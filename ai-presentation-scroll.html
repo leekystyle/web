@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비즈니스 전문가를 위한 인공지능 입문 과정</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            border-bottom: 2px solid #e0e0e0;
+            background: linear-gradient(135deg, #ffffff, #f5f5f5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .slide-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36pt; /* 슬라이드 제목 36포인트 */
+        }
+        
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 28pt; /* 본문 제목 28포인트 */
+        }
+        
+        p, li, td, th {
+            font-size: 24pt; /* 본문 일반 글자 24포인트 */
+            line-height: 1.5;
+        }
+        
+        ul, ol {
+            margin-bottom: 30px;
+            padding-left: 40px;
+        }
+        
+        li {
+            margin-bottom: 15px;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14pt;
+            z-index: 1000;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            text-align: left;
+            padding: 15px;
+        }
+        
+        td {
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .highlight-box {
+            background-color: #e1f5fe;
+            border-left: 8px solid #03a9f4;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .comparison {
+            display: flex;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .comparison-column {
+            flex: 1;
+            padding: 25px;
+            border: 1px solid #ddd;
+            min-width: 300px;
+        }
+        
+        .comparison-column:first-child {
+            background-color: #f8f9fa;
+            border-radius: 8px 0 0 8px;
+            border-right: none;
+        }
+        
+        .comparison-column:last-child {
+            background-color: #e1f5fe;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .comparison-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .check-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .check-item:before {
+            content: "✓";
+            position: absolute;
+            left: 15px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 24pt;
+            color: #7f8c8d;
+            background: #f9f9f9;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32pt;
+            }
+            h2 {
+                font-size: 24pt;
+            }
+            p, li, td, th {
+                font-size: 20pt;
+            }
+            .two-column, .comparison {
+                flex-direction: column;
+            }
+            .comparison-column:first-child {
+                border-radius: 8px 8px 0 0;
+                border-bottom: none;
+                border-right: 1px solid #ddd;
+            }
+            .comparison-column:last-child {
+                border-radius: 0 0 8px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-indicator" id="pageIndicator">1 / 10</div>
+
+    <!-- 슬라이드 1: 표지 -->
+    <div class="slide" id="slide1">
+        <div class="slide-content" style="text-align: center;">
+            <h1>업무에 인공지능 활용 방법</h1>
+            <p><strong>1시간으로 배우는 비즈니스 AI 활용법</strong></p>
+        </div>
+    </div>
+
+    <!-- 슬라이드 2: 강의 개요 -->
+    <div class="slide" id="slide2">
+        <div class="slide-content">
+            <h1>강의 개요</h1>
+            <div class="highlight-box">
+                <p><strong>대상</strong>: 인공지능을 현업에 활용하고자 하는 직장인</p>
+                <p><strong>목표</strong>: 비즈니스 관점에서 인공지능 이해 및 실무 적용 방법 학습</p>
+                <p><strong>시간</strong>: 1시간</p>
+            </div>
+            
+            <h2>주요 내용</h2>
+            <ul>
+                <li>섹션 1: 인공지능의 핵심 개념 (20분)</li>
+                <li>섹션 2: 최근 인공지능 트렌드 (20분)</li>
+                <li>섹션 3: 현업에서 인공지능 활용하기 (20분)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 슬라이드 3: 인공지능이란? -->
+    <div class="slide" id="slide3">
+        <div class="slide-content">
+            <h1>인공지능이란?</h1>
+            <ul>
+                <li>인간의 학습, 추론, 인식 능력을 모방하는 기술</li>
+                <li>데이터를 기반으로 패턴을 학습하고 의사결정을 지원</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <h2>비즈니스 관점에서 쉽게 이해하면</h2>
+                <ul>
+                    <li>스마트한 비서</li>
+                    <li>대량 데이터 신속 분석</li>
+                    <li>반복 업무 자동화</li>
+                    <li>예측과 추천으로 인사이트 제공</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 슬라이드 4: 인공지능의 주요 분야 -->
+    <div class="slide" id="slide4">
+        <div class="slide-content">
+            <h1>인공지능의 주요 분야</h1>
+            
+            <h2>머신러닝: 데이터에서 패턴을 학습하는 기술</h2>
+            <ul>
+                <li><strong>지도학습</strong>: 라벨이 있는 데이터로 학습 (예: 스팸 필터링)</li>
+                <li><strong>비지도학습</strong>: 라벨 없는 데이터에서 패턴 발견 (예: 고객 세그먼테이션)</li>
+                <li><strong>강화학습</strong>: 시행착오를 통한 최적 전략 학습 (예: 자율주행)</li>
+            </ul>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h2>딥러닝</h2>
+                    <p>인간 뇌의 뉴런 구조를 모방한 고급 학습 방식</p>
+                </div>
+                <div class="column">
+                    <h2>자연어 처리</h2>
+                    <p>인간 언어를 이해하고 생성하는 기술</p>
+                </div>
+            </div>
+            
+            <h2>컴퓨터 비전</h2>
+            <p>이미지와 영상을 인식하고 분석하는 기술</p>
+        </div>
+    </div>
+
+    <!-- 슬라이드 5: 최근 인공지능 트렌드 -->
+    <div class="slide" id="slide5">
+        <div class="slide-content">
+            <h1>최근 인공지능 트렌드</h1>
+            
+            <h2>생성형 AI (Generative AI)</h2>
+            <ul>
+                <li>텍스트, 이미지, 음악 등 <strong>새로운 콘텐츠 생성</strong> 능력</li>
+                <li>주요 서비스: ChatGPT, DALL-E, Midjourney 등</li>
+            </ul>
+            
+            <h2>대규모 언어 모델 (LLM)</h2>
+            <ul>
+                <li>방대한 텍스트 데이터로 학습된 AI 모델</li>
+                <li>주요 모델: GPT-4, Claude, Gemini 등</li>
+            </ul>
+            
+            <h2>AI 민주화</h2>
+            <ul>
+                <li>코딩 지식 없이도 AI 활용 가능한 도구 증가</li>
+                <li>No-code/Low-code AI 플랫폼의 확산</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 슬라이드 6: 비즈니스 임팩트 -->
+    <div class="slide" id="slide6">
+        <div class="slide-content">
+            <h1>비즈니스 임팩트</h1>
+            
+            <h2>생산성 혁명</h2>
+            <ul>
+                <li>단순 업무 자동화를 넘어 창의적 업무 지원</li>
+                <li><strong>사례</strong>: 마케팅 카피 작성 시간 단축, 코드 개발 효율 향상</li>
+            </ul>
+            
+            <h2>개인화된 경험 제공</h2>
+            <ul>
+                <li>고객별 맞춤형 서비스와 제품 추천</li>
+                <li><strong>사례</strong>: 개인화 추천으로 전환율 증가</li>
+            </ul>
+            
+            <h2>의사결정 지원 고도화</h2>
+            <ul>
+                <li>복잡한 데이터 분석과 예측 정확도 향상</li>
+                <li><strong>사례</strong>: 수요 예측 정확도 개선</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 슬라이드 7: 비즈니스 영역별 AI 활용 -->
+    <div class="slide" id="slide7">
+        <div class="slide-content">
+            <h1>비즈니스 영역별 AI 활용</h1>
+            
+            <table>
+                <tr>
+                    <th>영역</th>
+                    <th>활용 방법</th>
+                    <th>주요 도구</th>
+                </tr>
+                <tr>
+                    <td><strong>마케팅</strong></td>
+                    <td>고객 세그먼테이션, 콘텐츠 생성</td>
+                    <td>MarketMuse, Jasper</td>
+                </tr>
+                <tr>
+                    <td><strong>영업</strong></td>
+                    <td>리드 스코어링, 고객 이탈 예측</td>
+                    <td>Salesforce Einstein, Gong.io</td>
+                </tr>
+                <tr>
+                    <td><strong>운영</strong></td>
+                    <td>수요 예측, 재고 관리</td>
+                    <td>Blue Yonder, DataRobot</td>
+                </tr>
+                <tr>
+                    <td><strong>고객 서비스</strong></td>
+                    <td>챗봇, 감성 분석</td>
+                    <td>Intercom, Zendesk AI</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 슬라이드 8: AI 도입 단계 -->
+    <div class="slide" id="slide8">
+        <div class="slide-content">
+            <h1>AI 도입 5단계 접근법</h1>
+            
+            <ol>
+                <li>
+                    <h2>비즈니스 문제 정의</h2>
+                    <p>핵심 질문: "어떤 문제를 해결하려는가?"</p>
+                </li>
+                <li>
+                    <h2>데이터 검토</h2>
+                    <p>데이터 가용성 및 품질 평가</p>
+                </li>
+                <li>
+                    <h2>솔루션 탐색</h2>
+                    <p>기존 솔루션 vs 맞춤형 개발 트레이드오프 분석</p>
+                </li>
+                <li>
+                    <h2>파일럿 테스트</h2>
+                    <p>리스크 최소화 전략</p>
+                </li>
+                <li>
+                    <h2>확장 및 통합</h2>
+                    <p>조직 내 확산 전략</p>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- 슬라이드 9: 무료 및 저비용 AI 도구 -->
+    <div class="slide" id="slide9">
+        <div class="slide-content">
+            <h1>무료 및 저비용 AI 도구 추천</h1>
+            
+            <h2>텍스트 및 콘텐츠 생성</h2>
+            <ul>
+                <li>ChatGPT (무료 버전): 기본적인 텍스트 생성, 아이디어 브레인스토밍</li>
+                <li>Claude (무료 버전): 더 긴 컨텍스트 처리, 문서 분석</li>
+                <li>Jasper AI (프리미엄, 무료 체험): 마케팅 콘텐츠 특화</li>
+            </ul>
+            
+            <h2>이미지 생성</h2>
+            <ul>
+                <li>DALL-E (제한된 무료 크레딧): OpenAI의 이미지 생성 도구</li>
+                <li>Canva의 AI 기능 (무료 버전): 간단한 디자인과 이미지 생성</li>
+            </ul>
+            
+            <h2>데이터 분석 & 업무 자동화</h2>
+            <ul>
+                <li>Google Colab (무료): 기본 데이터 분석 및 머신러닝</li>
+                <li>Zapier (제한된 무료 기능): AI 기반 워크플로우 자동화</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 슬라이드 10: 추천 리소스 -->
+    <div class="slide" id="slide10">
+        <div class="slide-content">
+            <h1>추천 리소스</h1>
+            
+            <h2>무료 AI 학습 자료</h2>
+            <ul>
+                <li>Google AI 교육 센터: <span style="color: #2980b9;">https://ai.google/education/</span></li>
+                <li>Elements of AI: <span style="color: #2980b9;">https://www.elementsofai.com/</span></li>
+                <li>Microsoft AI Business School: <span style="color: #2980b9;">https://www.microsoft.com/ai/ai-business-school</span></li>
+            </ul>
+            
+            <h2>추천 도서</h2>
+            <ul>
+                <li>"인공지능 비즈니스: 데이터로 혁신하는 기업의 미래" - 토마스 H. 도벤포트</li>
+                <li>"예측 분석: 빅데이터로 미래를 예측하는 기술" - 에릭 시겔</li>
+                <li>"생성 AI 혁명: ChatGPT와 함께하는 비즈니스 전환" - 닐 사하</li>
+            </ul>
+            
+            <h2>추천 뉴스레터</h2>
+            <ul>
+                <li>The Algorithm (MIT Technology Review)</li>
+                <li>AI Weekly</li>
+                <li>The Batch (Andrew Ng)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        업무에 인공지능 활용 방법 - 끝 -
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const pageIndicator = document.getElementById('pageIndicator');
+            const totalPages = slides.length;
+            
+            // 현재 보이는 슬라이드를 추적하는 함수
+            function updateCurrentSlide() {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                
+                let currentPage = 1;
+                slides.forEach((slide, index) => {
+                    const slideTop = slide.offsetTop;
+                    const slideHeight = slide.offsetHeight;
+                    
+                    // 슬라이드가 화면의 50% 이상 보이면 현재 슬라이드로 간주
+                    if (scrollPosition >= slideTop - windowHeight / 2) {
+                        currentPage = index + 1;
+                    }
+                });
+                
+                pageIndicator.textContent = currentPage + ' / ' + totalPages;
+            }
+            
+            // 스크롤 이벤트 리스너
+            window.addEventListener('scroll', updateCurrentSlide);
+            window.addEventListener('resize', updateCurrentSlide);
+            
+            // 초기 페이지 표시 업데이트
+            updateCurrentSlide();
+        });
+    </script>
+</body>
+</html>
