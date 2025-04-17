@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화성시 비봉면 기상 정보</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #1565c0;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .subtitle {
+            margin-top: 8px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .iframe-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 800px;
+        }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #666;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        .refresh-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .refresh-button:hover {
+            background-color: #0d47a1;
+        }
+        @media (max-width: 768px) {
+            .iframe-container {
+                height: 600px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>화성시 비봉면 기상 정보</h1>
+            <div class="subtitle">기상청 날씨누리 서비스 기반</div>
+        </header>
+        
+        <div class="content">
+            <div class="info-box">
+                아래 화면은 기상청 날씨누리 서비스의 화성시 비봉면 기상 정보입니다. 최신 정보를 확인하려면 새로고침 버튼을 클릭하세요.
+            </div>
+            
+            <div id="loadingMessage" class="loading">
+                기상 정보를 불러오는 중입니다...
+            </div>
+            
+            <div class="iframe-container" id="iframeContainer" style="display: none;">
+                <iframe id="weatherFrame" src="https://www.weather.go.kr/w/index.do#dong/4159032000/37.226861497819/126.869268153963/%EA%B2%BD%EA%B8%B0%20%ED%99%94%EC%84%B1%EC%8B%9C%20%EB%B9%84%EB%B4%89%EB%A9%B4/SCH/%EC%97%98%EB%A6%AC%ED%85%8C%EB%8B%88%EC%8A%A4" title="기상청 화성시 비봉면 날씨 정보"></iframe>
+            </div>
+            
+            <button class="refresh-button" onclick="refreshWeather()">
+                새로고침
+            </button>
+        </div>
+        
+        <div class="footer">
+            제공: 기상청 날씨누리 | 본 페이지는 기상청의 공공데이터를 활용하고 있습니다.
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 실행
+        window.onload = function() {
+            // iframe 로딩 완료 시 로딩 메시지 숨기기
+            document.getElementById('weatherFrame').onload = function() {
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('iframeContainer').style.display = 'block';
+            };
+            
+            // 10초 후에도 로딩이 완료되지 않으면 강제로 표시
+            setTimeout(function() {
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('iframeContainer').style.display = 'block';
+            }, 10000);
+        };
+        
+        // 새로고침 버튼 클릭 시 실행
+        function refreshWeather() {
+            document.getElementById('loadingMessage').style.display = 'block';
+            document.getElementById('iframeContainer').style.display = 'none';
+            
+            // iframe 새로고침
+            const iframe = document.getElementById('weatherFrame');
+            iframe.src = iframe.src;
+        }
+    </script>
+</body>
+</html>
