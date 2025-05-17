@@ -1,0 +1,588 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국토교통과학기술진흥원 평균보수 현황 분석 (2020-2024)</title>
+    <style>
+        :root {
+            --primary: #0369a1;
+            --primary-light: #bae6fd;
+            --primary-dark: #0c4a6e;
+            --secondary: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg-light: #f8fafc;
+            --border-light: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        header {
+            background-color: var(--primary);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        header .container {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 0;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+        }
+        
+        h4 {
+            font-size: 1.125rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .text-primary { color: var(--primary); }
+        .text-success { color: var(--success); }
+        .text-danger { color: var(--danger); }
+        .text-warning { color: var(--warning); }
+        
+        .bg-light {
+            background-color: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .summary-card {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        
+        table th, table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+        
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        .trend-up::before {
+            content: "▲";
+            color: var(--success);
+            margin-right: 0.25rem;
+        }
+        
+        .trend-down::before {
+            content: "▼";
+            color: var(--danger);
+            margin-right: 0.25rem;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .bar-chart {
+            display: flex;
+            height: 100%;
+            align-items: flex-end;
+            margin: 2rem 0;
+            border-bottom: 2px solid #e5e7eb;
+            border-left: 2px solid #e5e7eb;
+            padding-right: 1rem;
+        }
+        
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            align-items: center;
+            height: 100%;
+            margin: 0 0.5rem;
+        }
+        
+        .bar {
+            background-color: var(--primary);
+            width: 50px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.3s ease;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .bar-label {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            text-align: center;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+        
+        .comparison-table th {
+            background-color: #f1f5f9;
+            text-align: center;
+        }
+        
+        .comparison-table td {
+            text-align: center;
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+        
+        .highlight-row {
+            background-color: #f0f9ff;
+            font-weight: 500;
+        }
+        
+        .rank-change {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .rank-up {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .rank-down {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        
+        .rank-same {
+            background-color: rgba(100, 116, 139, 0.1);
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>국토교통과학기술진흥원 평균보수 현황 분석 (2020-2024)</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="card summary-card">
+            <h3>주요 분석 결과</h3>
+            <ul>
+                <li><strong>5년간 증가율:</strong> <span class="text-success">5.12%</span> (83,293천원 → 87,557천원)</li>
+                <li><strong>순위 변동:</strong> 2020년 5위 → 2024년 4위 (<span class="text-success">1단계 상승</span>)</li>
+                <li><strong>증가율 순위:</strong> 전체 13개 기관 중 <strong>10위</strong> (평균 5.90% 대비 낮음)</li>
+                <li><strong>특징:</strong> 순위는 상승했으나 평균 증가율보다 낮은 상승세, 상위권 유지</li>
+            </ul>
+        </div>
+        
+        <h2>1. 평균보수 추이 (2020-2024)</h2>
+        
+        <div class="chart-container">
+            <svg width="100%" height="100%" viewBox="0 0 800 300" preserveAspectRatio="none">
+                <!-- 격자선 -->
+                <line x1="50" y1="250" x2="750" y2="250" stroke="#e5e7eb" stroke-width="2" />
+                <line x1="50" y1="200" x2="750" y2="200" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
+                <line x1="50" y1="150" x2="750" y2="150" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
+                <line x1="50" y1="100" x2="750" y2="100" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
+                <line x1="50" y1="50" x2="750" y2="50" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
+                <line x1="50" y1="0" x2="50" y2="250" stroke="#e5e7eb" stroke-width="2" />
+                
+                <!-- Y축 레이블 -->
+                <text x="45" y="250" text-anchor="end" alignment-baseline="middle" font-size="12">83,000</text>
+                <text x="45" y="200" text-anchor="end" alignment-baseline="middle" font-size="12">84,000</text>
+                <text x="45" y="150" text-anchor="end" alignment-baseline="middle" font-size="12">85,000</text>
+                <text x="45" y="100" text-anchor="end" alignment-baseline="middle" font-size="12">86,000</text>
+                <text x="45" y="50" text-anchor="end" alignment-baseline="middle" font-size="12">87,000</text>
+                <text x="45" y="0" text-anchor="end" alignment-baseline="middle" font-size="12">88,000</text>
+                
+                <!-- X축 레이블 -->
+                <text x="90" y="270" text-anchor="middle" font-size="12">2020년</text>
+                <text x="230" y="270" text-anchor="middle" font-size="12">2021년</text>
+                <text x="370" y="270" text-anchor="middle" font-size="12">2022년</text>
+                <text x="510" y="270" text-anchor="middle" font-size="12">2023년</text>
+                <text x="650" y="270" text-anchor="middle" font-size="12">2024년</text>
+                
+                <!-- 선 그래프 -->
+                <polyline
+                    points="
+                        90,250 
+                        230,182 
+                        370,199 
+                        510,120 
+                        650,88
+                    "
+                    fill="none"
+                    stroke="#0369a1"
+                    stroke-width="3"
+                />
+                
+                <!-- 데이터 포인트 -->
+                <circle cx="90" cy="250" r="5" fill="white" stroke="#0369a1" stroke-width="3" />
+                <circle cx="230" cy="182" r="5" fill="white" stroke="#0369a1" stroke-width="3" />
+                <circle cx="370" cy="199" r="5" fill="white" stroke="#0369a1" stroke-width="3" />
+                <circle cx="510" cy="120" r="5" fill="white" stroke="#0369a1" stroke-width="3" />
+                <circle cx="650" cy="88" r="5" fill="white" stroke="#0369a1" stroke-width="3" />
+                
+                <!-- 값 레이블 -->
+                <text x="90" y="230" text-anchor="middle" font-size="12" font-weight="500">83,293</text>
+                <text x="230" y="162" text-anchor="middle" font-size="12" font-weight="500">85,437</text>
+                <text x="370" y="179" text-anchor="middle" font-size="12" font-weight="500">84,442</text>
+                <text x="510" y="100" text-anchor="middle" font-size="12" font-weight="500">86,496</text>
+                <text x="650" y="68" text-anchor="middle" font-size="12" font-weight="500">87,557</text>
+            </svg>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>연도</th>
+                    <th>평균보수 (천원)</th>
+                    <th>전년 대비 증감</th>
+                    <th>증감률</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2020년</td>
+                    <td>83,293</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>2021년</td>
+                    <td>85,437</td>
+                    <td>+2,144</td>
+                    <td class="text-success">+2.58%</td>
+                </tr>
+                <tr>
+                    <td>2022년</td>
+                    <td>84,442</td>
+                    <td>-995</td>
+                    <td class="text-danger">-1.16%</td>
+                </tr>
+                <tr>
+                    <td>2023년</td>
+                    <td>86,496</td>
+                    <td>+2,054</td>
+                    <td class="text-success">+2.43%</td>
+                </tr>
+                <tr>
+                    <td>2024년</td>
+                    <td>87,557</td>
+                    <td>+1,061</td>
+                    <td class="text-success">+1.23%</td>
+                </tr>
+                <tr style="font-weight: 600; background-color: #f9fafb;">
+                    <td>5년간 변화</td>
+                    <td>+4,264</td>
+                    <td>-</td>
+                    <td class="text-success">+5.12%</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="bg-light">
+            <h3>연도별 증감 분석</h3>
+            <p>국토교통과학기술진흥원의 평균보수는 2020년부터 2024년까지 <strong>변동성을 보이며 전체적으로 상승</strong>했습니다. 2021년에 <span class="text-success">2.58%</span> 상승했다가 2022년에 <span class="text-danger">1.16%</span> 하락한 후, 2023년에 다시 <span class="text-success">2.43%</span> 상승하고 2024년에는 <span class="text-success">1.23%</span> 상승하는 추세를 보였습니다.</p>
+            <p>5년간 전체 증가율은 <span class="text-success">5.12%</span>로, 연노련 소속 13개 기관의 평균 증가율(5.90%)보다 <strong>0.78%p 낮은 수치</strong>입니다. 그러나 전체 금액 측면에서는 여전히 상위권을 유지하고 있습니다.</p>
+        </div>
+        
+        <h2>2. 순위 변동 분석</h2>
+        
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>연도</th>
+                        <th>순위</th>
+                        <th>순위 변동</th>
+                        <th>전체 평균과의 차이</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2020년</td>
+                        <td>5위</td>
+                        <td>-</td>
+                        <td>+9,000천원 (+12.11%)</td>
+                    </tr>
+                    <tr>
+                        <td>2021년</td>
+                        <td>5위</td>
+                        <td><span class="rank-change rank-same">변동없음</span></td>
+                        <td>+10,922천원 (+14.66%)</td>
+                    </tr>
+                    <tr>
+                        <td>2022년</td>
+                        <td>5위</td>
+                        <td><span class="rank-change rank-same">변동없음</span></td>
+                        <td>+9,955천원 (+13.36%)</td>
+                    </tr>
+                    <tr>
+                        <td>2023년</td>
+                        <td>4위</td>
+                        <td><span class="rank-change rank-up">1단계 상승</span></td>
+                        <td>+10,482천원 (+13.79%)</td>
+                    </tr>
+                    <tr>
+                        <td>2024년</td>
+                        <td>4위</td>
+                        <td><span class="rank-change rank-same">변동없음</span></td>
+                        <td>+8,860천원 (+11.26%)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p>국토교통과학기술진흥원은 2020년부터 2022년까지 <strong>5위</strong>를 유지하다가 2023년에 <strong>4위</strong>로 <span class="text-success">1단계 상승</span>하여 2024년까지 유지했습니다. 전체 평균과의 차이는 꾸준히 <strong>10% 이상의 높은 수준</strong>을 유지하고 있으며, 상위권 기관으로서의 위치를 공고히 하고 있습니다.</p>
+        
+        <h2>3. 증가율 비교 분석</h2>
+        
+        <div class="chart-container">
+            <div class="bar-chart">
+                <div class="bar-group">
+                    <div class="bar" style="height: 20%; background-color: #bae6fd;">
+                        <div class="bar-value">5.90%</div>
+                    </div>
+                    <div class="bar-label">전체 평균</div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar" style="height: 18%; background-color: #0369a1;">
+                        <div class="bar-value">5.12%</div>
+                    </div>
+                    <div class="bar-label">국토교통과학<br>기술진흥원</div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar" style="height: 48%; background-color: #10b981;">
+                        <div class="bar-value">14.40%</div>
+                    </div>
+                    <div class="bar-label">최고 증가율<br>(기상산업기술원)</div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar" style="height: 0%; background-color: #ef4444;">
+                        <div class="bar-value">-3.88%</div>
+                    </div>
+                    <div class="bar-label">최저 증가율<br>(농림식품기술기획평가원)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>연노련 기관 증가율 순위 (2020-2024)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>순위</th>
+                        <th>기관명</th>
+                        <th>증가율</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>한국기상산업기술원</td>
+                        <td class="text-success">+14.40%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>해양수산과학기술진흥원</td>
+                        <td class="text-success">+12.31%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>한국콘텐츠진흥원</td>
+                        <td class="text-success">+10.27%</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>10</td>
+                        <td>국토교통과학기술진흥원</td>
+                        <td class="text-success">+5.12%</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>한국연구재단</td>
+                        <td class="text-success">+2.53%</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>한국에너지기술평가원</td>
+                        <td class="text-danger">-0.93%</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>농림식품기술기획평가원</td>
+                        <td class="text-danger">-3.88%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bg-light">
+            <h3>증가율 비교 분석</h3>
+            <p>국토교통과학기술진흥원의 5년간 평균보수 증가율은 <span class="text-success">5.12%</span>로 연노련 소속 13개 기관 중 <strong>10위</strong>에 해당합니다. 이는 전체 평균 증가율(5.90%)보다 <strong>0.78%p 낮은 수준</strong>이며, 중위값(6.11%)보다도 <strong>0.99%p 낮은 수준</strong>입니다.</p>
+            <p>다른 기관들이 상대적으로 높은 증가율을 보인 반면, 국토교통과학기술진흥원은 이미 높은 보수 수준을 유지하고 있어 증가율이 상대적으로 낮게 나타난 것으로 분석됩니다.</p>
+        </div>
+        
+        <h2>4. 타 기관과의 비교</h2>
+        
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>국토교통과학기술진흥원</th>
+                        <th>전체 평균</th>
+                        <th>상위 3개 기관 평균</th>
+                        <th>하위 3개 기관 평균</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2020년</td>
+                        <td>83,293천원</td>
+                        <td>74,293천원</td>
+                        <td>88,292천원</td>
+                        <td>57,551천원</td>
+                    </tr>
+                    <tr>
+                        <td>2024년</td>
+                        <td>87,557천원</td>
+                        <td>78,697천원</td>
+                        <td>92,993천원</td>
+                        <td>62,406천원</td>
+                    </tr>
+                    <tr>
+                        <td>증가액</td>
+                        <td>+4,264천원</td>
+                        <td>+4,404천원</td>
+                        <td>+4,701천원</td>
+                        <td>+4,855천원</td>
+                    </tr>
+                    <tr>
+                        <td>증가율</td>
+                        <td class="text-success">+5.12%</td>
+                        <td>+5.93%</td>
+                        <td>+5.32%</td>
+                        <td>+8.44%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p>국토교통과학기술진흥원의 평균보수 증가액(<strong>+4,264천원</strong>)은 전체 평균 증가액(<strong>+4,404천원</strong>)보다 <strong>다소 낮지만</strong>, 금액 자체는 전체 평균을 크게 상회하고 있습니다. 특히 상위 3개 기관과의 격차가 2020년 4,999천원에서 2024년 5,436천원으로 확대되었습니다.</p>
+        
+        <h2>5. 결론 및 시사점</h2>
+        
+        <div class="card">
+            <h3>주요 결론</h3>
+            <ol>
+                <li><strong>안정적인 상위권 유지:</strong> 국토교통과학기술진흥원은 5년간 상위권(4-5위)을 꾸준히 유지하며, 2023년부터는 4위로 순위가 상승했습니다.</li>
+                <li><strong>평균 이하의 증가율:</strong> 5년간 증가율(5.12%)은 연노련 소속 13개 기관 중 10위로, 평균(5.90%)을 다소 하회합니다.</li>
+                <li><strong>변동성 있는 추세:</strong> 2021년 상승, 2022년 하락, 2023년 상승, 2024년 약한 상승의 패턴을 보이며 등락이 있었습니다.</li>
+                <li><strong>전체 평균 대비 우위 유지:</strong> 전체 평균과의 격차를 꾸준히 10% 이상 유지하고 있습니다.</li>
+            </ol>
+        </div>
+        
+        <div class="bg-light">
+            <h3>시사점</h3>
+            <ul>
+                <li>국토교통과학기술진흥원은 <strong>이미 높은 보수 수준</strong>을 유지하고 있어, 상대적으로 낮은 증가율에도 불구하고 우수한 처우를 제공하고 있습니다.</li>
+                <li>다만 <strong>상위 3개 기관과의 격차</strong>가 소폭 확대되고 있는 점은 장기적으로 고려해야 할 사항입니다.</li>
+                <li>2022년과 같은 <strong>일시적 감소</strong>가 발생했지만, 이후 회복하는 탄력성을 보여 전반적으로 안정적인 재정 상태를 유지하고 있는 것으로 판단됩니다.</li>
+                <li>하위권 기관들의 <strong>높은 증가율</strong>로 인해 전체적인 격차가 줄어들고 있는 추세이므로, 경쟁력 유지를 위한 적절한 보수 정책 검토가 필요할 수 있습니다.</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>※ 자료 출처: 연노련 직원 평균 보수 (2020~2024년) 데이터</p>
+            <p>※ 단위: 천원</p>
+            <p>※ 2025년 자료는 정확성이 떨어져 분석에서 제외</p>
+            <p>※ 작성일: 2025년 5월 17일</p>
+        </div>
+    </div>
+</body>
+</html>
