@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체코 공화국 종합 보고서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #11538C;
+            --secondary-color: #D7141A;
+            --accent-color: #FFFFFF;
+            --text-color: #333;
+            --background-color: #f5f5f7;
+            --card-bg: #fff;
+            --sidebar-width: 280px;
+            --header-height: 70px;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #1E88E5;
+            --secondary-color: #E53935;
+            --accent-color: #FFFFFF;
+            --text-color: #e0e0e0;
+            --background-color: #121212;
+            --card-bg: #1e1e1e;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--card-bg);
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 20px 0;
+            scrollbar-width: thin;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .logo h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .sidebar-menu {
+            padding: 20px;
+        }
+
+        .menu-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin: 15px 0 10px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(17, 83, 140, 0.1);
+            color: var(--primary-color);
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: var(--transition);
+            padding-top: var(--header-height);
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: var(--sidebar-width);
+            height: var(--header-height);
+            background-color: var(--card-bg);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        /* Content Styles */
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 24px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .card-content {
+            color: var(--text-color);
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Flag Colors */
+        .flag-colors {
+            display: flex;
+            margin: 15px 0;
+        }
+
+        .flag-color {
+            height: 30px;
+            flex: 1;
+        }
+
+        .flag-color:first-child {
+            background-color: #FFFFFF;
+            border: 1px solid #ddd;
+        }
+
+        .flag-color:nth-child(2) {
+            background-color: #D7141A;
+        }
+
+        .flag-color:last-child {
+            background-color: #11538C;
+        }
+
+        /* Stats */
+        .stat-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(17, 83, 140, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+
+        .stat-info h4 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .timeline-content {
+            padding-bottom: 10px;
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        /* Image Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minpack(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            height: 200px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: rgba(17, 83, 140, 0.1);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        /* Map */
+        .map-container {
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                left: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 0 15px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+        }
+
+        /* Additional Components */
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .badge-primary {
+            background-color: rgba(17, 83, 140, 0.1);
+            color: var(--primary-color);
+        }
+
+        .badge-secondary {
+            background-color: rgba(215, 20, 26, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .quote {
+            font-style: italic;
+            padding: 15px;
+            border-left: 4px solid var(--primary-color);
+            background-color: rgba(17, 83, 140, 0.05);
+            margin: 20px 0;
+        }
+
+        .quote-author {
+            display: block;
+            text-align: right;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .alert i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .alert-info {
+            background-color: rgba(17, 83, 140, 0.1);
+            color: var(--primary-color);
+        }
+
+        .alert-warning {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .image-with-caption {
+            margin: 20px 0;
+        }
+
+        .image-with-caption img {
+            width: 100%;
+            border-radius: var(--border-radius);
+        }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Custom styles for this report */
+        .czech-flag {
+            display: flex;
+            height: 60px;
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .czech-flag-white {
+            width: 100%;
+            height: 50%;
+            background-color: white;
+        }
+
+        .czech-flag-red {
+            width: 100%;
+            height: 50%;
+            background-color: #D7141A;
+        }
+
+        .czech-flag-blue {
+            width: 33.33%;
+            height: 100%;
+            background-color: #11538C;
+            position: absolute;
+            clip-path: polygon(0 0, 0% 100%, 100% 50%);
+        }
+
+        .key-figure {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(17, 83, 140, 0.05);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+        }
+
+        .key-figure h3 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .key-figure p {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .comparison-bar {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .comparison-label {
+            width: 120px;
+            font-weight: 500;
+        }
+
+        .comparison-track {
+            flex: 1;
+            height: 10px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .comparison-value {
+            position: absolute;
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .comparison-text {
+            margin-left: 10px;
+            font-weight: 600;
+            width: 50px;
+            text-align: right;
+        }
+
+        .culture-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .culture-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(17, 83, 140, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .culture-info h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            transition: transform 0.3s ease;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fact-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .fact-card h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .section-nav {
+            position: sticky;
+            top: calc(var(--header-height) + 20px);
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 20px;
+        }
+
+        .section-nav-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .section-nav-list {
+            list-style: none;
+        }
+
+        .section-nav-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .section-nav-item:hover {
+            color: var(--primary-color);
+        }
+
+        .section-nav-item.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .section-nav-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png" alt="체코 국기">
+                    <h2>체코 공화국</h2>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <p class="menu-title">메인 메뉴</p>
+                <a href="#overview" class="menu-item active" onclick="scrollToSection('overview')">
+                    <i class="fas fa-home"></i>
+                    <span>개요</span>
+                </a>
+                <a href="#geography" class="menu-item" onclick="scrollToSection('geography')">
+                    <i class="fas fa-mountain"></i>
+                    <span>지리</span>
+                </a>
+                <a href="#history" class="menu-item" onclick="scrollToSection('history')">
+                    <i class="fas fa-landmark"></i>
+                    <span>역사</span>
+                </a>
+                <a href="#politics" class="menu-item" onclick="scrollToSection('politics')">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>정치</span>
+                </a>
+                <a href="#economy" class="menu-item" onclick="scrollToSection('economy')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>경제</span>
+                </a>
+                <a href="#society" class="menu-item" onclick="scrollToSection('society')">
+                    <i class="fas fa-users"></i>
+                    <span>사회</span>
+                </a>
+                <a href="#culture" class="menu-item" onclick="scrollToSection('culture')">
+                    <i class="fas fa-theater-masks"></i>
+                    <span>문화</span>
+                </a>
+                <a href="#tourism" class="menu-item" onclick="scrollToSection('tourism')">
+                    <i class="fas fa-plane"></i>
+                    <span>관광</span>
+                </a>
+                <a href="#relations" class="menu-item" onclick="scrollToSection('relations')">
+                    <i class="fas fa-handshake"></i>
+                    <span>국제관계</span>
+                </a>
+                <p class="menu-title">추가 정보</p>
+                <a href="#references" class="menu-item" onclick="scrollToSection('references')">
+                    <i class="fas fa-book"></i>
+                    <span>참고 자료</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="header-title">체코 공화국 종합 보고서</h1>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Overview Section -->
+                <section id="overview" class="section">
+                    <h2 class="section-title"><i class="fas fa-home"></i> 체코 공화국 개요</h2>
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="position: relative; height: 60px; margin-bottom: 20px;">
+                                <div class="czech-flag">
+                                    <div class="czech-flag-blue"></div>
+                                    <div class="czech-flag-white"></div>
+                                    <div class="czech-flag-red"></div>
+                                </div>
+                            </div>
+                            <p>체코 공화국(체코어: Česká republika)은 중앙유럽에 위치한 내륙국으로, 서쪽으로는 독일, 남쪽으로는 오스트리아, 동쪽으로는 슬로바키아, 북쪽으로는 폴란드와 국경을 접하고 있습니다. 수도는 프라하(Praha)이며, 주요 도시로는 브르노, 오스트라바, 플젠 등이 있습니다.</p>
+                            <p>체코는 역사적으로 보헤미아, 모라비아, 실레시아 세 지방으로 구성되어 있으며, 1993년 1월 1일 체코슬로바키아에서 분리되어 독립국가가 되었습니다. 2004년 5월 1일에는 유럽 연합(EU)에 가입했으며, 1999년에는 북대서양 조약기구(NATO)에 가입했습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">주요 정보</h3>
+                            <div class="card-content">
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-flag"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>국가명</h4>
+                                        <p>체코 공화국 (Czech Republic)</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-city"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>수도</h4>
+                                        <p>프라하 (Praha)</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-language"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>공용어</h4>
+                                        <p>체코어</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-coins"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>화폐</h4>
+                                        <p>체코 코루나 (CZK)</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>국가 번호</h4>
+                                        <p>+420</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>인터넷 도메인</h4>
+                                        <p>.cz</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">주요 통계</h3>
+                            <div class="card-content">
+                                <div class="key-figure">
+                                    <h3>1,088만 명</h3>
+                                    <p>인구 (2024년 기준)</p>
+                                </div>
+                                <div class="key-figure">
+                                    <h3>78,867 km²</h3>
+                                    <p>면적 (한반도의 약 1/3)</p>
+                                </div>
+                                <div class="key-figure">
+                                    <h3>3만 600$</h3>
+                                    <p>1인당 GDP (2023년)</p>
+                                </div>
+                                <div class="key-figure">
+                                    <h3>3,320억$</h3>
+                                    <p>GDP (2023년)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">체코의 위치</h3>
+                        <div class="card-content">
+                            <div class="map-container">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2618847.907631079!2d12.240347574729554!3d49.80385202762429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b948fd7dd8243%3A0xf8661c75d3db586f!2z7LKr7L2U!5e0!3m2!1sko!2skr!4v1684123456789!5m2!1sko!2skr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Geography Section -->
+                <section id="geography" class="section">
+                    <h2 class="section-title"><i class="fas fa-mountain"></i> 지리</h2>
+                    <div class="card">
+                        <h3 class="card-title">지리적 특성</h3>
+                        <div class="card-content">
+                            <p>체코는 중앙유럽에 위치한 내륙국으로, 총 면적은 78,867km²입니다. 지리적으로 다양한 특성을 보이며, 서쪽의 보헤미아 지방에는 엘베강과 블타바강이 흐르는 분지 지역이 낮은 산릉으로 둘러싸여 있습니다. 체코에서 가장 높은 산인 스네슈카 산(1,602m)이 이곳에 위치하고 있습니다.</p>
+                            <p>체코의 지형은 크게 세 부분으로 나눌 수 있습니다:</p>
+                            <ul>
+                                <li><strong>보헤미아 분지</strong>: 서쪽에 위치하며 엘베강과 블타바강이 흐르는 지역</li>
+                                <li><strong>모라비아 저지대</strong>: 동쪽에 위치하며 모라바강이 흐르는 지역</li>
+                                <li><strong>수데텐 산맥과 카르파티아 산맥</strong>: 국경 지역을 따라 형성된 산악 지대</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">기후</h3>
+                            <div class="card-content">
+                                <p>체코는 습기 많은 대륙성 기후를 가지고 있어 여름에는 따뜻하고 비가 많이 내리며, 겨울에는 춥고 눈이 많이 내립니다. 기온 변화는 비교적 완만한 편입니다.</p>
+                                <ul>
+                                    <li><strong>가장 더운 달</strong>: 7월</li>
+                                    <li><strong>가장 추운 달</strong>: 1월</li>
+                                    <li><strong>겨울 기간</strong>: 12월~2월 (저지대도 영하로 떨어짐)</li>
+                                    <li><strong>강설 일수</strong>: 40~100일 (산간지방은 130일 정도)</li>
+                                </ul>
+                                <p>체코는 사실상 '건기'라는 것이 없으며, 연중 고르게 강수량이 분포되어 있습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">자연 환경</h3>
+                            <div class="card-content">
+                                <p>체코는 산, 완만한 고원, 저지대, 동굴, 협곡, 넓은 평원, 습지, 호수, 연못, 댐 등 다양하고 아름다운 자연 환경을 자랑합니다. 그러나 북부 지역으로 갈수록 산업화의 영향으로 대기 오염과 산성비 오염이 심각한 편입니다.</p>
+                                <p>체코 국토의 약 1/3은 여전히 숲으로 덮여 있으며, 사람의 손이 닿지 않은 천연 숲은 주로 경작이 불가능한 산악 지역에 위치하고 있습니다. 수목 한계선(1,400m) 이상에는 초원, 관목림, 지의류 등이 자라고 있습니다.</p>
+                                <p>체코의 숲과 습지대에는 다양한 야생동물이 서식하고 있으며, 곰, 늑대, 스라소니, 야생고양이, 마멋, 수달, 담비, 밍크 등의 포유류와 꿩, 자고, 오리, 야생거위 등의 조류가 살고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">주요 강과 호수</h3>
+                        <div class="card-content">
+                            <p>체코는 내륙국이지만 영토 내를 흐르는 강들은 북해, 발트해, 흑해로 흘러들어갑니다. 주요 강으로는 블타바강(Vltava), 엘베강(Labe), 모라바강(Morava) 등이 있습니다.</p>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>강 이름</th>
+                                            <th>길이 (체코 내)</th>
+                                            <th>유역</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>블타바강 (Vltava)</td>
+                                            <td>430 km</td>
+                                            <td>북해</td>
+                                        </tr>
+                                        <tr>
+                                            <td>엘베강 (Labe)</td>
+                                            <td>370 km</td>
+                                            <td>북해</td>
+                                        </tr>
+                                        <tr>
+                                            <td>모라바강 (Morava)</td>
+                                            <td>284 km</td>
+                                            <td>흑해</td>
+                                        </tr>
+                                        <tr>
+                                            <td>오드라강 (Odra)</td>
+                                            <td>135 km</td>
+                                            <td>발트해</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">행정 구역</h3>
+                        <div class="card-content">
+                            <p>체코는 14개의 주(kraj)로 나뉘어 있으며, 수도 프라하는 독립된 행정 단위로 취급됩니다.</p>
+                            <div class="image-with-caption">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Czech_Rep._-_Bohemia%2C_Moravia_and_Silesia_III_%28en%29.png/800px-Czech_Rep._-_Bohemia%2C_Moravia_and_Silesia_III_%28en%29.png" alt="체코의 행정 구역">
+                                <div class="image-caption">체코의 행정 구역 지도 (보헤미아, 모라비아, 실레시아)</div>
+                            </div>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>주 (Kraj)</th>
+                                            <th>주도</th>
+                                            <th>인구 (2023년)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>프라하 (Praha)</td>
+                                            <td>프라하</td>
+                                            <td>약 1,335,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>중앙보헤미아 (Středočeský)</td>
+                                            <td>프라하</td>
+                                            <td>약 1,397,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>남보헤미아 (Jihočeský)</td>
+                                            <td>체스케부데요비체</td>
+                                            <td>약 643,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>플젠 (Plzeňský)</td>
+                                            <td>플젠</td>
+                                            <td>약 589,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>카를로비바리 (Karlovarský)</td>
+                                            <td>카를로비바리</td>
+                                            <td>약 293,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>우스티 (Ústecký)</td>
+                                            <td>우스티나트라벰</td>
+                                            <td>약 817,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>리베레츠 (Liberecký)</td>
+                                            <td>리베레츠</td>
+                                            <td>약 442,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>흐라데츠크랄로베 (Královéhradecký)</td>
+                                            <td>흐라데츠크랄로베</td>
+                                            <td>약 550,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>파르두비체 (Pardubický)</td>
+                                            <td>파르두비체</td>
+                                            <td>약 522,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>비소치나 (Vysočina)</td>
+                                            <td>이흘라바</td>
+                                            <td>약 509,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>남모라비아 (Jihomoravský)</td>
+                                            <td>브르노</td>
+                                            <td>약 1,195,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>올로모우츠 (Olomoucký)</td>
+                                            <td>올로모우츠</td>
+                                            <td>약 630,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>즐린 (Zlínský)</td>
+                                            <td>즐린</td>
+                                            <td>약 580,000명</td>
+                                        </tr>
+                                        <tr>
+                                            <td>모라비아실레시아 (Moravskoslezský)</td>
+                                            <td>오스트라바</td>
+                                            <td>약 1,183,000명</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- History Section -->
+                <section id="history" class="section">
+                    <h2 class="section-title"><i class="fas fa-landmark"></i> 역사</h2>
+                    <div class="card">
+                        <h3 class="card-title">역사적 개요</h3>
+                        <div class="card-content">
+                            <p>체코의 역사는 기원전 800년경부터 시작되며, 이 지역에는 다양한 원시 문화가 석기 시대 내내 흔적을 남겼습니다. 선사 시대 동안 체코에 존재했던 가장 널리 알려진 문화는 Únětice 문화로, 석기 시대 말부터 청동기 시대 시작까지 약 5세기 동안 흔적을 남겼습니다. 기원전 5세기에 켈트족이 이 지역에 정착했으며, 이후 게르만족에 의해 밀려났습니다.</p>
+                            <p>체코의 역사는 크게 다음과 같은 시기로 나눌 수 있습니다:</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">7세기 - 10세기</div>
+                            <div class="timeline-content">
+                                <h4>슬라브족의 정착과 대모라비아 제국</h4>
+                                <p>7세기경 슬라브족이 이 지역에 정착하기 시작했으며, 9세기에는 대모라비아 제국이 형성되었습니다. 이 시기에 기독교가 전파되기 시작했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">9세기 말 - 14세기 초</div>
+                            <div class="timeline-content">
+                                <h4>프르셰미슬 왕조</h4>
+                                <p>9세기 말부터 14세기 초까지 프르셰미슬 왕조가 보헤미아를 다스렸습니다. 이 시기에 프라하가 중요한 도시로 성장했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">14세기 - 15세기</div>
+                            <div class="timeline-content">
+                                <h4>룩셈부르크 왕조와 카렐 4세</h4>
+                                <p>14세기에는 룩셈부르크 왕조가 보헤미아를 다스렸으며, 카렐 4세(카를 4세)가 신성 로마 황제로 즉위했습니다. 이 시기에 프라하는 유럽의 문화적, 지적 중심지로 발전했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">15세기</div>
+                            <div class="timeline-content">
+                                <h4>후스파 운동과 종교 개혁</h4>
+                                <p>15세기에는 얀 후스의 종교 개혁 운동이 일어났으며, 이는 유럽에서 가장 초기의 종교 개혁 중 하나로 간주됩니다. 후스파 전쟁이 발발했고, 이는 체코의 종교적, 사회적 변화를 가져왔습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">1526년 - 1918년</div>
+                            <div class="timeline-content">
+                                <h4>합스부르크 왕가의 지배</h4>
+                                <p>1526년부터 1918년까지 체코는 합스부르크 왕가의 지배를 받았습니다. 30년 전쟁(1618-1648) 동안 보헤미아는 큰 피해를 입었으며, 이후 합스부르크 왕가의 재가톨릭화 정책이 시행되었습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">1918년 - 1938년</div>
+                            <div class="timeline-content">
+                                <h4>체코슬로바키아 제1공화국</h4>
+                                <p>제1차 세계대전 이후 1918년에 체코슬로바키아가 독립했습니다. 토마시 가리크 마사리크가 초대 대통령이 되었으며, 이 시기는 민주주의와 경제적 번영의 시기였습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">1938년 - 1945년</div>
+                            <div class="timeline-content">
+                                <h4>나치 점령과 제2차 세계대전</h4>
+                                <p>1938년 뮌헨 협정으로 수데텐란트가 독일에 할양되었고, 1939년에는 나치 독일이 체코를 점령하여 보헤미아-모라비아 보호령을 설립했습니다. 제2차 세계대전 동안 체코는 나치의 지배를 받았습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">1945년 - 1989년</div>
+                            <div class="timeline-content">
+                                <h4>공산주의 시대</h4>
+                                <p>제2차 세계대전 이후 체코슬로바키아는 소련의 영향권에 들어갔으며, 1948년부터 공산당이 집권했습니다. 1968년에는 '프라하의 봄'이라 불리는 개혁 운동이 있었으나 소련의 군사 개입으로 진압되었습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">1989년 - 1993년</div>
+                            <div class="timeline-content">
+                                <h4>벨벳 혁명과 체코슬로바키아의 분리</h4>
+                                <p>1989년 벨벳 혁명으로 공산주의 체제가 무너졌으며, 바츨라프 하벨이 대통령이 되었습니다. 1993년 1월 1일, 체코슬로바키아는 평화적으로 체코와 슬로바키아로 분리되었습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">1993년 - 현재</div>
+                            <div class="timeline-content">
+                                <h4>현대 체코 공화국</h4>
+                                <p>1993년 이후 체코는 민주주의와 시장 경제를 발전시켜 왔습니다. 1999년에는 NATO에 가입했으며, 2004년에는 유럽 연합(EU)에 가입했습니다. 현재 체코는 중앙유럽의 안정적인 민주주의 국가로 자리 잡았습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">주요 역사적 사건</h3>
+                        <div class="card-content">
+                            <div class="fact-card">
+                                <h4>벨벳 혁명 (1989)</h4>
+                                <p>1989년 11월 17일 프라하에서 시작된 학생 시위를 계기로 비폭력적인 방식으로 공산주의 체제가 무너진 사건입니다. 이 혁명은 '벨벳'처럼 부드럽고 평화적으로 진행되었다는 의미에서 이름이 붙여졌습니다. 이 혁명의 결과로 바츨라프 하벨이 체코슬로바키아의 대통령이 되었습니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>프라하의 봄 (1968)</h4>
+                                <p>1968년 알렉산더 두브체크의 지도 아래 체코슬로바키아에서 일어난 자유화 운동입니다. '인간의 얼굴을 한 사회주의'를 목표로 했으나, 같은 해 8월 바르샤바 조약기구 군대의 침공으로 진압되었습니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>뮌헨 협정 (1938)</h4>
+                                <p>1938년 9월 30일 독일, 영국, 프랑스, 이탈리아가 체코슬로바키아의 수데텐란트를 독일에 할양하기로 합의한 협정입니다. 체코슬로바키아는 이 협상에 참여하지 못했으며, 이 사건은 '뮌헨의 배신'으로도 불립니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">역사적 인물</h3>
+                        <div class="card-content">
+                            <div class="image-grid">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Karel_IV-_Roman_Emperor.jpg/330px-Karel_IV-_Roman_Emperor.jpg" alt="카렐 4세">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Jan_Hus_1.jpg/330px-Jan_Hus_1.jpg" alt="얀 후스">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Tom%C3%A1%C5%A1_Garrigue_Masaryk_1925.PNG/330px-Tom%C3%A1%C5%A1_Garrigue_Masaryk_1925.PNG" alt="토마시 가리크 마사리크">
+                            </div>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>인물</th>
+                                            <th>생애</th>
+                                            <th>주요 업적</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>카렐 4세 (Karel IV)</td>
+                                            <td>1316-1378</td>
+                                            <td>신성 로마 제국 황제이자 보헤미아 왕으로, 프라하를 유럽의 문화적, 지적 중심지로 발전시켰습니다. 카를교와 카를 대학교를 설립했습니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>얀 후스 (Jan Hus)</td>
+                                            <td>1369-1415</td>
+                                            <td>종교 개혁가로, 로마 가톨릭 교회의 부패를 비판했습니다. 그의 가르침은 후스파 운동의 기초가 되었으며, 1415년 이단으로 화형에 처해졌습니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>토마시 가리크 마사리크 (Tomáš Garrigue Masaryk)</td>
+                                            <td>1850-1937</td>
+                                            <td>체코슬로바키아의 초대 대통령으로, '체코슬로바키아의 아버지'로 불립니다. 제1차 세계대전 중 체코슬로바키아의 독립을 위해 노력했습니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>바츨라프 하벨 (Václav Havel)</td>
+                                            <td>1936-2011</td>
+                                            <td>작가이자 정치가로, 공산주의 체제에 대한 비판으로 투옥되었다가 벨벳 혁명 이후 체코슬로바키아의 마지막 대통령과 체코의 초대 대통령을 역임했습니다.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Politics Section -->
+                <section id="politics" class="section">
+                    <h2 class="section-title"><i class="fas fa-balance-scale"></i> 정치</h2>
+                    <div class="card">
+                        <h3 class="card-title">정치 체제</h3>
+                        <div class="card-content">
+                            <p>체코는 대통령제를 가미한 의원내각제 국가입니다. 1992년 12월에 채택된 신헌법에 기초한 자유 민주주의 체제를 갖추고 있으며, 다당제를 채택하고 있습니다.</p>
+                            <p>체코의 정치 체제는 다음과 같은 특징을 가지고 있습니다:</p>
+                            <ul>
+                                <li><strong>정부 형태</strong>: 의원내각제 (대통령제 요소 포함)</li>
+                                <li><strong>국가 원수</strong>: 대통령 (직접 선거로 선출, 임기 5년, 1회 연임 가능)</li>
+                                <li><strong>행정부 수반</strong>: 총리 (대통령이 임명, 의회의 신임을 받음)</li>
+                                <li><strong>입법부</strong>: 양원제 (상원과 하원)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">행정부</h3>
+                            <div class="card-content">
+                                <p>체코의 행정부는 총리가 이끄는 내각으로 구성됩니다. 총리는 대통령이 임명하며, 의회의 신임을 받아야 합니다. 내각은 총리와 각 부처의 장관들로 구성됩니다.</p>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>대통령</h4>
+                                        <p>페트르 파벨 (Petr Pavel)</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>총리</h4>
+                                        <p>페트르 피알라 (Petr Fiala)</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>외교장관</h4>
+                                        <p>얀 리파브스키 (Jan Lipavsky)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">입법부</h3>
+                            <div class="card-content">
+                                <p>체코의 입법부는 양원제로, 상원(Senát)과 하원(Poslanecká sněmovna)으로 구성됩니다.</p>
+                                <ul>
+                                    <li><strong>하원</strong>: 200명의 의원으로 구성되며, 임기는 4년입니다. 비례대표제로 선출됩니다.</li>
+                                    <li><strong>상원</strong>: 81명의 의원으로 구성되며, 임기는 6년입니다. 2년마다 1/3의 의원이 교체됩니다. 다수대표제로 선출됩니다.</li>
+                                </ul>
+                                <p>입법부는 법률 제정, 예산 승인, 국제 조약 비준, 정부 감독 등의 역할을 수행합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">주요 정당</h3>
+                        <div class="card-content">
+                            <p>체코는 다당제 국가로, 여러 정당이 정치적 스펙트럼을 형성하고 있습니다. 주요 정당으로는 다음과 같은 것들이 있습니다:</p>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>정당명</th>
+                                            <th>성향</th>
+                                            <th>설명</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>시민민주당 (ODS)</td>
+                                            <td>중도우파</td>
+                                            <td>자유 시장 경제와 유럽 통합을 지지하는 보수 정당입니다. 현재 페트르 피알라 총리가 소속된 정당입니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ANO 2011</td>
+                                            <td>중도/포퓰리즘</td>
+                                            <td>안드레이 바비시 전 총리가 이끄는 정당으로, 반부패와 효율적인 정부를 강조합니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>체코 해적당</td>
+                                            <td>중도좌파/진보</td>
+                                            <td>직접 민주주의, 투명성, 디지털 권리를 강조하는 진보적 정당입니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>자유와직접민주주의당 (SPD)</td>
+                                            <td>우파/민족주의</td>
+                                            <td>반이민, 반EU 성향의 민족주의 정당입니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>체코 사회민주당 (ČSSD)</td>
+                                            <td>중도좌파</td>
+                                            <td>전통적인 사회민주주의 정당으로, 복지국가와 노동권을 강조합니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>보헤미아 모라바 공산당 (KSČM)</td>
+                                            <td>좌파</td>
+                                            <td>체코의 공산당으로, 사회주의적 가치를 지지합니다.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">사법 제도</h3>
+                        <div class="card-content">
+                            <p>체코의 사법 제도는 독립적인 사법부를 기반으로 하며, 다음과 같은 구조를 가지고 있습니다:</p>
+                            <ul>
+                                <li><strong>헌법재판소</strong>: 법률과 정부 행위의 합헌성을 심사합니다. 15명의 판사로 구성되며, 대통령이 임명하고 상원의 동의를 받습니다.</li>
+                                <li><strong>대법원</strong>: 민사 및 형사 사건의 최고 법원입니다.</li>
+                                <li><strong>최고행정법원</strong>: 행정 사건의 최고 법원입니다.</li>
+                                <li><strong>고등법원</strong>: 지방법원의 항소를 처리합니다.</li>
+                                <li><strong>지방법원</strong>: 1심 법원으로 기능합니다.</li>
+                                <li><strong>지역법원</strong>: 경미한 사건을 처리하는 가장 낮은 단계의 법원입니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">국제 관계 및 외교 정책</h3>
+                        <div class="card-content">
+                            <p>체코는 유럽 연합(EU)과 북대서양 조약기구(NATO)의 회원국으로, 서방과의 관계를 중시하는 외교 정책을 펼치고 있습니다. 주요 외교 정책 방향은 다음과 같습니다:</p>
+                            <ul>
+                                <li><strong>유럽 통합</strong>: EU 회원국으로서 유럽 통합 과정에 적극 참여하고 있습니다.</li>
+                                <li><strong>대서양 관계</strong>: NATO 회원국으로서 미국 및 다른 서방 국가들과 안보 협력을 강화하고 있습니다.</li>
+                                <li><strong>중부 유럽 협력</strong>: 비세그라드 그룹(V4: 체코, 폴란드, 헝가리, 슬로바키아)을 통해 중부 유럽 국가들과의 협력을 강화하고 있습니다.</li>
+                                <li><strong>인권과 민주주의</strong>: 국제 사회에서 인권과 민주주의 가치를 지지하고 있습니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Economy Section -->
+                <section id="economy" class="section">
+                    <h2 class="section-title"><i class="fas fa-chart-line"></i> 경제</h2>
+                    <div class="card">
+                        <h3 class="card-title">경제 개요</h3>
+                        <div class="card-content">
+                            <p>체코는 중앙유럽에서 가장 안정적이고 번영하는 경제 중 하나를 보유하고 있습니다. 공산주의 체제에서 시장 경제로의 성공적인 전환을 이루었으며, 현재는 수출 중심의 산업화된 경제를 갖추고 있습니다.</p>
+                            <div class="key-figure">
+                                <h3>3,320억$</h3>
+                                <p>GDP (2023년)</p>
+                            </div>
+                            <div class="key-figure">
+                                <h3>3만 600$</h3>
+                                <p>1인당 GDP (2023년)</p>
+                            </div>
+                            <div class="key-figure">
+                                <h3>-0.4%</h3>
+                                <p>경제성장률 (실질, 2023년)</p>
+                            </div>
+                            <div class="key-figure">
+                                <h3>2.6%</h3>
+                                <p>실업률 (2023년)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">주요 산업</h3>
+                        <div class="card-content">
+                            <p>체코 경제는 다양한 산업 분야에 기반을 두고 있으며, 특히 제조업이 강점을 보이고 있습니다. 주요 산업 분야는 다음과 같습니다:</p>
+                            <div class="chart-container">
+                                <canvas id="industryChart"></canvas>
+                            </div>
+                            <ul>
+                                <li><strong>자동차 산업</strong>: 체코는 유럽의 주요 자동차 생산국 중 하나로, 스코다(Škoda)를 비롯한 여러 자동차 브랜드의 생산 기지가 있습니다.</li>
+                                <li><strong>기계 공학</strong>: 정밀 기계, 공작 기계, 중장비 등의 생산이 발달했습니다.</li>
+                                <li><strong>전자 및 전기 공학</strong>: 컴퓨터 하드웨어, 통신 장비, 가전제품 등의 생산이 활발합니다.</li>
+                                <li><strong>화학 산업</strong>: 석유화학, 제약, 플라스틱 등의 분야가 발달했습니다.</li>
+                                <li><strong>정보 기술</strong>: 소프트웨어 개발, IT 서비스 등의 분야가 성장하고 있습니다.</li>
+                                <li><strong>관광 산업</strong>: 프라하를 비롯한 역사적 도시들과 자연 경관을 바탕으로 한 관광 산업이 중요한 수입원입니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">무역</h3>
+                            <div class="card-content">
+                                <p>체코는 수출 중심의 경제를 가지고 있으며, 특히 EU 국가들과의 무역이 활발합니다. 2023년 기준 무역 규모는 약 3,788억 달러입니다.</p>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-file-export"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>수출액</h4>
+                                        <p>2,004억$ (2023년)</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-file-import"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>수입액</h4>
+                                        <p>1,784억$ (2023년)</p>
+                                    </div>
+                                </div>
+                                <p><strong>주요 수출품</strong>: 자동차, 기계류, 전자제품, 컴퓨터, 철강 제품</p>
+                                <p><strong>주요 수입품</strong>: 기계류, 전자제품, 자동차 부품, 화학제품, 원자재</p>
+                                <p><strong>주요 교역국</strong>: 독일, 슬로바키아, 폴란드, 프랑스, 이탈리아, 영국, 중국</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">금융 및 통화</h3>
+                            <div class="card-content">
+                                <p>체코의 통화는 체코 코루나(CZK)이며, 중앙은행인 체코 국립은행(Česká národní banka)이 통화 정책을 담당합니다.</p>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-coins"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>통화</h4>
+                                        <p>체코 코루나 (CZK)</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>중앙은행</h4>
+                                        <p>체코 국립은행</p>
+                                    </div>
+                                </div>
+                                <p>체코는 유럽 연합 회원국이지만 아직 유로화를 도입하지 않았습니다. 유로존 가입을 위한 준비를 진행 중이나, 구체적인 일정은 확정되지 않았습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">한국과의 경제 관계</h3>
+                        <div class="card-content">
+                            <p>한국과 체코는 1990년 외교 관계 수립 이후 경제적 협력을 꾸준히 발전시켜 왔습니다. 양국 간 교역 및 투자는 지속적으로 증가하고 있습니다.</p>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>교역액 (2023년)</h4>
+                                    <p>수출: 31억 7000만$, 수입: 12억 9000만$</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>투자 현황 (2023년 누계)</h4>
+                                    <p>대체코: 23.6억불 (324건), 대한국: 4백만불 (15건)</p>
+                                </div>
+                            </div>
+                            <p><strong>주요 수출품</strong>: 자동차, 컴퓨터, 휴대전화</p>
+                            <p><strong>주요 수입품</strong>: 전자기기, 광학기기 등</p>
+                            <p>한국 기업들의 체코 진출도 활발하게 이루어지고 있으며, 특히 자동차, 전자, IT 분야에서 협력이 이루어지고 있습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">경제적 과제와 전망</h3>
+                        <div class="card-content">
+                            <p>체코 경제는 안정적인 성장을 보이고 있지만, 몇 가지 과제에 직면해 있습니다:</p>
+                            <ul>
+                                <li><strong>인구 고령화</strong>: 저출산과 고령화로 인한 노동력 감소 문제에 직면하고 있습니다.</li>
+                                <li><strong>기술 혁신</strong>: 4차 산업혁명에 대응하기 위한 기술 혁신과 디지털 전환이 필요합니다.</li>
+                                <li><strong>에너지 전환</strong>: 화석 연료에 대한 의존도를 줄이고 재생 에너지로의 전환이 과제입니다.</li>
+                                <li><strong>EU 기금 의존도</strong>: EU 기금에 대한 의존도를 줄이고 자체적인 경제 성장 동력을 확보해야 합니다.</li>
+                            </ul>
+                            <p>향후 체코 경제는 디지털 경제, 녹색 경제로의 전환을 통해 지속 가능한 성장을 추구할 것으로 전망됩니다. 특히 자동차 산업의 전기차 전환, IT 및 소프트웨어 산업의 발전, 관광 산업의 회복 등이 주요 성장 동력이 될 것으로 예상됩니다.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Society Section -->
+                <section id="society" class="section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> 사회</h2>
+                    <div class="card">
+                        <h3 class="card-title">인구 및 민족</h3>
+                        <div class="card-content">
+                            <p>체코의 인구는 약 1,088만 명(2024년 기준)으로, 비교적 동질적인 민족 구성을 보이고 있습니다.</p>
+                            <div class="chart-container">
+                                <canvas id="ethnicityChart"></canvas>
+                            </div>
+                            <p>체코 공화국에 거주하는 주민의 약 64.3%는 자신의 민족적 정체성을 체코인으로, 5%는 모라비아인으로 생각합니다. 이외에도 슬로바키아인(1.4%)과 기타 소수 민족이 있습니다.</p>
+                            <p>체코슬로바키아가 두 나라로 분리되면서 체코에 남은 슬로바키아인은 전체 인구의 약 2% 정도를 차지합니다. 이외의 소수 민족으로는 폴란드인, 독일인, 로마인(집시), 헝가리인, 우크라이나인 등이 있습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">언어</h3>
+                            <div class="card-content">
+                                <p>체코의 공용어는 슬라브어파에 속하는 체코어입니다. 체코어는 라틴 알파벳을 사용하며, 특수 발음 기호가 있는 것이 특징입니다.</p>
+                                <p>외국어로는 독일어, 슬로바키아어, 영어, 러시아어, 프랑스어가 체코인들에게 선호되는 언어입니다. 특히 젊은 세대는 영어 구사 능력이 높은 편입니다.</p>
+                                <div class="fact-card">
+                                    <h4>체코어의 특징</h4>
+                                    <p>체코어는 서슬라브어군에 속하며, 슬로바키아어와 매우 유사합니다. 체코어의 특징 중 하나는 단어의 첫 음절에 강세가 있다는 것입니다. 또한 'ř'와 같은 독특한 발음을 가진 문자가 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">종교</h3>
+                            <div class="card-content">
+                                <p>체코는 유럽에서 무신론자의 비율이 가장 높은 나라 중 하나입니다. 이는 공산정권 시절의 영향과 체코의 독특한 종교사적 경험에서 비롯된 것으로 볼 수 있습니다.</p>
+                                <div class="chart-container" style="height: 200px;">
+                                    <canvas id="religionChart"></canvas>
+                                </div>
+                                <p>2011년 통계에 따르면 무응답 45.2%, 무종교 34.2%, 가톨릭 10.3%, 개신교 0.9%, 기타 9.4%로 나타났습니다. 체코는 역사적으로 가톨릭 국가였으나, 15세기 얀 후스의 종교 개혁 운동과 30년 전쟁 이후의 재가톨릭화, 그리고 공산주의 시대의 종교 억압 등 복잡한 종교적 역사를 가지고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">교육</h3>
+                        <div class="card-content">
+                            <p>체코는 높은 수준의 교육 시스템을 갖추고 있으며, 문맹률이 매우 낮습니다. 교육은 무상으로 제공되며, 의무 교육 기간은 6세부터 15세까지입니다.</p>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>문맹률</h4>
+                                    <p>1% 미만</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-school"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>의무 교육</h4>
+                                    <p>9년 (6-15세)</p>
+                                </div>
+                            </div>
+                            <p>체코의 교육 시스템은 다음과 같이 구성되어 있습니다:</p>
+                            <ul>
+                                <li><strong>초등 교육</strong>: 6-15세, 9년간의 의무 교육</li>
+                                <li><strong>중등 교육</strong>: 일반 고등학교(김나지움), 직업 고등학교, 기술 고등학교 등</li>
+                                <li><strong>고등 교육</strong>: 대학교, 기술 대학, 예술 아카데미 등</li>
+                            </ul>
+                            <p>체코의 대표적인 대학으로는 1348년에 설립된 카를 대학교(Charles University)가 있으며, 이는 중앙유럽에서 가장 오래된 대학 중 하나입니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">보건 및 복지</h3>
+                        <div class="card-content">
+                            <p>체코는 보편적 건강보험 시스템을 갖추고 있으며, 모든 시민과 영주권자는 기본적인 의료 서비스를 받을 수 있습니다. 의료 서비스의 질은 높은 편이며, 특히 프라하와 같은 대도시에서는 최신 의료 시설을 갖추고 있습니다.</p>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>평균 수명</h4>
+                                    <p>79세 (남성 75세, 여성 83세)</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-baby"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>영아 사망률</h4>
+                                    <p>1,000명당 4명</p>
+                                </div>
+                            </div>
+                            <p>체코의 사회 보장 시스템은 다음과 같은 요소로 구성되어 있습니다:</p>
+                            <ul>
+                                <li><strong>연금 제도</strong>: 노령, 장애, 유족 연금 등</li>
+                                <li><strong>건강 보험</strong>: 질병, 출산, 장기 요양 등</li>
+                                <li><strong>실업 보험</strong>: 실직자를 위한 지원</li>
+                                <li><strong>가족 지원</strong>: 아동 수당, 출산 지원금 등</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">사회적 이슈</h3>
+                        <div class="card-content">
+                            <p>체코가 직면한 주요 사회적 이슈는 다음과 같습니다:</p>
+                            <div class="fact-card">
+                                <h4>인구 고령화</h4>
+                                <p>체코는 많은 유럽 국가들과 마찬가지로 저출산과 고령화 문제에 직면해 있습니다. 이는 노동력 감소, 연금 시스템 부담 증가 등의 문제를 야기하고 있습니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>이민과 통합</h4>
+                                <p>체코는 전통적으로 이민자 비율이 낮은 국가였으나, 최근 EU 가입 이후 이민자 수가 증가하고 있습니다. 이민자 통합과 다문화 사회로의 전환이 과제로 대두되고 있습니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>소득 불평등</h4>
+                                <p>체코는 EU 국가 중에서는 소득 불평등이 비교적 낮은 편이지만, 지역 간 경제적 격차가 존재합니다. 특히 프라하와 같은 대도시와 농촌 지역 간의 경제적 격차가 큰 편입니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>주택 문제</h4>
+                                <p>특히 프라하와 같은 대도시에서는 주택 가격 상승으로 인한 주택 구입의 어려움이 사회적 이슈로 대두되고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Culture Section -->
+                <section id="culture" class="section">
+                    <h2 class="section-title"><i class="fas fa-theater-masks"></i> 문화</h2>
+                    <div class="card">
+                        <h3 class="card-title">문화적 특성</h3>
+                        <div class="card-content">
+                            <p>체코는 중앙유럽에 위치하지만 문화적으로는 서유럽의 색채가 짙습니다. 오랜 역사를 가진 체코는 로마네스크, 고딕, 르네상스, 바로크 양식의 건축물과 예술 작품이 풍부하게 남아 있으며, 음악, 문학, 영화 등 다양한 문화 영역에서 세계적인 업적을 이루었습니다.</p>
+                            <div class="image-grid">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Prague_%286365119737%29.jpg/1200px-Prague_%286365119737%29.jpg" alt="프라하 구시가지">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Karlstejn_Castle_3.jpg/1200px-Karlstejn_Castle_3.jpg" alt="카를슈테인 성">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Alfons_Mucha_-_1896_-_Seasons_-_Spring.jpg/800px-Alfons_Mucha_-_1896_-_Seasons_-_Spring.jpg" alt="알폰스 무하의 작품">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">예술과 건축</h3>
+                            <div class="card-content">
+                                <p>체코는 다양한 건축 양식이 공존하는 나라로, 특히 프라하는 '백탑의 도시'라고 불릴 만큼 아름다운 건축물이 많습니다.</p>
+                                <div class="culture-item">
+                                    <div class="culture-icon">
+                                        <i class="fas fa-landmark"></i>
+                                    </div>
+                                    <div class="culture-info">
+                                        <h4>프라하 성</h4>
+                                        <p>9세기에 이미 교회가 있던 자리로, 세계에서 가장 큰 고대 성 중 하나입니다. 성 비투스 대성당, 구 왕궁, 성 이르지 바실리카 등이 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="culture-item">
+                                    <div class="culture-icon">
+                                        <i class="fas fa-archway"></i>
+                                    </div>
+                                    <div class="culture-info">
+                                        <h4>카를교</h4>
+                                        <p>14세기에 건설된 프라하의 상징적인 다리로, 30개 이상의 바로크 양식 조각상이 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="culture-item">
+                                    <div class="culture-icon">
+                                        <i class="fas fa-paint-brush"></i>
+                                    </div>
+                                    <div class="culture-info">
+                                        <h4>알폰스 무하</h4>
+                                        <p>아르누보 양식의 대표적인 화가이자 그래픽 디자이너로, 독특한 장식적 스타일로 유명합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">음악과 문학</h3>
+                            <div class="card-content">
+                                <p>체코는 클래식 음악의 강국으로, 많은 유명 작곡가를 배출했습니다. 또한 풍부한 문학 전통을 가지고 있습니다.</p>
+                                <div class="culture-item">
+                                    <div class="culture-icon">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                    <div class="culture-info">
+                                        <h4>베드르지흐 스메타나</h4>
+                                        <p>'몰다우' 등을 작곡한 체코의 대표적인 작곡가로, 체코 민족 음악의 아버지로 불립니다.</p>
+                                    </div>
+                                </div>
+                                <div class="culture-item">
+                                    <div class="culture-icon">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                    <div class="culture-info">
+                                        <h4>안토닌 드보르작</h4>
+                                        <p>'신세계 교향곡'으로 유명한 작곡가로, 체코 민속 음악의 요소를 클래식 음악에 접목시켰습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="culture-item">
+                                    <div class="culture-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="culture-info">
+                                        <h4>프란츠 카프카</h4>
+                                        <p>프라하 출신의 독일어 작가로, '변신', '심판', '성' 등의 작품으로 유명합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">전통과 풍습</h3>
+                        <div class="card-content">
+                            <p>체코는 다양한 전통과 풍습을 가지고 있으며, 이는 주로 기독교 전통과 민간 신앙에서 비롯되었습니다.</p>
+                            <div class="fact-card">
+                                <h4>부활절 전통</h4>
+                                <p>체코의 부활절은 독특한 전통이 있습니다. 남성들은 버드나무 가지로 만든 채찍(pomlázka)으로 여성들을 가볍게 때리는 풍습이 있는데, 이는 여성에게 건강과 젊음을 전해준다는 의미를 담고 있습니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>성 니콜라스 데이</h4>
+                                <p>12월 5일 저녁, 성 니콜라스(Mikuláš)가 천사와 악마를 동반하여 아이들을 방문합니다. 착한 아이들에게는 선물을, 나쁜 아이들에게는 석탄이나 감자를 줍니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>크리스마스 전통</h4>
+                                <p>체코의 크리스마스는 12월 24일 저녁에 주로 축하합니다. 전통적인 크리스마스 저녁 식사는 감자 샐러드와 튀긴 잉어로 구성됩니다. 또한 사과를 반으로 자르는 점술 풍습이 있는데, 씨앗이 별 모양으로 나타나면 행운의 징조로 여깁니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">음식과 음료</h3>
+                        <div class="card-content">
+                            <p>체코 요리는 중부 유럽의 영향을 많이 받았으며, 육류, 감자, 덤플링 등이 주요 재료로 사용됩니다. 또한 체코는 맥주 문화가 발달한 나라로 유명합니다.</p>
+                            <div class="image-grid">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Svickova_na_smetane.jpg/1200px-Svickova_na_smetane.jpg" alt="스비치코바">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Vep%C5%99o-knedlo-zelo.JPG/1200px-Vep%C5%99o-knedlo-zelo.JPG" alt="베프로 크네들로 젤로">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Pilsner_Urquell.jpg/800px-Pilsner_Urquell.jpg" alt="필스너 우르켈">
+                            </div>
+                            <div class="fact-card">
+                                <h4>대표적인 체코 요리</h4>
+                                <ul>
+                                    <li><strong>스비치코바(Svíčková)</strong>: 소고기 등심을 크림 소스와 함께 제공하는 요리</li>
+                                    <li><strong>굴라시(Guláš)</strong>: 헝가리에서 유래한 고기 스튜</li>
+                                    <li><strong>베프로 크네들로 젤로(Vepřo-knedlo-zelo)</strong>: 돼지고기, 덤플링, 양배추를 함께 제공하는 전통 요리</li>
+                                    <li><strong>트르델니크(Trdelník)</strong>: 원통형 모양의 달콤한 빵</li>
+                                </ul>
+                            </div>
+                            <div class="fact-card">
+                                <h4>체코의 맥주 문화</h4>
+                                <p>체코는 1인당 맥주 소비량이 세계에서 가장 높은 나라 중 하나입니다. 필스너(Pilsner) 스타일의 맥주가 유명하며, 필스너 우르켈(Pilsner Urquell)과 부드바르(Budvar) 등이 대표적인 브랜드입니다. 체코에서는 맥주가 단순한 음료를 넘어 문화적 상징으로 자리 잡고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">스포츠와 여가</h3>
+                        <div class="card-content">
+                            <p>체코인들은 스포츠를 즐기며, 특히 아이스하키와 축구가 인기 있는 스포츠입니다.</p>
+                            <div class="culture-item">
+                                <div class="culture-icon">
+                                    <i class="fas fa-hockey-puck"></i>
+                                </div>
+                                <div class="culture-info">
+                                    <h4>아이스하키</h4>
+                                    <p>체코에서 가장 인기 있는 스포츠 중 하나로, 체코 국가대표팀은 세계 챔피언십에서 여러 차례 우승한 바 있습니다.</p>
+                                </div>
+                            </div>
+                            <div class="culture-item">
+                                <div class="culture-icon">
+                                    <i class="fas fa-futbol"></i>
+                                </div>
+                                <div class="culture-info">
+                                    <h4>축구</h4>
+                                    <p>체코는 축구 강국으로, 1976년 유럽 챔피언십에서 체코슬로바키아로서 우승한 바 있습니다.</p>
+                                </div>
+                            </div>
+                            <div class="culture-item">
+                                <div class="culture-icon">
+                                    <i class="fas fa-hiking"></i>
+                                </div>
+                                <div class="culture-info">
+                                    <h4>하이킹과 사이클링</h4>
+                                    <p>체코인들은 자연을 즐기는 활동을 좋아하며, 특히 하이킹과 사이클링이 인기 있습니다. 체코에는 잘 정비된 하이킹 트레일과 자전거 도로가 많습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tourism Section -->
+                <section id="tourism" class="section">
+                    <h2 class="section-title"><i class="fas fa-plane"></i> 관광</h2>
+                    <div class="card">
+                        <h3 class="card-title">주요 관광지</h3>
+                        <div class="card-content">
+                            <p>체코는 아름다운 역사적 도시, 성, 자연 경관 등 다양한 관광 명소를 보유하고 있습니다. 특히 프라하는 '유럽의 황금 도시'라고 불리며, 매년 수백만 명의 관광객이 방문합니다.</p>
+                            <div class="image-grid">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Praha%2C_Star%C3%A9_M%C4%9Bsto%2C_Starom%C4%9Bstsk%C3%A9_n%C3%A1m%C4%9Bst%C3%AD%2C_radnice.jpg/1200px-Praha%2C_Star%C3%A9_M%C4%9Bsto%2C_Starom%C4%9Bstsk%C3%A9_n%C3%A1m%C4%9Bst%C3%AD%2C_radnice.jpg" alt="프라하 구시가지 광장">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Karlovy_Vary_Czech.jpg/1200px-Karlovy_Vary_Czech.jpg" alt="카를로비바리">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Cesky_Krumlov_-_panoramio.jpg/1200px-Cesky_Krumlov_-_panoramio.jpg" alt="체스키크룸로프">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">프라하</h3>
+                        <div class="card-content">
+                            <p>체코의 수도 프라하는 '백탑의 도시', '유럽의 황금 도시'라고 불리며, 중세 건축물이 잘 보존된 아름다운 도시입니다. 프라하의 역사 지구는 유네스코 세계문화유산으로 등재되어 있습니다.</p>
+                            <div class="fact-card">
+                                <h4>프라하 성</h4>
+                                <p>세계에서 가장 큰 고대 성 중 하나로, 성 비투스 대성당, 구 왕궁, 성 이르지 바실리카 등이 있습니다. 체코 대통령의 공식 관저이기도 합니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>카를교</h4>
+                                <p>블타바강 위에 놓인 14세기 석조 다리로, 30개 이상의 바로크 양식 조각상이 있습니다. 프라하에서 가장 상징적인 건축물 중 하나입니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>구시가지 광장</h4>
+                                <p>프라하의 중심부에 위치한 광장으로, 천문시계, 틴 성당, 성 니콜라스 교회 등이 있습니다. 특히 프라하 천문시계는 매시간 정각에 인형들이 움직이는 쇼를 선보입니다.</p>
+                            </div>
+                            <div class="fact-card">
+                                <h4>바츨라프 광장</h4>
+                                <p>프라하의 신시가지에 위치한 대형 광장으로, 쇼핑과 엔터테인먼트의 중심지입니다. 체코의 주요 역사적 사건들이 이곳에서 일어났습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">기타 주요 도시</h3>
+                            <div class="card-content">
+                                <div class="fact-card">
+                                    <h4>체스키크룸로프</h4>
+                                    <p>중세 도시의 모습이 잘 보존된 작은 도시로, 블타바강이 도시를 감싸고 흐릅니다. 체스키크룸로프 성과 아름다운 구시가지가 유명하며, 유네스코 세계문화유산으로 등재되어 있습니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>카를로비바리</h4>
+                                    <p>세계 3대 온천 관광지역 중 하나로, 유럽인들의 휴양지로 사랑받고 있습니다. 아름다운 온천 건물과 콜로나다(산책로)가 특징입니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>브르노</h4>
+                                    <p>체코 제2의 도시로, 슈필베르크 성, 성 피터와 바울 대성당 등의 역사적 건축물이 있습니다. 또한 현대적인 대학 도시로서의 면모도 갖추고 있습니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>플젠</h4>
+                                    <p>체코 서부의 도시로, 세계적으로 유명한 필스너 맥주의 발상지입니다. 플젠 맥주 양조장 투어가 인기 있는 관광 프로그램입니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">자연 명소</h3>
+                            <div class="card-content">
+                                <div class="fact-card">
+                                    <h4>보헤미안 스위스 국립공원</h4>
+                                    <p>체코 북부에 위치한 국립공원으로, 독특한 사암 바위 형성물, 깊은 계곡, 울창한 숲이 특징입니다. 하이킹과 암벽 등반이 인기 있는 활동입니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>모라비안 카르스트</h4>
+                                    <p>체코 동부에 위치한 카르스트 지형으로, 수백 개의 동굴과 협곡이 있습니다. 특히 마코차 협곡과 푼크바 동굴이 유명합니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>크르코노셰 산맥</h4>
+                                    <p>체코와 폴란드 국경에 위치한 산맥으로, 체코에서 가장 높은 산인 스네슈카 산(1,602m)이 있습니다. 겨울에는 스키, 여름에는 하이킹이 인기 있습니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>슈마바 산맥</h4>
+                                    <p>체코 남서부에 위치한 산맥으로, 울창한 숲과 아름다운 호수가 특징입니다. 자연 보호 구역으로 지정되어 있으며, 다양한 야생 동식물이 서식하고 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">유네스코 세계문화유산</h3>
+                        <div class="card-content">
+                            <p>체코에는 총 16개의 유네스코 세계문화유산이 있으며, 이는 체코의 풍부한 문화적, 역사적 유산을 보여줍니다.</p>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>유산명</th>
+                                            <th>등재 연도</th>
+                                            <th>위치</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>프라하 역사 지구</td>
+                                            <td>1992</td>
+                                            <td>프라하</td>
+                                        </tr>
+                                        <tr>
+                                            <td>체스키크룸로프 역사 지구</td>
+                                            <td>1992</td>
+                                            <td>체스키크룸로프</td>
+                                        </tr>
+                                        <tr>
+                                            <td>텔치 역사 지구</td>
+                                            <td>1992</td>
+                                            <td>텔치</td>
+                                        </tr>
+                                        <tr>
+                                            <td>젤레나 호라의 성 얀 네포무크 순례 교회</td>
+                                            <td>1994</td>
+                                            <td>젤레나 호라</td>
+                                        </tr>
+                                        <tr>
+                                            <td>쿠트나 호라: 성 바르보라 대성당과 세들레츠의 성모 승천 대성당이 있는 역사 도시 센터</td>
+                                            <td>1995</td>
+                                            <td>쿠트나 호라</td>
+                                        </tr>
+                                        <tr>
+                                            <td>레드니체-발티체 문화 경관</td>
+                                            <td>1996</td>
+                                            <td>모라비아</td>
+                                        </tr>
+                                        <tr>
+                                            <td>크로메르지슈의 정원과 성</td>
+                                            <td>1998</td>
+                                            <td>크로메르지슈</td>
+                                        </tr>
+                                        <tr>
+                                            <td>홀라쇼비체 역사 마을</td>
+                                            <td>1998</td>
+                                            <td>홀라쇼비체</td>
+                                        </tr>
+                                        <tr>
+                                            <td>리토미슐 성</td>
+                                            <td>1999</td>
+                                            <td>리토미슐</td>
+                                        </tr>
+                                        <tr>
+                                            <td>올로모우츠의 성삼위일체 기둥</td>
+                                            <td>2000</td>
+                                            <td>올로모우츠</td>
+                                        </tr>
+                                        <tr>
+                                            <td>브르노의 투겐트하트 빌라</td>
+                                            <td>2001</td>
+                                            <td>브르노</td>
+                                        </tr>
+                                        <tr>
+                                            <td>트르제비치의 유대인 지구와 성 프로코피우스 바실리카</td>
+                                            <td>2003</td>
+                                            <td>트르제비치</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">관광 정보</h3>
+                        <div class="card-content">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>최적 방문 시기</h4>
+                                    <p>5월~9월 (여름), 12월 (크리스마스 시장)</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>언어</h4>
+                                    <p>체코어 (관광지에서는 영어 통용)</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>통화</h4>
+                                    <p>체코 코루나 (CZK)</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-plug"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>전압</h4>
+                                    <p>230V, 50Hz (유럽식 플러그)</p>
+                                </div>
+                            </div>
+                            <p>체코는 비교적 안전한 여행지로, 일반적인 여행 주의사항을 지키면 큰 문제 없이 여행할 수 있습니다. 다만 관광객이 많은 지역에서는 소매치기에 주의해야 합니다.</p>
+                            <p>체코 내 이동은 발달된 대중교통 시스템을 이용하면 편리합니다. 프라하는 지하철, 트램, 버스 등의 대중교통이 잘 발달되어 있으며, 도시 간 이동은 기차나 버스를 이용할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- International Relations Section -->
+                <section id="relations" class="section">
+                    <h2 class="section-title"><i class="fas fa-handshake"></i> 국제관계</h2>
+                    <div class="card">
+                        <h3 class="card-title">국제기구 가입 현황</h3>
+                        <div class="card-content">
+                            <p>체코는 다양한 국제기구에 가입하여 활발한 국제 활동을 펼치고 있습니다.</p>
+                            <ul>
+                                <li><strong>유럽 연합(EU)</strong>: 2004년 5월 1일 가입</li>
+                                <li><strong>북대서양 조약기구(NATO)</strong>: 1999년 3월 12일 가입</li>
+                                <li><strong>국제연합(UN)</strong>: 1993년 1월 19일 가입 (체코슬로바키아는 1945년 창립 회원국)</li>
+                                <li><strong>경제협력개발기구(OECD)</strong>: 1995년 12월 21일 가입</li>
+                                <li><strong>세계무역기구(WTO)</strong>: 1995년 1월 1일 가입</li>
+                                <li><strong>비세그라드 그룹(V4)</strong>: 1991년 창립 회원국 (체코슬로바키아로서)</li>
+                                <li><strong>유럽 안보 협력 기구(OSCE)</strong>: 1995년 가입</li>
+                                <li><strong>유엔 교육 과학 문화 기구(UNESCO)</strong>: 1993년 가입</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">주요국과의 관계</h3>
+                            <div class="card-content">
+                                <div class="fact-card">
+                                    <h4>유럽 연합(EU)</h4>
+                                    <p>체코는 2004년 EU에 가입했으며, EU 내에서 중요한 역할을 수행하고 있습니다. 다만 아직 유로화를 도입하지 않고 자국 통화인 체코 코루나를 사용하고 있습니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>독일</h4>
+                                    <p>독일은 체코의 가장 중요한 경제 파트너로, 양국 간 무역 규모가 매우 큽니다. 역사적으로는 복잡한 관계를 가지고 있으나, 현재는 우호적인 관계를 유지하고 있습니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>슬로바키아</h4>
+                                    <p>1993년 체코슬로바키아에서 분리된 이후에도 양국은 특별한 관계를 유지하고 있습니다. 언어적, 문화적 유사성으로 인해 긴밀한 협력 관계를 유지하고 있습니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>미국</h4>
+                                    <p>체코는 미국과 우호적인 관계를 유지하고 있으며, NATO를 통한 안보 협력이 중요한 부분을 차지합니다.</p>
+                                </div>
+                                <div class="fact-card">
+                                    <h4>러시아</h4>
+                                    <p>과거 소련의 영향으로 인해 복잡한 역사적 관계를 가지고 있으며, 최근에는 러시아의 우크라이나 침공 이후 관계가 악화되었습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="card-title">한국과의 관계</h3>
+                            <div class="card-content">
+                                <p>한국과 체코는 1990년 3월 22일에 외교 관계를 수립했으며, 이후 정치, 경제, 문화 등 다양한 분야에서 협력 관계를 발전시켜 왔습니다.</p>
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">1990년 3월 22일</div>
+                                        <div class="timeline-content">
+                                            <p>한국-체코슬로바키아 외교 관계 수립</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">1993년</div>
+                                        <div class="timeline-content">
+                                            <p>체코슬로바키아 분리 후 한국-체코 외교 관계 지속</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">1995년 3월</div>
+                                        <div class="timeline-content">
+                                            <p>김영삼 대통령 체코 국빈 방문</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">2015년 12월</div>
+                                        <div class="timeline-content">
+                                            <p>박근혜 대통령 체코 방문</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">2018년 11월</div>
+                                        <div class="timeline-content">
+                                            <p>문재인 대통령 체코 방문</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">2024년 9월</div>
+                                        <div class="timeline-content">
+                                            <p>윤석열 대통령 체코 공식 방문</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>경제적으로는 한국 기업들의 체코 진출이 활발하게 이루어지고 있으며, 특히 자동차, 전자, IT 분야에서 협력이 이루어지고 있습니다. 문화적으로는 한류의 영향으로 체코 내에서 한국 문화에 대한 관심이 증가하고 있습니다.</p>
+                                <p>2023년 기준 체코 내 한국 교민은 약 3,043명으로 집계되고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">주요 외교 정책</h3>
+                        <div class="card-content">
+                            <p>체코의 주요 외교 정책 방향은 다음과 같습니다:</p>
+                            <ul>
+                                <li><strong>유럽 통합</strong>: EU 회원국으로서 유럽 통합 과정에 적극 참여하고 있습니다.</li>
+                                <li><strong>대서양 관계</strong>: NATO 회원국으로서 미국 및 다른 서방 국가들과 안보 협력을 강화하고 있습니다.</li>
+                                <li><strong>중부 유럽 협력</strong>: 비세그라드 그룹(V4: 체코, 폴란드, 헝가리, 슬로바키아)을 통해 중부 유럽 국가들과의 협력을 강화하고 있습니다.</li>
+                                <li><strong>인권과 민주주의</strong>: 국제 사회에서 인권과 민주주의 가치를 지지하고 있습니다.</li>
+                                <li><strong>경제 외교</strong>: 수출 중심 경제를 바탕으로 경제적 이익을 추구하는 실용적인 외교 정책을 펼치고 있습니다.</li>
+                                <li><strong>에너지 안보</strong>: 러시아에 대한 에너지 의존도를 줄이고 에너지 공급원을 다변화하는 정책을 추진하고 있습니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- References Section -->
+                <section id="references" class="section">
+                    <h2 class="section-title"><i class="fas fa-book"></i> 참고 자료</h2>
+                    <div class="card">
+                        <h3 class="card-title">인용 및 출처</h3>
+                        <div class="card-content">
+                            <ol>
+                                <li>위키백과, "체코", <a href="https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%BD%94" target="_blank">https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%BD%94</a></li>
+                                <li>위키백과, "체코의 역사", <a href="https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%BD%94%EC%9D%98_%EC%97%AD%EC%82%AC" target="_blank">https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%BD%94%EC%9D%98_%EC%97%AD%EC%82%AC</a></li>
+                                <li>위키백과, "Geography of Poland", <a href="https://en.wikipedia.org/wiki/Geography_of_Poland" target="_blank">https://en.wikipedia.org/wiki/Geography_of_Poland</a></li>
+                                <li>위키백과, "History of Poland", <a href="https://en.wikipedia.org/wiki/History_of_Poland" target="_blank">https://en.wikipedia.org/wiki/History_of_Poland</a></li>
+                                <li>BBC News, "Poland profile - Overview", <a href="https://www.bbc.com/news/world-europe-17753719" target="_blank">https://www.bbc.com/news/world-europe-17753719</a></li>
+                                <li>외교부, "체코, 경제현황 상세보기", <a href="https://www.mofa.go.kr/www/brd/m_4049/view.do?seq=281598" target="_blank">https://www.mofa.go.kr/www/brd/m_4049/view.do?seq=281598</a></li>
+                                <li>외교부, "국가정보(체코공화국)", <a href="https://www.mofa.go.kr/www/nation/m_3458/view.do?seq=120" target="_blank">https://www.mofa.go.kr/www/nation/m_3458/view.do?seq=120</a></li>
+                                <li>Poland Travel, "Home page", <a href="https://www.poland.travel/en/" target="_blank">https://www.poland.travel/en/</a></li>
+                                <li>Poland Travel, "Top attractions", <a href="https://www.poland.travel/en/top-atractions/" target="_blank">https://www.poland.travel/en/top-atractions/</a></li>
+                                <li>Poland Travel, "Visit Poland", <a href="https://www.poland.travel/en/visit-poland/" target="_blank">https://www.poland.travel/en/visit-poland/</a></li>
+                                <li>The Culture Trip, "The 10 Most Unusual Traditions in Poland", <a href="https://theculturetrip.com/europe/poland/articles/the-10-most-unusual-traditions-in-poland" target="_blank">https://theculturetrip.com/europe/poland/articles/the-10-most-unusual-traditions-in-poland</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const sidebar = document.querySelector('.sidebar');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const themeToggle = document.getElementById('themeToggle');
+        const menuItems = document.querySelectorAll('.menu-item');
+        const sections = document.querySelectorAll('.section');
+
+        // Mobile Toggle
+        mobileToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+            themeToggle.innerHTML = document.body.dataset.theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Scroll to Section
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const sectionTop = section.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: sectionTop,
+                behavior: 'smooth'
+            });
+
+            // Close sidebar on mobile
+            if (window.innerWidth < 992) {
+                sidebar.classList.remove('active');
+            }
+
+            // Update active menu item
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').substring(1) === id) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Intersection Observer for Sections
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Update active menu item
+                    const id = entry.target.id;
+                    menuItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('href').substring(1) === id) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Industry Chart
+            const industryCtx = document.getElementById('industryChart').getContext('2d');
+            const industryChart = new Chart(industryCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['제조업', '서비스업', '농업', '건설업', '기타'],
+                    datasets: [{
+                        data: [38, 52, 2, 6, 2],
+                        backgroundColor: [
+                            'rgba(17, 83, 140, 0.8)',
+                            'rgba(215, 20, 26, 0.8)',
+                            'rgba(0, 128, 0, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(108, 117, 125, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(17, 83, 140, 1)',
+                            'rgba(215, 20, 26, 1)',
+                            'rgba(0, 128, 0, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(108, 117, 125, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Noto Sans KR', sans-serif"
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '체코 산업 구조 (GDP 기여도)',
+                            font: {
+                                family: "'Noto Sans KR', sans-serif",
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Ethnicity Chart
+            const ethnicityCtx = document.getElementById('ethnicityChart').getContext('2d');
+            const ethnicityChart = new Chart(ethnicityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['체코인', '모라비아인', '슬로바키아인', '기타', '무응답'],
+                    datasets: [{
+                        label: '인구 비율 (%)',
+                        data: [64.3, 5, 1.4, 4, 25.3],
+                        backgroundColor: [
+                            'rgba(17, 83, 140, 0.8)',
+                            'rgba(215, 20, 26, 0.8)',
+                            'rgba(0, 128, 0, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(108, 117, 125, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(17, 83, 140, 1)',
+                            'rgba(215, 20, 26, 1)',
+                            'rgba(0, 128, 0, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(108, 117, 125, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: '체코의 민족 구성',
+                            font: {
+                                family: "'Noto Sans KR', sans-serif",
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 70
+                        }
+                    }
+                }
+            });
+
+            // Religion Chart
+            const religionCtx = document.getElementById('religionChart').getContext('2d');
+            const religionChart = new Chart(religionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['무응답', '무종교', '가톨릭', '개신교', '기타'],
+                    datasets: [{
+                        data: [45.2, 34.2, 10.3, 0.9, 9.4],
+                        backgroundColor: [
+                            'rgba(108, 117, 125, 0.8)',
+                            'rgba(17, 83, 140, 0.8)',
+                            'rgba(215, 20, 26, 0.8)',
+                            'rgba(0, 128, 0, 0.8)',
+                            'rgba(255, 193, 7, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(108, 117, 125, 1)',
+                            'rgba(17, 83, 140, 1)',
+                            'rgba(215, 20, 26, 1)',
+                            'rgba(0, 128, 0, 1)',
+                            'rgba(255, 193, 7, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    family: "'Noto Sans KR', sans-serif"
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '체코의 종교 구성',
+                            font: {
+                                family: "'Noto Sans KR', sans-serif",
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
