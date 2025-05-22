@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>협상의 이해와 실전 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+        
+        .subsection {
+            margin-bottom: 2rem;
+        }
+        
+        .subsection h3 {
+            color: #5a67d8;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid #5a67d8;
+        }
+        
+        .key-points {
+            background: #e8f2ff;
+            border-left: 5px solid #667eea;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .key-points h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .key-points ul {
+            padding-left: 1.5rem;
+        }
+        
+        .key-points li {
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .formula-box {
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .formula-box h4 {
+            color: #e53e3e;
+            margin-bottom: 1rem;
+        }
+        
+        .three-logics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .logic-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid;
+        }
+        
+        .logic-card.power { border-top-color: #e53e3e; }
+        .logic-card.rights { border-top-color: #3182ce; }
+        .logic-card.interests { border-top-color: #38a169; }
+        
+        .logic-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .logic-card.power h4 { color: #e53e3e; }
+        .logic-card.rights h4 { color: #3182ce; }
+        .logic-card.interests h4 { color: #38a169; }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tip-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .conclusion h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .section-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤝 협상의 이해와 실전 가이드</h1>
+            <p>삶의 지혜로서의 협상 - 갈등을 기회로 만드는 방법</p>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="section-number">1</span>
+                    협상이란 무엇인가?
+                </h2>
+                
+                <div class="subsection">
+                    <h3>삶의 지혜로서 협상</h3>
+                    <div class="key-points">
+                        <h4>📌 핵심 개념</h4>
+                        <ul>
+                            <li><strong>협상은 삶의 지혜</strong> - 갈등 해결의 일반적 방식</li>
+                            <li><strong>인간관계의 노하우</strong> - 감정을 추스르고 대화를 부드럽게 하는 기술</li>
+                            <li><strong>역사적 기원</strong> - 프란시스 베이컨의 '협상론'에서 등장</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>인간의 본성과 협상</h3>
+                    <div class="highlight">
+                        <p><strong>🧠 인간의 특성</strong></p>
+                        <p>• <strong>이기적이면서도 이타적</strong> - 행복 추구하지만 나눔으로도 행복 느낌</p>
+                        <p>• <strong>합리적이면서도 감성적</strong> - 제한적 합리성, 관객효과의 영향</p>
+                        <p>• <strong>편견과 선입견</strong> - 베이컨의 4대 우상론</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>분쟁 해결의 3가지 논리</h3>
+                    <div class="three-logics">
+                        <div class="logic-card power">
+                            <h4>💪 힘의 논리</h4>
+                            <p>군사력, 경제력, 집단의 숫자 등으로 상대방을 굴복시키는 방식</p>
+                            <p><em>⚠️ 분쟁을 악화시키기 쉬움</em></p>
+                        </div>
+                        <div class="logic-card rights">
+                            <h4>⚖️ 권리의 논리</h4>
+                            <p>법이나 관행에 따른 시시비비를 가려 분쟁을 해결하는 방식</p>
+                            <p><em>⚠️ 분쟁 해결이 지연되는 문제</em></p>
+                        </div>
+                        <div class="logic-card interests">
+                            <h4>🎯 이익의 논리</h4>
+                            <p>욕구나 불만의 해소 방안을 찾아 분쟁을 해결하는 방식</p>
+                            <p><em>✅ 시간이 짧고, 해법이 창의적이며, 신뢰 회복 가능</em></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>분쟁 해결의 4가지 유형</h3>
+                    <div class="key-points">
+                        <h4>🔄 해결 방식</h4>
+                        <ul>
+                            <li><strong>수용</strong> - 상대방의 요구를 받아들임</li>
+                            <li><strong>단절</strong> - 상대방과 관계를 끊음</li>
+                            <li><strong>경쟁</strong> - 상대방과 겨루어 이김</li>
+                            <li><strong>협력</strong> - 상대방과 함께 문제 해결</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="section-number">2</span>
+                    협상은 어떻게 하는가?
+                </h2>
+                
+                <div class="subsection">
+                    <h3>협상의 이익과 가능 영역</h3>
+                    <div class="formula-box">
+                        <h4>📊 협상의 기대 이익 계산</h4>
+                        <p><strong>기대 이익 = 결과 × 확률</strong></p>
+                        <p>협상 가능 영역 = 양측의 보텀라인 사이 구간</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>협상력의 결정 요인</h3>
+                    <div class="highlight">
+                        <p><strong>🔍 외부 요인</strong></p>
+                        <p>• 경제적 요인 (손실의 크기와 차이)</p>
+                        <p>• 사회적 요인 (조직 규모, 응집력, 여론)</p>
+                        <p>• 법·제도적 요인 (법과 판례, 관행)</p>
+                        
+                        <p><strong>🎯 내부 요인</strong></p>
+                        <p>• 정보, 조직과 네트워크, 자금</p>
+                        <p>• 의사결정, 문제해결, 공감능력</p>
+                        <p>• BATNA (Best Alternative to Negotiated Agreement)</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>협상의 단계별 진행</h3>
+                    <div class="key-points">
+                        <h4>⏱️ 시간과 단계 관리</h4>
+                        <ul>
+                            <li><strong>파레토 법칙</strong> - 합의의 80%가 마지막 20% 시간에 해결</li>
+                            <li><strong>3단계 진행</strong> - 탐색 → 합의 방향 설정 → 최선 선택</li>
+                            <li><strong>프레임 설정</strong> - 핵심, 파생, 부수 이슈 분류</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>효과적인 의사소통</h3>
+                    <div class="highlight">
+                        <p><strong>🗣️ 아리스토텔레스의 설득 3요소</strong></p>
+                        <p>• <strong>에토스(Ethos)</strong> - 신뢰성 (60%)</p>
+                        <p>• <strong>파토스(Pathos)</strong> - 감정적 공감 (30%)</p>
+                        <p>• <strong>로고스(Logos)</strong> - 논리와 논증 (10%)</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>입장을 이익으로 전환</h3>
+                    <div class="key-points">
+                        <h4>🔄 전환의 중요성</h4>
+                        <ul>
+                            <li><strong>입장</strong> - 'Yes/No' 선택지가 제한적</li>
+                            <li><strong>이익</strong> - '크다/작다' 상대적이고 다양한 해법 가능</li>
+                            <li><strong>배경 파악</strong> - 왜 그런 요구를 하는지 이유와 배경 이해</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    협상을 잘하려면
+                </h2>
+                
+                <div class="subsection">
+                    <h3>협상에 대한 오해 극복</h3>
+                    <div class="highlight">
+                        <p><strong>⚠️ 잘못된 인식들</strong></p>
+                        <p>• 협상 = 야합이나 유착</p>
+                        <p>• 말싸움의 자리로 인식</p>
+                        <p>• 파업을 위한 통과의례</p>
+                        <p>• 힘의 논리나 권리의 논리에만 의존</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>성공적인 협상을 위한 핵심 원칙</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🎯 사전 준비</h4>
+                            <p>협상 성공의 80%는 사전 준비에 달려 있음. 분쟁 진단, 정보 수집, 전략 수립이 핵심</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🤝 신뢰 구축</h4>
+                            <p>사실 진술의 원리와 상호성의 원리를 지켜 신뢰 관계 형성</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>💡 창의적 사고</h4>
+                            <p>협상은 테크닉이 아닌 예술이자 과학. 창의적 대안 개발이 중요</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🔍 심리적 함정 회피</h4>
+                            <p>자기중심적 사고, 고정관념, 편향적 정보 수용 등의 오류 방지</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>협상 이익의 다면성</h3>
+                    <div class="key-points">
+                        <h4>🎭 4가지 이익 유형</h4>
+                        <ul>
+                            <li><strong>실체적 이익</strong> - 당면한 권리와 의무</li>
+                            <li><strong>원칙적 이익</strong> - 미래와 관련한 원칙</li>
+                            <li><strong>관계적 이익</strong> - 신뢰와 협력 관계</li>
+                            <li><strong>절차적 이익</strong> - 지위나 분쟁 해결 과정</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>화해·조정·중재의 활용</h3>
+                    <div class="highlight">
+                        <p><strong>🎪 제3자 지원의 단계</strong></p>
+                        <p>• <strong>화해</strong> - 대화 촉진 (가장 느슨한 지원)</p>
+                        <p>• <strong>조정</strong> - 전문가 조언과 합의 돌파구 제공</p>
+                        <p>• <strong>중재</strong> - 당사자들이 제3자 결정에 따르기로 합의</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>협상 스킬의 가치</h3>
+                    <div class="formula-box">
+                        <h4>📈 경제적 효과</h4>
+                        <p><strong>휴먼 스킬 10% 향상 → 임금 5% 증가</strong></p>
+                        <p><strong>기업의 휴먼 스킬 투자 → 생산성 20% 향상</strong></p>
+                        <p class="small">* 딜로이트(2019), 미국 국가경제연구기구(NBER, 2016) 연구 결과</p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="conclusion">
+                <h3>🌟 결론</h3>
+                <p>협상은 단순한 기술이 아닌 <strong>삶의 지혜</strong>입니다.</p>
+                <p>갈등을 기회로 만들고, 상호 이익을 창출하며, 지속가능한 관계를 구축하는 핵심 역량입니다.</p>
+                <p>체계적인 준비와 지속적인 학습을 통해 누구나 유능한 협상가가 될 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
