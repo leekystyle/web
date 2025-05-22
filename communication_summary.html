@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의사소통 - ADR 교육자료 요약</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #495057;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .section h4 {
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .warning-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        .key-point {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0.2rem;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+        }
+        
+        .tip-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗣️ 의사소통</h1>
+            <p>ADR(대안적 분쟁해결) 과정에서의 효과적인 의사소통 기법</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>💡 의사소통이 왜 중요한가?</h2>
+                
+                <div class="highlight-box">
+                    <h3>현대사회의 아이러니</h3>
+                    <p>수많은 의사소통 매체와 교육이 있음에도 불구하고, 사람들은 여전히 서로 마주보고 대화하는 데 어려움을 겪고 있습니다.</p>
+                </div>
+                
+                <h3>📊 의사소통 오류로 인한 문제들</h3>
+                <ul>
+                    <li><strong>직장 내 갈등:</strong> 3명 중 1명이 직장 내 괴롭힘을 경험</li>
+                    <li><strong>노사분쟁:</strong> 의사소통 부재로 인한 갈등 증폭</li>
+                    <li><strong>감정대립:</strong> 노동분쟁 해결의 가장 큰 애로사항 (45%)</li>
+                </ul>
+                
+                <h3>🎯 의사소통이 중요한 5가지 이유</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>1️⃣ 누구나 의사소통을 한다</h4>
+                        <p>말뿐만 아니라 침묵, 표정, 몸짓 모두가 의사소통입니다.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>2️⃣ 모든 대화는 관계를 형성한다</h4>
+                        <p>말 한마디가 관계를 형성하고 파괴할 수 있는 힘을 갖고 있습니다.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>3️⃣ 말은 현실을 만들어낸다</h4>
+                        <p>"말이 씨가 된다" - 말은 환경이 되고 현실을 빚어냅니다.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>4️⃣ 말은 인격의 수준을 말해준다</h4>
+                        <p>말은 마음으로부터 나오며, 그 사람의 인격을 드러냅니다.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>5️⃣ 자존감에 따라 대화방식이 달라진다</h4>
+                        <p>자존감 수준에 맞는 적절한 의사소통 방식이 필요합니다.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🚫 의사소통을 방해하는 요소</h2>
+                
+                <h3>❌ 역기능적 의사소통의 유형</h3>
+                <div class="warning-box">
+                    <h4>1. 자동반사적이고 감정적인 상호작용</h4>
+                    <p>상대방의 의도를 헤아리지 않고 감정적으로만 반응하는 것</p>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>2. 솔직하지 않은 의사소통</h4>
+                    <p>부정적 감정을 억압하다가 결국 파괴적 행동으로 표현하는 것</p>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>3. 언어적·비언어적 메시지의 불일치</h4>
+                    <p>말과 행동이 다를 때 상대방이 혼란을 겪게 됨</p>
+                </div>
+                
+                <h3>🧱 경청을 방해하는 12가지 걸림돌</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <span class="key-point">추측하여 넘겨짚기</span>
+                        <span class="key-point">대답할 말 준비하기</span>
+                        <span class="key-point">건성으로 듣기</span>
+                    </div>
+                    <div class="tip-card">
+                        <span class="key-point">판단하기</span>
+                        <span class="key-point">딴 생각하기</span>
+                        <span class="key-point">조언하기</span>
+                    </div>
+                    <div class="tip-card">
+                        <span class="key-point">말다툼하기</span>
+                        <span class="key-point">옳아야만 하기</span>
+                        <span class="key-point">은근슬쩍 넘어가기</span>
+                    </div>
+                    <div class="tip-card">
+                        <span class="key-point">비위 맞추기</span>
+                        <span class="key-point">내 말만 하기</span>
+                        <span class="key-point">비교하기</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🛠️ 의사소통의 기본 기술</h2>
+                
+                <h3>👂 듣기 기술</h3>
+                <div class="info-box">
+                    <h4>적극적 경청의 6단계</h4>
+                    <ol>
+                        <li><strong>수용적 자세로 주의집중</strong> - 눈맞춤, 끄덕임, 의성어 활용</li>
+                        <li><strong>열린 마음</strong> - 비판적 말에도 마음을 열고 받아들이기</li>
+                        <li><strong>내면 자각하기</strong> - 자신의 감정과 편견 인식하기</li>
+                        <li><strong>정확히 듣고 바꾸어 말하기</strong> - 들은 내용 확인하기</li>
+                        <li><strong>개방적 질문으로 명료화</strong> - 육하원칙에 따른 질문</li>
+                        <li><strong>긍정적이고 공감적으로 반영</strong> - 감정까지 이해하고 반응</li>
+                    </ol>
+                </div>
+                
+                <h3>💬 말하기 기술</h3>
+                <div class="highlight-box">
+                    <h4>나-메시지 vs 너-메시지</h4>
+                    <p><strong>너-메시지 (피해야 할 방식):</strong> "당신은 항상 늦어요!"</p>
+                    <p><strong>나-메시지 (권장 방식):</strong> "회의가 늦어질까봐 걱정이 됩니다."</p>
+                    
+                    <h4>나-메시지의 3요소</h4>
+                    <ul>
+                        <li>수용할 수 없는 상대방의 행동</li>
+                        <li>그 행동이 나에게 미치는 구체적 영향</li>
+                        <li>나의 솔직한 감정</li>
+                    </ul>
+                </div>
+                
+                <h3>❓ 질문하기 기술</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>❌ 부적절한 질문</h4>
+                        <ul>
+                            <li>핀잔을 주거나 비난하는 질문</li>
+                            <li>따지거나 심문하는 듯한 질문</li>
+                            <li>잘못된 결론을 유도하는 질문</li>
+                        </ul>
+                    </div>
+                    <div class="tip-card">
+                        <h4>✅ 적절한 질문</h4>
+                        <ul>
+                            <li>상대방을 존중하는 질문</li>
+                            <li>시각을 확장하는 질문</li>
+                            <li>개방적이고 확산적 사고를 유도하는 질문</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🤝 협상과정에서의 의사소통</h2>
+                
+                <h3>⚠️ 협상에서의 의사소통 오해들</h3>
+                <ul>
+                    <li>협상은 눈속임이나 말싸움이라는 오해</li>
+                    <li>상대방에 대한 선입견이나 편견에 집착</li>
+                    <li>자기중심의 의사소통에 빠지는 오류</li>
+                    <li>파이가 고정되어 있다고 생각하는 오류</li>
+                    <li>상생의 공동체 가치를 인정하지 않는 오류</li>
+                </ul>
+                
+                <h3>💡 협상에서의 의사소통 요령</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>1. 상생의 신뢰관계 형성</h4>
+                        <p>협상 이전에 긍정적 접촉과 정보교환</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>2. 철저한 준비</h4>
+                        <p>설득력 있는 정보 수집과 자료 준비</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>3. 성향 차이 고려</h4>
+                        <p>상대방의 특성에 맞는 의사소통</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>4. 이익 중심 접근</h4>
+                        <p>힘의 논리가 아닌 이익의 논리로 협상</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>⚖️ 화해·조정인이 가져야 할 기본태도</h2>
+                
+                <div class="highlight-box">
+                    <h3>🎯 6가지 핵심 자세</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>1. 기본자세</h4>
+                            <p>예의 바르고 부드러운 말투, 진정성과 정성을 다하는 모습</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>2. 진정어린 대화 태도</h4>
+                            <p>당사자를 진정으로 이해하고 도우려는 마음가짐</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>3. 공정성, 일관성, 책임감</h4>
+                            <p>어느 한편에 치우지지 않는 균형된 시각 유지</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>4. 인간으로서 존중하는 태도</h4>
+                            <p>사건과 사람을 분리하여 인격체로 대우</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>5. 편안한 분위기 조성</h4>
+                            <p>당사자들이 자유롭게 의견을 표현할 수 있는 환경</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>6. 서로의 기대를 동일하게 존중</h4>
+                            <p>양 당사자 모두에게 유익한 결과 추구</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📝 직장 내 고충처리 3단계</h3>
+                    <h4>1단계: 고충 발견</h4>
+                    <p>비언어적 신호(복장, 표정, 근태, 업무태도)를 통한 조기 발견</p>
+                    
+                    <h4>2단계: 원인분석의 의사소통</h4>
+                    <ul>
+                        <li>공감대 형성하기</li>
+                        <li>듣고, 듣고 또 듣기</li>
+                        <li>들은 내용 요약하기</li>
+                        <li>상대의 내면 인정해주기</li>
+                        <li>탐색적 질문하기</li>
+                    </ul>
+                    
+                    <h4>3단계: 해결책 모색의 의사소통</h4>
+                    <ul>
+                        <li>고충근로자로부터 해결책 의견 구하기</li>
+                        <li>수용여부에 대한 입장 설명하기</li>
+                        <li>명확한 사후조치사항 합의</li>
+                        <li>감사 표현으로 마무리하기</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© ADR 교육자료 - 효과적인 의사소통을 통한 분쟁해결</p>
+            <p>💡 "경청만 잘해도 의사소통의 70%는 성공한 것이다"</p>
+        </div>
+    </div>
+</body>
+</html>
