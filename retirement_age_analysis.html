@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 대선 후보별 정년연장 공약 분석 보고서</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .candidate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .candidate-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid;
+        }
+        .candidate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .candidate-1 { border-left-color: #0066cc; }
+        .candidate-2 { border-left-color: #e74c3c; }
+        .candidate-3 { border-left-color: #f39c12; }
+        .candidate-4 { border-left-color: #27ae60; }
+        .candidate-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .candidate-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+        }
+        .candidate-info h3 {
+            margin: 0;
+            font-size: 1.3em;
+            color: #2c3e50;
+        }
+        .candidate-info p {
+            margin: 5px 0 0 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .policy-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .policy-title {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        .policy-detail {
+            color: #6c757d;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .no-policy {
+            color: #dc3545;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            background: #fff5f5;
+            border-radius: 8px;
+            border: 1px dashed #dc3545;
+        }
+        .analysis-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .analysis-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        .insight-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .insight-list {
+            list-style: none;
+            padding: 0;
+        }
+        .insight-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        .insight-list li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+        .methodology {
+            background: #e8f4f8;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .methodology h4 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+        .methodology p {
+            color: #0c5460;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>2025 대선 후보별 정년연장 공약 분석</h1>
+        <p>제21대 대통령선거 주요 정당 후보 4인 공약 비교 분석</p>
+    </div>
+
+    <div class="candidate-grid">
+        <div class="candidate-card candidate-1">
+            <div class="candidate-header">
+                <div class="candidate-number">1</div>
+                <div class="candidate-info">
+                    <h3>이재명</h3>
+                    <p>더불어민주당</p>
+                </div>
+            </div>
+            <div class="policy-content">
+                <div class="policy-title">🎯 포괄적 정년연장 정책</div>
+                <div class="policy-detail">
+                    <strong>핵심 내용:</strong> 국민연금 수급 연령에 맞춘 정년 연장<br>
+                    <strong>추진 방식:</strong> 사회적 합의를 통한 단계적 추진<br>
+                    <strong>목표:</strong> 지속 가능한 노후 소득 보장 체계 구축<br>
+                    <strong>특징:</strong> 전 사회적 접근, 연금제도와 연계
+                </div>
+            </div>
+        </div>
+
+        <div class="candidate-card candidate-2">
+            <div class="candidate-header">
+                <div class="candidate-number">2</div>
+                <div class="candidate-info">
+                    <h3>김문수</h3>
+                    <p>국민의힘</p>
+                </div>
+            </div>
+            <div class="policy-content">
+                <div class="policy-title">🔬 연구인력 정년연장</div>
+                <div class="policy-detail">
+                    <strong>핵심 내용:</strong> 정부출연연구기관 연구자 정년 65세 회복<br>
+                    <strong>추진 방식:</strong> 즉시 시행<br>
+                    <strong>목표:</strong> 과학기술인 처우 개선 및 위상 강화<br>
+                    <strong>특징:</strong> 특정 분야 우선, 구체적 연령 명시
+                </div>
+            </div>
+        </div>
+
+        <div class="candidate-card candidate-3">
+            <div class="candidate-header">
+                <div class="candidate-number">5</div>
+                <div class="candidate-info">
+                    <h3>권영국</h3>
+                    <p>민주노동당</p>
+                </div>
+            </div>
+            <div class="no-policy">
+                정년연장에 대한 구체적 공약 없음
+            </div>
+        </div>
+
+        <div class="candidate-card candidate-4">
+            <div class="candidate-header">
+                <div class="candidate-number">4</div>
+                <div class="candidate-info">
+                    <h3>이준석</h3>
+                    <p>개혁신당</p>
+                </div>
+            </div>
+            <div class="no-policy">
+                정년연장에 대한 구체적 공약 없음
+            </div>
+        </div>
+    </div>
+
+    <div class="analysis-section">
+        <h2 class="analysis-title">📊 후보별 공약 비교 분석</h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>후보</th>
+                    <th>정년연장 범위</th>
+                    <th>구체성</th>
+                    <th>실현 가능성</th>
+                    <th>접근 방식</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>이재명</strong></td>
+                    <td>전 사회적 정년연장</td>
+                    <td>중간 (사회적 합의 언급)</td>
+                    <td>중간 (단계적 추진)</td>
+                    <td>포괄적·점진적</td>
+                </tr>
+                <tr>
+                    <td><strong>김문수</strong></td>
+                    <td>정부출연연구기관 한정</td>
+                    <td>높음 (65세 명시)</td>
+                    <td>높음 (특정 분야)</td>
+                    <td>선별적·즉시적</td>
+                </tr>
+                <tr>
+                    <td><strong>권영국</strong></td>
+                    <td>공약 없음</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><strong>이준석</strong></td>
+                    <td>공약 없음</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="analysis-section">
+        <h2 class="analysis-title">🔍 심층 분석</h2>
+        
+        <h3>1. 정책 접근 방식의 차이</h3>
+        <p><strong>이재명 후보</strong>는 국민연금 수급 연령과 연계한 <em>전 사회적 정년연장</em>을 제시하여 고령화 사회에 대한 종합적 대응 의지를 보였습니다. 사회적 합의를 통한 단계적 추진을 강조하여 현실적 접근을 시도했습니다.</p>
+        
+        <p><strong>김문수 후보</strong>는 <em>정부출연연구기관 연구자로 범위를 한정</em>하여 과학기술 분야의 전문성 활용에 중점을 두었습니다. 65세라는 구체적 연령을 제시하여 실행력을 강조했습니다.</p>
+
+        <h3>2. 정책의 범위와 영향</h3>
+        <p>이재명 후보의 공약은 <strong>광범위한 사회적 영향</strong>을 미칠 수 있으나, 사회적 합의 과정에서 시간이 소요될 가능성이 높습니다. 반면 김문수 후보의 공약은 <strong>제한적이지만 즉시 실현 가능한</strong> 정책으로 평가됩니다.</p>
+
+        <h3>3. 미제시 후보들의 의미</h3>
+        <p>권영국, 이준석 후보가 정년연장 공약을 제시하지 않은 것은 <strong>다른 정책 우선순위</strong>를 가지고 있거나, 현행 정년제도에 대한 문제의식이 상대적으로 낮다는 것을 의미할 수 있습니다.</p>
+    </div>
+
+    <div class="insight-box">
+        <div class="insight-title">💡 정책 시사점</div>
+        <ul class="insight-list">
+            <li><strong>사회적 논의 필요성:</strong> 고령화 사회 진입으로 정년연장은 불가피한 사회적 과제</li>
+            <li><strong>단계적 접근의 중요성:</strong> 급진적 변화보다는 사회적 합의를 통한 점진적 추진이 바람직</li>
+            <li><strong>분야별 차별화:</strong> 직종 특성에 따른 맞춤형 정년제도 고려 필요</li>
+            <li><strong>청년 일자리와의 균형:</strong> 정년연장이 청년 고용에 미치는 영향 고려 필요</li>
+            <li><strong>연금제도와의 연계:</strong> 국민연금 수급 시기와 정년의 일치성 검토 필요</li>
+        </ul>
+    </div>
+
+    <div class="methodology">
+        <h4>📋 분석 방법론</h4>
+        <p><strong>자료 출처:</strong> 각 후보별 10대 공약집 (2025년 6월 3일 제21대 대통령선거)</p>
+        <p><strong>분석 기준:</strong> 정년연장 관련 직접적 언급 및 관련 정책의 구체성, 실현 가능성</p>
+        <p><strong>평가 항목:</strong> 정책 범위, 구체성, 실현 가능성, 접근 방식</p>
+        <p><strong>한계:</strong> 본 분석은 공개된 공약집을 기준으로 하며, 후보자의 추가 입장이나 세부 계획은 반영되지 않음</p>
+    </div>
+</body>
+</html>
