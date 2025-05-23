@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21대 대통령선거 후보별 4.5일제 공약 분석 보고서</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            margin-top: 10px;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        
+        .candidate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .candidate-card {
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .candidate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .candidate-card.active {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+        
+        .candidate-card.inactive {
+            background: linear-gradient(135deg, #95a5a6 0%, #bdc3c7 100%);
+            color: white;
+        }
+        
+        .candidate-card.moderate {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+        }
+        
+        .candidate-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .party-name {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        
+        .policy-content {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 18px;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        .status-positive {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .status-neutral {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .status-negative {
+            color: #95a5a6;
+            font-weight: bold;
+        }
+        
+        .analysis-box {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .analysis-box h3 {
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+        
+        .key-findings {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .key-findings h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .finding-item {
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .finding-item:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .comparison-table {
+                font-size: 0.9em;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>21대 대통령선거 후보별 4.5일제 공약 분석</h1>
+            <div class="subtitle">2025년 6월 3일 대선 주요 후보 정책 비교</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>📋 후보별 4.5일제 공약 현황</h2>
+                
+                <div class="candidate-grid">
+                    <div class="candidate-card active">
+                        <div class="candidate-name">이재명</div>
+                        <div class="party-name">더불어민주당 (1번)</div>
+                        <div class="policy-content">
+                            <strong>✅ 적극적 추진 입장</strong><br>
+                            • 주4.5일 도입․확산 명시<br>
+                            • 2030년까지 OECD 평균 이하 노동시간 감축<br>
+                            • 범정부 차원 실시 지원<br>
+                            • 실노동시간 단축 로드맵 제시
+                        </div>
+                    </div>
+                    
+                    <div class="candidate-card inactive">
+                        <div class="candidate-name">김문수</div>
+                        <div class="party-name">국민의힘 (2번)</div>
+                        <div class="policy-content">
+                            <strong>⚠️ 소극적 접근</strong><br>
+                            • 4.5일제 직접 언급 없음<br>
+                            • "노사합의 기반 주52시간제 근로시간 개선" 언급<br>
+                            • 기업 친화적 접근 우선
+                        </div>
+                    </div>
+                    
+                    <div class="candidate-card inactive">
+                        <div class="candidate-name">이준석</div>
+                        <div class="party-name">개혁신당 (4번)</div>
+                        <div class="policy-content">
+                            <strong>❌ 언급 없음</strong><br>
+                            • 4.5일제 관련 공약 없음<br>
+                            • 최저임금 지자체 위임 등<br>
+                            • 지방자치 관점의 노동정책 중심
+                        </div>
+                    </div>
+                    
+                    <div class="candidate-card inactive">
+                        <div class="candidate-name">권영국</div>
+                        <div class="party-name">민주노동당 (5번)</div>
+                        <div class="policy-content">
+                            <strong>❌ 언급 없음</strong><br>
+                            • 4.5일제 관련 공약 없음<br>
+                            • 전국민 일자리보장제 등<br>
+                            • 노동권 강화에 중점
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📊 후보별 정책 비교표</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>이재명<br>(더불어민주당)</th>
+                            <th>김문수<br>(국민의힘)</th>
+                            <th>이준석<br>(개혁신당)</th>
+                            <th>권영국<br>(민주노동당)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>4.5일제 입장</strong></td>
+                            <td class="status-positive">적극 찬성</td>
+                            <td class="status-neutral">소극적 접근</td>
+                            <td class="status-negative">언급 없음</td>
+                            <td class="status-negative">언급 없음</td>
+                        </tr>
+                        <tr>
+                            <td><strong>구체적 계획</strong></td>
+                            <td class="status-positive">도입․확산 명시</td>
+                            <td class="status-neutral">노사합의 기반</td>
+                            <td class="status-negative">-</td>
+                            <td class="status-negative">-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>목표 시점</strong></td>
+                            <td class="status-positive">2030년까지</td>
+                            <td class="status-negative">-</td>
+                            <td class="status-negative">-</td>
+                            <td class="status-negative">-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>정책 우선순위</strong></td>
+                            <td class="status-positive">높음 (7대 공약)</td>
+                            <td class="status-negative">낮음</td>
+                            <td class="status-negative">-</td>
+                            <td class="status-negative">-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>이행 방식</strong></td>
+                            <td class="status-positive">범정부 차원 지원</td>
+                            <td class="status-neutral">기업 자율성 중시</td>
+                            <td class="status-negative">-</td>
+                            <td class="status-negative">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h2>🔍 심층 분석</h2>
+                
+                <div class="analysis-box">
+                    <h3>💡 주요 특징</h3>
+                    <p><strong>이재명 후보</strong>만이 4.5일제에 대해 구체적이고 적극적인 공약을 제시했습니다. 
+                    범정부 차원의 지원과 명확한 목표 시점(2030년)을 설정하여 정책 실현 의지를 보여주고 있습니다.</p>
+                    
+                    <p><strong>김문수 후보</strong>는 직접적인 4.5일제 언급은 없지만, 근로시간 개선에 대해 "노사합의 기반" 접근을 제시하여 
+                    기업의 자율성을 중시하는 입장을 보이고 있습니다.</p>
+                    
+                    <p><strong>이준석, 권영국 후보</strong>는 4.5일제에 대한 직접적인 입장 표명이 없어, 
+                    이 이슈에 대한 우선순위가 상대적으로 낮은 것으로 판단됩니다.</p>
+                </div>
+                
+                <div class="key-findings">
+                    <h3>🎯 핵심 발견사항</h3>
+                    
+                    <div class="finding-item">
+                        <strong>정책 격차 존재:</strong> 후보 간 4.5일제에 대한 입장 차이가 명확하게 드러남
+                    </div>
+                    
+                    <div class="finding-item">
+                        <strong>구체성의 차이:</strong> 이재명 후보만이 구체적인 이행 계획과 목표 시점을 제시
+                    </div>
+                    
+                    <div class="finding-item">
+                        <strong>접근 방식 상이:</strong> 정부 주도 vs 노사 자율 vs 정책 부재로 구분
+                    </div>
+                    
+                    <div class="finding-item">
+                        <strong>우선순위 반영:</strong> 후보별로 노동시간 단축에 대한 정책 우선순위 차이 존재
+                    </div>
+                    
+                    <div class="finding-item">
+                        <strong>유권자 선택의 기준:</strong> 4.5일제 도입 찬반이 명확한 후보 선택 기준이 될 수 있음
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📈 정책 영향도 분석</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                    <div style="background: #e8f5e8; padding: 25px; border-radius: 12px; border-left: 5px solid #27ae60;">
+                        <h4 style="color: #27ae60; margin-top: 0;">🟢 적극 추진 시 예상 효과</h4>
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>근로자 삶의 질 향상</li>
+                            <li>일자리 나눔 효과</li>
+                            <li>생산성 향상 가능성</li>
+                            <li>저출산 대응 효과</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #fff5e6; padding: 25px; border-radius: 12px; border-left: 5px solid #f39c12;">
+                        <h4 style="color: #f39c12; margin-top: 0;">🟡 소극적 접근 시 예상 결과</h4>
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>기업 부담 완화</li>
+                            <li>점진적 변화 가능</li>
+                            <li>노사 갈등 최소화</li>
+                            <li>현상 유지 가능성</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📅 2025년 6월 3일 제21대 대통령선거 대비 정책 분석 보고서</p>
+            <p style="margin: 5px 0 0 0; opacity: 0.8; font-size: 0.9em;">
+                * 본 분석은 각 후보의 공개된 공약집을 바탕으로 작성되었습니다.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
