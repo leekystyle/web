@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>산업통상자원부 산하 3개 전문기관 비교 분석 보고서</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        .summary-table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        .summary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .highlight-ketep {
+            background-color: #e8f5e8 !important;
+            font-weight: bold;
+        }
+        .analysis-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .insight-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .recommendation-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .metric-card {
+            display: inline-block;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .metric-label {
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>산업통상자원부 산하 3개 전문기관 비교 분석 보고서</h1>
+        
+        <div style="text-align: center; margin: 20px 0; color: #666;">
+            <p><strong>보고 대상:</strong> 한국에너지기술평가원 기관장</p>
+            <p><strong>분석 기간:</strong> 2022년 ~ 2025년</p>
+            <p><strong>분석 기관:</strong> 한국산업기술기획평가원(KEIT), 한국산업기술진흥원(KIAT), 한국에너지기술평가원(KETEP)</p>
+        </div>
+
+        <h2>1. 정규직 인원 규모 현황</h2>
+        <div class="chart-container">
+            <canvas id="staffChart"></canvas>
+        </div>
+        
+        <table class="summary-table">
+            <tr>
+                <th>기관명</th>
+                <th>2022년</th>
+                <th>2023년</th>
+                <th>2024년</th>
+                <th>2025년</th>
+                <th>연평균 증감율</th>
+            </tr>
+            <tr>
+                <td>한국산업기술기획평가원</td>
+                <td>335명</td>
+                <td>296.5명</td>
+                <td>299.5명</td>
+                <td>302.5명</td>
+                <td>-3.4%</td>
+            </tr>
+            <tr>
+                <td>한국산업기술진흥원</td>
+                <td>359명</td>
+                <td>380명</td>
+                <td>380명</td>
+                <td>387명</td>
+                <td>2.6%</td>
+            </tr>
+            <tr class="highlight-ketep">
+                <td>한국에너지기술평가원</td>
+                <td>157명</td>
+                <td>157명</td>
+                <td>160명</td>
+                <td>160명</td>
+                <td>0.6%</td>
+            </tr>
+        </table>
+
+        <div class="insight-box">
+            <strong>시사점:</strong> KETEP의 정원은 3개 기관 중 가장 작으며, 정원 증가율도 가장 낮습니다. 
+            KIAT는 지속적인 정원 확대 추세를 보이는 반면, KEIT는 2023년 대폭 감소 후 점진적 회복 중입니다.
+        </div>
+
+        <h2>2. 기관운영예산 현황</h2>
+        <div class="chart-container">
+            <canvas id="operatingBudgetChart"></canvas>
+        </div>
+        
+        <table class="summary-table">
+            <tr>
+                <th>기관명</th>
+                <th>2022년</th>
+                <th>2023년</th>
+                <th>2024년</th>
+                <th>2025년</th>
+                <th>연평균 증감율</th>
+            </tr>
+            <tr>
+                <td>한국산업기술기획평가원</td>
+                <td>90,385백만원</td>
+                <td>91,298백만원</td>
+                <td>91,792백만원</td>
+                <td>96,549백만원</td>
+                <td>2.2%</td>
+            </tr>
+            <tr>
+                <td>한국산업기술진흥원</td>
+                <td>42,221백만원</td>
+                <td>43,031백만원</td>
+                <td>41,184백만원</td>
+                <td>42,306백만원</td>
+                <td>0.1%</td>
+            </tr>
+            <tr class="highlight-ketep">
+                <td>한국에너지기술평가원</td>
+                <td>33,435백만원</td>
+                <td>31,795백만원</td>
+                <td>29,870백만원</td>
+                <td>30,429백만원</td>
+                <td>-3.1%</td>
+            </tr>
+        </table>
+
+        <div class="insight-box">
+            <strong>시사점:</strong> KETEP의 기관운영예산은 지속적으로 감소하는 추세(-3.1%)로, 
+            KEIT의 증가 추세(2.2%)와 대조적입니다. 이는 운영 효율성 제고 노력의 결과일 수 있으나, 
+            조직 운영 역량에 영향을 미칠 수 있습니다.
+        </div>
+
+        <h2>3. 1인당 기관운영예산 현황</h2>
+        <div class="chart-container">
+            <canvas id="perCapitaOperatingChart"></canvas>
+        </div>
+
+        <table class="summary-table">
+            <tr>
+                <th>기관명</th>
+                <th>2022년</th>
+                <th>2023년</th>
+                <th>2024년</th>
+                <th>2025년</th>
+                <th>연평균 증감율</th>
+            </tr>
+            <tr>
+                <td>한국산업기술기획평가원</td>
+                <td>270백만원</td>
+                <td>308백만원</td>
+                <td>306백만원</td>
+                <td>319백만원</td>
+                <td>5.8%</td>
+            </tr>
+            <tr>
+                <td>한국산업기술진흥원</td>
+                <td>118백만원</td>
+                <td>113백만원</td>
+                <td>108백만원</td>
+                <td>109백만원</td>
+                <td>-2.5%</td>
+            </tr>
+            <tr class="highlight-ketep">
+                <td>한국에너지기술평가원</td>
+                <td>213백만원</td>
+                <td>202백만원</td>
+                <td>187백만원</td>
+                <td>190백만원</td>
+                <td>-3.7%</td>
+            </tr>
+        </table>
+
+        <div class="insight-box">
+            <strong>시사점:</strong> KETEP의 1인당 기관운영예산은 KEIT보다는 낮지만 KIAT보다는 높습니다. 
+            그러나 감소 추세(-3.7%)가 뚜렷하여 개선이 필요해 보입니다.
+        </div>
+
+        <h2>4. 주요사업 현황</h2>
+        <div class="chart-container">
+            <canvas id="majorProjectChart"></canvas>
+        </div>
+
+        <table class="summary-table">
+            <tr>
+                <th>기관명</th>
+                <th>2022년</th>
+                <th>2023년</th>
+                <th>2024년</th>
+                <th>2025년</th>
+                <th>연평균 증감율</th>
+            </tr>
+            <tr>
+                <td>한국산업기술기획평가원</td>
+                <td>2,818,641백만원</td>
+                <td>3,120,124백만원</td>
+                <td>2,953,980백만원</td>
+                <td>3,340,740백만원</td>
+                <td>5.8%</td>
+            </tr>
+            <tr>
+                <td>한국산업기술진흥원</td>
+                <td>1,773,368백만원</td>
+                <td>1,808,057백만원</td>
+                <td>1,842,732백만원</td>
+                <td>1,995,839백만원</td>
+                <td>4.0%</td>
+            </tr>
+            <tr class="highlight-ketep">
+                <td>한국에너지기술평가원</td>
+                <td>1,091,918백만원</td>
+                <td>1,121,150백만원</td>
+                <td>1,113,895백만원</td>
+                <td>1,156,011백만원</td>
+                <td>1.9%</td>
+            </tr>
+        </table>
+
+        <div class="insight-box">
+            <strong>시사점:</strong> KETEP의 주요사업 규모는 3개 기관 중 가장 작으며, 
+            증가율(1.9%)도 다른 기관 대비 낮습니다. 에너지 기술 분야의 중요성을 고려할 때 
+            사업 확대 방안 검토가 필요합니다.
+        </div>
+
+        <h2>5. 1인당 주요사업 현황</h2>
+        <div class="chart-container">
+            <canvas id="perCapitaProjectChart"></canvas>
+        </div>
+
+        <table class="summary-table">
+            <tr>
+                <th>기관명</th>
+                <th>2022년</th>
+                <th>2023년</th>
+                <th>2024년</th>
+                <th>2025년</th>
+                <th>연평균 증감율</th>
+            </tr>
+            <tr>
+                <td>한국산업기술기획평가원</td>
+                <td>8,414백만원</td>
+                <td>10,523백만원</td>
+                <td>9,862백만원</td>
+                <td>11,043백만원</td>
+                <td>9.4%</td>
+            </tr>
+            <tr>
+                <td>한국산업기술진흥원</td>
+                <td>4,940백만원</td>
+                <td>4,758백만원</td>
+                <td>4,849백만원</td>
+                <td>5,158백만원</td>
+                <td>1.4%</td>
+            </tr>
+            <tr class="highlight-ketep">
+                <td>한국에너지기술평가원</td>
+                <td>6,955백만원</td>
+                <td>7,141백만원</td>
+                <td>6,962백만원</td>
+                <td>7,225백만원</td>
+                <td>1.3%</td>
+            </tr>
+        </table>
+
+        <div class="insight-box">
+            <strong>시사점:</strong> KETEP의 1인당 주요사업 규모는 KIAT보다 높지만 KEIT보다는 낮습니다. 
+            특히 KEIT의 1인당 사업 관리 규모가 급격히 증가하는 추세와 대조적입니다.
+        </div>
+
+        <h2>6. 주요사업 대비 기관운영예산 비율</h2>
+        <div class="chart-container">
+            <canvas id="operatingRatioChart"></canvas>
+        </div>
+
+        <table class="summary-table">
+            <tr>
+                <th>기관명</th>
+                <th>2022년</th>
+                <th>2023년</th>
+                <th>2024년</th>
+                <th>2025년</th>
+                <th>연평균 증감율</th>
+            </tr>
+            <tr>
+                <td>한국산업기술기획평가원</td>
+                <td>3.2%</td>
+                <td>2.9%</td>
+                <td>3.1%</td>
+                <td>2.9%</td>
+                <td>-3.4%</td>
+            </tr>
+            <tr>
+                <td>한국산업기술진흥원</td>
+                <td>2.4%</td>
+                <td>2.4%</td>
+                <td>2.2%</td>
+                <td>2.1%</td>
+                <td>-3.8%</td>
+            </tr>
+            <tr class="highlight-ketep">
+                <td>한국에너지기술평가원</td>
+                <td>3.1%</td>
+                <td>2.8%</td>
+                <td>2.7%</td>
+                <td>2.6%</td>
+                <td>-4.9%</td>
+            </tr>
+        </table>
+
+        <div class="insight-box">
+            <strong>시사점:</strong> 모든 기관이 운영비 비율을 지속적으로 낮추는 추세이나, 
+            KETEP의 감소폭(-4.9%)이 가장 큽니다. 이는 운영 효율성 개선의 긍정적 신호입니다.
+        </div>
+
+        <h2>7. 한국에너지기술평가원 종합 분석</h2>
+        <div class="analysis-box">
+            <h3 style="color: white; margin-top: 0;">KETEP 현황 종합 평가</h3>
+            
+            <div class="metric-card" style="background: rgba(255,255,255,0.9); color: #333;">
+                <div class="metric-value" style="color: #e74c3c;">3위</div>
+                <div class="metric-label">전체 규모 순위</div>
+            </div>
+            
+            <div class="metric-card" style="background: rgba(255,255,255,0.9); color: #333;">
+                <div class="metric-value" style="color: #f39c12;">2.6%</div>
+                <div class="metric-label">운영비 비율</div>
+            </div>
+            
+            <div class="metric-card" style="background: rgba(255,255,255,0.9); color: #333;">
+                <div class="metric-value" style="color: #27ae60;">1.9%</div>
+                <div class="metric-label">사업 증가율</div>
+            </div>
+
+            <h4 style="color: white;">주요 특징</h4>
+            <ul style="color: white;">
+                <li><strong>안정적 운영:</strong> 정원과 예산 변동이 가장 적어 안정적 조직 운영</li>
+                <li><strong>효율적 관리:</strong> 운영비 비율이 지속적으로 개선되어 효율성 증대</li>
+                <li><strong>성장 한계:</strong> 다른 기관 대비 사업 규모와 증가율이 낮음</li>
+                <li><strong>전문성 집중:</strong> 에너지 기술 분야 특화로 전문성 확보</li>
+            </ul>
+        </div>
+
+        <h2>8. 향후 발전 방향 및 로드맵</h2>
+        
+        <div class="recommendation-box">
+            <h3>정원 확대 방안</h3>
+            <ul>
+                <li><strong>단기(2026-2027):</strong> 연간 5-10명 증원으로 180명 수준 달성</li>
+                <li><strong>중기(2028-2030):</strong> 에너지전환 가속화에 따른 전문인력 확충으로 200명 수준</li>
+                <li><strong>장기(2031~):</strong> 글로벌 에너지 기술 허브 구축을 위한 250명 규모 달성</li>
+            </ul>
+        </div>
+
+        <div class="recommendation-box">
+            <h3>주요사업 확대 방안</h3>
+            <ul>
+                <li><strong>신재생에너지:</strong> 태양광, 풍력, 수소 분야 R&D 예산 확대</li>
+                <li><strong>에너지저장:</strong> ESS, 배터리 기술 개발 투자 증대</li>
+                <li><strong>탄소중립:</strong> CCUS, 그린수소 등 신기술 분야 선점</li>
+                <li><strong>국제협력:</strong> IEA, IRENA 등과의 협력 사업 확대</li>
+            </ul>
+        </div>
+
+        <div class="recommendation-box">
+            <h3>기관운영예산 최적화 방안</h3>
+            <ul>
+                <li><strong>디지털 전환:</strong> 업무 프로세스 디지털화로 운영비 절감</li>
+                <li><strong>스마트 오피스:</strong> 에너지 효율적 사무환경 구축</li>
+                <li><strong>성과 기반 예산:</strong> 사업 성과와 연동된 예산 배분 체계 구축</li>
+                <li><strong>공유 서비스:</strong> 타 기관과의 공통 서비스 활용으로 비용 절감</li>
+            </ul>
+        </div>
+
+        <h2>9. 결론 및 제언</h2>
+        
+        <div class="analysis-box">
+            <h3 style="color: white; margin-top: 0;">핵심 제언</h3>
+            
+            <div style="color: white;">
+                <h4>1. 전략적 포지셔닝 강화</h4>
+                <p>에너지 분야의 특수성과 중요성을 활용하여 정책적 지원 확대 필요. 
+                탄소중립 정책과 연계한 예산 증액 및 조직 확대 추진</p>
+                
+                <h4>2. 운영 효율성 기반 성장</h4>
+                <p>현재의 높은 운영 효율성을 유지하면서도 규모 확대를 통한 
+                영향력 증대 방안 모색 필요</p>
+                
+                <h4>3. 차별화된 전문성 확보</h4>
+                <p>에너지 기술 분야의 독점적 지위를 활용한 
+                고부가가치 사업 발굴 및 추진</p>
+                
+                <h4>4. 지속가능한 성장 기반 구축</h4>
+                <p>안정적 조직 운영 역량을 바탕으로 
+                중장기 성장 전략 수립 및 실행</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; color: #666; font-size: 14px;">
+            <p>※ 본 분석은 제공된 2022-2025년 데이터를 기반으로 작성되었습니다.</p>
+            <p>※ 연평균 증감율은 각 연도별 증가율의 평균값입니다.</p>
+        </div>
+    </div>
+
+    <script>
+        // 공통 차트 옵션
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // 색상 설정
+        const colors = {
+            keit: '#3498db',
+            kiat: '#e74c3c', 
+            ketep: '#27ae60'
+        };
+
+        // 1. 정규직 인원 현황
+        new Chart(document.getElementById('staffChart'), {
+            type: 'line',
+            data: {
+                labels: ['2022년', '2023년', '2024년', '2025년'],
+                datasets: [{
+                    label: '한국산업기술기획평가원',
+                    data: [335, 296.5, 299.5, 302.5],
+                    borderColor: colors.keit,
+                    backgroundColor: colors.keit + '20'
+                }, {
+                    label: '한국산업기술진흥원',
+                    data: [359, 380, 380, 387],
+                    borderColor: colors.kiat,
+                    backgroundColor: colors.kiat + '20'
+                }, {
+                    label: '한국에너지기술평가원',
+                    data: [157, 157, 160, 160],
+                    borderColor: colors.ketep,
+                    backgroundColor: colors.ketep + '20'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '정규직 인원 현황 (명)'
+                    }
+                }
+            }
+        });
+
+        // 2. 기관운영예산 현황
+        new Chart(document.getElementById('operatingBudgetChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2022년', '2023년', '2024년', '2025년'],
+                datasets: [{
+                    label: '한국산업기술기획평가원',
+                    data: [90385, 91298, 91792, 96549],
+                    backgroundColor: colors.keit
+                }, {
+                    label: '한국산업기술진흥원',
+                    data: [42221, 43031, 41184, 42306],
+                    backgroundColor: colors.kiat
+                }, {
+                    label: '한국에너지기술평가원',
+                    data: [33435, 31795, 29870, 30429],
+                    backgroundColor: colors.ketep
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '기관운영예산 현황 (백만원)'
+                    }
+                }
+            }
+        });
+
+        // 3. 1인당 기관운영예산 현황
+        new Chart(document.getElementById('perCapitaOperatingChart'), {
+            type: 'line',
+            data: {
+                labels: ['2022년', '2023년', '2024년', '2025년'],
+                datasets: [{
+                    label: '한국산업기술기획평가원',
+                    data: [270, 308, 306, 319],
+                    borderColor: colors.keit,
+                    backgroundColor: colors.keit + '20'
+                }, {
+                    label: '한국산업기술진흥원',
+                    data: [118, 113, 108, 109],
+                    borderColor: colors.kiat,
+                    backgroundColor: colors.kiat + '20'
+                }, {
+                    label: '한국에너지기술평가원',
+                    data: [213, 202, 187, 190],
+                    borderColor: colors.ketep,
+                    backgroundColor: colors.ketep + '20'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '1인당 기관운영예산 현황 (백만원)'
+                    }
+                }
+            }
+        });
+
+        // 4. 주요사업 현황
+        new Chart(document.getElementById('majorProjectChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2022년', '2023년', '2024년', '2025년'],
+                datasets: [{
+                    label: '한국산업기술기획평가원',
+                    data: [2818641, 3120124, 2953980, 3340740],
+                    backgroundColor: colors.keit
+                }, {
+                    label: '한국산업기술진흥원',
+                    data: [1773368, 1808057, 1842732, 1995839],
+                    backgroundColor: colors.kiat
+                }, {
+                    label: '한국에너지기술평가원',
+                    data: [1091918, 1121150, 1113895, 1156011],
+                    backgroundColor: colors.ketep
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '주요사업 현황 (백만원)'
+                    }
+                }
+            }
+        });
+
+        // 5. 1인당 주요사업 현황
+        new Chart(document.getElementById('perCapitaProjectChart'), {
+            type: 'line',
+            data: {
+                labels: ['2022년', '2023년', '2024년', '2025년'],
+                datasets: [{
+                    label: '한국산업기술기획평가원',
+                    data: [8414, 10523, 9862, 11043],
+                    borderColor: colors.keit,
+                    backgroundColor: colors.keit + '20'
+                }, {
+                    label: '한국산업기술진흥원',
+                    data: [4940, 4758, 4849, 5158],
+                    borderColor: colors.kiat,
+                    backgroundColor: colors.kiat + '20'
+                }, {
+                    label: '한국에너지기술평가원',
+                    data: [6955, 7141, 6962, 7225],
+                    borderColor: colors.ketep,
+                    backgroundColor: colors.ketep + '20'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '1인당 주요사업 현황 (백만원)'
+                    }
+                }
+            }
+        });
+
+        // 6. 운영비 비율 현황
+        new Chart(document.getElementById('operatingRatioChart'), {
+            type: 'line',
+            data: {
+                labels: ['2022년', '2023년', '2024년', '2025년'],
+                datasets: [{
+                    label: '한국산업기술기획평가원',
+                    data: [3.2, 2.9, 3.1, 2.9],
+                    borderColor: colors.keit,
+                    backgroundColor: colors.keit + '20'
+                }, {
+                    label: '한국산업기술진흥원',
+                    data: [2.4, 2.4, 2.2, 2.1],
+                    borderColor: colors.kiat,
+                    backgroundColor: colors.kiat + '20'
+                }, {
+                    label: '한국에너지기술평가원',
+                    data: [3.1, 2.8, 2.7, 2.6],
+                    borderColor: colors.ketep,
+                    backgroundColor: colors.ketep + '20'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '주요사업 대비 기관운영예산 비율 (%)'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
