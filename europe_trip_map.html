@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동유럽 연수 여행 동선 지도</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .map-container {
+            position: relative;
+            height: 700px;
+            margin: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .legend {
+            background: white;
+            margin: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .legend h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .legend-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .day-schedule {
+            margin: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .schedule-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .schedule-content {
+            padding: 25px 30px;
+        }
+        
+        .day-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+        
+        .day-item:last-child {
+            border-bottom: none;
+        }
+        
+        .day-number {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .day-info {
+            color: #2c3e50;
+        }
+        
+        .day-info strong {
+            color: #2980b9;
+        }
+        
+        .route-info {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            margin: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            color: #2d3436;
+        }
+        
+        .route-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .distance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .distance-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .map-container {
+                height: 500px;
+                margin: 15px;
+            }
+            
+            .legend, .day-schedule, .route-info {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .day-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🗺️ 동유럽 연수 여행 동선</h1>
+            <p class="subtitle">2025년 6월 23일-30일 | 체코·독일·폴란드 8일 일정</p>
+        </header>
+        
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+        
+        <div class="legend">
+            <h3>📍 주요 방문지 안내</h3>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #e74c3c;">✈️</div>
+                    <div>
+                        <strong>인천국제공항</strong><br>
+                        출발점 및 최종 도착지
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #3498db;">1</div>
+                    <div>
+                        <strong>프라하 (체코)</strong><br>
+                        황금의 도시, 프라하 성, 비투스 대성당
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #9b59b6;">2</div>
+                    <div>
+                        <strong>드레스덴 (독일)</strong><br>
+                        작센 왕국의 보석, 츠빙거 궁전
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #e67e22;">3</div>
+                    <div>
+                        <strong>바르샤바 (폴란드)</strong><br>
+                        폴란드 수도, 와지엔키 공원
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #27ae60;">4</div>
+                    <div>
+                        <strong>크라쿠프 (폴란드)</strong><br>
+                        고도, 바벨성, 유네스코 세계유산
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #f39c12;">5</div>
+                    <div>
+                        <strong>비엘리치카</strong><br>
+                        소금광산, 유네스코 세계유산
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #34495e;">6</div>
+                    <div>
+                        <strong>오시비엥침</strong><br>
+                        아우슈비츠 강제수용소
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="day-schedule">
+            <div class="schedule-header">
+                📅 일정별 이동 경로
+            </div>
+            <div class="schedule-content">
+                <div class="day-item">
+                    <div class="day-number">1일차</div>
+                    <div class="day-info">
+                        <strong>인천 → 바르샤바 → 프라하</strong><br>
+                        LOT 098편 → LOT 529편 환승
+                    </div>
+                </div>
+                <div class="day-item">
+                    <div class="day-number">2일차</div>
+                    <div class="day-info">
+                        <strong>프라하 시내 관광</strong><br>
+                        프라하 성, CMKOS 방문, 구시가지 탐방
+                    </div>
+                </div>
+                <div class="day-item">
+                    <div class="day-number">3일차</div>
+                    <div class="day-info">
+                        <strong>프라하 → 드레스덴 → 프라하</strong><br>
+                        당일치기 (150km × 2, 총 5시간 이동)
+                    </div>
+                </div>
+                <div class="day-item">
+                    <div class="day-number">4일차</div>
+                    <div class="day-info">
+                        <strong>프라하 → 바르샤바 → 크라쿠프</strong><br>
+                        LOT 524편 → 크라쿠프행 연결편
+                    </div>
+                </div>
+                <div class="day-item">
+                    <div class="day-number">5일차</div>
+                    <div class="day-info">
+                        <strong>크라쿠프 → 비엘리치카 → 오시비엥침 → 크라쿠프</strong><br>
+                        소금광산 (25km) → 아우슈비츠 (90km) → 복귀 (75km)
+                    </div>
+                </div>
+                <div class="day-item">
+                    <div class="day-number">6일차</div>
+                    <div class="day-info">
+                        <strong>크라쿠프 시내 자유관광</strong><br>
+                        바벨성, 구시가지, 개인별 자유시간
+                    </div>
+                </div>
+                <div class="day-item">
+                    <div class="day-number">7일차</div>
+                    <div class="day-info">
+                        <strong>크라쿠프 → 바르샤바 → 인천행</strong><br>
+                        바르샤바 관광 후 LOT 099편 탑승
+                    </div>
+                </div>
+                <div class="day-item">
+                    <div class="day-number">8일차</div>
+                    <div class="day-info">
+                        <strong>인천 도착</strong><br>
+                        개별 귀가, 연수 완료
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="route-info">
+            <h3>🚌 주요 이동 거리 정보</h3>
+            <p>전용버스를 이용한 육로 이동 구간별 상세 정보</p>
+            <div class="distance-grid">
+                <div class="distance-item">
+                    <strong>프라하 ↔ 드레스덴</strong><br>
+                    150km, 약 2시간 30분 (왕복 5시간)
+                </div>
+                <div class="distance-item">
+                    <strong>크라쿠프 → 비엘리치카</strong><br>
+                    25km, 약 30분
+                </div>
+                <div class="distance-item">
+                    <strong>비엘리치카 → 오시비엥침</strong><br>
+                    90km, 약 1시간 30분
+                </div>
+                <div class="distance-item">
+                    <strong>오시비엥침 → 크라쿠프</strong><br>
+                    75km, 약 1시간
+                </div>
+                <div class="distance-item">
+                    <strong>크라쿠프 → 바르샤바</strong><br>
+                    295km, 약 3시간 30분
+                </div>
+                <div class="distance-item">
+                    <strong>총 육로 이동거리</strong><br>
+                    약 835km (편도 기준)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    <script>
+        // 지도 초기화
+        var map = L.map('map').setView([50.5, 16.5], 5);
+
+        // OpenStreetMap 타일 레이어 추가
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 도시 좌표 및 정보
+        var cities = {
+            seoul: {
+                coords: [37.4449, 126.7378],
+                name: '인천국제공항',
+                info: '출발/도착지',
+                color: '#e74c3c',
+                icon: '✈️',
+                day: ''
+            },
+            warsaw: {
+                coords: [52.2297, 21.0122],
+                name: '바르샤바',
+                info: '폴란드 수도<br>와지엔키 공원, 올드타운',
+                color: '#e67e22',
+                icon: '3',
+                day: '1일차 경유, 7일차'
+            },
+            prague: {
+                coords: [50.0755, 14.4378],
+                name: '프라하',
+                info: '황금의 도시<br>프라하 성, 비투스 대성당',
+                color: '#3498db',
+                icon: '1',
+                day: '1~3일차'
+            },
+            dresden: {
+                coords: [51.0504, 13.7373],
+                name: '드레스덴',
+                info: '작센 왕국의 보석<br>츠빙거 궁전, 군주의 행렬',
+                color: '#9b59b6',
+                icon: '2',
+                day: '3일차 당일치기'
+            },
+            krakow: {
+                coords: [50.0647, 19.9450],
+                name: '크라쿠프',
+                info: '폴란드 고도<br>바벨성, 구시가지',
+                color: '#27ae60',
+                icon: '4',
+                day: '4~7일차'
+            },
+            wieliczka: {
+                coords: [49.9833, 20.0667],
+                name: '비엘리치카',
+                info: '소금광산<br>유네스코 세계유산',
+                color: '#f39c12',
+                icon: '5',
+                day: '5일차'
+            },
+            auschwitz: {
+                coords: [50.0270, 19.2026],
+                name: '오시비엥침',
+                info: '아우슈비츠 강제수용소<br>홀로코스트 역사 현장',
+                color: '#34495e',
+                icon: '6',
+                day: '5일차'
+            }
+        };
+
+        // 마커 추가
+        var markers = {};
+        for (var city in cities) {
+            var cityData = cities[city];
+            
+            // 커스텀 아이콘 생성
+            var customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="
+                    background: ${cityData.color};
+                    color: white;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    font-size: 14px;
+                    border: 3px solid white;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                ">${cityData.icon}</div>`,
+                iconSize: [40, 40],
+                iconAnchor: [20, 20]
+            });
+
+            var marker = L.marker(cityData.coords, {icon: customIcon}).addTo(map);
+            marker.bindPopup(`
+                <div style="text-align: center; min-width: 200px;">
+                    <h3 style="margin: 0 0 10px 0; color: ${cityData.color};">${cityData.name}</h3>
+                    <p style="margin: 0 0 8px 0; font-size: 14px;">${cityData.info}</p>
+                    ${cityData.day ? `<div style="background: ${cityData.color}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; display: inline-block;">${cityData.day}</div>` : ''}
+                </div>
+            `);
+            markers[city] = marker;
+        }
+
+        // 항공 경로 (점선)
+        var flightRoutes = [
+            // 인천 → 바르샤바 → 프라하
+            {
+                coords: [cities.seoul.coords, cities.warsaw.coords, cities.prague.coords],
+                color: '#e74c3c',
+                weight: 3,
+                dashArray: '10, 10',
+                label: '1일차: 인천→바르샤바→프라하'
+            },
+            // 프라하 → 바르샤바 → 크라쿠프
+            {
+                coords: [cities.prague.coords, cities.warsaw.coords, cities.krakow.coords],
+                color: '#3498db',
+                weight: 3,
+                dashArray: '10, 10',
+                label: '4일차: 프라하→바르샤바→크라쿠프'
+            },
+            // 크라쿠프 → 바르샤바 → 인천
+            {
+                coords: [cities.krakow.coords, cities.warsaw.coords, cities.seoul.coords],
+                color: '#27ae60',
+                weight: 3,
+                dashArray: '10, 10',
+                label: '7일차: 크라쿠프→바르샤바→인천'
+            }
+        ];
+
+        // 육로 이동 경로 (실선)
+        var roadRoutes = [
+            // 프라하 ↔ 드레스덴 (당일치기)
+            {
+                coords: [cities.prague.coords, cities.dresden.coords],
+                color: '#9b59b6',
+                weight: 4,
+                label: '3일차: 프라하↔드레스덴 (당일치기)'
+            },
+            // 크라쿠프 → 비엘리치카 → 오시비엥침 → 크라쿠프
+            {
+                coords: [cities.krakow.coords, cities.wieliczka.coords, cities.auschwitz.coords, cities.krakow.coords],
+                color: '#f39c12',
+                weight: 4,
+                label: '5일차: 크라쿠프→비엘리치카→아우슈비츠→크라쿠프'
+            },
+            // 크라쿠프 → 바르샤바
+            {
+                coords: [cities.krakow.coords, cities.warsaw.coords],
+                color: '#e67e22',
+                weight: 4,
+                label: '7일차: 크라쿠프→바르샤바'
+            }
+        ];
+
+        // 항공 경로 그리기
+        flightRoutes.forEach(function(route) {
+            var polyline = L.polyline(route.coords, {
+                color: route.color,
+                weight: route.weight,
+                dashArray: route.dashArray,
+                opacity: 0.8
+            }).addTo(map);
+            
+            polyline.bindTooltip(route.label, {
+                permanent: false,
+                direction: 'center',
+                className: 'custom-tooltip'
+            });
+        });
+
+        // 육로 경로 그리기
+        roadRoutes.forEach(function(route) {
+            var polyline = L.polyline(route.coords, {
+                color: route.color,
+                weight: route.weight,
+                opacity: 0.9
+            }).addTo(map);
+            
+            polyline.bindTooltip(route.label, {
+                permanent: false,
+                direction: 'center',
+                className: 'custom-tooltip'
+            });
+        });
+
+        // 커스텀 툴팁 스타일
+        var style = document.createElement('style');
+        style.textContent = `
+            .custom-tooltip {
+                background: rgba(0, 0, 0, 0.8) !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 6px !important;
+                font-size: 12px !important;
+                padding: 6px 10px !important;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+            }
+            .custom-tooltip::before {
+                border-top-color: rgba(0, 0, 0, 0.8) !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 지도 범위 조정 (유럽 중심)
+        var group = new L.featureGroup(Object.values(markers).filter(marker => marker.getLatLng().lat > 45));
+        map.fitBounds(group.getBounds().pad(0.1));
+    </script>
+</body>
+</html>
