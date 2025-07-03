@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KETEP 노동조합 소식 2025년 상반기호</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,0 1000,0 1000,100 0,50"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .issue-info {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-bottom: 3px solid #2a5298;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .issue-date {
+            font-weight: bold;
+            color: #2a5298;
+            font-size: 1.1em;
+        }
+        
+        .issue-number {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+        }
+        
+        .section {
+            padding: 40px 30px;
+            border-right: 1px solid #eee;
+            min-height: 600px;
+        }
+        
+        .section:last-child {
+            border-right: none;
+        }
+        
+        .section-header {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            margin: -40px -30px 25px -30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .union-header {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+        
+        .communication-header {
+            background: linear-gradient(45deg, #4834d4, #686de0);
+        }
+        
+        .cooperation-header {
+            background: linear-gradient(45deg, #00d2d3, #54a0ff);
+        }
+        
+        .article {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .article:last-child {
+            border-bottom: none;
+        }
+        
+        .article-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 4px solid #2a5298;
+            line-height: 1.4;
+        }
+        
+        .article-content {
+            color: #555;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+        
+        .stats-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2a5298;
+            display: block;
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 10px;
+            color: #ffc107;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #495057;
+            padding-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .issue-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏢 KETEP 노동조합 소식</h1>
+            <div class="subtitle">한국에너지기술평가원노동조합</div>
+        </header>
+        
+        <div class="issue-info">
+            <div class="issue-date">📅 2025년 상반기호</div>
+            <div class="issue-number">7대 노조 소식지 - 제5호 (2025.7.4)</div>
+        </div>
+        
+        <div class="content-grid">
+            <!-- 노동조합 주요 활동 섹션 -->
+            <section class="section">
+                <div class="section-header union-header">
+                    🤝 노동조합 주요 활동
+                </div>
+                
+                <article class="article">
+                    <h3 class="article-title">제1차 대의원대회 개최 및 대의원 선거 완료</h3>
+                    <div class="article-content">
+                        2025년 2월 4일부터 18일까지 진행된 대의원 선거가 성공적으로 완료되었습니다. 4개 선거구에서 총 5명의 대의원이 선출되었으며, 전자투표 방식으로 민주적이고 투명한 선거를 실시했습니다. 제1선거구 채윤영(96.0%), 제2선거구 김영효(100.0%), 제3선거구 반은서·김형진(90.7%), 제4선거구 신다영(95.2%)이 각각 당선되어 높은 지지율을 기록했습니다.
+                    </div>
+                    
+                    <div class="stats">
+                        <span class="stats-number">75.8%</span>
+                        평균 투표율 달성
+                    </div>
+                </article>
+                
+                <article class="article">
+                    <h3 class="article-title">제1차·제2차 상무집행위원회 개최</h3>
+                    <div class="article-content">
+                        1월과 3월에 각각 개최된 제1차, 제2차 상무집행위원회에서는 주요 노조 현안을 심의·의결했습니다. 제1차 회의에서는 선거관리위원 선출 및 선거구 설정을 의결하였고, 제2차 회의에서는 노사협의회 위원 선출과 2025년 노동조합 사업계획서 검토를 진행했습니다. 각 회의는 상무집행위원 전원 참석 하에 민주적 절차에 따라 운영되었습니다.
+                    </div>
+                    
+                    <div class="highlight">
+                        <strong>🎯 주요 의결사항</strong><br>
+                        • 선거관리위원 선출 (조인애, 김주한)<br>
+                        • 4개 선거구 설정 (총 5명 대의원 선출)<br>
+                        • 노사협의회 위원 선출 (신다영, 김형진, 김득천)<br>
+                        • 2025년 사업계획서 검토 및 승인
+                    </div>
+                </article>
+                
+                <article class="article">
+                    <h3 class="article-title">2024-2025년 사업계획 성과적 추진</h3>
+                    <div class="article-content">
+                        제7대 노동조합의 '노조원들의 권익 보호와 증진을 위해 뛰겠습니다'라는 슬로건 하에 체계적인 사업계획을 추진하여 실질적인 성과를 달성했습니다. 2024년 12월 단체협약 및 임금협약 체결, 전 직원 직무급 도입 노사 합의, 13년 연속 무분규 달성 등 주요 목표를 성공적으로 완수했습니다. 특히 기관 최초 무교섭 위임 협약 체결은 노사 간 신뢰의 상징적 사건으로 평가받고 있습니다.
+                    </div>
+                </article>
+            </section>
+            
+            <!-- 노사소통 및 협력 섹션 -->
+            <section class="section">
+                <div class="section-header communication-header">
+                    💬 노사소통 및 협력
+                </div>
+                
+                <article class="article">
+                    <h3 class="article-title">2025년 1분기 노사협의회 개최 결과</h3>
+                    <div class="article-content">
+                        3월 25일 7층 대회의실에서 개최된 2025년 1분기 노사협의회에서는 사업장 밖 간주근로시간제 도입, 자율출퇴근제 시행, 2025년 안전보건 교육훈련 계획, 휴가 사용 시간단위 세분화 등 4개 안건이 모두 합의로 의결되었습니다. 특히 사업장 밖 간주근로시간제 도입으로 원거리 출장 시 1일 8시간 근무로 인정하는 제도가 신설되어 직원 자율성이 크게 향상되었습니다.
+                    </div>
+                    
+                    <div class="highlight">
+                        <strong>📊 주요 합의사항</strong><br>
+                        • 원거리 출장(50km 이상) 시 간주근로 8시간 인정<br>
+                        • 자율출퇴근제 도입 (7:30~10:30 출근 가능)<br>
+                        • 휴가 사용 단위 30분으로 세분화<br>
+                        • 2025년 안전보건 교육계획 승인
+                    </div>
+                    
+                    <div class="article-content">
+                        이번 노사협의회를 통해 직원들의 일-생활 균형 지원과 업무 효율성 제고를 위한 제도적 기반이 더욱 강화되었으며, 노사 간 상호 신뢰를 바탕으로 한 협력적 의사결정 문화가 정착되고 있음을 확인할 수 있었습니다.
+                    </div>
+                </article>
+                
+                <article class="article">
+                    <h3 class="article-title">2025년 노사문화 우수기업 신청</h3>
+                    <div class="article-content">
+                        우리 기관이 고용노동부가 주관하는 '2025년 노사문화 우수기업' 평가에 신청했습니다. 지난해 기관장 공백기를 극복하고 신임 기관장 부임 후 노사 간 신뢰 회복과 협력을 통해 달성한 성과들을 종합적으로 정리하여 제출했습니다. 특히 13년 연속 무분규 임단협 체결, 기관 최초 무교섭 위임 협약, 전 직원 직무급 도입 등의 혁신적 노사관계 성과가 높이 평가받을 것으로 기대됩니다.
+                    </div>
+                    
+                    <div class="stats">
+                        <span class="stats-number">8.25점</span>
+                        기관장 만족도 (10점 만점)
+                    </div>
+                </article>
+            </section>
+            
+            <!-- 유관기관 연대강화 섹션 -->
+            <section class="section">
+                <div class="section-header cooperation-header">
+                    🤝 유관기관 연대강화
+                </div>
+                
+                <article class="article">
+                    <h3 class="article-title">연노련 제2차 정책워크숍 성료</h3>
+                    <div class="article-content">
+                        3월 21일 대구경북디자인진흥원에서 개최된 연노련 2025년도 제2차 정책워크숍이 성공적으로 마무리되었습니다. 12개 회원사 노동조합 위원장, 부위원장, 사무국장 등 18명이 참석하여 연구개발 분야의 선도형 R&D 포트폴리오 개편과 공공부문 AI 대전환에 대한 노동조합 차원의 대응방안을 집중 논의했습니다. 8개 회원사의 2024년 조합활동 우수사례도 공유되어 상호 벤치마킹의 기회가 되었습니다.
+                    </div>
+                    
+                    <div class="highlight">
+                        <strong>🏆 주요 논의사항</strong><br>
+                        • R&D 예산 삭감 등 어려운 환경 극복 방안<br>
+                        • 공공부문 AI 도입에 따른 일자리 변화 대응<br>
+                        • 회원사별 2025년도 사업계획 공유<br>
+                        • 공통 현안에 대한 연대 방안 모색
+                    </div>
+                </article>
+                
+                <article class="article">
+                    <h3 class="article-title">연노련 노사공동 워크숍 참여</h3>
+                    <div class="article-content">
+                        6월 11일부터 13일까지 제주 휘슬락에서 개최된 연노련 2025년 노사공동 워크숍에 참여했습니다. 12개 기관의 노사 간부 48명이 참석한 이번 워크숍에서는 새정부 노동정책 주요내용과 대책, 스마트폰 사진촬영 기법 등 실용적인 프로그램이 진행되어 노사 간 상호 이해와 협력을 강화하는 계기가 되었습니다. 특히 자유로운 분위기에서 노사 상생 발전을 위한 폭넓은 의견 교환이 이루어졌습니다.
+                    </div>
+                </article>
+                
+                <article class="article">
+                    <h3 class="article-title">기관장 만족도 조사 실시 및 결과</h3>
+                    <div class="article-content">
+                        4월 28일부터 29일까지 실시된 연노련 기관장 만족도 조사에서 우리 기관은 전체 평균 8.25점(10점 만점)의 우수한 성과를 거두었습니다. 조직문화(8.41점), 리더 개인적 특성(8.36점), 노동조합의 이해(8.25점) 영역에서 특히 높은 평가를 받았으며, 긍정적 응답률이 75.45%에 달해 신임 기관장의 노사 협력과 소통 의지가 높이 평가받았습니다. 이는 매주 정기 면담, 노사 핫라인 운영 등 다양한 소통 채널 구축의 성과로 분석됩니다.
+                    </div>
+                    
+                    <div class="stats">
+                        <span class="stats-number">13개</span>
+                        연노련 회원기관 참여
+                    </div>
+                </article>
+            </section>
+        </div>
+        
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>📞 연락처</h4>
+                    <p>노동조합 사무실<br>
+                    ☎ 02-3469-8459<br>
+                    📧 leeky@ketep.re.kr</p>
+                </div>
+                <div class="footer-section">
+                    <h4>👥 조합 임원진</h4>
+                    <p>위원장: 이관엽<br>
+                    사무국장: 신주환<br>
+                    설립일: 2011년 11월 8일</p>
+                </div>
+                <div class="footer-section">
+                    <h4>🎯 우리의 다짐</h4>
+                    <p>"노조원들의 권익 보호와<br>
+                    증진을 위해 뛰겠습니다"<br>
+                    - 제7대 노동조합 슬로건</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 한국에너지기술평가원노동조합. 모든 권리 보유.</p>
+                <p>서울특별시 강남구 테헤란로 114길 14 5층</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
