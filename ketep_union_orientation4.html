@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신입직원 노동조합 교육 | 한국에너지기술평가원</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        /* 헤더 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .instructor-info {
+            font-size: 0.9rem;
+            text-align: right;
+            opacity: 0.9;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* 메인 컨테이너 */
+        .main-container {
+            margin-top: 80px;
+        }
+
+        /* 섹션 공통 스타일 */
+        .section {
+            padding: 4rem 0;
+            min-height: 500px;
+        }
+
+        .section:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .welcome-message {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero .slogan {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem 2rem;
+            border-radius: 50px;
+            margin: 2rem auto;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .education-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 카드 그리드 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #2980b9;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* 강조 박스 */
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .highlight h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .highlight p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+        /* 통계 박스 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* 혜택 카드 */
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-card {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card p {
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* 가입 절차 */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step:last-child .step-number {
+            background: #27ae60;
+        }
+
+        /* FAQ 섹션 */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin: 1.5rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .faq-question {
+            background: #f8f9fa;
+            padding: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 2rem;
+            color: #555;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .faq-answer.active {
+            max-height: 300px;
+        }
+
+        /* 연락처 섹션 */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA 버튼 */
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        /* 푸터 */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* 백 투 탑 */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 1.2rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .main-container {
+                margin-top: 120px;
+            }
+
+            .instructor-info {
+                text-align: center;
+            }
+        }
+
+        /* 스크롤 애니메이션 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">KETEP UNION</div>
+            <nav>
+                <ul class="nav">
+                    <li><a href="#home">홈</a></li>
+                    <li><a href="#necessity">필요성</a></li>
+                    <li><a href="#achievements">성과</a></li>
+                    <li><a href="#benefits">혜택</a></li>
+                    <li><a href="#join">가입안내</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
+            </nav>
+            <div class="instructor-info">
+                한국에너지기술평가원 노동조합<br>
+                제7대 위원장 이관엽
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- 히어로 섹션 -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>신입직원 여러분,<br>환영합니다! 🎉</h1>
+                <div class="welcome-message">
+                    한국에너지기술평가원 입사를 진심으로 축하드립니다!
+                </div>
+                <div class="slogan">
+                    "왜 우리에게 노동조합이 필요한가?"
+                </div>
+                <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 3rem;">
+                    오늘은 여러분의 직장생활을 위한 중요한 정보를 전달해드리겠습니다.
+                </p>
+                
+                <div class="education-info">
+                    <div class="info-card">
+                        <h3>📋 교육 내용</h3>
+                        <p>노동조합의 필요성과 혜택,<br>가입 방법까지</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>⏱️ 소요 시간</h3>
+                        <p>약 15분간의<br>소중한 시간</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎯 목표</h3>
+                        <p>함께 만들어가는<br>더 나은 직장문화</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 왜 노동조합이 필요한가 -->
+        <section id="necessity" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">왜 우리에게 노동조합이 필요할까요?</h2>
+                
+                <div class="highlight fade-in">
+                    <h3>💡 혼자서는 해결할 수 없는 일들이 있습니다</h3>
+                    <p>개별 직원으로는 어려운 일들을 함께 힘을 합쳐 해결할 수 있습니다.</p>
+                </div>
+
+                <div class="card-grid fade-in">
+                    <div class="card">
+                        <h3>😰 개인이 직면하는 한계</h3>
+                        <ul>
+                            <li>임금 협상 시 약한 협상력</li>
+                            <li>부당한 대우에 혼자 대응</li>
+                            <li>복리후생 개선 요구의 어려움</li>
+                            <li>회사 정책에 대한 의견 개진 한계</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>💪 노동조합이 있을 때</h3>
+                        <ul>
+                            <li>집단 협상을 통한 강력한 발언권</li>
+                            <li>전문적인 법적 지원</li>
+                            <li>체계적인 복리후생 개선</li>
+                            <li>민주적 의사결정 참여</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight fade-in">
+                    <h3>🎯 핵심 포인트</h3>
+                    <p><strong>"노동조합은 여러분의 든든한 동반자입니다"</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 우리 노조의 성과 -->
+        <section id="achievements" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">우리 노동조합이 만든 실제 성과들</h2>
+                
+                <div class="highlight fade-in">
+                    <h3>📈 2024년에만 이런 성과를 이뤘습니다!</h3>
+                </div>
+
+                <div class="stats-grid fade-in">
+                    <div class="stat-box">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-label">최대 기본급 인상<br>임금협약 체결</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-label">자율출퇴근제<br>도입</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">🏖️</div>
+                        <div class="stat-label">연간 10일<br>보상휴가 보장</div>
+                    </div>
+                </div>
+
+                <div class="card-grid fade-in">
+                    <div class="card">
+                        <h3>💼 근로조건 개선</h3>
+                        <ul>
+                            <li>직무급 제도 도입으로 공정한 평가</li>
+                            <li>사업장 밖 간주근로제 도입</li>
+                            <li>시간외수당 보상 시간 조정</li>
+                            <li>육아 지원 관련 사항 강화</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>🎯 복리후생 확대</h3>
+                        <ul>
+                            <li>워케이션 프로그램 운영</li>
+                            <li>동호회 지원 확대</li>
+                            <li>건강증진 프로그램 제공</li>
+                            <li>노사공동 사회공헌 활동</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight fade-in">
+                    <h3>✨ 이 모든 혜택은 노조가 있어서 가능했습니다!</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- 가입 혜택 -->
+        <section id="benefits" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">노동조합에 가입하면 받는 혜택</h2>
+                
+                <div class="highlight fade-in">
+                    <h3>🎁 조합원이 되시면 이런 혜택을 받으실 수 있습니다</h3>
+                </div>
+
+                <div class="benefit-grid fade-in">
+                    <div class="benefit-card">
+                        <h4>💰 경제적 혜택</h4>
+                        <p>• 단체협약으로 보장되는 더 나은 근로조건<br>
+                        • 경조사비 지급 (결혼, 출산, 사망 등)<br>
+                        • 각종 복리후생 프로그램 참여</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>⚖️ 법적 보호</h4>
+                        <p>• 전문 노무사의 법률 상담<br>
+                        • 부당한 처우 발생 시 집단 대응<br>
+                        • 징계 시 조합 측 인사 참여</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>🗣️ 발언권 강화</h4>
+                        <p>• 회사 정책에 대한 의견 개진<br>
+                        • 노사협의회 참여를 통한 의사결정<br>
+                        • 조합 운영에 직접 참여</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>🤝 동료애</h4>
+                        <p>• 화목한 소통 런치 프로그램<br>
+                        • 다양한 교육 프로그램 참여<br>
+                        • 조합원 간 네트워킹</p>
+                    </div>
+                </div>
+
+                <div class="card fade-in">
+                    <h3 style="text-align: center;">💡 중요한 사실</h3>
+                    <p style="text-align: center; font-size: 1.2rem; line-height: 1.7;">
+                        <strong>비조합원도 단체협약의 혜택은 받지만,<br>
+                        조합원만이 직접 참여하고 의견을 낼 수 있습니다!</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 가입 안내 -->
+        <section id="join" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">어떻게 가입할 수 있나요?</h2>
+
+                <div class="card-grid fade-in">
+                    <div class="card">
+                        <h3>✅ 가입 자격</h3>
+                        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;">
+                            <strong>한국에너지기술평가원에 종사하는<br>정규직(무기계약직) 근로자</strong>
+                        </p>
+                        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffc107;">
+                            <p style="color: #856404; font-weight: bold; text-align: center;">
+                                ⚠️ 수습기간 중에는 가입할 수 없습니다<br>
+                                (수습해제 후 가입 가능)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>💰 조합비</h3>
+                        <div style="text-align: center;">
+                            <div style="background: linear-gradient(45deg, #3498db, #8e44ad); color: white; padding: 2rem; border-radius: 15px; margin: 1rem 0;">
+                                <div style="font-size: 2.5rem; font-weight: bold;">17,000원</div>
+                                <div>월 조합비<br>(직급 관계없이 동일)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <h3 style="text-align: center; margin: 3rem 0 2rem; font-size: 1.8rem; color: #2980b9;">📝 가입 절차</h3>
+                    <div class="process-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h4>가입원서 작성</h4>
+                            <p>가입원서를 작성하여 제출</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h4>위원장 승인</h4>
+                            <p>위원장의 승인 절차</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">✓</div>
+                            <h4>조합원 자격 취득</h4>
+                            <p>조합원이 되어 모든 혜택 享受!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight fade-in">
+                    <h3>📞 가입 문의</h3>
+                    <p><strong>위원장 이관엽 또는 사무국장 신주환</strong>에게 언제든 연락주세요!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">신입직원들이 가장 궁금해하는 질문들</h2>
+                
+                <div class="faq-container fade-in">
+                    <div class="faq-item">
+                        <div class="faq-question">Q1. 노조에 가입하면 회사에서 불이익을 받나요?</div>
+                        <div class="faq-answer">
+                            <strong>절대 그렇지 않습니다!</strong> 노동조합 가입이나 활동을 이유로 한 불이익 처우는 <strong>부당노동행위</strong>로 법적으로 강력히 금지되어 있습니다. 오히려 회사도 노조를 통해 직원들의 의견을 체계적으로 들을 수 있어 도움이 됩니다.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">Q2. 조합비가 아깝지 않나요?</div>
+                        <div class="faq-answer">
+                            월 17,000원으로 받는 혜택을 생각해보세요! <strong>임금 인상, 복리후생 개선, 법적 보호</strong> 등을 고려하면 투자 대비 효과가 매우 큽니다. 실제로 노조 활동으로 얻는 경제적 이익이 조합비보다 훨씬 큽니다.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">Q3. 업무에 지장을 주지 않나요?</div>
+                        <div class="faq-answer">
+                            <strong>전혀 그렇지 않습니다!</strong> 노조 활동은 기본적으로 업무시간 외에 이루어지며, 단체교섭 등 공식 활동은 유급으로 인정됩니다. 오히려 더 나은 근무환경으로 업무 효율성이 높아집니다.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">Q4. 비조합원도 같은 혜택을 받는데 굳이 가입해야 하나요?</div>
+                        <div class="faq-answer">
+                            맞습니다. 단체협약은 모든 직원에게 적용됩니다. 하지만 <strong>조합원만이 의사결정에 참여하고, 자신의 의견을 직접 반영할 수 있습니다.</strong> 또한 개별적인 법적 지원이나 경조사비 등은 조합원만의 혜택입니다.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">Q5. 언제든 탈퇴할 수 있나요?</div>
+                        <div class="faq-answer">
+                            네, <strong>가입과 탈퇴는 완전히 자유</strong>입니다. 본인이 원할 때 언제든 탈퇴서를 제출하면 됩니다. 강제 가입이나 강제 탈퇴는 모두 불법입니다.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">Q6. 수습기간 중에도 노조 혜택을 받을 수 있나요?</div>
+                        <div class="faq-answer">
+                            <strong>단체협약의 혜택은 수습기간 중에도 적용</strong>됩니다. 다만 노조 가입은 수습해제 후에 가능하므로, 개별적인 조합원 혜택(경조사비 등)은 가입 후 받을 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 연락처 및 마무리 -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">함께 만들어가는 더 나은 직장</h2>
+                
+                <div class="highlight" style="background: rgba(255,255,255,0.1); border-left: 5px solid white;">
+                    <h3 style="color: white;">💝 여러분의 참여가 모두를 위한 더 나은 직장을 만듭니다</h3>
+                </div>
+
+                <div class="contact-grid fade-in">
+                    <div class="contact-card">
+                        <h4>👨‍💼 위원장</h4>
+                        <p><strong>이관엽</strong></p>
+                        <p>노조 대표 및 단체교섭 책임</p>
+                    </div>
+                    <div class="contact-card">
+                        <h4>📋 사무국장</h4>
+                        <p><strong>신주환</strong></p>
+                        <p>노조 업무 총괄 및 조합원 상담</p>
+                    </div>
+                    <div class="contact-card">
+                        <h4>🏢 노조 사무실</h4>
+                        <p><strong>한국에너지기술평가원 내</strong></p>
+                        <p>서울특별시 강남구 테헤란로114길 14</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">
+                        수습해제 후 언제든 편하게 연락주세요!
+                    </p>
+                    <button class="cta-button">
+                        "혼자가 아닌 함께, 더 나은 내일을 만들어갑시다!"
+                    </button>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <p style="font-size: 1.3rem;">
+                        <strong>🎉 오늘 교육에 참여해주셔서 감사합니다! 🎉</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 한국에너지기술평가원 노동조합. All rights reserved.</p>
+            <p>제7대 집행부 | 위원장: 이관엽, 사무국장: 신주환</p>
+        </div>
+    </footer>
+
+    <!-- 백 투 탑 버튼 -->
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // FAQ 아코디언 기능
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                // 모든 FAQ 닫기
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // 클릭된 FAQ 토글
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 백 투 탑 버튼
+        const backToTopBtn = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 네비게이션 하이라이트
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.opacity = '0.8';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.opacity = '1';
+                    link.style.fontWeight = 'bold';
+                } else {
+                    link.style.fontWeight = '500';
+                }
+            });
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
