@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대한맥진학회 공용 예진 설문지</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3ff6; /* Light gray background */
+        }
+        .form-section {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            font-weight: 500;
+            color: #374151; /* Gray-700 */
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* Gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-size: 1rem;
+            color: #1f2937; /* Gray-900 */
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group textarea:focus {
+            border-color: #6366f1; /* Indigo-500 */
+            outline: 0;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25); /* Focus ring */
+        }
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .checkbox-item input[type="checkbox"],
+        .radio-item input[type="radio"] {
+            margin-right: 0.5rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #6366f1; /* Indigo-500 */
+        }
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .question-item {
+            background-color: #f9fafb; /* Gray-50 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb; /* Gray-200 */
+        }
+        .question-item label {
+            font-weight: 400;
+            color: #4b5563; /* Gray-600 */
+            display: flex;
+            align-items: center;
+        }
+        .question-item input[type="checkbox"],
+        .question-item input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+        .score-box {
+            background-color: #e0e7ff; /* Indigo-100 */
+            color: #4338ca; /* Indigo-700 */
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+        .note-text {
+            font-size: 0.875rem; /* text-sm */
+            color: #6b7280; /* Gray-500 */
+            margin-top: 0.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600;
+            color: #1f2937; /* Gray-900 */
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .subsection-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;
+            color: #374151; /* Gray-700 */
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        /* Modal styles - No longer needed but kept for reference */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #9ca3af; /* Gray-400 */
+        }
+        .close-button:hover {
+            color: #6b7280; /* Gray-500 */
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #6366f1; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+            display: none; /* Hidden by default */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-6 sm:mb-8">
+            대한맥진학회 공용 예진 설문지
+        </h1>
+        <p class="text-center text-gray-600 mb-8">
+            정확한 진단과 높은 치료율을 위한 설문지입니다. 솔직하고 자세한 답변은 진료에 큰 도움이 됩니다.
+        </p>
+
+        <!-- 기본 정보 -->
+        <div class="form-section">
+            <h2 class="subsection-title">기본 정보</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="form-group">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required class="w-full">
+                </div>
+                <div class="form-group">
+                    <label for="age">나이:</label>
+                    <input type="number" id="age" name="age" placeholder="만 나이를 입력해주세요" min="0" class="w-full">
+                </div>
+                <div class="form-group">
+                    <label>성별:</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="남"> 남
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="여"> 여
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="height">키:</label>
+                    <input type="number" id="height" name="height" placeholder="cm" min="0" step="0.1" class="w-full">
+                </div>
+                <div class="form-group">
+                    <label for="weight">체중:</label>
+                    <input type="number" id="weight" name="weight" placeholder="kg" min="0" step="0.1" class="w-full">
+                </div>
+                <div class="form-group">
+                    <label for="job">직업:</label>
+                    <input type="text" id="job" name="job" placeholder="직업을 입력해주세요" class="w-full">
+                </div>
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="main_symptom">치료받고 싶은 증상:</label>
+                <textarea id="main_symptom" name="main_symptom" rows="3" placeholder="가장 불편한 증상을 자세히 설명해주세요." class="w-full"></textarea>
+            </div>
+            <div class="form-group mb-4">
+                <label for="current_meds">현재 복용하고 있는 약물:</label>
+                <textarea id="current_meds" name="current_meds" rows="3" placeholder="처방약, 영양제, 한약 등 모든 약물을 기재해주세요." class="w-full"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="past_illness_surgery">과거에 앓았던 병/수술:</label>
+                <textarea id="past_illness_surgery" name="past_illness_surgery" rows="3" placeholder="병명, 수술명, 시기 등을 자세히 기재해주세요." class="w-full"></textarea>
+            </div>
+        </div>
+
+        <!-- 신체 증상 설문 -->
+        <div class="form-section">
+            <h2 class="section-title">신체 증상 설문</h2>
+            <p class="note-text mb-6 text-center">다음 문항들을 읽고 해당되는 사항에 체크(✓)해 주세요. 추가 설명이 필요한 경우 비고란에 작성해주세요.</p>
+
+            <!-- 1. 식욕 및 기호 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">1. 식욕 및 기호 (食欲, 嗜好)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="radio" name="appetite" value="입맛이 좋다."> 입맛이 좋다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="appetite" value="입맛이 없다."> 입맛이 없다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="eating_habit" value="골고루 잘 먹는 편이다."> 골고루 잘 먹는 편이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="eating_habit" value="한 번에 먹는 양이 많은 편이다."> 한 번에 먹는 양이 많은 편이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="satiety" value="조금만 먹어도 금방 배가 부르다."> 조금만 먹어도 금방 배가 부르다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="satiety" value="허기를 참기 힘들다."> 허기를 참기 힘들다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="weight_change" value="요즘 살이 찌고 있다."> 요즘 살이 찌고 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="weight_change" value="요즘 살이 빠지는 편이다."> 요즘 살이 빠지는 편이다.</label>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label for="fav_taste">평소에 좋아하는 맛이나 음식은?</label>
+                        <input type="text" id="fav_taste" name="fav_taste" placeholder="예: 단맛, 매운맛, 쓴맛, 신맛, 짠맛, 고기, 야채 등" class="mt-2">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="smoking_status"> 담배를 자주 피운다.</label>
+                        <input type="text" name="smoking_details" placeholder="하루에 몇 갑, 일주일에 몇 회" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="drinking_status"> 술을 자주 마신다.</label>
+                        <input type="text" name="drinking_details" placeholder="일주일에 몇 회, 주량 몇 병" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="coffee_status"> 커피를 하루에 마신다.</label>
+                        <input type="number" name="coffee_cups" placeholder="잔" min="0" class="mt-2 w-24 text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 물 마시는 양상 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">2. 물 마시는 양상 (口渴)</h3>
+                <div class="question-grid">
+                    <div class="question-item col-span-full">
+                        <label for="water_intake">하루에 마시는 모든 수분(생수, 차, 음료수, 우유, 커피 등)의 양은 대략 얼마나 됩니까?</label>
+                        <input type="number" id="water_intake" name="water_intake" placeholder="리터 가량" min="0" step="0.1" class="mt-2">
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label>물을 마시는 주된 이유는?</label>
+                        <div class="radio-group mt-2">
+                            <label class="radio-item"><input type="radio" name="water_reason" value="목이 말라서"> 목이 말라서</label>
+                            <label class="radio-item"><input type="radio" name="water_reason" value="건강에 좋다고 해서"> 건강에 좋다고 해서</label>
+                            <label class="radio-item"><input type="radio" name="water_reason" value="습관적으로"> 습관적으로</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="dry_mouth" value="입안이나 입술이 자주 마른다."> 입안이나 입술이 자주 마른다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="water_temp_pref" value="찬물을 좋아한다."> 찬물을 좋아한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="water_temp_pref" value="따뜻한 물이 좋다."> 따뜻한 물이 좋다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="water_drink_habit" value="물을 벌컥벌컥 들이킨다."> 물을 벌컥벌컥 들이킨다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="water_drink_habit" value="조금씩 물을 마신다."> 조금씩 물을 마신다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bad_breath" value="입 냄새가 난다."> 입 냄새가 난다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="meal_water" value="식사할 때 국이나 물 없이 식사를 못 한다."> 식사할 때 국이나 물 없이 식사를 못 한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="hot_water_search" value="몸이 더워지면 물부터 찾는다."> 몸이 더워지면 물부터 찾는다.</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 대변 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">3. 대변 (大便)</h3>
+                <p class="note-text mb-4">다음 항목 중 해당되는 경우에만 체크해주세요. (총 18점 이상일 경우 장 문제 가능성 있음)</p>
+                <div class="question-grid">
+                    <div class="question-item col-span-full">
+                        <label for="bowel_freq">대변 보는 횟수:</label>
+                        <input type="number" id="bowel_freq" name="bowel_freq" placeholder="하루에 몇 번 정도 보러 가는지" min="0" class="mt-2">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_time" value="대변 보는데 5분 이상 걸린다."> 대변 보는데 5분 이상 걸린다.</label> <span class="score-box">10점</span>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_smell" value="방귀와 변 냄새가 많이 난다."> 방귀와 변 냄새가 많이 난다.</label> <span class="score-box">12점</span>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_irregular_freq" value="변의 횟수가 너무 많거나 며칠에 한 번 본다."> 변의 횟수가 너무 많거나 며칠에 한 번 본다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_shape" value="변이 풀어지고, 모양이나 굵기가 일정치 않다."> 변이 풀어지고, 모양이나 굵기가 일정치 않다.</label> <span class="score-box">11점</span>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_color" value="변의 색깔이 갈색, 회색, 푸른색, 검은색이다."> 변의 색깔이 갈색, 회색, 푸른색, 검은색이다.</label> <span class="score-box">9점</span>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_incomplete" value="변 보고 난 뒤 덜 빠져나온 것 같고 시원치 않다."> 변 보고 난 뒤 덜 빠져나온 것 같고 시원치 않다.</label> <span class="score-box">7점</span>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_hard" value="대변이 단단하다."> 대변이 단단하다.</label> <span class="score-box">8점</span>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_irregular_time" value="변 보는 시간이 불규칙하다."> 변 보는 시간이 불규칙하다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_undigested" value="대변에서 소화 안 된 음식물이 자주 보인다."> 대변에서 소화 안 된 음식물이 자주 보인다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_sink" value="변이 물에 안 뜬다."> 변이 물에 안 뜬다.</label> <span class="score-box">5점</span>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_gas" value="아랫배에 가스가 잘 차고 방귀가 자주 나온다."> 아랫배에 가스가 잘 차고 방귀가 자주 나온다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="bowel_meds" value="대변을 시원하게 보기 위해 변비약이나 건강식품 등을 복용 중이다."> 대변을 시원하게 보기 위해 변비약이나 건강식품 등을 복용 중이다.</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 소화 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">4. 소화 (消化)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="radio" name="digestion" value="소화가 잘 된다."> 소화가 잘 된다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="digestion" value="소화가 잘 안 된다."> 소화가 잘 안 된다.</label>
+                        <input type="text" name="digestion_bad_details" placeholder="자주 안 되는 느낌 / 가끔 그렇다 / 신경 쓴 후" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="indigestion" value="잘 체하는 편이다."> 잘 체하는 편이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="stomach_ache" value="자주 배가 아프다."> 자주 배가 아프다.</label>
+                        <input type="text" name="stomach_ache_details" placeholder="공복 시 / 식후 / 스트레스 받은 후" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="burping" value="트림을 자주 한다."> 트림을 자주 한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="heartburn" value="속이 쓰리다."> 속이 쓰리다.</label>
+                        <input type="text" name="heartburn_details" placeholder="공복 시 / 매운 것 먹을 때" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="vomiting" value="구토를 자주 한다."> 구토를 자주 한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="nausea" value="자주 메스껍다."> 자주 메스껍다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="stomach_noise" value="배에서 소리가 자주 난다."> 배에서 소리가 자주 난다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="acid_reflux" value="신물이 넘어옴"> 신물이 넘어옴</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="gag_reflex" value="양치 시 자주 구역질을 한다."> 양치 시 자주 구역질을 한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="cold_diarrhea" value="찬 것 먹으면 설사를 잘 한다."> 찬 것 먹으면 설사를 잘 한다.</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 소변 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">5. 소변 (小便)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="radio" name="urination_feel" value="소변을 시원하게 본다."> 소변을 시원하게 본다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="urination_feel" value="소변 보고 난 후 시원치 않다."> 소변 보고 난 후 시원치 않다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="frequent_urination" value="소변을 자주 보러 간다."> 소변을 자주 보러 간다.</label>
+                        <input type="text" name="frequent_urination_details" placeholder="낮 몇 회, 밤 몇 회" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="night_urination" value="밤에 소변을 보러 갈 때가 있다."> 밤에 소변을 보러 갈 때가 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="urine_leak" value="소변 본 후, 소변이 팬티에 자주 묻는다."> 소변 본 후, 소변이 팬티에 자주 묻는다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="difficulty_holding_urine" value="소변을 참기가 어렵다."> 소변을 참기가 어렵다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="pain_urination" value="소변을 보고 난 후 통증을 느낀다."> 소변을 보고 난 후 통증을 느낀다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="dribbling_urine" value="소변이 잘 안 나오거나 방울방울 떨어진다."> 소변이 잘 안 나오거나 방울방울 떨어진다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="dark_urine" value="소변 색이 진하다. (매우 노랗거나 붉다)"> 소변 색이 진하다. (매우 노랗거나 붉다)</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="low_urine_volume" value="소변 양이 매우 적다."> 소변 양이 매우 적다.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 신체 전반 증상 설문 -->
+        <div class="form-section">
+            <h2 class="section-title">신체 전반 증상 설문</h2>
+
+            <!-- 6. 땀 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">6. 땀 (汗出)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="radio" name="sweat_amount" value="땀이 잘 난다."> 땀이 잘 난다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="sweat_amount" value="땀이 잘 나지 않는다."> 땀이 잘 나지 않는다.</label>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label><input type="checkbox" name="partial_sweat_status" value="신체의 일부분에서만 땀이 잘 난다."> 신체의 일부분에서만 땀이 잘 난다.</label>
+                        <div class="checkbox-group mt-2">
+                            <label class="checkbox-item"><input type="checkbox" name="partial_sweat_area" value="얼굴"> 얼굴</label>
+                            <label class="checkbox-item"><input type="checkbox" name="partial_sweat_area" value="가슴"> 가슴</label>
+                            <label class="checkbox-item"><input type="checkbox" name="partial_sweat_area" value="뒷목과 등"> 뒷목과 등</label>
+                            <label class="checkbox-item"><input type="checkbox" name="partial_sweat_area" value="겨드랑이"> 겨드랑이</label>
+                            <label class="checkbox-item"><input type="checkbox" name="partial_sweat_area" value="손바닥"> 손바닥</label>
+                            <label class="checkbox-item"><input type="checkbox" name="partial_sweat_area" value="발바닥"> 발바닥</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="sweat_feeling" value="땀을 내면 기분이 좋다."> 땀을 내면 기분이 좋다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="sweat_feeling" value="땀을 내면 지친다."> 땀을 내면 지친다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="sauna_dislike" value="사우나, 한증막에 답답해서 못 들어간다."> 사우나, 한증막에 답답해서 못 들어간다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="sweat_only_exercise" value="사우나 가거나 운동할 때만 땀이 난다."> 사우나 가거나 운동할 때만 땀이 난다.</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 한열 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">7. 한열 (寒熱)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="radio" name="heat_tolerance" value="더위를 못 참는다."> 더위를 못 참는다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="cold_tolerance" value="추위를 못 참는다."> 추위를 못 참는다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="ac_fan_dislike" value="에어컨, 선풍기를 쐬는 것이 싫다."> 에어컨, 선풍기를 쐬는 것이 싫다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="cold_body_part" value="몸이 더워도 신체 일부는 항상 차다."> 몸이 더워도 신체 일부는 항상 차다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="temp_fluctuation" value="열이 나고 더웠다가 다시 열이 식고 추웠다가 왔다 갔다 할 때가 자주 있다."> 열이 나고 더웠다가 다시 열이 식고 추웠다가 왔다 갔다 할 때가 자주 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="head_heat_rush" value="열이 머리 위로 확 오를 때가 있다."> 열이 머리 위로 확 오를 때가 있다.</label>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label><input type="checkbox" name="localized_heat_status" value="신체 어딘가에 열이 나는 것 같다."> 신체 어딘가에 열이 나는 것 같다.</label>
+                        <div class="checkbox-group mt-2">
+                            <label class="checkbox-item"><input type="checkbox" name="localized_heat_area" value="얼굴"> 얼굴</label>
+                            <label class="checkbox-item"><input type="checkbox" name="localized_heat_area" value="손"> 손</label>
+                            <label class="checkbox-item"><input type="checkbox" name="localized_heat_area" value="발"> 발</label>
+                            <label class="checkbox-item"><input type="checkbox" name="localized_heat_area" value="피곤할 때"> 피곤할 때</label>
+                            <label class="checkbox-item"><input type="checkbox" name="localized_heat_area" value="아무 때나"> 아무 때나</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. 두면, 이비인후 증상 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">8. 두면, 이비인후 증상 (頭部)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="checkbox" name="headache" value="두통이 자주 있다."> 두통이 자주 있다.</label>
+                        <input type="text" name="headache_details" placeholder="언제 / 어떻게" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="dizziness" value="잘 어지럽다."> 잘 어지럽다.</label>
+                        <input type="text" name="dizziness_details" placeholder="언제" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="gum_inflammation" value="풍치나 잇몸 염증이 자주 생긴다."> 풍치나 잇몸 염증이 자주 생긴다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="tinnitus" value="이명증이 있다."> 이명증이 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="frequent_cold" value="특히 환절기에 감기가 자주 걸린다."> 특히 환절기에 감기가 자주 걸린다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="mouth_ulcers" value="입안이 자주 헌다."> 입안이 자주 헌다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="swollen_tonsils" value="편도가 자주 붓는 편이다."> 편도가 자주 붓는 편이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="eye_issues" value="눈이 침침함, 안구건조, 충혈, 백내장이 있다."> 눈이 침침하고, 안구건조증, 충혈, 백내장이 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="throat_lump" value="목에 무언가 걸려있는 느낌이 들 때가 자주 있다."> 목에 무언가 걸려있는 느낌이 들 때가 자주 있다.</label>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label><input type="checkbox" name="respiratory_symptoms_status" value="호흡기 증상이 잘 생긴다."> 호흡기 증상이 잘 생긴다.</label>
+                        <div class="checkbox-group mt-2">
+                            <label class="checkbox-item"><input type="checkbox" name="respiratory_symptoms_type" value="기침"> 기침</label>
+                            <label class="checkbox-item"><input type="checkbox" name="respiratory_symptoms_type" value="재채기"> 재채기</label>
+                            <label class="checkbox-item"><input type="checkbox" name="respiratory_symptoms_type" value="콧물"> 콧물</label>
+                            <label class="checkbox-item"><input type="checkbox" name="respiratory_symptoms_type" value="코막힘"> 코막힘</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="hair_loss" value="탈모가 있다."> 탈모가 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="memory_loss" value="건망증이 있다."> 건망증이 있다.</label>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label><input type="checkbox" name="phlegm_status" value="가래가 자주 생긴다."> 가래가 자주 생긴다.</label>
+                        <div class="radio-group mt-2">
+                            <label class="radio-item"><input type="radio" name="phlegm_type" value="묽고 잘 뱉어진다."> 묽고 잘 뱉어진다.</label>
+                            <label class="radio-item"><input type="radio" name="phlegm_type" value="끈끈하고 잘 뱉어지지 않는다."> 끈끈하고 잘 뱉어지지 않는다.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. 가슴 부위 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">9. 가슴 부위 (胸部)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="checkbox" name="palpitations" value="신경 쓰면 심장이 두근거린다."> 신경 쓰면 심장이 두근거린다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="chest_tightness" value="가슴이 자주 답답하다."> 가슴이 자주 답답하다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="shortness_breath_exertion" value="조금만 움직여도 숨이 차다."> 조금만 움직여도 숨이 차다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="frequent_sighs" value="한숨을 자주 쉬는 편이다."> 한숨을 자주 쉬는 편이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="difficulty_inhaling" value="숨을 들이쉴 때 힘들다."> 숨을 들이쉴 때 힘들다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="difficulty_exhaling" value="숨을 내쉬기가 힘들다."> 숨을 내쉬기가 힘들다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="frequent_hiccups" value="딸꾹질을 자주 한다."> 딸꾹질을 자주 한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="anxiety" value="불안감을 느낄 때가 자주 있다."> 불안감을 느낄 때가 자주 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="chest_pain" value="가슴이 뻐근하거나 따끔거리는 통증을 느낄 때가 자주 있다."> 가슴이 뻐근하거나 따끔거리는 통증을 느낄 때가 자주 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="tight_clothes_dislike" value="목폴라, 쫄티, 넥타이, 브래지어 등 목이나 가슴을 조이는 옷이 답답해서 싫다."> 목폴라, 쫄티, 넥타이, 브래지어 등 목이나 가슴을 조이는 옷이 답답해서 싫다.</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. 수면 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">10. 수면 (睡眠)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="radio" name="sleep_quality" value="잠을 잘 잔다."> 잠을 잘 잔다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="sleep_meds" value="수면제나 안정제를 복용 중이다."> 수면제나 안정제를 복용 중이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="sleep_onset" value="잠이 잘 들지 않는다."> 잠이 잘 들지 않는다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="wake_up_difficulty" value="자다가 도중에 깨면 다시 자기 쉽지 않다."> 자다가 도중에 깨면 다시 자기 쉽지 않다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="sleep_disturbances" value="꿈/잠꼬대/가위눌림을 많이 한다."> 꿈/잠꼬대/가위눌림을 많이 한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="morning_wake_up" value="아침에 잘 일어난다."> 아침에 잘 일어난다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="radio" name="morning_wake_up" value="아침에 일어난 이후에도 한참 동안 몽롱하다."> 아침에 일어난 이후에도 한참 동안 몽롱하다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="frequent_yawning" value="하품을 잘 한다."> 하품을 잘 한다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="coffee_discomfort_status" value="커피 마시면 불편하다."> 커피 마시면 불편하다.</label>
+                        <input type="text" name="coffee_discomfort_details" placeholder="잠을 못 자거나 / 심장이 두근거림 / 속쓰림" class="mt-2 text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. 수족, 신체, 피부 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">11. 수족, 신체, 피부 (手足, 身體, 皮膚)</h3>
+                <div class="question-grid">
+                    <div class="question-item">
+                        <label><input type="checkbox" name="hot_extremities_status" value="손발이 뜨겁다."> 손발이 뜨겁다.</label>
+                        <div class="checkbox-group mt-2">
+                            <label class="checkbox-item"><input type="checkbox" name="hot_extremities_part" value="손"> 손</label>
+                            <label class="checkbox-item"><input type="checkbox" name="hot_extremities_part" value="발"> 발</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="cold_extremities_status" value="손발이 차갑다."> 손발이 차갑다.</label>
+                        <div class="checkbox-group mt-2">
+                            <label class="checkbox-item"><input type="checkbox" name="cold_extremities_part" value="손"> 손</label>
+                            <label class="checkbox-item"><input type="checkbox" name="cold_extremities_part" value="발"> 발</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="skin_redness" value="피부 긁히면 금방 빨개지고 잘 안 없어진다."> 피부 긁히면 금방 빨개지고 잘 안 없어진다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="numb_extremities" value="손발이 저릴 때가 자주 있다."> 손발이 저릴 때가 자주 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="stiff_extremities" value="손발이 뻣뻣해질 때가 자주 있다."> 손발이 뻣뻣해질 때가 자주 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="frequent_cramps" value="쥐가 잘 나는 편이다."> 쥐가 잘 나는 편이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="skin_sensation_loss" value="피부 감각이 내 살 같지 않은 부분이 있다."> 피부 감각이 내 살 같지 않은 부분이 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="body_aches_fatigue" value="피곤하면 몸살이 자주 생긴다."> 피곤하면 몸살이 자주 생긴다.</label>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label><input type="checkbox" name="swelling_status" value="잘 붓는다."> 잘 붓는다.</label>
+                        <input type="text" name="swelling_details" placeholder="부위: 전신, 얼굴, 손, 다리, 발 / 주로 언제: 아침, 저녁, 하루 종일" class="mt-2 text-sm">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="muscle_twitching" value="피곤하거나 신경 쓰면 눈꺼풀, 입 주위나 몸의 어딘가의 근육이 자주 떨린다."> 피곤하거나 신경 쓰면 눈꺼풀, 입 주위나 몸의 어딘가의 근육이 자주 떨린다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="easy_bruising" value="어디 부딪히지 않고도 멍이 잘 드는 편이다."> 어디 부딪히지 않고도 멍이 잘 드는 편이다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="food_hives" value="음식 먹고 두드러기가 잘 난다."> 음식 먹고 두드러기가 잘 난다.</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. 관절 질환 -->
+            <div class="mb-8">
+                <h3 class="subsection-title">12. 관절 질환 (關節)</h3>
+                <p class="note-text mb-4">아픈 곳을 모두 표시해주세요.</p>
+                <div class="question-grid">
+                    <div class="question-item col-span-full">
+                        <label class="font-semibold mb-2 block">목/어깨:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="joint_neck_shoulder" value="뒷목"> 뒷목</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_neck_shoulder" value="어깨"> 어깨</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_neck_shoulder" value="팔"> 팔</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_neck_shoulder" value="손목"> 손목</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_neck_shoulder" value="손가락"> 손가락</label>
+                        </div>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label class="font-semibold mb-2 block">허리/엉덩이:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="joint_waist_hip" value="등"> 등</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_waist_hip" value="허리"> 허리</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_waist_hip" value="엉치"> 엉치</label>
+                        </div>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label class="font-semibold mb-2 block">다리/발:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="joint_leg_foot" value="다리"> 다리</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_leg_foot" value="무릎"> 무릎</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_leg_foot" value="발목"> 발목</label>
+                            <label class="checkbox-item"><input type="checkbox" name="joint_leg_foot" value="발가락"> 발가락</label>
+                        </div>
+                    </div>
+                    <div class="question-item col-span-full">
+                        <label for="joint_other" class="font-semibold mb-2 block">기타:</label>
+                        <input type="text" id="joint_other" name="joint_other" placeholder="예: 턱관절, 목/허리디스크, 류마티스, 협착증" class="w-full">
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="joint_cold_aggravation" value="찬 기운에 닿으면 아파지는 곳이 있다."> 찬 기운에 닿으면 아파지는 곳이 있다.</label>
+                    </div>
+                    <div class="question-item">
+                        <label><input type="checkbox" name="joint_swelling_pain" value="아픈 곳이 부으면서 통증을 느낄 때가 있다."> 아픈 곳이 부으면서 통증을 느낄 때가 있다.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 여성분들만 -->
+        <div class="form-section">
+            <h2 class="section-title">여성분들만 적어주세요.</h2>
+            <div class="question-grid">
+                <div class="question-item">
+                    <label for="num_births">출산 횟수는?</label>
+                    <input type="number" id="num_births" name="num_births" placeholder="회" min="0" class="mt-2 w-24">
+                </div>
+                <div class="question-item">
+                    <label for="num_miscarriages">유산 경험은?</label>
+                    <input type="number" id="num_miscarriages" name="num_miscarriages" placeholder="회" min="0" class="mt-2 w-24">
+                </div>
+                <div class="question-item col-span-full">
+                    <label for="female_illness_surgery">자궁/난소/유방/갑상선 염증, 치료 또는 수술 제거 경험이 있나요?</label>
+                    <textarea id="female_illness_surgery" name="female_illness_surgery" rows="2" placeholder="자세히 기재해주세요." class="mt-2 w-full"></textarea>
+                </div>
+                <div class="question-item">
+                    <label><input type="radio" name="menstrual_cycle" value="생리 주기가 잘 맞는다."> 생리 주기가 잘 맞는다.</label>
+                    <input type="text" name="menstrual_cycle_details" placeholder="예: 28일 주기" class="mt-2 text-sm">
+                </div>
+                <div class="question-item">
+                    <label><input type="radio" name="menstrual_cycle" value="생리 주기가 불규칙하다."> 생리 주기가 불규칙하다.</label>
+                </div>
+                <div class="question-item">
+                    <label><input type="checkbox" name="menstrual_pain_status" value="생리통이 자주 있다."> 생리통이 자주 있다.</label>
+                    <input type="text" name="menstrual_pain_duration" placeholder="지속시간: 시간 정도" class="mt-2 text-sm">
+                    <input type="text" name="menstrual_pain_area" placeholder="부위: 하복통, 요통, 두통, 기타" class="mt-2 text-sm">
+                </div>
+                <div class="question-item">
+                    <label><input type="checkbox" name="menopause_status" value="폐경이다."> 폐경이다.</label>
+                    <input type="number" name="menopause_age" placeholder="세 폐경" min="0" class="mt-2 w-24 text-sm">
+                </div>
+                <div class="question-item col-span-full">
+                    <label><input type="checkbox" name="vaginal_discharge_status" value="냉이 있다."> 냉이 있다.</label>
+                    <div class="checkbox-group mt-2">
+                        <label class="checkbox-item"><input type="checkbox" name="vaginal_discharge_type" value="황색"> 황색</label>
+                        <label class="checkbox-item"><input type="checkbox" name="vaginal_discharge_type" value="백색"> 백색</label>
+                        <label class="checkbox-item"><input type="checkbox" name="vaginal_discharge_type" value="소양감이 심하다."> 소양감이 심하다.</label>
+                    </div>
+                </div>
+                <div class="question-item">
+                    <label><input type="checkbox" name="pms_appetite" value="생리 전에 주체할 수 없이 식욕이 당긴다."> 생리 전에 주체할 수 없이 식욕이 당긴다.</label>
+                </div>
+                <div class="question-item">
+                    <label><input type="checkbox" name="pms_memory_loss" value="건망증이 심한 편이다."> 건망증이 심한 편이다.</label>
+                </div>
+                <div class="question-item">
+                    <label><input type="checkbox" name="post_sex_pain" value="성관계 후 아랫배 아픔이 있다."> 성관계 후 아랫배 아픔이 있다.</label>
+                </div>
+                <div class="question-item">
+                    <label><input type="checkbox" name="pms_irritability" value="생리 전에 짜증을 잘 낸다."> 생리 전에 짜증을 잘 낸다.</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 남성분들만 -->
+        <div class="form-section">
+            <h2 class="section-title">남성분들만 적어주세요.</h2>
+            <div class="question-grid">
+                <div class="question-item">
+                    <label><input type="checkbox" name="erectile_dysfunction" value="발기력이 떨어진다."> 발기력이 떨어진다.</label>
+                </div>
+                <div class="question-item">
+                    <label><input type="checkbox" name="premature_ejaculation" value="조루증상이 있는 것 같다."> 조루증상이 있는 것 같다.</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8 p-4 bg-white rounded-xl shadow-md">
+            <p class="text-gray-700 font-medium">설문지 작성을 완료해 주셔서 감사합니다.</p>
+            <p class="text-gray-500 text-sm mt-2">모든 정보는 진료에만 활용되며, 개인 정보는 철저히 보호됩니다.</p>
+            <button type="button" id="saveFormBtn" class="mt-6 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition duration-200 ease-in-out">
+                설문 저장
+            </button>
+            <div id="loadingSpinner" class="loading-spinner mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const saveBtn = document.getElementById('saveFormBtn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            saveBtn.addEventListener('click', function() {
+                // Show loading spinner
+                loadingSpinner.style.display = 'block';
+                saveBtn.disabled = true; // Disable button during processing
+
+                // Collect form data
+                let formData = {};
+
+                // Basic Info
+                formData['이름'] = document.getElementById('name').value;
+                formData['나이'] = document.getElementById('age').value ? document.getElementById('age').value + '세' : '';
+                const gender = document.querySelector('input[name="gender"]:checked');
+                formData['성별'] = gender ? gender.value : '';
+                formData['키'] = document.getElementById('height').value ? document.getElementById('height').value + 'cm' : '';
+                formData['체중'] = document.getElementById('weight').value ? document.getElementById('weight').value + 'kg' : '';
+                formData['직업'] = document.getElementById('job').value;
+                formData['치료받고 싶은 증상'] = document.getElementById('main_symptom').value;
+                formData['현재 복용하고 있는 약물'] = document.getElementById('current_meds').value;
+                formData['과거에 앓았던 병/수술'] = document.getElementById('past_illness_surgery').value;
+
+                // Function to get value for radio buttons
+                const getRadioValue = (name) => {
+                    const radio = document.querySelector(`input[name="${name}"]:checked`);
+                    return radio ? radio.value : '';
+                };
+
+                // Function to get values for checkboxes
+                const getCheckboxValues = (name) => {
+                    const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+                    return Array.from(checkboxes).map(cb => cb.value).join(', ');
+                };
+
+                // Helper to get text input value associated with a checkbox/radio
+                const getAssociatedTextValue = (checkboxName, inputName) => {
+                    if (document.querySelector(`input[name="${checkboxName}"]:checked`)) {
+                        const input = document.querySelector(`input[name="${inputName}"]`);
+                        return input ? input.value : '';
+                    }
+                    return '';
+                };
+                 // Helper to get text area value associated with a checkbox/radio
+                const getAssociatedTextareaValue = (checkboxName, textareaName) => {
+                    if (document.querySelector(`input[name="${checkboxName}"]:checked`)) {
+                        const textarea = document.querySelector(`textarea[name="${textareaName}"]`);
+                        return textarea ? textarea.value : '';
+                    }
+                    return '';
+                };
+
+
+                // 1. 식욕 및 기호
+                formData['식욕'] = getRadioValue('appetite');
+                formData['식습관'] = getCheckboxValues('eating_habit');
+                formData['포만감'] = getCheckboxValues('satiety');
+                formData['체중 변화'] = getRadioValue('weight_change');
+                formData['좋아하는 맛/음식'] = document.getElementById('fav_taste').value;
+                formData['흡연 여부'] = document.querySelector('input[name="smoking_status"]:checked') ?
+                                     '예, ' + (document.querySelector('input[name="smoking_details"]').value || '정보 없음') : '아니오';
+                formData['음주 여부'] = document.querySelector('input[name="drinking_status"]:checked') ?
+                                     '예, ' + (document.querySelector('input[name="drinking_details"]').value || '정보 없음') : '아니오';
+                formData['커피 섭취'] = document.querySelector('input[name="coffee_status"]:checked') ?
+                                    '예, 하루에 ' + (document.querySelector('input[name="coffee_cups"]').value || '0') + '잔' : '아니오';
+
+                // 2. 물 마시는 양상
+                formData['하루 수분 섭취량'] = document.getElementById('water_intake').value ? document.getElementById('water_intake').value + '리터' : '';
+                formData['물 마시는 이유'] = getRadioValue('water_reason');
+                formData['입안/입술 건조'] = getCheckboxValues('dry_mouth');
+                formData['선호하는 물 온도'] = getRadioValue('water_temp_pref');
+                formData['물 마시는 습관'] = getRadioValue('water_drink_habit');
+                formData['입 냄새'] = getCheckboxValues('bad_breath');
+                formData['식사 시 국/물 필요'] = getCheckboxValues('meal_water');
+                formData['더울 때 물 찾음'] = getCheckboxValues('hot_water_search');
+
+                // 3. 대변
+                formData['대변 보는 횟수'] = document.getElementById('bowel_freq').value ? document.getElementById('bowel_freq').value + '번' : '';
+                // Collect all bowel related checkboxes and filter out empty strings
+                const bowelItems = [
+                    getCheckboxValues('bowel_time'),
+                    getCheckboxValues('bowel_smell'),
+                    getCheckboxValues('bowel_irregular_freq'),
+                    getCheckboxValues('bowel_shape'),
+                    getCheckboxValues('bowel_color'),
+                    getCheckboxValues('bowel_incomplete'),
+                    getCheckboxValues('bowel_hard'),
+                    getCheckboxValues('bowel_irregular_time'),
+                    getCheckboxValues('bowel_undigested'),
+                    getCheckboxValues('bowel_sink'),
+                    getCheckboxValues('bowel_gas'),
+                    getCheckboxValues('bowel_meds')
+                ].filter(Boolean); // Filter out empty strings
+                formData['대변 항목 (체크)'] = bowelItems.join(', ');
+
+
+                // 4. 소화
+                formData['소화 상태'] = getRadioValue('digestion');
+                formData['소화 불량 상세'] = getAssociatedTextValue('digestion', 'digestion_bad_details');
+                formData['잘 체함'] = getCheckboxValues('indigestion');
+                formData['복통'] = getCheckboxValues('stomach_ache');
+                formData['복통 상세'] = getAssociatedTextValue('stomach_ache', 'stomach_ache_details');
+                formData['트림'] = getCheckboxValues('burping');
+                formData['속쓰림'] = getCheckboxValues('heartburn');
+                formData['속쓰림 상세'] = getAssociatedTextValue('heartburn', 'heartburn_details');
+                formData['구토'] = getCheckboxValues('vomiting');
+                formData['메스꺼움'] = getCheckboxValues('nausea');
+                formData['배에서 소리'] = getCheckboxValues('stomach_noise');
+                formData['신물 넘어옴'] = getCheckboxValues('acid_reflux');
+                formData['양치 시 구역질'] = getCheckboxValues('gag_reflex');
+                formData['찬 것 먹으면 설사'] = getCheckboxValues('cold_diarrhea');
+
+                // 5. 소변
+                formData['소변 느낌'] = getRadioValue('urination_feel');
+                formData['잦은 소변'] = getCheckboxValues('frequent_urination');
+                formData['잦은 소변 상세'] = getAssociatedTextValue('frequent_urination', 'frequent_urination_details');
+                formData['밤 소변'] = getCheckboxValues('night_urination');
+                formData['소변 팬티 묻음'] = getCheckboxValues('urine_leak');
+                formData['소변 참기 어려움'] = getCheckboxValues('difficulty_holding_urine');
+                formData['소변 시 통증'] = getCheckboxValues('pain_urination');
+                formData['소변 잘 안 나옴/방울'] = getCheckboxValues('dribbling_urine');
+                formData['소변 색 진함'] = getCheckboxValues('dark_urine');
+                formData['소변 양 적음'] = getCheckboxValues('low_urine_volume');
+
+                // 6. 땀
+                formData['땀 양'] = getRadioValue('sweat_amount');
+                formData['부분 땀'] = getCheckboxValues('partial_sweat_status');
+                formData['부분 땀 부위'] = getCheckboxValues('partial_sweat_area');
+                formData['땀 흘린 후 느낌'] = getRadioValue('sweat_feeling');
+                formData['사우나 싫어함'] = getCheckboxValues('sauna_dislike');
+                formData['운동 시에만 땀'] = getCheckboxValues('sweat_only_exercise');
+
+                // 7. 한열
+                formData['더위 못 참음'] = getRadioValue('heat_tolerance');
+                formData['추위 못 참음'] = getRadioValue('cold_tolerance');
+                formData['에어컨/선풍기 싫어함'] = getCheckboxValues('ac_fan_dislike');
+                formData['몸 더워도 일부 차가움'] = getCheckboxValues('cold_body_part');
+                formData['체온 변화 심함'] = getCheckboxValues('temp_fluctuation');
+                formData['머리로 열 오름'] = getCheckboxValues('head_heat_rush');
+                formData['국소 열감'] = getCheckboxValues('localized_heat_status');
+                formData['국소 열감 부위'] = getCheckboxValues('localized_heat_area');
+
+                // 8. 두면, 이비인후 증상
+                formData['두통'] = getCheckboxValues('headache');
+                formData['두통 상세'] = getAssociatedTextValue('headache', 'headache_details');
+                formData['어지러움'] = getCheckboxValues('dizziness');
+                formData['어지러움 상세'] = getAssociatedTextValue('dizziness', 'dizziness_details');
+                formData['잇몸 염증'] = getCheckboxValues('gum_inflammation');
+                formData['이명'] = getCheckboxValues('tinnitus');
+                formData['잦은 감기'] = getCheckboxValues('frequent_cold');
+                formData['입안 헐음'] = getCheckboxValues('mouth_ulcers');
+                formData['편도 부음'] = getCheckboxValues('swollen_tonsils');
+                formData['눈 관련 문제'] = getCheckboxValues('eye_issues');
+                formData['목 이물감'] = getCheckboxValues('throat_lump');
+                formData['호흡기 증상'] = getCheckboxValues('respiratory_symptoms_status');
+                formData['호흡기 증상 종류'] = getCheckboxValues('respiratory_symptoms_type');
+                formData['탈모'] = getCheckboxValues('hair_loss');
+                formData['건망증'] = getCheckboxValues('memory_loss');
+                formData['가래'] = getCheckboxValues('phlegm_status');
+                formData['가래 종류'] = getRadioValue('phlegm_type');
+
+                // 9. 가슴 부위
+                formData['심장 두근거림'] = getCheckboxValues('palpitations');
+                formData['가슴 답답함'] = getCheckboxValues('chest_tightness');
+                formData['숨참 (움직일 때)'] = getCheckboxValues('shortness_breath_exertion');
+                formData['한숨 자주'] = getCheckboxValues('frequent_sighs');
+                formData['숨 들이쉬기 힘듦'] = getCheckboxValues('difficulty_inhaling');
+                formData['숨 내쉬기 힘듦'] = getCheckboxValues('difficulty_exhaling');
+                formData['딸꾹질 자주'] = getCheckboxValues('frequent_hiccups');
+                formData['불안감'] = getCheckboxValues('anxiety');
+                formData['가슴 통증'] = getCheckboxValues('chest_pain');
+                formData['조이는 옷 싫어함'] = getCheckboxValues('tight_clothes_dislike');
+
+                // 10. 수면
+                formData['수면의 질'] = getRadioValue('sleep_quality');
+                formData['수면제/안정제 복용'] = getCheckboxValues('sleep_meds');
+                formData['잠들기 어려움'] = getRadioValue('sleep_onset');
+                formData['자다 깨면 다시 잠들기 어려움'] = getCheckboxValues('wake_up_difficulty');
+                formData['꿈/잠꼬대/가위눌림'] = getCheckboxValues('sleep_disturbances');
+                formData['아침 기상'] = getRadioValue('morning_wake_up');
+                formData['하품 자주'] = getCheckboxValues('frequent_yawning');
+                formData['커피 불편함'] = getCheckboxValues('coffee_discomfort_status');
+                formData['커피 불편함 상세'] = getAssociatedTextValue('coffee_discomfort_status', 'coffee_discomfort_details');
+
+                // 11. 수족, 신체, 피부
+                formData['손발 뜨거움'] = getCheckboxValues('hot_extremities_status');
+                formData['손발 뜨거움 부위'] = getCheckboxValues('hot_extremities_part');
+                formData['손발 차가움'] = getCheckboxValues('cold_extremities_status');
+                formData['손발 차가움 부위'] = getCheckboxValues('cold_extremities_part');
+                formData['피부 긁히면 빨개짐'] = getCheckboxValues('skin_redness');
+                formData['손발 저림'] = getCheckboxValues('numb_extremities');
+                formData['손발 뻣뻣함'] = getCheckboxValues('stiff_extremities');
+                formData['쥐 자주 남'] = getCheckboxValues('frequent_cramps');
+                formData['피부 감각 이상'] = getCheckboxValues('skin_sensation_loss');
+                formData['피곤하면 몸살'] = getCheckboxValues('body_aches_fatigue');
+                formData['부종'] = getCheckboxValues('swelling_status');
+                formData['부종 상세'] = getAssociatedTextValue('swelling_status', 'swelling_details');
+                formData['근육 떨림'] = getCheckboxValues('muscle_twitching');
+                formData['멍 잘 듦'] = getCheckboxValues('easy_bruising');
+                formData['음식 두드러기'] = getCheckboxValues('food_hives');
+
+                // 12. 관절 질환
+                formData['목/어깨 관절'] = getCheckboxValues('joint_neck_shoulder');
+                formData['허리/엉덩이 관절'] = getCheckboxValues('joint_waist_hip');
+                formData['다리/발 관절'] = getCheckboxValues('joint_leg_foot');
+                formData['기타 관절'] = document.getElementById('joint_other').value;
+                formData['찬 기운에 악화되는 관절'] = getCheckboxValues('joint_cold_aggravation');
+                formData['관절 부종/통증'] = getCheckboxValues('joint_swelling_pain');
+
+                // 여성분들만
+                formData['출산 횟수'] = document.getElementById('num_births').value ? document.getElementById('num_births').value + '회' : '';
+                formData['유산 경험'] = document.getElementById('num_miscarriages').value ? document.getElementById('num_miscarriages').value + '회' : '';
+                formData['여성 질환/수술'] = document.getElementById('female_illness_surgery').value;
+                formData['생리 주기'] = getRadioValue('menstrual_cycle');
+                formData['생리 주기 상세'] = getAssociatedTextValue('menstrual_cycle', 'menstrual_cycle_details');
+                formData['생리통'] = getCheckboxValues('menstrual_pain_status');
+                formData['생리통 지속시간'] = getAssociatedTextValue('menstrual_pain_status', 'menstrual_pain_duration');
+                formData['생리통 부위'] = getAssociatedTextValue('menstrual_pain_status', 'menstrual_pain_area');
+                formData['폐경'] = getCheckboxValues('menopause_status');
+                formData['폐경 나이'] = getAssociatedTextValue('menopause_status', 'menopause_age');
+                formData['냉'] = getCheckboxValues('vaginal_discharge_status');
+                formData['냉 종류'] = getCheckboxValues('vaginal_discharge_type');
+                formData['생리 전 식욕 당김'] = getCheckboxValues('pms_appetite');
+                formData['생리 전 건망증'] = getCheckboxValues('pms_memory_loss');
+                formData['성관계 후 아랫배 통증'] = getCheckboxValues('post_sex_pain');
+                formData['생리 전 짜증'] = getCheckboxValues('pms_irritability');
+
+                // 남성분들만
+                formData['발기력 저하'] = getCheckboxValues('erectile_dysfunction');
+                formData['조루증상'] = getCheckboxValues('premature_ejaculation');
+
+
+                // Format data for text file body
+                let fileContent = "대한맥진학회 예진 설문지 답변입니다.\n\n";
+                for (const key in formData) {
+                    if (formData[key]) { // Only add if value exists
+                        fileContent += `${key}: ${formData[key]}\n`;
+                    }
+                }
+
+                // Get name for filename
+                const userName = document.getElementById('name').value || '익명';
+                // Get current date for filename
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                const day = String(today.getDate()).padStart(2, '0');
+                const dateString = `${year}${month}${day}`;
+
+                const filename = `예진설문지_${userName}_${dateString}.txt`;
+
+                // Create a Blob from the file content
+                const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+
+                // Create a link element
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = filename; // Set the download filename
+
+                // Append the link to the body and click it to trigger download
+                document.body.appendChild(a);
+                a.click();
+
+                // Clean up: remove the link and revoke the object URL
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+
+                // Hide loading spinner and re-enable button after a short delay for UX
+                setTimeout(() => {
+                    loadingSpinner.style.display = 'none';
+                    saveBtn.disabled = false;
+                }, 500); // Give a small delay for the download to initiate
+            });
+        });
+    </script>
+</body>
+</html>
