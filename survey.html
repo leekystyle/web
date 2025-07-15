@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대한맥진학회 예진설문지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #1f2937;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-info {
+            background: #dbeafe;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .progress-text {
+            color: #1d4ed8;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar {
+            background: #93c5fd;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: #2563eb;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-item input[type="checkbox"],
+        .checkbox-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-item label {
+            font-weight: normal;
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #2563eb;
+        }
+        
+        .btn-success {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #15803d;
+        }
+        
+        .btn:disabled {
+            background: #d1d5db;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>대한맥진학회 예진설문지</h1>
+            <p>정확한 진단을 위한 설문조사입니다</p>
+            <div class="progress-info">
+                <div class="progress-text" id="progressText">페이지 1 / 9: 기본 정보</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 11.11%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 1: 기본 정보 -->
+        <div class="page active" id="page-0">
+            <h2 class="section-title">기본 정보</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="gender">성별</label>
+                    <select id="gender" name="gender">
+                        <option value="">선택하세요</option>
+                        <option value="남">남</option>
+                        <option value="여">여</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age">나이</label>
+                    <input type="number" id="age" name="age" placeholder="세">
+                </div>
+                <div class="form-group">
+                    <label for="height">키</label>
+                    <input type="number" id="height" name="height" placeholder="cm">
+                </div>
+                <div class="form-group">
+                    <label for="weight">체중</label>
+                    <input type="number" id="weight" name="weight" placeholder="kg">
+                </div>
+                <div class="form-group">
+                    <label for="job">직업</label>
+                    <input type="text" id="job" name="job">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="symptoms">치료받고 싶은 증상</label>
+                <textarea id="symptoms" name="symptoms" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="medications">현재 복용하고 있는 약물</label>
+                <textarea id="medications" name="medications" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="pastHistory">과거에 앓았던 병/수술</label>
+                <textarea id="pastHistory" name="pastHistory" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- 페이지 2: 갈증 및 수분 섭취 -->
+        <div class="page" id="page-1">
+            <h2 class="section-title">갈증(口渴) - 물 마시는 양상</h2>
+            
+            <div class="form-group">
+                <label for="dailyWaterAmount">하루에 마시는 모든 수분의 양이 얼마나 됩니까?</label>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                    (생수, 차, 음료수, 우유, 커피 다 포함해서)
+                </p>
+                <input type="number" id="dailyWaterAmount" name="dailyWaterAmount" placeholder="리터 가량" step="0.1">
+            </div>
+            
+            <div class="form-group">
+                <label>물을 마시는 이유는?</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="radio" id="drink1" name="drinkingReason" value="목이 말라서">
+                        <label for="drink1">① 목이 말라서</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="drink2" name="drinkingReason" value="건강에 좋다니까">
+                        <label for="drink2">② 건강에 좋다니까</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="drink3" name="drinkingReason" value="습관적으로">
+                        <label for="drink3">③ 습관적으로</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>물 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water1" name="waterPreferences" value="찬물을 좋아한다">
+                        <label for="water1">찬물을 좋아한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water2" name="waterPreferences" value="따뜻한 물이 좋다">
+                        <label for="water2">따뜻한 물이 좋다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water3" name="waterPreferences" value="입안이나 입술이 마를 때가 자주 있다">
+                        <label for="water3">입안이나 입술이 마를 때가 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water4" name="waterPreferences" value="물을 벌컥벌컥 들이킨다">
+                        <label for="water4">물을 벌컥벌컥 들이킨다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water5" name="waterPreferences" value="입 냄새가 난다">
+                        <label for="water5">입 냄새가 난다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water6" name="waterPreferences" value="조금씩 물을 마신다">
+                        <label for="water6">조금씩 물을 마신다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water7" name="waterPreferences" value="몸이 더워지면 물부터 찾는다">
+                        <label for="water7">몸이 더워지면 물부터 찾는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="water8" name="waterPreferences" value="식사할 때 국이나 물 없이 못 먹는다">
+                        <label for="water8">식사할 때 국이나 물 없이 못 먹는다</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 3: 식욕 및 기호 -->
+        <div class="page" id="page-2">
+            <h2 class="section-title">食慾(식욕), 嗜好(기호)</h2>
+            
+            <div class="form-group">
+                <label>식욕 관련 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite1" name="appetite" value="입맛이 좋다">
+                        <label for="appetite1">입맛이 좋다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite2" name="appetite" value="골고루 잘먹는다">
+                        <label for="appetite2">골고루 잘먹는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite3" name="appetite" value="한번에 먹는 양이 많다">
+                        <label for="appetite3">한번에 먹는 양이 많다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite4" name="appetite" value="입맛이 없다">
+                        <label for="appetite4">입맛이 없다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite5" name="appetite" value="허기를 참기가 힘들다">
+                        <label for="appetite5">허기를 참기가 힘들다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite6" name="appetite" value="조금만 먹어도 금새 배가 부르다">
+                        <label for="appetite6">조금만 먹어도 금새 배가 부르다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite7" name="appetite" value="요즘 살이 찌고 있다">
+                        <label for="appetite7">요즘 살이 찌고 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="appetite8" name="appetite" value="요즘 살이 빠지는 편이다">
+                        <label for="appetite8">요즘 살이 빠지는 편이다</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>평소에 좋아하는 맛(음식)은?</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="taste1" name="foodPreferences" value="단것">
+                        <label for="taste1">단것</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="taste2" name="foodPreferences" value="매운것">
+                        <label for="taste2">매운것</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="taste3" name="foodPreferences" value="쓴것">
+                        <label for="taste3">쓴것</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="taste4" name="foodPreferences" value="신것">
+                        <label for="taste4">신것</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="taste5" name="foodPreferences" value="짠것">
+                        <label for="taste5">짠것</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="taste6" name="foodPreferences" value="고기">
+                        <label for="taste6">고기</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="taste7" name="foodPreferences" value="야채">
+                        <label for="taste7">야채</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="coffee">커피를 하루에 ( ) 잔 마신다</label>
+                    <input type="number" id="coffee" name="coffee" placeholder="잔">
+                </div>
+                <div class="form-group">
+                    <label for="smoking">담배/술을 자주 마신다</label>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        (한주에 몇 회, 몇 갑, 주량 몇 병)
+                    </p>
+                    <input type="text" id="smoking" name="smoking" placeholder="예: 한주에 1회, 1갑, 주량 소주 1병">
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 4: 대변 및 소화 -->
+        <div class="page" id="page-3">
+            <h2 class="section-title">大便(대변)</h2>
+            
+            <div class="form-group">
+                <label for="bowelFrequency">( ) 일에 ( ) 번 정도 보러간다</label>
+                <input type="text" id="bowelFrequency" name="bowelFrequency" placeholder="예: 1일 1회">
+            </div>
+            
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+                <h4 style="color: #856404; margin-bottom: 10px;">📊 대변 상태 자가진단</h4>
+                <p style="color: #856404; font-size: 0.9rem; margin-bottom: 5px;">
+                    <strong>총 18점 이상시 장에 문제 - 장해독과 발효효소요법 필요</strong>
+                </p>
+                <p style="color: #666; font-size: 0.8rem;">
+                    각 항목별로 점수가 표시되어 있습니다. 해당하는 항목을 체크하고 점수를 합산해보세요.
+                </p>
+            </div>
+            
+            <div class="form-group">
+                <label>대변 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel1" name="bowelSymptoms" value="방귀와 변의 냄새가 많이 난다" data-score="12">
+                        <label for="bowel1">방귀와 변의 냄새가 많이 난다 <span style="color: #d63384;">(12점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel2" name="bowelSymptoms" value="변이 풀어지고 모양, 굵기가 일정치 않다" data-score="11">
+                        <label for="bowel2">변이 풀어지고 모양, 굵기가 일정치 않다 <span style="color: #d63384;">(11점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel3" name="bowelSymptoms" value="변의 횟수가 많거나 며칠에 한번 본다" data-score="10">
+                        <label for="bowel3">변의 횟수가 많거나 며칠에 한번 본다 <span style="color: #d63384;">(10점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel4" name="bowelSymptoms" value="변의 색깔이 갈색, 회색, 푸른색, 검은색이다" data-score="9">
+                        <label for="bowel4">변의 색깔이 갈색, 회색, 푸른색, 검은색이다 <span style="color: #d63384;">(9점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel5" name="bowelSymptoms" value="대변이 단단하다" data-score="8">
+                        <label for="bowel5">대변이 단단하다 <span style="color: #d63384;">(8점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel6" name="bowelSymptoms" value="변 보는데 5분 이상 걸린다" data-score="8">
+                        <label for="bowel6">변 보는데 5분 이상 걸린다 <span style="color: #d63384;">(8점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel7" name="bowelSymptoms" value="변보고 난뒤 덜빠져 나와 시원치 않다" data-score="7">
+                        <label for="bowel7">변보고 난뒤 덜빠져 나와 시원치 않다 <span style="color: #d63384;">(7점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel8" name="bowelSymptoms" value="변보는 시간이 불규칙하다" data-score="5">
+                        <label for="bowel8">변보는 시간이 불규칙하다 <span style="color: #d63384;">(5점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel9" name="bowelSymptoms" value="변이 물에 안뜬다" data-score="5">
+                        <label for="bowel9">변이 물에 안뜬다 <span style="color: #d63384;">(5점)</span></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel10" name="bowelSymptoms" value="대변에서 소화 안된 음식물이 자주 보인다">
+                        <label for="bowel10">대변에서 소화 안된 음식물이 자주 보인다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel11" name="bowelSymptoms" value="아랫배에 가스가 잘 찬다. 방귀 자주 나온다">
+                        <label for="bowel11">아랫배에 가스가 잘 찬다. 방귀 자주 나온다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel12" name="bowelSymptoms" value="찬 것 먹으면 설사를 잘한다">
+                        <label for="bowel12">찬 것 먹으면 설사를 잘한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bowel13" name="bowelSymptoms" value="대변을 시원하게 보기위해 변비약이나 건강식품 등을 복용중이다">
+                        <label for="bowel13">대변을 시원하게 보기위해 변비약이나 건강식품 등을 복용중이다</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="bowelScore" style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <h4 style="color: #1976d2; margin-bottom: 10px;">📊 현재 점수: <span id="currentScore">0</span>점</h4>
+                <div id="scoreResult" style="font-weight: bold;"></div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 30px;">
+                <h3 style="color: #1f2937; margin-bottom: 15px;">消化(소화)</h3>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest1" name="digestion" value="소화가 잘 된다">
+                        <label for="digest1">소화가 잘 된다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest2" name="digestion" value="소화가 잘 안 된다">
+                        <label for="digest2">소화가 잘 안 된다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest3" name="digestion" value="자주 안되는 느낌이 든다">
+                        <label for="digest3">자주 안되는 느낌이 든다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest4" name="digestion" value="가끔 그렇다">
+                        <label for="digest4">가끔 그렇다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest5" name="digestion" value="신경쓴 후">
+                        <label for="digest5">신경쓴 후</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest6" name="digestion" value="잘 체하는 편이다">
+                        <label for="digest6">잘 체하는 편이다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest7" name="digestion" value="자주 배가 아프다 (공복시)">
+                        <label for="digest7">자주 배가 아프다 (공복시)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest8" name="digestion" value="자주 배가 아프다 (식후에)">
+                        <label for="digest8">자주 배가 아프다 (식후에)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest9" name="digestion" value="스트레스 받은 후">
+                        <label for="digest9">스트레스 받은 후</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest10" name="digestion" value="트림을 자주한다">
+                        <label for="digest10">트림을 자주한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest11" name="digestion" value="구토를 자주 한다">
+                        <label for="digest11">구토를 자주 한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest12" name="digestion" value="속이 쓰리다 (공복시)">
+                        <label for="digest12">속이 쓰리다 (공복시)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest13" name="digestion" value="속이 쓰리다 (매운것 먹을 때)">
+                        <label for="digest13">속이 쓰리다 (매운것 먹을 때)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest14" name="digestion" value="자주 메스껍다">
+                        <label for="digest14">자주 메스껍다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest15" name="digestion" value="양치시 자주 구역질을 한다">
+                        <label for="digest15">양치시 자주 구역질을 한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest16" name="digestion" value="배에서 소리가 자주 난다">
+                        <label for="digest16">배에서 소리가 자주 난다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digest17" name="digestion" value="신물이 넘어온다">
+                        <label for="digest17">신물이 넘어온다</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 5: 소변 및 땀 -->
+        <div class="page" id="page-4">
+            <h2 class="section-title">小便(소변)</h2>
+            
+            <div class="form-group">
+                <label>소변 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine1" name="urination" value="소변을 시원하게 본다">
+                        <label for="urine1">소변을 시원하게 본다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine2" name="urination" value="소변 보고 난 후 시원치 않다">
+                        <label for="urine2">소변 보고 난 후 시원치 않다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine3" name="urination" value="소변을 자주 보러 간다">
+                        <label for="urine3">소변을 자주 보러 간다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine4" name="urination" value="밤에 소변을 보러 갈 때가 있다">
+                        <label for="urine4">밤에 소변을 보러 갈 때가 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine5" name="urination" value="소변 본 후, 소변이 팬티에 자주 묻는다">
+                        <label for="urine5">소변 본 후, 소변이 팬티에 자주 묻는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine6" name="urination" value="소변을 참기가 어렵다">
+                        <label for="urine6">소변을 참기가 어렵다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine7" name="urination" value="소변이 잘 안 나오거나 방울방울 떨어진다">
+                        <label for="urine7">소변이 잘 안 나오거나 방울방울 떨어진다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine8" name="urination" value="소변을 보고 난 후 통증을 느낀다">
+                        <label for="urine8">소변을 보고 난 후 통증을 느낀다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine9" name="urination" value="소변 양이 매우 적다">
+                        <label for="urine9">소변 양이 매우 적다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urine10" name="urination" value="소변 색이 진하다 (매우 노랗거나 붉다)">
+                        <label for="urine10">소변 색이 진하다 (매우 노랗거나 붉다)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="urinationDay">낮 ( ) 회</label>
+                    <input type="number" id="urinationDay" name="urinationDay" placeholder="회">
+                </div>
+                <div class="form-group">
+                    <label for="urinationNight">밤에 소변을 보러 갈 때가 있다 ( ) 회</label>
+                    <input type="number" id="urinationNight" name="urinationNight" placeholder="회">
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 40px;">
+                <h3 style="color: #1f2937; margin-bottom: 15px;">汗出(한출)</h3>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat1" name="sweating" value="땀이 잘 난다">
+                        <label for="sweat1">땀이 잘 난다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat2" name="sweating" value="땀이 잘 나지 않는다">
+                        <label for="sweat2">땀이 잘 나지 않는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat3" name="sweating" value="신체의 일부분에서만 땀이 잘 난다 (얼굴)">
+                        <label for="sweat3">신체의 일부분에서만 땀이 잘 난다 (얼굴)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat4" name="sweating" value="신체의 일부분에서만 땀이 잘 난다 (가슴)">
+                        <label for="sweat4">신체의 일부분에서만 땀이 잘 난다 (가슴)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat5" name="sweating" value="신체의 일부분에서만 땀이 잘 난다 (뒷목과 등)">
+                        <label for="sweat5">신체의 일부분에서만 땀이 잘 난다 (뒷목과 등)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat6" name="sweating" value="신체의 일부분에서만 땀이 잘 난다 (겨드랑이)">
+                        <label for="sweat6">신체의 일부분에서만 땀이 잘 난다 (겨드랑이)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat7" name="sweating" value="신체의 일부분에서만 땀이 잘 난다 (손바닥)">
+                        <label for="sweat7">신체의 일부분에서만 땀이 잘 난다 (손바닥)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat8" name="sweating" value="신체의 일부분에서만 땀이 잘 난다 (발바닥)">
+                        <label for="sweat8">신체의 일부분에서만 땀이 잘 난다 (발바닥)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat9" name="sweating" value="땀을 내면 기분이 좋다">
+                        <label for="sweat9">땀을 내면 기분이 좋다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat10" name="sweating" value="땀을 내면 지친다">
+                        <label for="sweat10">땀을 내면 지친다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat11" name="sweating" value="사우나, 한증막에 답답해서 못 들어간다">
+                        <label for="sweat11">사우나, 한증막에 답답해서 못 들어간다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sweat12" name="sweating" value="사우나 가거나 운동할 때만 땀이 난다">
+                        <label for="sweat12">사우나 가거나 운동할 때만 땀이 난다</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 6: 한열 및 두면부 -->
+        <div class="page" id="page-5">
+            <h2 class="section-title">寒熱(한열)</h2>
+            
+            <div class="form-group">
+                <label>한열 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp1" name="temperature" value="더위를 못 참는다">
+                        <label for="temp1">더위를 못 참는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp2" name="temperature" value="추위를 못 참는다">
+                        <label for="temp2">추위를 못 참는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp3" name="temperature" value="에어컨, 선풍기를 쐬는 것이 싫다">
+                        <label for="temp3">에어컨, 선풍기를 쐬는 것이 싫다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp4" name="temperature" value="몸이 더워도 신체 일부는 항상 차다">
+                        <label for="temp4">몸이 더워도 신체 일부는 항상 차다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp5" name="temperature" value="열이 나고 더웠다가 다시 열이 식고 추웠다가 왔다 갔다 할 때가 자주 있다">
+                        <label for="temp5">열이 나고 더웠다가 다시 열이 식고 추웠다가 왔다 갔다 할 때가 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp6" name="temperature" value="열이 머리위로 확 오를 때가 있다">
+                        <label for="temp6">열이 머리위로 확 오를 때가 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp7" name="temperature" value="신체 어딘가에 열이 나는 것 같다 (얼굴)">
+                        <label for="temp7">신체 어딘가에 열이 나는 것 같다 (얼굴)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp8" name="temperature" value="신체 어딘가에 열이 나는 것 같다 (손)">
+                        <label for="temp8">신체 어딘가에 열이 나는 것 같다 (손)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp9" name="temperature" value="신체 어딘가에 열이 나는 것 같다 (발)">
+                        <label for="temp9">신체 어딘가에 열이 나는 것 같다 (발)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp10" name="temperature" value="신체 어딘가에 열이 나는 것 같다 (피곤할 때)">
+                        <label for="temp10">신체 어딘가에 열이 나는 것 같다 (피곤할 때)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="temp11" name="temperature" value="신체 어딘가에 열이 나는 것 같다 (아무 때나)">
+                        <label for="temp11">신체 어딘가에 열이 나는 것 같다 (아무 때나)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 40px;">
+                <h3 style="color: #1f2937; margin-bottom: 15px;">頭部(두면, 이비인후) 증상</h3>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head1" name="headSymptoms" value="두통이 자주 있다">
+                        <label for="head1">두통이 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head2" name="headSymptoms" value="잘 어지럽다">
+                        <label for="head2">잘 어지럽다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head3" name="headSymptoms" value="풍치나 잇몸염증이 자주 생긴다">
+                        <label for="head3">풍치나 잇몸염증이 자주 생긴다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head4" name="headSymptoms" value="이명증이 있다">
+                        <label for="head4">이명증이 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head5" name="headSymptoms" value="편도가 자주 붓는 편이다">
+                        <label for="head5">편도가 자주 붓는 편이다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head6" name="headSymptoms" value="입안이 자주 헌다">
+                        <label for="head6">입안이 자주 헌다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head7" name="headSymptoms" value="눈침침함, 안구건조, 충혈, 백내장">
+                        <label for="head7">눈침침함, 안구건조, 충혈, 백내장</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head8" name="headSymptoms" value="특히 환절기에 감기가 자주 걸린다">
+                        <label for="head8">특히 환절기에 감기가 자주 걸린다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head9" name="headSymptoms" value="목에 무언가 걸려있는 느낌이 들 때가 자주 있다">
+                        <label for="head9">목에 무언가 걸려있는 느낌이 들 때가 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head10" name="headSymptoms" value="호흡기증상이 잘 생긴다 (기침)">
+                        <label for="head10">호흡기증상이 잘 생긴다 (기침)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head11" name="headSymptoms" value="호흡기증상이 잘 생긴다 (재채기)">
+                        <label for="head11">호흡기증상이 잘 생긴다 (재채기)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head12" name="headSymptoms" value="호흡기증상이 잘 생긴다 (콧물)">
+                        <label for="head12">호흡기증상이 잘 생긴다 (콧물)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head13" name="headSymptoms" value="호흡기증상이 잘 생긴다 (코막힘)">
+                        <label for="head13">호흡기증상이 잘 생긴다 (코막힘)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head14" name="headSymptoms" value="탈모가 있다">
+                        <label for="head14">탈모가 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head15" name="headSymptoms" value="건망증">
+                        <label for="head15">건망증</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head16" name="headSymptoms" value="가래가 자주 생긴다 (묽고 잘 뱉어진다)">
+                        <label for="head16">가래가 자주 생긴다 (묽고 잘 뱉어진다)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="head17" name="headSymptoms" value="가래가 자주 생긴다 (끈끈하고 잘 뱉어지지 않는다)">
+                        <label for="head17">가래가 자주 생긴다 (끈끈하고 잘 뱉어지지 않는다)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row" style="margin-top: 30px;">
+                <div class="form-group">
+                    <label for="headacheWhen">두통이 언제 발생합니까?</label>
+                    <input type="text" id="headacheWhen" name="headacheWhen" placeholder="언제">
+                </div>
+                <div class="form-group">
+                    <label for="headacheHow">두통이 어떻게 아픕니까?</label>
+                    <input type="text" id="headacheHow" name="headacheHow" placeholder="어떻게">
+                </div>
+                <div class="form-group">
+                    <label for="dizzinessWhen">어지럼이 언제 발생합니까?</label>
+                    <input type="text" id="dizzinessWhen" name="dizzinessWhen" placeholder="언제">
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 7: 가슴 및 수면 -->
+        <div class="page" id="page-6">
+            <h2 class="section-title">가슴 및 수면</h2>
+            
+            <div class="form-group">
+                <label>가슴 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest1" name="chestSymptoms" value="신경쓰면 심장이 두근거린다">
+                        <label for="chest1">신경쓰면 심장이 두근거린다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest2" name="chestSymptoms" value="가슴이 자주 답답하다">
+                        <label for="chest2">가슴이 자주 답답하다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest3" name="chestSymptoms" value="조금만 움직여도 숨이 찬다">
+                        <label for="chest3">조금만 움직여도 숨이 찬다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest4" name="chestSymptoms" value="한숨을 자주 쉬는 편이다">
+                        <label for="chest4">한숨을 자주 쉬는 편이다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest5" name="chestSymptoms" value="숨을 들이쉴 때 힘들다">
+                        <label for="chest5">숨을 들이쉴 때 힘들다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest6" name="chestSymptoms" value="숨을 내쉬기가 힘들다">
+                        <label for="chest6">숨을 내쉬기가 힘들다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest7" name="chestSymptoms" value="불안감을 느낄 때가 자주 있다">
+                        <label for="chest7">불안감을 느낄 때가 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest8" name="chestSymptoms" value="딸꾹질을 자주 한다">
+                        <label for="chest8">딸꾹질을 자주 한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest9" name="chestSymptoms" value="가슴이 뻐근하거나 따끔거리는 통증을 느낄 때가 자주 있다">
+                        <label for="chest9">가슴이 뻐근하거나 따끔거리는 통증을 느낄 때가 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="chest10" name="chestSymptoms" value="목폴라, 쫄티, 넥타이, 브래지어 등 목이나 가슴을 조이는 옷은 답답해서 싫다">
+                        <label for="chest10">목폴라, 쫄티, 넥타이, 브래지어 등 목이나 가슴을 조이는 옷은 답답해서 싫다</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>수면 관련 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep1" name="sleep" value="잠을 잘 잔다">
+                        <label for="sleep1">잠을 잘 잔다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep2" name="sleep" value="잠이 잘 들지 않는다">
+                        <label for="sleep2">잠이 잘 들지 않는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep3" name="sleep" value="수면제나 안정제를 복용중이다">
+                        <label for="sleep3">수면제나 안정제를 복용중이다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep4" name="sleep" value="자다가 도중에 깨면 다시 자기 쉽지 않다">
+                        <label for="sleep4">자다가 도중에 깨면 다시 자기 쉽지 않다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep5" name="sleep" value="꿈을 많이 한다">
+                        <label for="sleep5">꿈을 많이 한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep6" name="sleep" value="잠꼬대를 많이 한다">
+                        <label for="sleep6">잠꼬대를 많이 한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep7" name="sleep" value="가위눌림을 많이 한다">
+                        <label for="sleep7">가위눌림을 많이 한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep8" name="sleep" value="아침에 잘 일어난다">
+                        <label for="sleep8">아침에 잘 일어난다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep9" name="sleep" value="아침에 일어난 이후에도 한참동안 몽롱하다">
+                        <label for="sleep9">아침에 일어난 이후에도 한참동안 몽롱하다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep10" name="sleep" value="하품을 잘 한다">
+                        <label for="sleep10">하품을 잘 한다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep11" name="sleep" value="커피 마시면 불편하다 (잠을 못자거나)">
+                        <label for="sleep11">커피 마시면 불편하다 (잠을 못자거나)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep12" name="sleep" value="커피 마시면 불편하다 (심장이 두근거림)">
+                        <label for="sleep12">커피 마시면 불편하다 (심장이 두근거림)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sleep13" name="sleep" value="커피 마시면 불편하다 (속쓰림)">
+                        <label for="sleep13">커피 마시면 불편하다 (속쓰림)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 8: 신체 및 관절 -->
+        <div class="page" id="page-7">
+            <h2 class="section-title">신체 및 관절</h2>
+            
+            <div class="form-group">
+                <label>수족, 신체, 피부 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body1" name="bodySymptoms" value="손발이 뜨겁다 (손)">
+                        <label for="body1">손발이 뜨겁다 (손)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body2" name="bodySymptoms" value="손발이 뜨겁다 (발)">
+                        <label for="body2">손발이 뜨겁다 (발)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body3" name="bodySymptoms" value="손발이 차갑다 (손)">
+                        <label for="body3">손발이 차갑다 (손)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body4" name="bodySymptoms" value="손발이 차갑다 (발)">
+                        <label for="body4">손발이 차갑다 (발)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body5" name="bodySymptoms" value="피부 긁히면 금방 빨개지고 잘 안 없어진다">
+                        <label for="body5">피부 긁히면 금방 빨개지고 잘 안 없어진다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body6" name="bodySymptoms" value="손발이 저릴 때가 자주 있다">
+                        <label for="body6">손발이 저릴 때가 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body7" name="bodySymptoms" value="손발이 뻣뻣해질 때가 자주 있다">
+                        <label for="body7">손발이 뻣뻣해질 때가 자주 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body8" name="bodySymptoms" value="쥐가 잘 나는 편이다">
+                        <label for="body8">쥐가 잘 나는 편이다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body9" name="bodySymptoms" value="피부 감각이 내 살 같지 않은 부분이 있다">
+                        <label for="body9">피부 감각이 내 살 같지 않은 부분이 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body10" name="bodySymptoms" value="피곤하면 몸살이 자주 생긴다">
+                        <label for="body10">피곤하면 몸살이 자주 생긴다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body11" name="bodySymptoms" value="잘 붓는다">
+                        <label for="body11">잘 붓는다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body12" name="bodySymptoms" value="피곤하거나 신경 쓰면 눈꺼풀, 입 주위나 몸의 어딘가의 근육이 자주 떨린다">
+                        <label for="body12">피곤하거나 신경 쓰면 눈꺼풀, 입 주위나 몸의 어딘가의 근육이 자주 떨린다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body13" name="bodySymptoms" value="음식 먹고 두드러기가 잘 난다">
+                        <label for="body13">음식 먹고 두드러기가 잘 난다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="body14" name="bodySymptoms" value="어디 부딪치지 않고도 멍이 잘 드는 편이다">
+                        <label for="body14">어디 부딪치지 않고도 멍이 잘 드는 편이다</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="swellingWhere">부종 부위 (전신, 얼굴, 손, 다리발 등)</label>
+                    <input type="text" id="swellingWhere" name="swellingWhere">
+                </div>
+                <div class="form-group">
+                    <label for="swellingWhen">부종 발생 시기 (아침, 저녁, 하루종일)</label>
+                    <input type="text" id="swellingWhen" name="swellingWhen">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>관절 질환 - 아픈 곳을 모두 선택하세요</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint1" name="jointPain" value="뒷목">
+                        <label for="joint1">뒷목</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint2" name="jointPain" value="어깨">
+                        <label for="joint2">어깨</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint3" name="jointPain" value="팔">
+                        <label for="joint3">팔</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint4" name="jointPain" value="손목">
+                        <label for="joint4">손목</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint5" name="jointPain" value="손가락">
+                        <label for="joint5">손가락</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint6" name="jointPain" value="다리">
+                        <label for="joint6">다리</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint7" name="jointPain" value="무릎">
+                        <label for="joint7">무릎</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint8" name="jointPain" value="발목">
+                        <label for="joint8">발목</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint9" name="jointPain" value="발가락">
+                        <label for="joint9">발가락</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint10" name="jointPain" value="등">
+                        <label for="joint10">등</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint11" name="jointPain" value="허리">
+                        <label for="joint11">허리</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint12" name="jointPain" value="엉치">
+                        <label for="joint12">엉치</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint13" name="jointPain" value="턱관절">
+                        <label for="joint13">턱관절</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint14" name="jointPain" value="목/허리디스크">
+                        <label for="joint14">목/허리디스크</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint15" name="jointPain" value="류마티스">
+                        <label for="joint15">류마티스</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint16" name="jointPain" value="협착증">
+                        <label for="joint16">협착증</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint17" name="jointPain" value="찬 기운에 닿으면 아파지는 곳이 있다">
+                        <label for="joint17">찬 기운에 닿으면 아파지는 곳이 있다</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="joint18" name="jointPain" value="아픈 곳이 부으면서 통증을 느낄 때가 있다">
+                        <label for="joint18">아픈 곳이 부으면서 통증을 느낄 때가 있다</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지 9: 성별별 질문 (동적으로 표시) -->
+        <div class="page" id="page-8" style="display: none;">
+            <!-- 여성 관련 질문 -->
+            <div id="femaleQuestions" style="display: none;">
+                <h2 class="section-title">여성 관련 증상</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pregnancies">출산 횟수</label>
+                        <input type="number" id="pregnancies" name="pregnancies" placeholder="회">
+                    </div>
+                    <div class="form-group">
+                        <label for="miscarriages">유산 경력</label>
+                        <input type="number" id="miscarriages" name="miscarriages" placeholder="회">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>생리 주기</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="radio" id="cycle1" name="menstrualCycle" value="생리 주기가 잘 맞는다">
+                            <label for="cycle1">생리 주기가 잘 맞는다</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" id="cycle2" name="menstrualCycle" value="생리 주기가 불규칙하다">
+                            <label for="cycle2">생리 주기가 불규칙하다</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" id="cycle3" name="menstrualCycle" value="폐경이다">
+                            <label for="cycle3">폐경이다</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="menopauseAge" style="display: none;">
+                    <label for="menstrualAge">폐경 나이</label>
+                    <input type="number" id="menstrualAge" name="menstrualAge" placeholder="세">
+                </div>
+                
+                <div class="form-group">
+                    <label>생리 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens1" name="menstrualSymptoms" value="생리통이 자주 있다 (지속시간: 몇 시간정도)">
+                            <label for="mens1">생리통이 자주 있다 (지속시간: 몇 시간정도)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens2" name="menstrualSymptoms" value="생리통이 자주 있다 (부위: 하복통)">
+                            <label for="mens2">생리통이 자주 있다 (부위: 하복통)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens3" name="menstrualSymptoms" value="생리통이 자주 있다 (부위: 요통)">
+                            <label for="mens3">생리통이 자주 있다 (부위: 요통)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens4" name="menstrualSymptoms" value="생리통이 자주 있다 (부위: 두통)">
+                            <label for="mens4">생리통이 자주 있다 (부위: 두통)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens5" name="menstrualSymptoms" value="생리 전에 주체할 수 없이 식욕이 당긴다">
+                            <label for="mens5">생리 전에 주체할 수 없이 식욕이 당긴다</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens6" name="menstrualSymptoms" value="생리 전에 짜증을 잘 낸다">
+                            <label for="mens6">생리 전에 짜증을 잘 낸다</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens7" name="menstrualSymptoms" value="건망증이 심한 편이다">
+                            <label for="mens7">건망증이 심한 편이다</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mens8" name="menstrualSymptoms" value="성관계후 아랫배 아픔">
+                            <label for="mens8">성관계후 아랫배 아픔</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>냉 관련 (해당되는 것을 모두 선택하세요)</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="discharge1" name="discharge" value="냉이 있다 (황색)">
+                            <label for="discharge1">냉이 있다 (황색)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="discharge2" name="discharge" value="냉이 있다 (백색)">
+                            <label for="discharge2">냉이 있다 (백색)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="discharge3" name="discharge" value="소양감이 심하다">
+                            <label for="discharge3">소양감이 심하다</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>기타 여성 관련 증상</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="female1" name="femaleSymptoms" value="자궁/난소/유방/갑상선염증 (치료나 수술제거)">
+                            <label for="female1">자궁/난소/유방/갑상선염증 (치료나 수술제거)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 남성 관련 질문 -->
+            <div id="maleQuestions" style="display: none;">
+                <h2 class="section-title">남성 관련 증상</h2>
+                
+                <div class="form-group">
+                    <label>남성 관련 증상 (해당되는 것을 모두 선택하세요)</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="male1" name="maleSymptoms" value="발기력이 떨어진다">
+                            <label for="male1">발기력이 떨어진다</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="male2" name="maleSymptoms" value="조루증상이 있는 것 같다">
+                            <label for="male2">조루증상이 있는 것 같다</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button type="button" id="prevBtn" class="btn btn-primary" onclick="previousPage()">
+                ← 이전
+            </button>
+            <button type="button" id="nextBtn" class="btn btn-primary" onclick="nextPage()">
+                다음 →
+            </button>
+            <button type="button" id="downloadBtn" class="btn btn-success" style="display: none;" onclick="generateReport()">
+                📁 결과 저장
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const totalPages = 9;
+        let totalActualPages = 8; // 기본적으로 8페이지 (성별 질문 제외)
+        
+        const pageData = {
+            0: { title: "기본 정보", element: "page-0" },
+            1: { title: "갈증 및 수분 섭취", element: "page-1" },
+            2: { title: "식욕 및 기호", element: "page-2" },
+            3: { title: "대변 및 소화", element: "page-3" },
+            4: { title: "소변 및 땀", element: "page-4" },
+            5: { title: "한열 및 두면부", element: "page-5" },
+            6: { title: "가슴 및 수면", element: "page-6" },
+            7: { title: "신체 및 관절", element: "page-7" },
+            8: { title: "성별별 질문", element: "page-8" }
+        };
+
+        function updateProgress() {
+            const progressText = document.getElementById('progressText');
+            const progressFill = document.getElementById('progressFill');
+            
+            progressText.textContent = `페이지 ${currentPage + 1} / ${totalActualPages}: ${pageData[currentPage].title}`;
+            progressFill.style.width = `${((currentPage + 1) / totalActualPages) * 100}%`;
+        }
+
+        function showPage(pageIndex) {
+            // 모든 페이지 숨기기
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 현재 페이지 보이기
+            const currentPageElement = document.getElementById(pageData[pageIndex].element);
+            if (currentPageElement) {
+                currentPageElement.classList.add('active');
+                
+                // 성별별 질문 페이지인 경우 성별에 따른 내용 표시
+                if (pageIndex === 8) {
+                    const gender = document.getElementById('gender').value;
+                    const femaleQuestions = document.getElementById('femaleQuestions');
+                    const maleQuestions = document.getElementById('maleQuestions');
+                    
+                    if (gender === '여') {
+                        femaleQuestions.style.display = 'block';
+                        maleQuestions.style.display = 'none';
+                    } else if (gender === '남') {
+                        femaleQuestions.style.display = 'none';
+                        maleQuestions.style.display = 'block';
+                    }
+                }
+            }
+        }
+
+        function checkGenderAndUpdatePages() {
+            const gender = document.getElementById('gender').value;
+            const genderPage = document.getElementById('page-8');
+            
+            if (gender === '여' || gender === '남') {
+                genderPage.style.display = 'block';
+                totalActualPages = 9;
+            } else {
+                genderPage.style.display = 'none';
+                totalActualPages = 8;
+            }
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            // 이전 버튼
+            prevBtn.disabled = currentPage === 0;
+            
+            // 다음/완료 버튼
+            if (currentPage === totalActualPages - 1) {
+                nextBtn.style.display = 'none';
+                downloadBtn.style.display = 'flex';
+            } else {
+                nextBtn.style.display = 'flex';
+                downloadBtn.style.display = 'none';
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+                updateProgress();
+                updateNavigationButtons();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalActualPages - 1) {
+                currentPage++;
+                
+                // 성별별 질문 페이지로 넘어갈 때 성별이 선택되지 않았으면 건너뛰기
+                if (currentPage === 8) {
+                    const gender = document.getElementById('gender').value;
+                    if (!gender || (gender !== '여' && gender !== '남')) {
+                        // 성별이 선택되지 않았으면 건너뛰고 완료 상태로
+                        generateReport();
+                        return;
+                    }
+                }
+                
+                showPage(currentPage);
+                updateProgress();
+                updateNavigationButtons();
+            }
+        }
+
+        function getFormData() {
+            const formData = {};
+            
+            // 모든 input, select, textarea 요소들에서 데이터 수집
+            const allInputs = document.querySelectorAll('input, select, textarea');
+            
+            allInputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    if (input.checked) {
+                        if (!formData[input.name]) {
+                            formData[input.name] = [];
+                        }
+                        formData[input.name].push(input.value);
+                    }
+                } else if (input.type === 'radio') {
+                    if (input.checked) {
+                        formData[input.name] = input.value;
+                    }
+                } else {
+                    if (input.value.trim() !== '') {
+                        formData[input.name] = input.value.trim();
+                    }
+                }
+            });
+            
+            return formData;
+        }
+
+        function generateReport() {
+            const formData = getFormData();
+            const today = new Date().toISOString().split('T')[0];
+            const name = formData.name || '익명';
+            const filename = `${name}_${today}_예진설문지.txt`;
+            
+            let report = `한의학 예진설문지 결과\n`;
+            report += `작성일: ${today}\n`;
+            report += `작성자: ${name}\n\n`;
+            
+            // 기본 정보
+            if (formData.name) report += `이름: ${formData.name}\n`;
+            if (formData.gender) report += `성별: ${formData.gender}\n`;
+            if (formData.age) report += `나이: ${formData.age}세\n`;
+            if (formData.height) report += `키: ${formData.height}cm\n`;
+            if (formData.weight) report += `체중: ${formData.weight}kg\n`;
+            if (formData.job) report += `직업: ${formData.job}\n`;
+            if (formData.symptoms) report += `치료받고 싶은 증상: ${formData.symptoms}\n`;
+            if (formData.medications) report += `현재 복용약물: ${formData.medications}\n`;
+            if (formData.pastHistory) report += `과거 병력: ${formData.pastHistory}\n`;
+            
+            // 갈증
+            if (formData.dailyWaterAmount) report += `일일 수분 섭취량: ${formData.dailyWaterAmount}리터\n`;
+            if (formData.drinkingReason && formData.drinkingReason.length > 0) report += `물 마시는 이유: ${formData.drinkingReason.join(', ')}\n`;
+            if (formData.waterPreferences && formData.waterPreferences.length > 0) report += `물 관련 증상: ${formData.waterPreferences.join(', ')}\n`;
+            
+            // 식욕
+            if (formData.appetite && formData.appetite.length > 0) report += `식욕 관련: ${formData.appetite.join(', ')}\n`;
+            if (formData.foodPreferences && formData.foodPreferences.length > 0) report += `좋아하는 맛: ${formData.foodPreferences.join(', ')}\n`;
+            if (formData.coffee) report += `커피 섭취: 하루 ${formData.coffee}잔\n`;
+            if (formData.smoking) report += `흡연: ${formData.smoking}\n`;
+            if (formData.alcohol) report += `음주: ${formData.alcohol}\n`;
+            
+            // 대변
+            if (formData.bowelFrequency) report += `배변 횟수: ${formData.bowelFrequency}\n`;
+            if (formData.bowelSymptoms && formData.bowelSymptoms.length > 0) report += `대변 관련 증상: ${formData.bowelSymptoms.join(', ')}\n`;
+            
+            // 소화
+            if (formData.digestion && formData.digestion.length > 0) report += `소화 관련 증상: ${formData.digestion.join(', ')}\n`;
+            
+            // 소변
+            if (formData.urination && formData.urination.length > 0) report += `소변 관련 증상: ${formData.urination.join(', ')}\n`;
+            if (formData.urinationDay) report += `낮 소변 횟수: ${formData.urinationDay}회\n`;
+            if (formData.urinationNight) report += `밤 소변 횟수: ${formData.urinationNight}회\n`;
+            
+            // 땀
+            if (formData.sweating && formData.sweating.length > 0) report += `땀 관련 증상: ${formData.sweating.join(', ')}\n`;
+            
+            // 한열
+            if (formData.temperature && formData.temperature.length > 0) report += `한열 관련 증상: ${formData.temperature.join(', ')}\n`;
+            
+            // 두면부
+            if (formData.headSymptoms && formData.headSymptoms.length > 0) report += `두면부 증상: ${formData.headSymptoms.join(', ')}\n`;
+            if (formData.headacheWhen) report += `두통 발생 시기: ${formData.headacheWhen}\n`;
+            if (formData.headacheHow) report += `두통 양상: ${formData.headacheHow}\n`;
+            if (formData.dizzinessWhen) report += `어지럼 발생 시기: ${formData.dizzinessWhen}\n`;
+            
+            // 가슴
+            if (formData.chestSymptoms && formData.chestSymptoms.length > 0) report += `가슴 관련 증상: ${formData.chestSymptoms.join(', ')}\n`;
+            
+            // 수면
+            if (formData.sleep && formData.sleep.length > 0) report += `수면 관련: ${formData.sleep.join(', ')}\n`;
+            
+            // 수족신체피부
+            if (formData.bodySymptoms && formData.bodySymptoms.length > 0) report += `신체 관련 증상: ${formData.bodySymptoms.join(', ')}\n`;
+            if (formData.swellingWhere) report += `부종 부위: ${formData.swellingWhere}\n`;
+            if (formData.swellingWhen) report += `부종 시기: ${formData.swellingWhen}\n`;
+            
+            // 관절
+            if (formData.jointPain && formData.jointPain.length > 0) report += `관절 관련: ${formData.jointPain.join(', ')}\n`;
+            
+            // 여성
+            if (formData.pregnancies) report += `출산 횟수: ${formData.pregnancies}회\n`;
+            if (formData.miscarriages) report += `유산 횟수: ${formData.miscarriages}회\n`;
+            if (formData.menstrualCycle) report += `생리 주기: ${formData.menstrualCycle}\n`;
+            if (formData.menstrualAge) report += `폐경 나이: ${formData.menstrualAge}세\n`;
+            if (formData.menstrualSymptoms && formData.menstrualSymptoms.length > 0) report += `생리 관련 증상: ${formData.menstrualSymptoms.join(', ')}\n`;
+            if (formData.discharge && formData.discharge.length > 0) report += `냉 관련: ${formData.discharge.join(', ')}\n`;
+            if (formData.femaleSymptoms && formData.femaleSymptoms.length > 0) report += `여성 관련 증상: ${formData.femaleSymptoms.join(', ')}\n`;
+            
+            // 남성
+            if (formData.maleSymptoms && formData.maleSymptoms.length > 0) report += `남성 관련 증상: ${formData.maleSymptoms.join(', ')}\n`;
+            
+            // 파일 다운로드
+            const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('설문지 결과가 다운로드되었습니다.');
+        }
+
+        // 성별 선택 변경 시 이벤트 리스너
+        document.getElementById('gender').addEventListener('change', function() {
+            checkGenderAndUpdatePages();
+        });
+
+        // 대변 점수 계산 함수
+        function calculateBowelScore() {
+            const bowelCheckboxes = document.querySelectorAll('input[name="bowelSymptoms"]:checked');
+            let totalScore = 0;
+            
+            bowelCheckboxes.forEach(checkbox => {
+                const score = parseInt(checkbox.getAttribute('data-score') || '0');
+                totalScore += score;
+            });
+            
+            const currentScoreSpan = document.getElementById('currentScore');
+            const scoreResultDiv = document.getElementById('scoreResult');
+            
+            if (currentScoreSpan) {
+                currentScoreSpan.textContent = totalScore;
+                
+                if (totalScore >= 18) {
+                    scoreResultDiv.innerHTML = '<span style="color: #dc3545;">⚠️ 장에 문제가 있을 수 있습니다 - 장해독과 발효효소요법이 필요합니다</span>';
+                } else if (totalScore >= 10) {
+                    scoreResultDiv.innerHTML = '<span style="color: #ffc107;">⚠️ 주의가 필요합니다</span>';
+                } else {
+                    scoreResultDiv.innerHTML = '<span style="color: #28a745;">✅ 양호합니다</span>';
+                }
+            }
+        }
+
+        // 대변 관련 체크박스 이벤트 리스너
+        document.addEventListener('change', function(e) {
+            if (e.target.name === 'bowelSymptoms') {
+                calculateBowelScore();
+            }
+            
+            if (e.target.name === 'menstrualCycle') {
+                const menopauseAge = document.getElementById('menopauseAge');
+                if (e.target.value === '폐경이다') {
+                    menopauseAge.style.display = 'block';
+                } else {
+                    menopauseAge.style.display = 'none';
+                }
+            }
+        });
+
+        // 초기 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage(0);
+            updateProgress();
+            updateNavigationButtons();
+            checkGenderAndUpdatePages();
+            calculateBowelScore(); // 초기 점수 계산
+        });
+    </script>
+</body>
+</html>
