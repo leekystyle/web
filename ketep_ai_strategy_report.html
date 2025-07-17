@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국에너지기술평가원 AI 도입 전략 보고서</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .date {
+            margin-top: 30px;
+            font-size: 1.1em;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .executive-summary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .executive-summary h2 {
+            margin: 0 0 25px 0;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .executive-summary h2::before {
+            content: '⚡';
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            background: #f8fafc;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 25px 40px;
+            font-size: 1.8em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-header::before {
+            content: attr(data-icon);
+            margin-right: 15px;
+            font-size: 1.3em;
+        }
+        
+        .section-content {
+            padding: 40px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .strategy-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            border-left: 5px solid #4facfe;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .strategy-card h4 {
+            color: #2d3748;
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .strategy-card h4::before {
+            content: '🎯';
+            margin-right: 10px;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #4facfe, #00f2fe);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 30px 0;
+            padding-left: 120px;
+        }
+        
+        .timeline-item::before {
+            content: attr(data-phase);
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        
+        .timeline-content h4 {
+            margin: 0 0 15px 0;
+            color: #2d3748;
+            font-size: 1.3em;
+        }
+        
+        .case-study {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #2d3748;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(250, 112, 154, 0.3);
+        }
+        
+        .case-study h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .case-study h4::before {
+            content: '📊';
+            margin-right: 10px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-top: 4px solid #4facfe;
+        }
+        
+        .metric-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #4facfe;
+            margin: 0;
+        }
+        
+        .metric-label {
+            color: #718096;
+            margin: 10px 0 0 0;
+            font-size: 0.9em;
+        }
+        
+        .action-items {
+            background: #edf2f7;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #38a169;
+        }
+        
+        .action-items h4 {
+            color: #2d3748;
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .action-items h4::before {
+            content: '✅';
+            margin-right: 10px;
+        }
+        
+        .action-items ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .action-items li {
+            margin: 10px 0;
+            color: #4a5568;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .header, .content {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .section-content {
+                padding: 25px;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                padding-left: 80px;
+            }
+            
+            .timeline-item::before {
+                left: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>한국에너지기술평가원 AI 도입 전략</h1>
+            <p class="subtitle">AI 거버넌스 구축을 통한 조직 혁신 및 에너지 기술 R&D 고도화 방안</p>
+            <p class="date">2025년 7월</p>
+        </div>
+        
+        <div class="content">
+            <div class="executive-summary">
+                <h2>Executive Summary</h2>
+                <p><strong>한국에너지기술평가원(KETEP)은 AI를 활용한 조직 혁신과 에너지 기술 R&D 고도화를 통해 타 전문기관 대비 AI 활용 선도기관으로 도약하고자 합니다.</strong></p>
+                <p>본 전략은 AI 거버넌스 체계 구축, 듀얼 브레인 시스템 도입, 인프라 확충, 점진적 업무 적용을 통해 에기평의 디지털 대전환을 실현하는 것을 목표로 합니다.</p>
+                <p><strong>핵심 목표:</strong> 2027년까지 AI 기반 스마트 R&D 평가 시스템 구축 및 업무 효율성 40% 향상</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="🎯">1. 전략적 배경 및 현황 분석</div>
+                <div class="section-content">
+                    <h3>1.1 AI 기술 발전과 에너지 분야 적용</h3>
+                    <p>ChatGPT 등장 이후 생성형 AI의 폭발적 성장으로 공공기관의 AI 도입이 본격화되었습니다. 특히 에너지 분야는 AI 기술과의 시너지 효과가 큰 분야로, <strong>Energy for AI</strong>와 <strong>AI for Energy</strong>의 양방향 연관성을 가지고 있습니다.</p>
+                    
+                    <div class="highlight-box">
+                        <h4>🔋 에너지와 AI의 상호 연관성</h4>
+                        <ul>
+                            <li><strong>Energy for AI:</strong> AI 운영을 위한 에너지 수요 급증 (ChatGPT 요청 처리시 구글 검색 대비 10배 에너지 소모)</li>
+                            <li><strong>AI for Energy:</strong> 에너지 효율화, 예측 최적화, 안정적 공급 관리에 AI 기술 활용</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>1.2 공공기관 AI 도입 현황</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <p class="metric-number">238</p>
+                            <p class="metric-label">AI 도입 공공기관 수<br>(전체 420개 중 56.7%)</p>
+                        </div>
+                        <div class="metric-card">
+                            <p class="metric-number">3,870</p>
+                            <p class="metric-label">지난 10년간<br>AI 도입 계약 건수</p>
+                        </div>
+                        <div class="metric-card">
+                            <p class="metric-number">40%</p>
+                            <p class="metric-label">업무 효율성<br>향상 목표</p>
+                        </div>
+                    </div>
+                    
+                    <h3>1.3 에기평 현재 AI 활용 현황</h3>
+                    <div class="case-study">
+                        <h4>현재 추진 중인 AI 프로젝트</h4>
+                        <ul>
+                            <li><strong>연구행정 자동화:</strong> 정부 규정 챗봇, 보도자료 작성, 통계 서비스 등 5개 프로젝트</li>
+                            <li><strong>AI 연계 R&D 확대:</strong> 에너지-AI 지원 기본계획 수립, 신규사업 기획, 중복기획 검증</li>
+                            <li><strong>산업부 AI+R&D 행정 사업:</strong> 3개 전담기관 공동 연구행정 플랫폼 구축</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="🏗️">2. AI 거버넌스 체계 구축</div>
+                <div class="section-content">
+                    <h3>2.1 AI 거버넌스 프레임워크</h3>
+                    <p>공공부문 초거대 AI 도입·활용 가이드라인 2.0(2025.4.16)을 기반으로 에기평 맞춤형 거버넌스 체계를 구축합니다.</p>
+                    
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <h4>조직 체계</h4>
+                            <ul>
+                                <li>AI 전담 TF 구성</li>
+                                <li>각 부서별 AI 담당자 지정</li>
+                                <li>외부 전문가 자문위원회</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>정책 및 규정</h4>
+                            <ul>
+                                <li>AI 도입·활용 지침 수립</li>
+                                <li>데이터 보안 및 개인정보보호</li>
+                                <li>AI 윤리 가이드라인</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>성과 관리</h4>
+                            <ul>
+                                <li>AI 프로젝트 성과지표 설정</li>
+                                <li>정기적 모니터링 체계</li>
+                                <li>지속적 개선 프로세스</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3>2.2 벤치마킹 사례 분석</h3>
+                    <div class="case-study">
+                        <h4>타 기관 성공 사례</h4>
+                        <ul>
+                            <li><strong>KISTEP GPT:</strong> 정책 분석 및 연구 지원 특화 AI 시스템</li>
+                            <li><strong>챗경북 2.0:</strong> 보도자료 작성 1시간 → 3분 단축, 다국어 번역 지원</li>
+                            <li><strong>한국에너지공단:</strong> 디지털 전환을 통한 업무시간 20% 단축</li>
+                            <li><strong>서울시여성가족재단:</strong> DARVIS 도입으로 60여 개 문서 AI 지식화</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="🧠">3. 듀얼 브레인 시스템 구축</div>
+                <div class="section-content">
+                    <h3>3.1 듀얼 브레인 개념</h3>
+                    <p>에기평의 AI 시스템이 인간 전문가와 상호 보완하며 의사결정을 지원하는 <strong>'듀얼 브레인'</strong> 역할을 수행하도록 설계합니다.</p>
+                    
+                    <div class="highlight-box">
+                        <h4>🧠 듀얼 브레인 시스템 구성</h4>
+                        <ul>
+                            <li><strong>Human Brain:</strong> 전문 지식, 창의적 사고, 가치 판단</li>
+                            <li><strong>AI Brain:</strong> 데이터 분석, 패턴 인식, 반복 업무 처리</li>
+                            <li><strong>Synergy Effect:</strong> 상호 보완을 통한 최적 의사결정</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>3.2 적용 영역별 전략</h3>
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <h4>R&D 기획</h4>
+                            <ul>
+                                <li>기술 동향 분석 자동화</li>
+                                <li>중복성 검토 시스템</li>
+                                <li>예산 최적화 알고리즘</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>평가 관리</h4>
+                            <ul>
+                                <li>평가 기준 일관성 지원</li>
+                                <li>문서 자동 분류·요약</li>
+                                <li>성과 예측 모델</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>행정 업무</h4>
+                            <ul>
+                                <li>공문서 자동 생성</li>
+                                <li>일정 관리 최적화</li>
+                                <li>민원 응답 시스템</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="🔧">4. 인프라 구축 방안</div>
+                <div class="section-content">
+                    <h3>4.1 소프트웨어 인프라</h3>
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <h4>AI 플랫폼</h4>
+                            <ul>
+                                <li>Private Cloud 기반 AI 서비스</li>
+                                <li>에기평 맞춤형 LLM 구축</li>
+                                <li>API 통합 관리 시스템</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>데이터 관리</h4>
+                            <ul>
+                                <li>통합 데이터 레이크 구축</li>
+                                <li>데이터 품질 관리 체계</li>
+                                <li>보안·개인정보보호 강화</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>개발 환경</h4>
+                            <ul>
+                                <li>MLOps 파이프라인 구축</li>
+                                <li>모델 버전 관리 시스템</li>
+                                <li>A/B 테스트 플랫폼</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3>4.2 하드웨어 인프라</h3>
+                    <div class="action-items">
+                        <h4>필수 하드웨어 구성</h4>
+                        <ul>
+                            <li>GPU 서버 클러스터 (AI 모델 학습·추론용)</li>
+                            <li>고성능 스토리지 시스템 (대용량 데이터 처리)</li>
+                            <li>네트워크 인프라 고도화 (저지연 데이터 전송)</li>
+                            <li>보안 시스템 강화 (방화벽, 침입탐지)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="📅">5. 단계별 추진 계획</div>
+                <div class="section-content">
+                    <div class="timeline">
+                        <div class="timeline-item" data-phase="1단계">
+                            <div class="timeline-content">
+                                <h4>기반 구축 단계 (2025년 하반기)</h4>
+                                <ul>
+                                    <li>AI 거버넌스 체계 수립 및 조직 구성</li>
+                                    <li>기본 인프라 구축 (서버, 네트워크)</li>
+                                    <li>파일럿 프로젝트 선정 및 시작</li>
+                                    <li>직원 역량 강화 교육 프로그램 운영</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-phase="2단계">
+                            <div class="timeline-content">
+                                <h4>확산 적용 단계 (2026년)</h4>
+                                <ul>
+                                    <li>에기평 맞춤형 AI 플랫폼 개발</li>
+                                    <li>핵심 업무 영역별 AI 시스템 구축</li>
+                                    <li>데이터 통합 및 품질 관리 체계 완성</li>
+                                    <li>성과 측정 및 지속적 개선</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-phase="3단계">
+                            <div class="timeline-content">
+                                <h4>고도화 단계 (2027년)</h4>
+                                <ul>
+                                    <li>듀얼 브레인 시스템 완성</li>
+                                    <li>AI 기반 의사결정 지원 시스템 구축</li>
+                                    <li>외부 기관과의 AI 협력 네트워크 확대</li>
+                                    <li>AI 활용 선도기관으로서의 모델 제시</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="💡">6. 핵심 추진 과제</div>
+                <div class="section-content">
+                    <h3>6.1 기술적 과제</h3>
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <h4>AI 모델 개발</h4>
+                            <ul>
+                                <li>에너지 기술 특화 언어모델 구축</li>
+                                <li>R&D 문서 분석 모델 개발</li>
+                                <li>예측 및 추천 알고리즘 고도화</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>시스템 통합</h4>
+                            <ul>
+                                <li>기존 시스템과의 연동</li>
+                                <li>워크플로우 자동화</li>
+                                <li>실시간 데이터 처리 체계</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>보안 강화</h4>
+                            <ul>
+                                <li>AI 모델 보안 검증</li>
+                                <li>데이터 암호화 강화</li>
+                                <li>접근 권한 관리 체계</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3>6.2 조직적 과제</h3>
+                    <div class="action-items">
+                        <h4>핵심 추진 사항</h4>
+                        <ul>
+                            <li><strong>전문 인력 확보:</strong> AI 전문가 채용 및 기존 직원 역량 강화</li>
+                            <li><strong>협력 체계 구축:</strong> 대내외 전문가 네트워크 활용</li>
+                            <li><strong>예산 확보:</strong> 인프라 구축 및 운영을 위한 예산 편성</li>
+                            <li><strong>문화 조성:</strong> AI 활용에 대한 조직 문화 변화 유도</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="📊">7. 기대 효과 및 성과 지표</div>
+                <div class="section-content">
+                    <h3>7.1 정량적 성과 목표</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <p class="metric-number">40%</p>
+                            <p class="metric-label">업무 효율성 향상</p>
+                        </div>
+                        <div class="metric-card">
+                            <p class="metric-number">60%</p>
+                            <p class="metric-label">반복 업무 자동화율</p>
+                        </div>
+                        <div class="metric-card">
+                            <p class="metric-number">30%</p>
+                            <p class="metric-label">의사결정 시간 단축</p>
+                        </div>
+                        <div class="metric-card">
+                            <p class="metric-number">90%</p>
+                            <p class="metric-label">직원 AI 활용률</p>
+                        </div>
+                    </div>
+                    
+                    <h3>7.2 정성적 기대 효과</h3>
+                    <div class="highlight-box">
+                        <h4>🎯 조직 혁신 효과</h4>
+                        <ul>
+                            <li><strong>의사결정 품질 향상:</strong> 데이터 기반 객관적 판단 지원</li>
+                            <li><strong>업무 생산성 증대:</strong> 반복적 업무 자동화로 고부가가치 업무 집중</li>
+                            <li><strong>서비스 품질 개선:</strong> 신속하고 정확한 대국민 서비스 제공</li>
+                            <li><strong>조직 경쟁력 강화:</strong> 타 전문기관 대비 AI 활용 선도기관 위상 확립</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="⚠️">8. 리스크 관리 및 대응 방안</div>
+                <div class="section-content">
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <h4>기술적 리스크</h4>
+                            <ul>
+                                <li><strong>리스크:</strong> AI 모델 성능 한계</li>
+                                <li><strong>대응:</strong> 지속적 모델 개선 및 인간 검증 체계</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>보안 리스크</h4>
+                            <ul>
+                                <li><strong>리스크:</strong> 데이터 유출 및 해킹</li>
+                                <li><strong>대응:</strong> 다중 보안 체계 및 정기 보안 점검</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>조직적 리스크</h4>
+                            <ul>
+                                <li><strong>리스크:</strong> 직원 저항 및 역량 부족</li>
+                                <li><strong>대응:</strong> 체계적 교육 및 점진적 도입</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header" data-icon="🎯">9. 결론 및 향후 과제</div>
+                <div class="section-content">
+                    <div class="highlight-box">
+                        <h4>🚀 비전 달성을 위한 핵심 성공 요인</h4>
+                        <ul>
+                            <li><strong>강력한 리더십:</strong> 최고경영진의 AI 전환 의지</li>
+                            <li><strong>체계적 접근:</strong> 단계별 추진 및 지속적 개선</li>
+                            <li><strong>인재 육성:</strong> AI 전문 인력 확보 및 역량 강화</li>
+                            <li><strong>문화 혁신:</strong> AI 친화적 조직 문화 조성</li>
+                            <li><strong>외부 협력:</strong> 산학연 네트워크 활용</li>
+                        </ul>
+                    </div>
+                    
+                    <p><strong>한국에너지기술평가원은 본 AI 도입 전략을 통해 에너지 기술 R&D 분야의 디지털 대전환을 선도하고, 국가 에너지 정책 수립과 기술 혁신에 기여하는 스마트 전문기관으로 도약할 것입니다.</strong></p>
+                    
+                    <div class="action-items">
+                        <h4>즉시 착수 과제</h4>
+                        <ul>
+                            <li>AI 전담 TF 구성 및 거버넌스 체계 수립</li>
+                            <li>인프라 구축을 위한 예산 확보 및 조달 계획 수립</li>
+                            <li>파일럿 프로젝트 선정 및 실행 계획 수립</li>
+                            <li>직원 교육 프로그램 기획 및 운영 준비</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="logo">한국에너지기술평가원</div>
+            <p>Korea Institute of Energy Technology Evaluation and Planning</p>
+        </div>
+    </div>
+</body>
+</html>
