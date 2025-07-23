@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노동조합에서 제안하는 신입직원 행동강령 10원칙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .header .organization {
+            font-size: 0.9em;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        
+        .source-info {
+            padding: 25px 30px;
+            background: #fff3cd;
+            border-bottom: 1px solid #ffeaa7;
+            text-align: center;
+        }
+        
+        .source-info h3 {
+            color: #856404;
+            font-size: 1em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .source-info p {
+            color: #856404;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .intro {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .intro p {
+            font-size: 1.1em;
+            color: #666;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .bullets-container {
+            padding: 40px 30px;
+        }
+        
+        .bullet {
+            margin-bottom: 35px;
+            padding: 25px;
+            border-radius: 15px;
+            background: #fff;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bullet:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(30, 60, 114, 0.1);
+        }
+        
+        .bullet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        
+        .bullet-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .bullet-titles {
+            margin-bottom: 15px;
+            padding-right: 50px;
+        }
+        
+        .bullet-title-main {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+        
+        .bullet-title-original {
+            font-size: 1em;
+            color: #667eea;
+            font-style: italic;
+            font-weight: 400;
+        }
+        
+        .bullet-description {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .bullet-example {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f7ff;
+            border-radius: 8px;
+            color: #2a5298;
+            border-left: 3px solid #1e3c72;
+            font-weight: 500;
+        }
+        
+        .bullet-goal {
+            margin-top: 10px;
+            padding: 12px;
+            background: #fff9e6;
+            border-radius: 8px;
+            color: #b8860b;
+            font-size: 0.9em;
+            border-left: 3px solid #ffa500;
+        }
+        
+        .original-concept {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #6c757d;
+        }
+        
+        .original-concept .label {
+            font-size: 0.85em;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .original-concept .content {
+            font-size: 0.9em;
+            color: #495057;
+            line-height: 1.5;
+            font-style: italic;
+        }
+        
+        .footer {
+            background: #1e3c72;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.9;
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+        
+        .footer .date {
+            opacity: 0.7;
+            font-size: 0.8em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .bullets-container {
+                padding: 30px 20px;
+            }
+            
+            .bullet {
+                padding: 20px;
+            }
+            
+            .bullet-title-main {
+                font-size: 1.2em;
+            }
+            
+            .bullet-title-original {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>노동조합에서 제안하는 신입직원 행동강령 10원칙</h1>
+            <div class="subtitle">KETEP 조직문화의 기초</div>
+            <div class="organization">한국에너지기술평가원노동조합</div>
+        </div>
+        
+        <div class="source-info">
+            <h3>📋 자료 출처</h3>
+            <p>이 자료는 뉴욕 아티스트 '톰 삭스(Tom Sachs)'가 실제로 사용하는 직원 행동강령 "10 Bullets"를 기반으로<br>
+            한국에너지기술평가원의 조직문화에 맞게 각색한 것입니다.</p>
+        </div>
+        
+        <div class="intro">
+            <p>
+                한국에너지기술평가원 노동조합에서 신입직원들에게 제안하는 10가지 핵심 원칙입니다. 
+                이 원칙들은 전문성, 책임감, 협업을 바탕으로 한 건전한 조직문화 구축을 위한 기본 지침입니다.
+            </p>
+        </div>
+        
+        <div class="bullets-container">
+            <div class="bullet">
+                <div class="bullet-number">1</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">규정과 절차 준수</div>
+                    <div class="bullet-title-original">원본: Work to Code</div>
+                </div>
+                <div class="bullet-description">
+                    기관의 규정과 업무 절차를 철저히 준수하세요. 기존의 시스템과 프로세스를 이해하고 존중하며, 
+                    개선사항이 있다면 적절한 절차를 통해 제안하세요.
+                </div>
+                <div class="bullet-example">
+                    ✓ 업무처리 지침 숙지 및 준수 ✓ 보고체계 준수 ✓ 문서작성 규정 준수
+                </div>
+                <div class="bullet-goal">
+                    목표: 체계적이고 일관성 있는 업무 수행으로 기관의 신뢰성 확보
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"이미 확립된 시스템을 존중하고, 새로운 아이디어는 기존 구조 위에 신중하게 구축해야 합니다. 개인의 편의가 아닌 필요에 의해 발명하세요."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">2</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">업무 공간 존중</div>
+                    <div class="bullet-title-original">원본: Sacred Space</div>
+                </div>
+                <div class="bullet-description">
+                    사무실과 회의실 등 업무 공간을 깨끗하게 유지하고, 동료들의 업무 환경을 배려하세요. 
+                    공용 공간에서는 타인을 방해하지 않도록 주의하세요.
+                </div>
+                <div class="bullet-example">
+                    ✓ 데스크 정리정돈 유지 ✓ 회의실 사용 후 원상복구 ✓ 조용한 업무 환경 조성
+                </div>
+                <div class="bullet-goal">
+                    목표: 쾌적하고 효율적인 업무 환경 조성으로 생산성 향상
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"스튜디오 공간과 그 안에서 작업하는 사람들을 존중해야 합니다. 신성한 공간에서는 셰이커 작업장이나 수도원에서처럼 행동해야 합니다."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">3</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">시간 엄수</div>
+                    <div class="bullet-title-original">원본: Be on Time</div>
+                </div>
+                <div class="bullet-description">
+                    출근시간, 회의시간, 마감일을 철저히 지키세요. 시간 관리는 전문성의 기본이며, 
+                    동료들에 대한 기본적인 예의입니다.
+                </div>
+                <div class="bullet-example">
+                    ✓ 정시 출근 및 퇴근 ✓ 회의 시간 준수 ✓ 업무 마감일 준수 ✓ 일정 관리 능력 향상
+                </div>
+                <div class="bullet-goal">
+                    목표: 신뢰할 수 있는 동료로서의 이미지 구축 및 업무 효율성 극대화
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"단순히 정시에 도착하는 것뿐만 아니라 '근무 중'이라는 마음가짐을 유지하세요. 충분한 수면과 건강한 식단을 통해 몸과 마음을 준비하세요."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">4</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">정확성과 완성도</div>
+                    <div class="bullet-title-original">원본: Thoroughness Counts</div>
+                </div>
+                <div class="bullet-description">
+                    모든 업무는 정확하고 완전하게 수행하세요. 대충하거나 미완성된 업무는 결국 더 큰 문제를 
+                    야기할 수 있습니다. 품질에 대한 책임감을 가지세요.
+                </div>
+                <div class="bullet-example">
+                    ✓ 문서 검토 및 오탈자 확인 ✓ 데이터 정확성 검증 ✓ 업무 완료 후 재점검
+                </div>
+                <div class="bullet-goal">
+                    목표: 에너지 기술 평가의 전문성과 신뢰성 확보
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"지름길을 택하지 마세요. 작업은 준비, 실행, 흔적 남기지 않기의 세 단계로 나누어 각각을 스튜디오의 엄격한 기준에 따라 완료해야 합니다."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">5</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">명확한 소통</div>
+                    <div class="bullet-title-original">원본: I Understand</div>
+                </div>
+                <div class="bullet-description">
+                    업무 지시나 요청사항을 정확히 이해했는지 확인하고, 불분명한 부분이 있다면 
+                    즉시 질문하세요. "이해했습니다" 또는 "확인이 필요합니다"를 명확히 표현하세요.
+                </div>
+                <div class="bullet-example">
+                    ✓ 업무 지시 내용 재확인 ✓ 의문사항 즉시 질의 ✓ 진행상황 적극 보고
+                </div>
+                <div class="bullet-goal">
+                    목표: 오해와 실수를 방지하고 원활한 업무 협력 체계 구축
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"명확히 이해했다면 '이해했습니다'라고 말하세요. 질문이 있다면 '이해하지 못했습니다'라고 하세요. 이것은 송신자와 수신자가 같은 페이지에 있음을 확인합니다."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">6</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">업무 계획 및 관리</div>
+                    <div class="bullet-title-original">원본: Keep a List</div>
+                </div>
+                <div class="bullet-description">
+                    담당 업무와 일정을 체계적으로 관리하세요. To-Do List를 작성하고 우선순위를 정하여 
+                    효율적으로 업무를 처리하세요.
+                </div>
+                <div class="bullet-example">
+                    ✓ 일일/주간 업무계획 수립 ✓ 우선순위 설정 ✓ 진행상황 추적 관리
+                </div>
+                <div class="bullet-goal">
+                    목표: 체계적인 업무 관리로 성과 극대화 및 업무 스트레스 최소화
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"항상 우선순위가 정해진 목록을 유지하세요. 모든 프로젝트와 관련된 모든 세부사항을 추적하세요. 당신의 목록은 당신의 과거이자 미래입니다."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">7</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">정리정돈</div>
+                    <div class="bullet-title-original">원본: Reset / Always be Knolling</div>
+                </div>
+                <div class="bullet-description">
+                    데스크, 컴퓨터 파일, 문서 등을 체계적으로 정리하세요. 정돈된 환경은 
+                    집중력을 높이고 업무 효율성을 증대시킵니다.
+                </div>
+                <div class="bullet-example">
+                    ✓ 데스크 정리 및 청소 ✓ 컴퓨터 파일 체계적 분류 ✓ 문서 정리 및 보관
+                </div>
+                <div class="bullet-goal">
+                    목표: 체계적인 업무 환경 조성으로 업무 효율성 및 전문성 향상
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"항상 정리 상태를 유지하세요(Always be Knolling). 사용하지 않는 모든 것을 정리하고, 유사한 물건들을 그룹화하며, 모든 객체를 표면이나 스튜디오에 맞춰 정렬하세요."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">8</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">책임감 있는 자세</div>
+                    <div class="bullet-title-original">원본: Leatherface</div>
+                </div>
+                <div class="bullet-description">
+                    자신의 실수나 문제에 대해 책임을 지고 적극적으로 해결책을 모색하세요. 
+                    변명보다는 개선 방안을 제시하는 자세를 가지세요.
+                </div>
+                <div class="bullet-example">
+                    ✓ 실수 인정 및 개선책 제시 ✓ 자발적 문제 해결 노력 ✓ 사후 재발 방지 조치
+                </div>
+                <div class="bullet-goal">
+                    목표: 신뢰받는 전문가로 성장하고 조직의 책임 문화 정착
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"실수에 대한 책임을 지세요. 가죽얼굴(Leatherface)에게 작은 금전적 희생을 바쳐 실수를 바로잡으세요. 이는 개인적 책임을 지고 인정하는 방법입니다."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">9</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">지속적인 학습과 개선</div>
+                    <div class="bullet-title-original">원본: Persistence</div>
+                </div>
+                <div class="bullet-description">
+                    에너지 기술 분야의 최신 동향을 파악하고 전문성을 지속적으로 향상시키세요. 
+                    배움에 대한 적극적인 자세로 성장하세요.
+                </div>
+                <div class="bullet-example">
+                    ✓ 에너지 기술 동향 모니터링 ✓ 전문 교육 및 세미나 참여 ✓ 자기계발 노력
+                </div>
+                <div class="bullet-goal">
+                    목표: 에너지 기술 분야의 전문가로 성장하여 기관의 경쟁력 강화에 기여
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"끈기를 가지세요. 지속적인 노력과 인내심이 창의적 작업의 핵심입니다. 포기하지 말고 목표를 향해 꾸준히 나아가세요."</div>
+                </div>
+            </div>
+            
+            <div class="bullet">
+                <div class="bullet-number">10</div>
+                <div class="bullet-titles">
+                    <div class="bullet-title-main">협업과 소통</div>
+                    <div class="bullet-title-original">원본: Always Choose Efficiency</div>
+                </div>
+                <div class="bullet-description">
+                    동료들과 적극적으로 소통하고 협력하세요. 팀워크를 바탕으로 한 협업이 
+                    우수한 성과를 만들어냅니다.
+                </div>
+                <div class="bullet-example">
+                    ✓ 팀 내 정보 공유 ✓ 동료 지원 및 도움 요청 ✓ 건설적인 의견 제시
+                </div>
+                <div class="bullet-goal">
+                    목표: 협력적 조직문화 구축으로 시너지 효과 창출 및 업무 만족도 향상
+                </div>
+                <div class="original-concept">
+                    <div class="label">톰 삭스 원본 개념:</div>
+                    <div class="content">"항상 가장 효율적이고 보수적인 접근법을 선택하면서도 직접성과 끈기를 유지하세요. 해결책에 대한 가장 직접적인 경로가 종종 최선의 방법입니다."</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                이 10가지 원칙을 실천하여 한국에너지기술평가원의 우수한 인재로 성장하시기 바랍니다.
+            </p>
+            <p>노동조합과 함께 만들어가는 건전한 조직문화</p>
+            <div class="date">한국에너지기술평가원노동조합 | 원본: Tom Sachs "10 Bullets" 기반 각색</div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p style="font-size: 0.9em; margin-bottom: 10px;">📺 뉴욕 사업가가 알려주는 작은브랜드 신입 교육법</p>
+                <a href="https://youtu.be/kNezTt32WEI?si=HVESDYkKXj39Hxk7" target="_blank" 
+                   style="color: #87ceeb; text-decoration: none; font-size: 0.85em; 
+                          border: 1px solid rgba(255,255,255,0.3); padding: 8px 15px; 
+                          border-radius: 20px; display: inline-block; transition: all 0.3s ease;">
+                    🎬 YouTube에서 원본 영상 보기
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
