@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수원 거주자 차량 운영 최적화 방안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+        
+        .section h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .highlight-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .cost-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .cost-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .cost-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .cost-card.recommended {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            border-color: #00b894;
+        }
+        
+        .cost-card.expensive {
+            background: linear-gradient(135deg, #e17055 0%, #fd79a8 100%);
+            color: white;
+        }
+        
+        .cost-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        
+        .cost-amount {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .pros, .cons {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        .pros {
+            border-left: 5px solid #00b894;
+        }
+        
+        .cons {
+            border-left: 5px solid #e17055;
+        }
+        
+        .pros h4, .cons h4 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .pros h4 {
+            color: #00b894;
+        }
+        
+        .cons h4 {
+            color: #e17055;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #3498db;
+        }
+        
+        .service-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .steps {
+            counter-reset: step-counter;
+        }
+        
+        .step {
+            counter-increment: step-counter;
+            background: #f8f9fa;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            position: relative;
+            padding-left: 80px;
+        }
+        
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 25px;
+            top: 25px;
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .conclusion h2 {
+            color: white;
+            border-bottom: 3px solid white;
+            margin-bottom: 20px;
+        }
+        
+        .savings-highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .savings-amount {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+            
+            .cost-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="report-card">
+            <div class="header">
+                <h1>수원 거주자 차량 운영 최적화 방안</h1>
+                <div class="subtitle">월 1회 이용 패턴과 경제성 우선 조건 분석 보고서</div>
+            </div>
+            
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>핵심 결론</h3>
+                    <p><strong>렌터카 멤버십</strong>이 가장 효율적인 솔루션으로 분석됩니다. 롯데렌터카 멤버십을 통해 연간 67-90만원으로 차량 이용이 가능하며, 이는 차량 구매 대비 <strong>연간 500-1000만원의 비용 절감</strong> 효과를 제공합니다.</p>
+                </div>
+
+                <div class="section">
+                    <h2>연간 총비용 비교 (12회 이용 기준)</h2>
+                    <div class="cost-comparison">
+                        <div class="cost-card recommended">
+                            <h4>롯데렌터카 멤버십</h4>
+                            <div class="cost-amount">67-90만원</div>
+                            <p>가장 경제적 ✨</p>
+                        </div>
+                        <div class="cost-card">
+                            <h4>그린카 카셰어링</h4>
+                            <div class="cost-amount">110-120만원</div>
+                            <p>편리하지만 비용 부담</p>
+                        </div>
+                        <div class="cost-card">
+                            <h4>대중교통 + 택시</h4>
+                            <div class="cost-amount">126만원</div>
+                            <p>보조 수단으로 활용</p>
+                        </div>
+                        <div class="cost-card">
+                            <h4>쏘카 카셰어링</h4>
+                            <div class="cost-amount">138만원</div>
+                            <p>시장 1위, 높은 요금</p>
+                        </div>
+                        <div class="cost-card expensive">
+                            <h4>차량 구매 (신차)</h4>
+                            <div class="cost-amount">660-1080만원</div>
+                            <p>가장 비경제적 ❌</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>수원 지역 카셰어링 현황</h2>
+                    
+                    <div class="service-grid">
+                        <div class="service-card">
+                            <h4>쏘카 (시장점유율 86.6%)</h4>
+                            <ul>
+                                <li>수원 전역 광범위한 카셰어링 존 운영</li>
+                                <li>경차급: 일일 5-7만원</li>
+                                <li>중형차: 평일 8만원/주말 12만원</li>
+                                <li>거리비: km당 220-280원 추가</li>
+                                <li>수원역, 주거단지, 쇼핑센터 집중 배치</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <h4>그린카 (시장점유율 22.4%)</h4>
+                            <ul>
+                                <li>가벼운 사용자에게 유리한 할인 정책</li>
+                                <li>최소 10분 단위 대여 가능</li>
+                                <li>구독 서비스 가입시 최대 60% 할인</li>
+                                <li>무료 24시간 쿠폰 제공</li>
+                                <li>L.POINT 적립 가능</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>렌터카 vs 카셰어링 vs 차량구매 비교</h2>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>연간 비용</th>
+                                <th>장점</th>
+                                <th>단점</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>롯데렌터카 멤버십</strong></td>
+                                <td>67-90만원</td>
+                                <td>다양한 차종, 배송서비스, 보험포함</td>
+                                <td>48시간 사전예약, 연료비 별도</td>
+                            </tr>
+                            <tr>
+                                <td><strong>그린카 카셰어링</strong></td>
+                                <td>110-120만원</td>
+                                <td>즉석이용, 할인혜택</td>
+                                <td>인기시간대 부족, 반납장소 제약</td>
+                            </tr>
+                            <tr>
+                                <td><strong>차량 구매</strong></td>
+                                <td>660-1080만원</td>
+                                <td>최고 편의성, 자유로운 이용</td>
+                                <td>높은 비용, 정비부담, 감가상각</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>차량 구매의 현실</h2>
+                    <p>3500만원 예산으로는 신차 기아 레이 EV(2775만원)나 2-4년 중고 하이브리드 차량(2800-3200만원) 구매가 가능합니다.</p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>연간 고정비용</h4>
+                            <ul>
+                                <li>보험료: 80-120만원</li>
+                                <li>세금: 20-40만원</li>
+                                <li>주차비: 16만원</li>
+                                <li>유지비: 30-60만원</li>
+                                <li><strong>총합: 154-249만원</strong></li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>추가 비용</h4>
+                            <ul>
+                                <li>감가상각: 연간 52-53%</li>
+                                <li>5년간 약 1800만원 가치 하락</li>
+                                <li>극소 주행거리로 km당 1500-2500원</li>
+                                <li>5년 총소유비용: 5400만원</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>수원 지역 교통 인프라 특성</h2>
+                    
+                    <div class="service-grid">
+                        <div class="service-card">
+                            <h4>대중교통 접근성</h4>
+                            <ul>
+                                <li>지하철 1호선, 수인분당선으로 서울 직결</li>
+                                <li>잘 발달된 버스 시스템</li>
+                                <li>시내 대부분 지역 30분 내 이동</li>
+                                <li>월 정기권 8만원</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <h4>마이크로 모빌리티</h4>
+                            <ul>
+                                <li>반디클, 타조 공유자전거 5000-8000대</li>
+                                <li>빔 모빌리티, 스윙 전동스쿠터</li>
+                                <li>단거리 이동에 최적화</li>
+                                <li>친환경 교통정책 지원</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>최종 추천 방안</h2>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <h3>1단계: 즉시 실행 (롯데렌터카 멤버십)</h3>
+                            <ul>
+                                <li>롯데렌터카 멤버십 가입으로 35-45% 할인 혜택 확보</li>
+                                <li>연간 67-90만원으로 12회 차량 이용 가능</li>
+                                <li>배송 서비스 활용으로 편의성 극대화</li>
+                                <li>차종 선택의 자유로 용도별 최적화</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="step">
+                            <h3>2단계: 보완 방안 (대중교통 + 마이크로 모빌리티)</h3>
+                            <ul>
+                                <li>가족 모임 등 근거리 이동은 지하철/버스 + 택시 조합</li>
+                                <li>공유자전거나 전동스쿠터로 단거리 이동 해결</li>
+                                <li>월 대중교통 정기권(8만원)으로 기본 이동성 확보</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="step">
+                            <h3>3단계: 응급상황 대비 (카셰어링 보조 활용)</h3>
+                            <ul>
+                                <li>그린카 구독 서비스 가입으로 할인 혜택 확보</li>
+                                <li>렌터카 예약이 어려운 급한 상황의 백업 수단</li>
+                                <li>1-2시간 짧은 이용에는 카셰어링이 더 경제적</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>최종 효과</h3>
+                        <p>이 조합으로 <strong>연간 총 교통비를 150만원 이내</strong>로 관리하면서도 필요시 언제든 차량 이용이 가능한 시스템을 구축할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="conclusion">
+            <h2>결론</h2>
+            <div class="savings-highlight">
+                <div class="savings-amount">연간 500-900만원 절약</div>
+                <p>차량 구매 대비 엄청난 비용 절감 효과</p>
+            </div>
+            <p>경제성과 편의성을 모두 고려할 때, <strong>렌터카 멤버십을 중심으로 한 하이브리드 교통 전략</strong>이 최적해입니다. 현재 소유 차량을 처분하고 위 방안을 실행하면, 연간 수백만원의 절약과 함께 더 나은 차량 이용 경험을 얻을 수 있을 것입니다.</p>
+        </div>
+    </div>
+</body>
+</html>
