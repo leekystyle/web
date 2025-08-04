@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProPresenter 초보자 완전 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 3px solid #667eea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .section h3 {
+            color: #555;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b20, #feca5720);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #51cf6620, #48cae420);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #51cf66;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+        }
+        
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 1rem 0;
+            padding: 1rem 1rem 1rem 3rem;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .shortcut-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .shortcut-key {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        
+        .interface-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .interface-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .interface-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .interface-item h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer h3 {
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .shortcut-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎥 ProPresenter 초보자 완전 가이드</h1>
+            <p>프레젠테이션 소프트웨어의 강력한 도구를 마스터하세요</p>
+        </header>
+        
+        <nav class="nav">
+            <ul>
+                <li><a href="#introduction">소개</a></li>
+                <li><a href="#installation">설치</a></li>
+                <li><a href="#interface">인터페이스</a></li>
+                <li><a href="#basic-functions">기본 기능</a></li>
+                <li><a href="#shortcuts">단축키</a></li>
+                <li><a href="#tips">유용한 팁</a></li>
+                <li><a href="#troubleshooting">문제해결</a></li>
+            </ul>
+        </nav>
+        
+        <main class="content">
+            <section id="introduction" class="section">
+                <h2><span class="icon">📋</span>ProPresenter란?</h2>
+                <p>ProPresenter는 라이브 프레젠테이션과 미디어 제작을 위한 전문적인 소프트웨어입니다. 교회, 학교, 기업 등에서 널리 사용되며, 다중 화면 출력, 실시간 편집, 미디어 통합 등의 강력한 기능을 제공합니다.</p>
+                
+                <div class="highlight-box">
+                    <h3>주요 특징</h3>
+                    <ul>
+                        <li><strong>다중 화면 지원:</strong> 최대 8개의 독립적인 출력 화면</li>
+                        <li><strong>실시간 편집:</strong> 라이브 중에도 슬라이드 수정 가능</li>
+                        <li><strong>미디어 통합:</strong> 비디오, 오디오, 이미지 완벽 지원</li>
+                        <li><strong>원격 제어:</strong> 모바일 앱으로 원격 조작</li>
+                        <li><strong>테마 및 템플릿:</strong> 전문적인 디자인 요소</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>💡 초보자 팁:</strong> ProPresenter는 14일 무료 체험이 가능합니다. 구매 전에 충분히 테스트해보세요!
+                </div>
+            </section>
+            
+            <section id="installation" class="section">
+                <h2><span class="icon">💻</span>설치 및 초기 설정</h2>
+                
+                <h3>시스템 요구사항</h3>
+                <div class="interface-grid">
+                    <div class="interface-item">
+                        <h4>🖥️ macOS</h4>
+                        <p>macOS Ventura (13.5) 이상<br>
+                        4GB RAM (8GB 권장)<br>
+                        2GB 여유 공간</p>
+                    </div>
+                    <div class="interface-item">
+                        <h4>🖥️ Windows</h4>
+                        <p>Windows 10/11<br>
+                        4GB RAM (8GB 권장)<br>
+                        2GB 여유 공간</p>
+                    </div>
+                </div>
+                
+                <h3>설치 과정</h3>
+                <ol class="step-list">
+                    <li><strong>다운로드:</strong> <a href="https://www.renewedvision.com/propresenter/download">공식 웹사이트</a>에서 최신 버전 다운로드</li>
+                    <li><strong>Mac 설치:</strong> ZIP 파일을 압축 해제 후 Applications 폴더로 드래그</li>
+                    <li><strong>Windows 설치:</strong> 설치 프로그램 실행 후 안내에 따라 진행</li>
+                    <li><strong>방화벽 허용:</strong> 네트워크 기능 사용을 위해 방화벽 규칙 허용</li>
+                    <li><strong>첫 실행:</strong> 라이선스 동의 및 초기 설정 마법사 완료</li>
+                </ol>
+                
+                <div class="warning-box">
+                    <strong>⚠️ 주의사항:</strong> Mac에서는 데스크탑 및 문서 폴더 접근 권한을 허용해야 합니다. 시스템 환경설정에서 개인정보 보호 설정을 확인하세요.
+                </div>
+            </section>
+            
+            <section id="interface" class="section">
+                <h2><span class="icon">🎛️</span>인터페이스 둘러보기</h2>
+                
+                <div class="interface-grid">
+                    <div class="interface-item">
+                        <h4>🔧 도구 모음</h4>
+                        <p>검색, 텍스트 편집, 테마, 쇼/편집 모드 전환 버튼이 위치한 상단 영역</p>
+                    </div>
+                    <div class="interface-item">
+                        <h4>📚 라이브러리</h4>
+                        <p>모든 프레젠테이션과 재생목록을 관리하는 좌측 패널</p>
+                    </div>
+                    <div class="interface-item">
+                        <h4>🖼️ 슬라이드 보기</h4>
+                        <p>현재 프레젠테이션의 모든 슬라이드를 표시하는 중앙 영역</p>
+                    </div>
+                    <div class="interface-item">
+                        <h4>🎬 미디어 빈</h4>
+                        <p>비디오, 오디오, 이미지 파일을 저장하고 관리하는 하단 영역</p>
+                    </div>
+                    <div class="interface-item">
+                        <h4>👁️ 미리보기 창</h4>
+                        <p>출력되는 내용을 실시간으로 확인할 수 있는 우측 패널</p>
+                    </div>
+                    <div class="interface-item">
+                        <h4>🎚️ 제어 패널</h4>
+                        <p>오디오, 스테이지, 타이머, 메시지 등을 제어하는 하단 영역</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>모드 전환</h3>
+                    <p><strong>쇼 모드:</strong> 실제 프레젠테이션을 진행할 때 사용하는 모드</p>
+                    <p><strong>편집 모드:</strong> 슬라이드를 만들고 수정할 때 사용하는 모드</p>
+                </div>
+            </section>
+            
+            <section id="basic-functions" class="section">
+                <h2><span class="icon">⚙️</span>기본 기능 익히기</h2>
+                
+                <h3>1. 새 프레젠테이션 만들기</h3>
+                <ol class="step-list">
+                    <li>도구 모음에서 "+" 버튼 클릭 또는 Cmd+N (Mac) / Ctrl+N (Windows)</li>
+                    <li>프레젠테이션 이름 입력</li>
+                    <li>템플릿 선택 (선택사항)</li>
+                    <li>확인 버튼으로 생성 완료</li>
+                </ol>
+                
+                <h3>2. 슬라이드 추가 및 편집</h3>
+                <ol class="step-list">
+                    <li>편집 모드로 전환</li>
+                    <li>좌측 하단의 "+" 버튼으로 새 슬라이드 추가</li>
+                    <li>텍스트 박스를 더블클릭하여 내용 입력</li>
+                    <li>우측 속성 패널에서 폰트, 색상, 크기 조정</li>
+                    <li>배경 이미지나 비디오 추가 (드래그 앤 드롭)</li>
+                </ol>
+                
+                <h3>3. 화면 설정</h3>
+                <div class="highlight-box">
+                    <p><strong>메뉴 > 화면 > 화면 구성</strong>에서 출력 화면을 설정할 수 있습니다.</p>
+                    <ul>
+                        <li><strong>청중 화면:</strong> 관객이 보는 메인 화면</li>
+                        <li><strong>스테이지 화면:</strong> 발표자용 모니터</li>
+                        <li><strong>해상도 및 위치:</strong> 각 화면의 해상도와 배치 설정</li>
+                    </ul>
+                </div>
+                
+                <h3>4. 미디어 관리</h3>
+                <ol class="step-list">
+                    <li>하단 미디어 빈에 파일 드래그 앤 드롭</li>
+                    <li>지원 형식: MP4, MOV, JPG, PNG, MP3, WAV 등</li>
+                    <li>미디어를 슬라이드로 드래그하여 배경으로 사용</li>
+                    <li>미디어 재생 시간 및 반복 설정 가능</li>
+                </ol>
+                
+                <div class="tip-box">
+                    <strong>💡 유용한 팁:</strong> 
+                    <ul>
+                        <li>고해상도 이미지는 자동으로 최적화됩니다</li>
+                        <li>비디오는 루프 재생이 가능합니다</li>
+                        <li>미디어 폴더를 정리하여 빠른 검색이 가능합니다</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="shortcuts" class="section">
+                <h2><span class="icon">⌨️</span>필수 단축키</h2>
+                
+                <h3>기본 조작</h3>
+                <div class="shortcut-grid">
+                    <div class="shortcut-item">
+                        <span>새 프레젠테이션</span>
+                        <span class="shortcut-key">Cmd+N / Ctrl+N</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>저장하기</span>
+                        <span class="shortcut-key">Cmd+S / Ctrl+S</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>실행 취소</span>
+                        <span class="shortcut-key">Cmd+Z / Ctrl+Z</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>다시 실행</span>
+                        <span class="shortcut-key">Cmd+Shift+Z / Ctrl+Y</span>
+                    </div>
+                </div>
+                
+                <h3>화면 제어</h3>
+                <div class="shortcut-grid">
+                    <div class="shortcut-item">
+                        <span>메인 출력 ON/OFF</span>
+                        <span class="shortcut-key">Cmd+1 / Ctrl+1</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>스테이지 출력 ON/OFF</span>
+                        <span class="shortcut-key">Cmd+2 / Ctrl+2</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>미리보기 전환</span>
+                        <span class="shortcut-key">Cmd+3 / Ctrl+3</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>화면 구성</span>
+                        <span class="shortcut-key">Opt+Cmd+1 / Alt+Ctrl+1</span>
+                    </div>
+                </div>
+                
+                <h3>편집 관련</h3>
+                <div class="shortcut-grid">
+                    <div class="shortcut-item">
+                        <span>슬라이드 복제</span>
+                        <span class="shortcut-key">Cmd+Shift+D / Ctrl+Shift+D</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>편집기 열기</span>
+                        <span class="shortcut-key">Cmd+E / Ctrl+E</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>슬라이드 분할</span>
+                        <span class="shortcut-key">Alt+Enter</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>서식 없이 붙여넣기</span>
+                        <span class="shortcut-key">Opt+Shift+Cmd+V / Alt+V</span>
+                    </div>
+                </div>
+                
+                <h3>프레젠테이션 제어</h3>
+                <div class="shortcut-grid">
+                    <div class="shortcut-item">
+                        <span>다음 슬라이드</span>
+                        <span class="shortcut-key">스페이스바 / 화살표</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>이전 슬라이드</span>
+                        <span class="shortcut-key">백스페이스 / 화살표</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>화면 지우기</span>
+                        <span class="shortcut-key">ESC</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>라이브러리로 이동</span>
+                        <span class="shortcut-key">Cmd+L / Ctrl+L</span>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ 중요:</strong> 라이브 프레젠테이션 중에는 Cmd+S / Ctrl+S로 자주 저장하여 작업 손실을 방지하세요!
+                </div>
+            </section>
+            
+            <section id="tips" class="section">
+                <h2><span class="icon">💡</span>전문가 팁</h2>
+                
+                <h3>효율적인 워크플로우</h3>
+                <div class="tip-box">
+                    <h4>1. 템플릿 활용</h4>
+                    <ul>
+                        <li>자주 사용하는 디자인은 템플릿으로 저장</li>
+                        <li>일관된 브랜딩을 위해 색상 팔레트 설정</li>
+                        <li>폰트 조합을 미리 정의하여 시간 절약</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <h4>2. 미디어 최적화</h4>
+                    <ul>
+                        <li>비디오는 H.264 코덱 사용 권장</li>
+                        <li>이미지는 적절한 해상도로 압축</li>
+                        <li>오디오는 48kHz/24bit 또는 44.1kHz/16bit 사용</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <h4>3. 라이브 운영</h4>
+                    <ul>
+                        <li>리허설 시간을 충분히 확보</li>
+                        <li>백업 프레젠테이션 파일 준비</li>
+                        <li>네트워크 연결 상태 사전 점검</li>
+                        <li>원격 제어 앱을 활용한 무선 조작</li>
+                    </ul>
+                </div>
+                
+                <h3>성능 최적화</h3>
+                <div class="highlight-box">
+                    <h4>시스템 설정</h4>
+                    <ul>
+                        <li><strong>그래픽 카드:</strong> 전용 GPU 사용 권장</li>
+                        <li><strong>메모리:</strong> 8GB 이상 RAM 권장</li>
+                        <li><strong>저장공간:</strong> SSD 사용으로 로딩 속도 향상</li>
+                        <li><strong>네트워크:</strong> 유선 연결로 안정성 확보</li>
+                    </ul>
+                </div>
+                
+                <h3>협업 및 백업</h3>
+                <ol class="step-list">
+                    <li><strong>클라우드 동기화:</strong> 여러 컴퓨터 간 파일 공유</li>
+                    <li><strong>프로젝트 패키징:</strong> 관련 미디어 파일 포함하여 내보내기</li>
+                    <li><strong>정기 백업:</strong> 중요한 프레젠테이션은 별도 저장</li>
+                    <li><strong>버전 관리:</strong> 날짜별로 파일명 구분</li>
+                </ol>
+            </section>
+            
+            <section id="troubleshooting" class="section">
+                <h2><span class="icon">🔧</span>문제 해결</h2>
+                
+                <h3>일반적인 문제들</h3>
+                
+                <div class="warning-box">
+                    <h4>화면 출력이 안 될 때</h4>
+                    <ol>
+                        <li>화면 구성에서 올바른 디스플레이 선택 확인</li>
+                        <li>Cmd+1 / Ctrl+1로 출력 활성화</li>
+                        <li>케이블 연결 상태 점검</li>
+                        <li>그래픽 드라이버 업데이트</li>
+                    </ol>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>프로그램이 느릴 때</h4>
+                    <ol>
+                        <li>사용하지 않는 미디어 파일 정리</li>
+                        <li>캐시 파일 삭제 (Cmd+Ctrl+E / Ctrl+Shift+E)</li>
+                        <li>해상도가 큰 이미지/비디오 최적화</li>
