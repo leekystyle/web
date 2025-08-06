@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조직평가 등급별 영향도 비교 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            font-weight: 600;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 2px 8px;
+        }
+        
+        .positive {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .negative {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .neutral {
+            color: #34495e;
+            font-weight: bold;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .summary-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .summary-box li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .summary-box li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            th, td {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 조직평가 등급별 영향도 비교 분석</h1>
+            <p>한국에너지기술평가원 근무평정 개선방안</p>
+        </div>
+        
+        <div class="content">
+            <!-- 개선안 개요 -->
+            <div class="section">
+                <h2 class="section-title">🎯 개선안 개요</h2>
+                <div class="comparison-grid">
+                    <div class="card">
+                        <h3>🔄 변경사항</h3>
+                        <p><strong>조직평가 점수 간격:</strong> 5점 → 6.5점</p>
+                        <p><strong>팀원 조직평가 비중:</strong> 40% → 30%</p>
+                        <p><strong>부서장 조직평가 비중:</strong> 60% (유지)</p>
+                    </div>
+                    <div class="card">
+                        <h3>📋 새로운 점수 체계</h3>
+                        <p><strong>A등급:</strong> 100점</p>
+                        <p><strong>B등급:</strong> 93.5점</p>
+                        <p><strong>C등급:</strong> 87점</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 1개 등급 차이 영향 비교 -->
+            <div class="section">
+                <h2 class="section-title">📈 조직평가 1개 등급 차이가 최종 평가에 미치는 영향</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>기존 시스템</th>
+                            <th>개선 시스템</th>
+                            <th>변화</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>팀원</strong></td>
+                            <td>5점 × 0.4 = <span class="highlight">2.0점</span></td>
+                            <td>6.5점 × 0.3 = <span class="highlight">1.95점</span></td>
+                            <td><span class="negative">-0.05점</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>부서장</strong></td>
+                            <td>5점 × 0.6 = <span class="highlight">3.0점</span></td>
+                            <td>6.5점 × 0.6 = <span class="highlight">3.9점</span></td>
+                            <td><span class="positive">+0.9점</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 세부 시나리오별 분석 -->
+            <div class="section">
+                <h2 class="section-title">🔍 세부 시나리오별 영향 분석</h2>
+                
+                <h3 style="margin: 30px 0 20px 0; color: #2c3e50;">💼 팀원의 경우</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>시나리오</th>
+                            <th>조직평가 점수 변화</th>
+                            <th>기존 시스템 영향</th>
+                            <th>개선 시스템 영향</th>
+                            <th>변화</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>A → B 등급</strong></td>
+                            <td>100점 → 95점 vs 100점 → 93.5점</td>
+                            <td>-2.0점</td>
+                            <td>-1.95점</td>
+                            <td><span class="negative">+0.05점</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>B → C 등급</strong></td>
+                            <td>95점 → 90점 vs 93.5점 → 87점</td>
+                            <td>-2.0점</td>
+                            <td>-1.95점</td>
+                            <td><span class="negative">+0.05점</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>A → C 등급 (2단계)</strong></td>
+                            <td>100점 → 90점 vs 100점 → 87점</td>
+                            <td>-4.0점</td>
+                            <td>-3.9점</td>
+                            <td><span class="negative">+0.1점</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 style="margin: 30px 0 20px 0; color: #2c3e50;">👔 부서장의 경우</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>시나리오</th>
+                            <th>조직평가 점수 변화</th>
+                            <th>기존 시스템 영향</th>
+                            <th>개선 시스템 영향</th>
+                            <th>변화</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>A → B 등급</strong></td>
+                            <td>100점 → 95점 vs 100점 → 93.5점</td>
+                            <td>-3.0점</td>
+                            <td>-3.9점</td>
+                            <td><span class="positive">-0.9점</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>B → C 등급</strong></td>
+                            <td>95점 → 90점 vs 93.5점 → 87점</td>
+                            <td>-3.0점</td>
+                            <td>-3.9점</td>
+                            <td><span class="positive">-0.9점</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>A → C 등급 (2단계)</strong></td>
+                            <td>100점 → 90점 vs 100점 → 87점</td>
+                            <td>-6.0점</td>
+                            <td>-7.8점</td>
+                            <td><span class="positive">-1.8점</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 평가 구조 변화 -->
+            <div class="section">
+                <h2 class="section-title">⚖️ 새로운 평가 구조</h2>
+                <div class="comparison-grid">
+                    <div class="card">
+                        <h3>👥 팀원 평가 비중</h3>
+                        <p><strong>조직평가:</strong> 30% (기존 40%)</p>
+                        <p><strong>개인평가:</strong> 60% (기존 50%)</p>
+                        <p><strong>다면평가:</strong> 10% (유지)</p>
+                    </div>
+                    <div class="card">
+                        <h3>👨‍💼 부서장 평가 비중</h3>
+                        <p><strong>조직평가:</strong> 60% (유지)</p>
+                        <p><strong>개인평가:</strong> 30%</p>
+                        <p><strong>다면평가:</strong> 10% (유지)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 핵심 결과 요약 -->
+            <div class="summary-box">
+                <h3>🎯 핵심 결과 요약</h3>
+                <ul>
+                    <li><strong>팀원:</strong> 조직평가 영향력이 미세하게 감소 (2.0점 → 1.95점)</li>
+                    <li><strong>부서장:</strong> 조직평가 영향력이 30% 증가 (3.0점 → 3.9점)</li>
+                    <li><strong>개인 성과 중심:</strong> 팀원의 개인평가 비중을 60%로 확대</li>
+                    <li><strong>책임 강화:</strong> 부서장의 조직 관리 책임 더욱 강조</li>
+                    <li><strong>변별력 향상:</strong> 등급간 점수 차이 확대로 우수 부서 구분 명확화</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
