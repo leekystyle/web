@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이재명 정부 123개 국정과제 완전판</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: bold;
+        }
+        .header p {
+            margin: 15px 0 0;
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        .category {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .category-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .category-icon {
+            font-size: 1.8em;
+        }
+        .category-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .category-count {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-left: auto;
+        }
+        .task-list {
+            padding: 20px;
+        }
+        .task-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            border-left: 4px solid #3498db;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        .task-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        .task-number {
+            background: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .task-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .task-desc {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        .priority-high { border-left-color: #e74c3c; }
+        .priority-medium { border-left-color: #f39c12; }
+        .priority-normal { border-left-color: #3498db; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2a5298;
+        }
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2em; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>이재명 정부 123개 국정과제</h1>
+            <p>국민주권정부 실현을 위한 완전한 정책과제 리스트</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">123</div>
+                <div class="stat-label">총 국정과제</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">중점전략과제</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">7</div>
+                <div class="stat-label">주요 분야</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">247</div>
+                <div class="stat-label">원래 공약수</div>
+            </div>
+        </div>
+
+        <!-- 경제·산업 분야 (30개) -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-icon">💼</div>
+                <div class="category-title">경제·산업 분야</div>
+                <div class="category-count">30개 과제</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item priority-high">
+                    <div class="task-number">001</div>
+                    <div class="task-title">AI 3대 강국 도약 전략</div>
+                    <div class="task-desc">인공지능 산업 생태계 구축, AI 반도체 경쟁력 강화, 전문인력 10만명 양성</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">002</div>
+                    <div class="task-title">반도체 메가클러스터 조성</div>
+                    <div class="task-desc">K-반도체 벨트 구축, 시스템 반도체 경쟁력 강화, 팹리스 기업 육성</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">003</div>
+                    <div class="task-title">바이오헬스 미래산업 육성</div>
+                    <div class="task-desc">정밀의료, 디지털 헬스케어, 바이오의약품 개발 지원</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">004</div>
+                    <div class="task-title">K-컬처 글로벌 확산</div>
+                    <div class="task-desc">콘텐츠 산업 육성, 창작자 지원 체계 구축, 한류 다변화</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">005</div>
+                    <div class="task-title">방위산업 수출 확대</div>
+                    <div class="task-desc">K-방산 해외진출 지원, 첨단무기체계 자주개발, 수출 300억 달러 달성</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">006</div>
+                    <div class="task-title">자본시장 선진화</div>
+                    <div class="task-desc">금융감독원 분리, 자본시장 경쟁력 강화, 핀테크 활성화</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">007</div>
+                    <div class="task-title">스타트업 생태계 강화</div>
+                    <div class="task-desc">벤처투자 활성화, 유니콘 기업 100개 육성, 창업 인프라 확충</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">008</div>
+                    <div class="task-title">청년 일자리 창출</div>
+                    <div class="task-desc">청년내일채움공제 부활, 청년미래적금 도입, 공공부문 일자리 확대</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">009</div>
+                    <div class="task-title">가계부채 종합 관리</div>
+                    <div class="task-desc">가계부채 TF 운영, 부채 경감 방안 마련, 연착륙 정책</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">010</div>
+                    <div class="task-title">중소기업 경쟁력 강화</div>
+                    <div class="task-desc">기술혁신 지원, 스마트 공장 1만개 구축, 디지털 전환 지원</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">011</div>
+                    <div class="task-title">소상공인 회복 지원</div>
+                    <div class="task-desc">민생회복지원금 확대, 경영 안정화 지원, 온라인 진출 돕기</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">012</div>
+                    <div class="task-title">디지털 경제 전환</div>
+                    <div class="task-desc">디지털 플랫폼 육성, 전자상거래 활성화, 디지털 뉴딜 2.0</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">013</div>
+                    <div class="task-title">농업·농촌 혁신</div>
+                    <div class="task-desc">스마트팜 확산, 농산물 유통구조 개선, 청년농업인 육성</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">014</div>
+                    <div class="task-title">해양경제 활성화</div>
+                    <div class="task-desc">해양신산업 육성, 항만 경쟁력 강화, 해양 바이오 산업</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">015</div>
+                    <div class="task-title">공정경제 확립</div>
+                    <div class="task-desc">대기업 갑질 근절, 상생협력 강화, 플랫폼 공정화</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">016</div>
+                    <div class="task-title">국민펀드 조성</div>
+                    <div class="task-desc">AI·반도체 집중 투자펀드 100조원 설립, 민간투자 활성화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">017</div>
+                    <div class="task-title">로봇산업 육성</div>
+                    <div class="task-desc">서비스 로봇, 산업용 로봇 기술개발, 로봇 친화형 규제 정비</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">018</div>
+                    <div class="task-title">우주항공 산업 발전</div>
+                    <div class="task-desc">한국형 발사체 고도화, 위성산업 육성, 우주경제 진입</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">019</div>
+                    <div class="task-title">금융개혁안 추진</div>
+                    <div class="task-desc">부동산 투기 완화, 서민금융 확대, 디지털 금융 혁신</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">020</div>
+                    <div class="task-title">관광산업 회복</div>
+                    <div class="task-desc">K-관광 브랜드 강화, 관광인프라 개선, 의료관광 활성화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">021</div>
+                    <div class="task-title">물류 허브 구축</div>
+                    <div class="task-desc">스마트 물류체계 구축, 물류비 절감, 국제물류 거점화</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">022</div>
+                    <div class="task-title">F4 회의 법제화</div>
+                    <div class="task-desc">거시경제·금융현안 간담회 제도화, 정책 조정 체계화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">023</div>
+                    <div class="task-title">예금보호한도 확대</div>
+                    <div class="task-desc">5천만원 → 1억원으로 상향 조정, 서민 금융보호 강화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">024</div>
+                    <div class="task-title">신용카드 소득공제 확대</div>
+                    <div class="task-desc">체육시설 이용료 소득공제 추가, 문화비 공제 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">025</div>
+                    <div class="task-title">경제안보 체계 구축</div>
+                    <div class="task-desc">공급망 안정화, 핵심소재 자립도 제고, 기술유출 방지</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">026</div>
+                    <div class="task-title">모빌리티 혁신</div>
+                    <div class="task-desc">자율주행차 상용화, UAM 도입, 친환경 모빌리티 확산</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">027</div>
+                    <div class="task-title">신재생에너지 산업화</div>
+                    <div class="task-desc">태양광·풍력 기업 육성, 에너지 저장 기술 개발</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">028</div>
+                    <div class="task-title">게임산업 글로벌화</div>
+                    <div class="task-desc">e스포츠 육성, 메타버스 게임 개발, 게임 수출 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">029</div>
+                    <div class="task-title">화학산업 고도화</div>
+                    <div class="task-desc">석유화학 전환, 친환경 소재 개발, 순환경제 적용</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">030</div>
+                    <div class="task-title">패션·뷰티 산업 육성</div>
+                    <div class="task-desc">K-뷰티 확산, 패션 브랜드 글로벌화, 디자이너 지원</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 사회·복지 분야 (25개) -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-icon">🏥</div>
+                <div class="category-title">사회·복지 분야</div>
+                <div class="category-count">25개 과제</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item priority-high">
+                    <div class="task-number">031</div>
+                    <div class="task-title">의정갈등 해소 및 의료개혁</div>
+                    <div class="task-desc">공공의대 신설, 지역의사제 도입, 필수의료 강화, 의대 정원 확대</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">032</div>
+                    <div class="task-title">인구정책 혁신</div>
+                    <div class="task-desc">인구 TF 운영, 저출산 대응 종합대책, 출산 지원금 확대</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">033</div>
+                    <div class="task-title">국민연금 개혁</div>
+                    <div class="task-desc">만 18세 자동가입, 급여 적정성 개선, 보험료율 조정</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">034</div>
+                    <div class="task-title">건강보험 보장성 강화</div>
+                    <div class="task-desc">비급여 축소, 본인부담금 경감, 중증질환 급여 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">035</div>
+                    <div class="task-title">돌봄서비스 확충</div>
+                    <div class="task-desc">국공립 어린이집 50% 확대, 노인돌봄 인프라 강화</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">036</div>
+                    <div class="task-title">주거복지 확대</div>
+                    <div class="task-desc">공공임대주택 250만호 공급, 주거급여 현실화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">037</div>
+                    <div class="task-title">노동시장 개편</div>
+                    <div class="task-desc">주 4일제 검토, 근로환경 개선, 노동시간 단축</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">038</div>
+                    <div class="task-title">양성평등 사회 구현</div>
+                    <div class="task-desc">성별 임금격차 해소, 여성 경력단절 방지, 육아휴직 확대</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">039</div>
+                    <div class="task-title">장애인 권익 보장</div>
+                    <div class="task-desc">탈시설 지원, 접근성 개선, 장애인 일자리 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">040</div>
+                    <div class="task-title">청년 주거 지원</div>
+                    <div class="task-desc">청년 전세대출 확대, 임대료 지원, 청년 매입임대 확충</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">041</div>
+                    <div class="task-title">고령사회 대응</div>
+                    <div class="task-desc">시니어 일자리 지원, 건강한 노후생활 보장, 노인 돌봄 체계</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">042</div>
+                    <div class="task-title">사회적 경제 활성화</div>
+                    <div class="task-desc">사회적 기업 1만개 육성, 협동조합 지원 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">043</div>
+                    <div class="task-title">먹거리 안전 강화</div>
+                    <div class="task-desc">식품안전관리 체계 고도화, 친환경 급식 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">044</div>
+                    <div class="task-title">범죄 예방 및 안전사회</div>
+                    <div class="task-desc">디지털 성범죄 척결, 안전인프라 구축, 생활안전 강화</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">045</div>
+                    <div class="task-title">다문화 사회 통합</div>
+                    <div class="task-desc">이민자 정착 지원, 사회통합 프로그램, 다문화 교육</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">046</div>
+                    <div class="task-title">자살 예방 대책</div>
+                    <div class="task-desc">정신건강 지원체계 강화, 자살예방 게이트키퍼 양성</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">047</div>
+                    <div class="task-title">취약계층 지원</div>
+                    <div class="task-desc">기초생활보장 강화, 복지사각지대 해소, 긴급지원 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">048</div>
+                    <div class="task-title">건강한 생활환경 조성</div>
+                    <div class="task-desc">미세먼지 대응, 생활화학물질 관리, 환경성 질환 예방</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">049</div>
+                    <div class="task-title">사회보험 통합 개편</div>
+                    <div class="task-desc">4대 보험 통합징수, 행정효율성 제고, 보험료 부담 경감</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">050</div>
+                    <div class="task-title">재해·재난 대응체계</div>
+                    <div class="task-desc">스마트 방재시스템 구축, 재난안전 강화, 대피시설 확충</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">051</div>
+                    <div class="task-title">아동 안전망 구축</div>
+                    <div class="task-desc">아동학대 예방, 아동보호 체계 강화, 아동수당 확대</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">052</div>
+                    <div class="task-title">치매 국가책임제</div>
+                    <div class="task-desc">치매 조기진단, 치매 돌봄 서비스 확대, 가족 지원</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">053</div>
+                    <div class="task-title">응급의료 체계 강화</div>
+                    <div class="task-desc">응급실 과밀화 해소, 닥터헬기 확충, 응급의료센터 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">054</div>
+                    <div class="task-title">혈액 안전관리</div>
+                    <div class="task-desc">혈액 수급 안정화, 헌혈 참여 확대, 혈액제제 안전성 강화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">055</div>
+                    <div class="task-title">감염병 대응 체계</div>
+                    <div class="task-desc">질병관리청 기능 강화, 백신 개발 역량, 감염병 예방</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 교육·문화 분야 (20개) -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-icon">📚</div>
+                <div class="category-title">교육·문화 분야</div>
+                <div class="category-count">20개 과제</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item priority-medium">
+                    <div class="task-number">056</div>
+                    <div class="task-title">AI 교육 혁신</div>
+                    <div class="task-desc">AI 활용 맞춤형 교육, 디지털 리터러시 강화, 에듀테크 도입</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">057</div>
+                    <div class="task-title">고교학점제 안착</div>
+                    <div class="task-desc">학생 선택권 확대, 진로맞춤형 교육과정, 온라인 공동교육과정</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">058</div>
+                    <div class="task-title">대학 자율성 확대</div>
+                    <div class="task-desc">대학 규제 완화, 특성화 지원, 국립대 법인화</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">059</div>
+                    <div class="task-title">평생교육 체계 구축</div>
+                    <div class="task-desc">성인 재교육, 직업능력개발 지원, K-MOOC 확산</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">060</div>
+                    <div class="task-title">교원 전문성 강화</div>
+                    <div class="task-desc">교사 연수 시스템 개선, 처우 개선, 교원양성 체계 혁신</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">061</div>
+                    <div class="task-title">문화예술 지원 확대</div>
+                    <div class="task-desc">예술인 사회보장, 창작 환경 개선, 문화예술 교육 강화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">062</div>
+                    <div class="task-title">디지털 도서관 구축</div>
+                    <div class="task-desc">스마트 도서관, 전자책 서비스 확대, 지식정보 접근성 향상</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">063</div>
+                    <div class="task-title">체육 진흥 정책</div>
+                    <div class="task-desc">생활체육 활성화, 스포츠 산업 육성, 체육시설 확충</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">064</div>
+                    <div class="task-title">문화유산 보존·활용</div>
+                    <div class="task-desc">전통문화 계승, 문화재 디지털화, 문화유산 관광 활성화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">065</div>
+                    <div class="task-title">사교육비 경감</div>
+                    <div class="task-desc">공교육 내실화, 방과후 활동 확대, 교육격차 해소</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">066</div>
+                    <div class="task-title">국제교육 협력</div>
+                    <div class="task-desc">해외 진출 지원, 국제학교 설립, 교육 한류 확산</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">067</div>
+                    <div class="task-title">지역문화 활성화</div>
+                    <div class="task-desc">문화도시 조성, 지역 특색 문화사업, 문화격차 해소</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">068</div>
+                    <div class="task-title">한국어 세계화</div>
+                    <div class="task-desc">세종학당 500개소 확산, 한국어 교육 강화, 한국학 진흥</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">069</div>
+                    <div class="task-title">창의융합 인재양성</div>
+                    <div class="task-desc">STEAM 교육, 메이커 스페이스 확충, 창의교육 활성화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">070</div>
+                    <div class="task-title">미디어 리터러시 교육</div>
+                    <div class="task-desc">가짜뉴스 대응, 비판적 사고력 함양, 디지털 시민교육</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">071</div>
+                    <div class="task-title">특수교육 지원 강화</div>
+                    <div class="task-desc">특수교육대상자 지원 확대, 통합교육 활성화, 개별화교육</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">072</div>
+                    <div class="task-title">박물관·미술관 현대화</div>
+                    <div class="task-desc">문화시설 디지털화, 관람객 체험 프로그램 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">073</div>
+                    <div class="task-title">독서문화 진흥</div>
+                    <div class="task-desc">독서교육 강화, 책 읽는 사회 조성, 작가 창작 지원</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">074</div>
+                    <div class="task-title">영화·영상 산업 육성</div>
+                    <div class="task-desc">영화 제작 지원, OTT 콘텐츠 육성, 영상 인프라 구축</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">075</div>
+                    <div class="task-title">음악산업 글로벌화</div>
+                    <div class="task-desc">K-POP 확산 지원, 음악 창작자 육성, 음원 유통 개선</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 환경·에너지 분야 (15개) -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-icon">🌱</div>
+                <div class="category-title">환경·에너지 분야</div>
+                <div class="category-count">15개 과제</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item priority-high">
+                    <div class="task-number">076</div>
+                    <div class="task-title">탄소중립 로드맵 실행</div>
+                    <div class="task-desc">2050 탄소중립 목표, 온실가스 40% 감축, 탄소국경세 대응</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">077</div>
+                    <div class="task-title">차세대 전력망(K-그리드) 구축</div>
+                    <div class="task-desc">스마트 그리드 구축, RE100 산단 20개소 조성, 전력망 접속 확대</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">078</div>
+                    <div class="task-title">재생에너지 확대</div>
+                    <div class="task-desc">태양광·풍력 보급 확대, 에너지 저장장치 개발, 그린뉴딜</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">079</div>
+                    <div class="task-title">원자력 안전 강화</div>
+                    <div class="task-desc">원전 안전관리 체계, 방사성폐기물 처리, 원전 해체 기술</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">080</div>
+                    <div class="task-title">수소경제 생태계</div>
+                    <div class="task-desc">그린수소 생산 확대, 수소차 100만대 보급, 수소충전소 확충</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">081</div>
+                    <div class="task-title">순환경제 구축</div>
+                    <div class="task-desc">폐기물 재활용 확대, 자원순환 체계 구축, 플라스틱 규제</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">082</div>
+                    <div class="task-title">미세먼지 저감</div>
+                    <div class="task-desc">대기질 개선, 국제협력 강화, 배출원 관리 체계화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">083</div>
+                    <div class="task-title">물 관리 혁신</div>
+                    <div class="task-desc">통합물관리, 상하수도 현대화, 스마트 워터그리드</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">084</div>
+                    <div class="task-title">생태계 보전</div>
+                    <div class="task-desc">생물다양성 증진, 국립공원 확대, 멸종위기종 보호</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">085</div>
+                    <div class="task-title">친환경 교통체계</div>
+                    <div class="task-desc">전기차 300만대 보급, 대중교통 확대, 친환경 선박</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">086</div>
+                    <div class="task-title">그린뉴딜 추진</div>
+                    <div class="task-desc">녹색산업 육성, 녹색일자리 100만개 창출, 친환경 기술개발</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">087</div>
+                    <div class="task-title">기후변화 적응</div>
+                    <div class="task-desc">극한기후 대응, 재해 예방 시설 확충, 기후 리스크 관리</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">088</div>
+                    <div class="task-title">환경영향평가 개선</div>
+                    <div class="task-desc">환경평가 체계 고도화, 사후관리 강화, 주민참여 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">089</div>
+                    <div class="task-title">토양·지하수 보전</div>
+                    <div class="task-desc">토양오염 정화, 지하수 수질관리, 토양 생태계 복원</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">090</div>
+                    <div class="task-title">화학물질 안전관리</div>
+                    <div class="task-desc">유해화학물질 관리 강화, 화학사고 예방, 안전정보 공개</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 정치·행정 분야 (18개) -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-icon">🏛️</div>
+                <div class="category-title">정치·행정 분야</div>
+                <div class="category-count">18개 과제</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item priority-high">
+                    <div class="task-number">091</div>
+                    <div class="task-title">검찰개혁 추진</div>
+                    <div class="task-desc">수사·기소 분리, 검찰 조직 개편, 권력기관 견제시스템 구축</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">092</div>
+                    <div class="task-title">개헌 추진</div>
+                    <div class="task-desc">국회 협의를 통한 개헌, 분권형 대통령제, 권력구조 개편</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">093</div>
+                    <div class="task-title">청와대 복귀</div>
+                    <div class="task-desc">대통령실 청와대 이전, 용산 시대 종료, 국민과의 거리 단축</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">094</div>
+                    <div class="task-title">디지털 정부 구현</div>
+                    <div class="task-desc">행정 디지털화, 온라인 원스톱 서비스, AI 행정서비스</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">095</div>
+                    <div class="task-title">정부조직 개편</div>
+                    <div class="task-desc">효율적 조직구조, 부처 간 협업 강화, 중복기능 정비</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">096</div>
+                    <div class="task-title">공직윤리 강화</div>
+                    <div class="task-desc">공무원 청렴도 향상, 부패 척결, 이해충돌 방지</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">097</div>
+                    <div class="task-title">국정감사 개선</div>
+                    <div class="task-desc">건설적 국감 문화, 정책 대안 제시, 국감 실효성 제고</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">098</div>
+                    <div class="task-title">정보공개 확대</div>
+                    <div class="task-desc">정부 투명성 강화, 알권리 보장, 공공데이터 개방</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">099</div>
+                    <div class="task-title">선거제도 개혁</div>
+                    <div class="task-desc">공정선거 문화, 정치자금 투명화, 선거구 개편</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">100</div>
+                    <div class="task-title">공공기관 혁신</div>
+                    <div class="task-desc">경영 효율성 제고, 공공서비스 개선, 기관 통폐합</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">101</div>
+                    <div class="task-title">사법부 독립성 강화</div>
+                    <div class="task-desc">법원 행정처 개혁, 판사 인사 투명화, 사법권 독립</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">102</div>
+                    <div class="task-title">국민참여 확대</div>
+                    <div class="task-desc">시민배심제, 참여예산제 활성화, 국민소통 강화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">103</div>
+                    <div class="task-title">규제혁신 추진</div>
+                    <div class="task-desc">네거티브 규제, 규제샌드박스 확대, 규제영향평가</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">104</div>
+                    <div class="task-title">방송통신 공정성</div>
+                    <div class="task-desc">미디어 다양성, 방송의 공정성 확보, 플랫폼 규제</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">105</div>
+                    <div class="task-title">국가기록관리 현대화</div>
+                    <div class="task-desc">디지털 기록관리, 역사 기록 보존, 기록정보 활용</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">106</div>
+                    <div class="task-title">개인정보보호 강화</div>
+                    <div class="task-desc">프라이버시 권리, 데이터 자기결정권, 개인정보 안전</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">107</div>
+                    <div class="task-title">권력기관 견제</div>
+                    <div class="task-desc">국정원·경찰 개혁, 민주적 통제, 권력 분산</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">108</div>
+                    <div class="task-title">국민 소통 강화</div>
+                    <div class="task-desc">대화형 정부, 정책 설명 확대, SNS 소통 활성화</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 외교·안보 분야 (15개) -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-icon">🌍</div>
+                <div class="category-title">외교·안보 분야</div>
+                <div class="category-count">15개 과제</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item priority-high">
+                    <div class="task-number">109</div>
+                    <div class="task-title">실용외교 추진</div>
+                    <div class="task-desc">한미동맹 강화, 대중관계 개선, 균형외교 실현</div>
+                </div>
+                <div class="task-item priority-high">
+                    <div class="task-number">110</div>
+                    <div class="task-title">한반도 평화 구축</div>
+                    <div class="task-desc">남북대화 재개, 평화체제 구축, 비핵화 진전</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">111</div>
+                    <div class="task-title">전시작전권 환수</div>
+                    <div class="task-desc">한미 협의를 통한 단계적 환수, 자주국방 역량 강화</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">112</div>
+                    <div class="task-title">한일관계 정상화</div>
+                    <div class="task-desc">과거사 문제 해결, 미래지향적 협력, 셔틀외교 재개</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">113</div>
+                    <div class="task-title">신남방정책 확대</div>
+                    <div class="task-desc">아세안·인도와의 전략적 협력, 경제협력 강화</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">114</div>
+                    <div class="task-title">신북방정책 재구축</div>
+                    <div class="task-desc">러시아·중앙아시아 협력 확대, 유라시아 연결</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">115</div>
+                    <div class="task-title">다자외교 적극 참여</div>
+                    <div class="task-desc">G20, APEC 등 국제기구 역할, 글로벌 거버넌스 참여</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">116</div>
+                    <div class="task-title">경제외교 강화</div>
+                    <div class="task-desc">FTA 확대, 통상협력 증진, 신통상질서 대응</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">117</div>
+                    <div class="task-title">국방력 강화</div>
+                    <div class="task-desc">첨단무기 도입, 방위력 현대화, 국방혁신 4.0</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">118</div>
+                    <div class="task-title">사이버보안 강화</div>
+                    <div class="task-desc">국가 사이버안보, 디지털 방어체계, 사이버 위협 대응</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">119</div>
+                    <div class="task-title">재외국민 보호</div>
+                    <div class="task-desc">영사서비스 개선, 해외 안전망 구축, 재외동포 지원</div>
+                </div>
+                <div class="task-item priority-medium">
+                    <div class="task-number">120</div>
+                    <div class="task-title">국제개발협력 확대</div>
+                    <div class="task-desc">ODA 0.3% 달성, 개발도상국 지원, 글로벌 연대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">121</div>
+                    <div class="task-title">문화외교 활성화</div>
+                    <div class="task-desc">한류 확산, 소프트파워 강화, 문화교류 확대</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">122</div>
+                    <div class="task-title">기후외교 선도</div>
+                    <div class="task-desc">국제기후협력, 그린동맹 구축, 기후변화 대응</div>
+                </div>
+                <div class="task-item priority-normal">
+                    <div class="task-number">123</div>
+                    <div class="task-title">우주외교 추진</div>
+                    <div class="task-desc">우주협력 확대, 아르테미스 참여, 우주경제 진출</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 30px;">
+            <h3>🎯 이재명 정부 123개 국정과제 완성</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #2a5298;">30개</div>
+                    <div>경제·산업</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #2a5298;">25개</div>
+                    <div>사회·복지</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #2a5298;">20개</div>
+                    <div>교육·문화</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #2a5298;">15개</div>
+                    <div>환경·에너지</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #2a5298;">18개</div>
+                    <div>정치·행정</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #2a5298;">15개</div>
+                    <div>외교·안보</div>
+                </div>
+            </div>
+            <p style="font-size: 1.2em; color: #666; margin: 20px 0;">
+                <strong>총 123개 과제 완성!</strong><br>
+                선택과 집중을 통한 실현 가능한 국정과제
+            </p>
+            <p style="color: #999; margin-top: 30px;">
+                작성일: 2025년 8월 7일 기준 | 국정기획위원회 자료 및 공개정보 종합
+            </p>
+        </div>
+    </div>
+</body>
+</html>
