@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2035 NDC와 탄소중립 전환 경로 - 전문가 세미나</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .content-grid {
+            display: grid;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section h2 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 5px solid #fff;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            background: linear-gradient(135deg, #a8e6cf, #56cc9d);
+            color: #2c3e50;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            display: block;
+            color: #27ae60;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-left: 15px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 15px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .challenge-list {
+            list-style: none;
+        }
+        
+        .challenge-list li {
+            background: #fff3cd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .challenge-list li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+        
+        .solution-list {
+            list-style: none;
+        }
+        
+        .solution-list li {
+            background: #d1ecf1;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #17a2b8;
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .solution-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+            height: 25px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tech-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .tech-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .recommendation {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 20px;
+            border-radius: 15px;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>2035 NDC와 탄소중립 전환 경로</h1>
+            <div class="subtitle">전환 경로의 현실과 과제</div>
+            <div class="subtitle">전문가 세미나 배경자료</div>
+        </div>
+        
+        <div class="key-insight">
+            <strong>핵심 통찰:</strong> 전 세계 95%의 국가가 2035 NDC 제출 기한을 놓쳤고, 현재 목표의 95%가 1.5°C와 부합하지 않는 상황에서 한국의 적극적 목표 설정이 기후 리더십의 관건
+        </div>
+        
+        <div class="content-grid">
+            <div class="section">
+                <h2>🌍 글로벌 NDC 현황</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        국가들이 제출 기한 놓침
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">21.7%</span>
+                        글로벌 배출량 커버
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">60%</span>
+                        2035년 필요 감축률
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>주요국 2035 NDC 목표</strong><br>
+                    🇺🇸 미국: 2005년 대비 61-66% 감축<br>
+                    🇬🇧 영국: 1990년 대비 81% 감축 (1.5°C 부합)<br>
+                    🇯🇵 일본: 2013년 대비 60% 감축
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🇰🇷 한국의 과제</h2>
+                <div class="challenge-list">
+                    <li>2035 NDC 미제출 상태</li>
+                    <li>2030 NDC 국내감축 32% vs 필요 59%</li>
+                    <li>1.5°C 목표와 27%p 격차</li>
+                    <li>정치적 정책 조율 필요</li>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>현재 정책 vs 필요 수준</strong>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 32%">32% (현재)</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 59%; background: #e74c3c;">59% (필요)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>⚡ 에너지 전환 동향</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">585GW</span>
+                        2024년 재생에너지 증가
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">92.5%</span>
+                        신규 발전용량 비중
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">16.6%</span>
+                        연간 필요 증가율
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>2025:</strong> 한국 재생에너지 42.7GW 목표
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2030:</strong> COP28 목표 3배 확대
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2035:</strong> 재생에너지 90% 필요
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🏭 산업 탈탄소화</h2>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>수소환원제철</h4>
+                        <p>포스코 기술개발 진행</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>시멘트 CCUS</h4>
+                        <p>공정배출 85% 대응</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>전기로 전환</h4>
+                        <p>현대제철 계획</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>2024년 투자 동향</strong><br>
+                    💰 저탄소 철강 투자: 74억 달러 (4개월)<br>
+                    🏗️ 월간 설치 목표: CCUS 중공업 10개소<br>
+                    ⚡ 전해조 설비: 2GW/월
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>💰 탄소가격제 & CBAM</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">$100B</span>
+                        2024년 탄소가격 수입
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">28%</span>
+                        글로벌 배출량 커버
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">€85</span>
+                        EU ETS 현재 가격
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>CBAM 영향 (2026년 시행)</strong><br>
+                    🎯 1차 대상: 철강, 시멘트, 알루미늄, 비료, 전력, 수소<br>
+                    📈 한국 철강업 비용절감 잠재력: 74% (탄소중립 생산 시)<br>
+                    💵 절감액: 1억 500만 달러
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🔬 청정기술 혁신</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">$2.1T</span>
+                        2024년 청정에너지 투자
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$6T</span>
+                        투자 격차
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">37%</span>
+                        필요 투자 대비 비율
+                    </div>
+                </div>
+                
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>수소경제</h4>
+                        <p>2040년 620만대 수소차</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>CCUS</h4>
+                        <p>628개 글로벌 프로젝트</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>배터리</h4>
+                        <p>차세대 기술 개발</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📊 경제 영향 분석</h2>
+                <div class="highlight-box">
+                    <strong>IMF 분석: 질서정연한 전환의 편익</strong><br>
+                    📈 2050년 GDP +7% (현행정책 대비)<br>
+                    💎 기후피해 회피편익 = 전환비용 × 5배<br>
+                    💼 신규 일자리: 1,400만 개 (청정에너지)<br>
+                    💚 녹색일자리 임금: +7% (일반 대비)
+                </div>
+                
+                <div class="solution-list">
+                    <li>맥킨지: 2021-2050년 총 275조 달러 투자 필요</li>
+                    <li>연간 GDP의 7.5% 수준</li>
+                    <li>한국: GDP 1-2% 추가 투자 필요</li>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🤝 국제협력 & 기후금융</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">$1.46T</span>
+                        2024년 기후금융
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$300B</span>
+                        COP29 선진국 지원목표
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">13개</span>
+                        파리협정 6.2조 양자협정
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>제6.2조:</strong> 스위스-태국 첫 ITMO 이전 완료
+                    </div>
+                    <div class="timeline-item">
+                        <strong>한국:</strong> 동남아·아프리카 양자협력 확대
+                    </div>
+                    <div class="timeline-item">
+                        <strong>K-ETS:</strong> 국제감축분 활용 방안 검토
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>🎯 핵심 정책 제언</h3>
+            <div class="recommendations">
+                <div class="recommendation">
+                    <h4>2035 NDC 전략적 설정</h4>
+                    <p>• 2050 탄소중립과 연계<br>
+                    • 국제 리더십 확보<br>
+                    • 산업 경쟁력 고려<br>
+                    • 최소 70% 감축 목표</p>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>기술혁신 가속화</h4>
+                    <p>• 50% 실증단계 기술 상용화<br>
+                    • 수소환원제철 실증<br>
+                    • 시멘트 CCUS 도입<br>
+                    • 차세대 배터리 개발</p>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>정의로운 전환</h4>
+                    <p>• 석탄발전소 폐쇄지역 지원<br>
+                    • 내연기관 산업 전환<br>
+                    • 재교육 프로그램 확대<br>
+                    • 지역 맞춤형 계획</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #e9ecef;">
+                <p><strong>결론:</strong> 2035 NDC는 한국 경제의 지속가능한 발전과 글로벌 기후 리더십 확보를 위한 종합적 전환 로드맵이 되어야 하며, 적절히 관리된 전환은 새로운 성장동력과 경쟁력 강화의 기회가 될 것입니다.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
