@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문해력 향상을 위한 5가지 훈련법</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #fafafa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #4a90e2;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+        
+        .intro {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .intro h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        
+        .intro p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        .three-steps {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid #4a90e2;
+            color: #2c3e50;
+        }
+        
+        .three-steps h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .three-steps ol {
+            padding-left: 20px;
+        }
+        
+        .three-steps li {
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+        
+        .method {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .method-number {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .method-title {
+            font-size: 1.6em;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .method-content {
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .method-content h4 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            font-size: 1.2em;
+            padding-left: 15px;
+            border-left: 3px solid #4a90e2;
+        }
+        
+        .method-content p {
+            margin-bottom: 15px;
+        }
+        
+        .example {
+            background: #f1f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .example h5 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+        
+        .tip {
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #17a2b8;
+            margin: 15px 0;
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 12px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .conclusion h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        
+        .conclusion p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        .key-points {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .key-points li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .method-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .method-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>문해력 향상을 위한 5가지 훈련법</h1>
+            <p class="subtitle">만년 4~5등급에서 1등급으로! 검증된 학습법</p>
+        </div>
+
+        <div class="intro">
+            <h2>🎯 학습 목표</h2>
+            <p><strong>비문학 독서</strong>를 잘하기 위해서는 다음 3단계가 필요합니다:</p>
+            <div class="three-steps">
+                <ol>
+                    <li><strong>문해력</strong> - 글을 제대로 읽을 수 있는 능력</li>
+                    <li><strong>독해 스킬</strong> - 지문을 빠르게 파악할 수 있는 기술</li>
+                    <li><strong>문제풀이 스킬</strong> - 문제를 정확하게 풀 수 있는 전략</li>
+                </ol>
+            </div>
+            <p>오늘은 그 중에서도 가장 기본이 되는 <strong>문해력 향상 훈련법</strong>을 소개합니다.</p>
+        </div>
+
+        <div class="method">
+            <div class="method-header">
+                <div class="method-number">1</div>
+                <div class="method-title">단어 제대로 이해하기</div>
+            </div>
+            <div class="method-content">
+                <p>국어도 모르는 단어가 있으면 반드시 공부해야 합니다. 영어와 마찬가지로 어휘력이 독해력의 기초가 됩니다.</p>
+                
+                <h4>📝 실천 방법</h4>
+                <ul class="key-points">
+                    <li>지문을 읽다가 모르는 단어가 나오면 <strong>파란색 펜</strong>으로 표시</li>
+                    <li>사전에서 정확한 뜻을 찾아 적기</li>
+                    <li>꼬리에 꼬리를 물며 모르는 단어가 없을 때까지 검색</li>
+                    <li>"대충 아는 것"은 "아는 것"이 아님을 명심</li>
+                </ul>
+
+                <div class="example">
+                    <h5>💡 예시</h5>
+                    <p><strong>"기축통화는 국제거래 결제 수단으로 통용되고..."</strong></p>
+                    <p>→ "통용"이 무슨 뜻인가? → "일반적으로 두루 쓰임"</p>
+                    <p>→ "기축통화"는? → "국제 간의 결제나 금융 거래의 기본이 되는 화폐"</p>
+                </div>
+
+                <div class="highlight">
+                    <strong>💡 핵심 포인트:</strong> 단어의 뜻을 물어봤을 때 바로 구체적으로 설명할 수 있어야 진짜 아는 것입니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="method">
+            <div class="method-header">
+                <div class="method-number">2</div>
+                <div class="method-title">문장 쪼개고 덧붙이기</div>
+            </div>
+            <div class="method-content">
+                <p>긴 문장을 한 번에 이해하려 하지 말고, 핵심 내용을 먼저 파악한 후 나머지를 덧붙이는 연습을 합니다.</p>
+                
+                <h4>🔧 훈련 방법</h4>
+                <ul class="key-points">
+                    <li>주어와 술어를 먼저 찾기</li>
+                    <li>수식어구와 부연설명 분리하기</li>
+                    <li>핵심 내용 → 덧붙인 내용 순으로 파악</li>
+                </ul>
+
+                <div class="example">
+                    <h5>📖 예시 문장 분석</h5>
+                    <p><strong>원문:</strong> "현대 사회에서 급속도로 발전하는 과학 기술은 인간의 수명 연장과 생활의 편리성을 크게 향상시키는 측면이 있는 반면에..."</p>
+                    <p><strong>핵심:</strong> 과학 기술은 → (좋은 측면도 있지만...)</p>
+                    <p><strong>덧붙임:</strong> "현대 사회에서 급속도로 발전하는"</p>
+                </div>
+
+                <div class="tip">
+                    <strong>🎯 주의사항:</strong> 표시하는 것에만 집중하지 말고, 문장 구조를 생각하며 훈련하는 것이 중요합니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="method">
+            <div class="method-header">
+                <div class="method-number">3</div>
+                <div class="method-title">내 식대로 풀이해서 설명해보기</div>
+            </div>
+            <div class="method-content">
+                <p>어려운 문장을 자신만의 쉬운 언어로 풀어서 설명하는 연습입니다. 진정한 이해의 척도는 "설명할 수 있는가"입니다.</p>
+                
+                <h4>🗣️ 실천 방법</h4>
+                <ul class="key-points">
+                    <li>초등학생에게 설명한다고 생각하고 말하기</li>
+                    <li>구체적인 예시를 들어가며 설명</li>
+                    <li>머릿속으로만 하지 말고 실제로 소리 내어 말하기</li>
+                    <li>설명이 막히는 부분은 완전히 이해하지 못한 부분</li>
+                </ul>
+
+                <div class="example">
+                    <h5>🔬 예시: 과학 지문 설명</h5>
+                    <p><strong>원문:</strong> "만성적인 스트레스 노출은 해마 영역의 신경 세포를 감소시켜 기억력 저하와 정서적 불안정을 초래할 수 있다."</p>
+                    <p><strong>쉬운 설명:</strong> "매일매일 스트레스를 받다 보면, 뇌의 해마라는 부분에 있는 세포들이 죽어버려. 그러면 평소에 잘 기억하던 것도 자꾸 까먹게 되고, 별 것 아닌 일에도 갑자기 우울해지거나 짜증이 나게 되는 거야."</p>
+                </div>
+
+                <div class="highlight">
+                    <strong>⏰ 권장 시간:</strong> 매일 30분씩 꾸준히 연습하면 큰 효과를 볼 수 있습니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="method">
+            <div class="method-header">
+                <div class="method-number">4</div>
+                <div class="method-title">이미지화 하기</div>
+            </div>
+            <div class="method-content">
+                <p>특히 과학·기술 지문에서 효과적인 방법입니다. 추상적인 내용을 시각적으로 구체화하여 이해도를 높입니다.</p>
+                
+                <h4>🎨 적용 방법</h4>
+                <ul class="key-points">
+                    <li>머릿속으로 이미지를 그려보기</li>
+                    <li>상상이 안 되면 손으로 간단히 그림 그리기</li>
+                    <li>과학 현상, 기술 원리 등에 특히 유용</li>
+                    <li>시각적 기억으로 장기 기억에 도움</li>
+                </ul>
+
+                <div class="example">
+                    <h5>🌍 예시: 환경 지문</h5>
+                    <p><strong>내용:</strong> "온실가스 농도 증가 → 극지방 빙하 융해 → 해수면 상승 → 연안 지역 피해"</p>
+                    <p><strong>이미지화:</strong></p>
+                    <p>1. 지구 위에 대기층 그리기</p>
+                    <p>2. 온실가스가 증가하는 모습</p>
+                    <p>3. 빙하가 점점 녹아내리는 과정</p>
+                    <p>4. 바다 수위가 높아지는 모습</p>
+                    <p>5. 연안 마을이 물에 잠기는 상황</p>
+                </div>
+
+                <div class="tip">
+                    <strong>🎯 활용 팁:</strong> 처음에는 그림을 그리며 연습하고, 나중에는 머릿속으로만 해도 이해가 잘 되도록 훈련합니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="method">
+            <div class="method-header">
+                <div class="method-number">5</div>
+                <div class="method-title">구조화 도식화 하기</div>
+            </div>
+            <div class="method-content">
+                <p>역사, 정치, 법 또는 복잡한 논리 구조가 나오는 지문에 효과적입니다. 내용 간의 관계와 흐름을 시각적으로 정리합니다.</p>
+                
+                <h4>📊 구조화 방법</h4>
+                <ul class="key-points">
+                    <li>여러 내용 간의 관계 파악</li>
+                    <li>논리적 흐름 도표로 표현</li>
+                    <li>대립, 통합, 발전 과정 등을 도식화</li>
+                    <li>복잡한 개념도 단순하게 정리</li>
+                </ul>
+
+                <div class="example">
+                    <h5>🏛️ 예시: 철학 지문 (변증법)</h5>
+                    <p><strong>개념:</strong> 정립 → 반정립 → 종합</p>
+                    <p><strong>구조화:</strong></p>
+                    <p>• 정립과 반정립이 대립적 관계</p>
+                    <p>• 두 개념이 조화롭게 통일</p>
+                    <p>• 상위 단계인 '종합'으로 발전</p>
+                    <p>• 이것이 변증법의 수렴적 상향성</p>
+                </div>
+
+                <div class="highlight">
+                    <strong>🔍 핵심:</strong> 복잡해 보이는 내용도 구조를 파악하면 이해하기 쉬워집니다. 평소 연습이 중요합니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <h3>🎯 성공의 핵심: 꾸준한 실천</h3>
+            <p>이 방법들을 실제로 적용한 학생들은 모두 성적이 향상되었습니다.</p>
+            <p>하지만 가장 중요한 것은 <strong>매일 꾸준히 하는 것</strong>입니다.</p>
+            <p>하루에 30분~1시간씩만 투자해도 충분한 효과를 볼 수 있습니다.</p>
+            <p><strong>지금 당장 시작하세요!</strong> 하루에 지문 10개를 몰아서 하는 것보다 매일 조금씩 꾸준히 하는 것이 훨씬 효과적입니다.</p>
+        </div>
+    </div>
+</body>
+</html>
