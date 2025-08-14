@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국연구재단 관련 국정과제 분석 보고서</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c5282, #3182ce);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .executive-summary {
+            background: #e6f3ff;
+            border-left: 5px solid #3182ce;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .executive-summary h2 {
+            color: #2c5282;
+            margin-top: 0;
+        }
+        .task-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .task-header {
+            background: linear-gradient(90deg, #4a5568, #2d3748);
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .priority-high {
+            background: linear-gradient(90deg, #c53030, #e53e3e);
+        }
+        .priority-medium {
+            background: linear-gradient(90deg, #dd6b20, #ed8936);
+        }
+        .task-content {
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h4 {
+            color: #2d3748;
+            margin: 0 0 10px 0;
+            padding: 8px 12px;
+            background: #f7fafc;
+            border-left: 4px solid #3182ce;
+            border-radius: 4px;
+        }
+        .section-content {
+            padding: 10px 15px;
+            background: #fafafa;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .section-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background: #ffd700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .nrf-info {
+            background: #f0f8ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .nrf-info h3 {
+            color: #1a365d;
+            margin-top: 0;
+        }
+        .methodology {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .methodology h3 {
+            color: #2d3748;
+            margin-top: 0;
+        }
+        .tag {
+            display: inline-block;
+            background: #3182ce;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+        .relevance-score {
+            float: right;
+            background: #fed7d7;
+            color: #c53030;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .high-score { background: #c6f6d5; color: #2f855a; }
+        .medium-score { background: #feebc8; color: #c05621; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>한국연구재단 관련 국정과제 분석 보고서</h1>
+            <p>이재명 정부 123개 국정과제 중 NRF와의 관련성 분석</p>
+        </div>
+        
+        <div class="content">
+            <div class="executive-summary">
+                <h2>🎯 요약보고</h2>
+                <p><strong>한국연구재단(NRF)</strong>의 미션과 역할을 종합 분석한 결과, 이재명 정부의 123개 국정과제 중 <span class="highlight">7개 과제가 직접적 관련성</span>을 보이며, 특히 <strong>과학기술 혁신과 기초연구 생태계 조성 분야</strong>에서 핵심적 역할을 수행할 것으로 예상됩니다.</p>
+                
+                <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2em; color: #e53e3e; font-weight: bold;">3개</div>
+                        <div>최우선 관련과제</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2em; color: #dd6b20; font-weight: bold;">4개</div>
+                        <div>중요 관련과제</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2em; color: #3182ce; font-weight: bold;">100%</div>
+                        <div>R&D·인재양성 집중도</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nrf-info">
+                <h3>📋 한국연구재단(NRF) 개요</h3>
+                <p><strong>설립목적:</strong> 전 학문분야를 아우르는 국가 기초연구지원시스템의 효율화 및 선진화</p>
+                <p><strong>미션:</strong> 창의적 연구와 미래인재 양성으로 지식·가치 창출과 인류 사회 발전에 기여</p>
+                <p><strong>비전:</strong> 학술•연구의 생태계 혁신을 이끄는 글로벌 리더</p>
+                <p><strong>주요기능:</strong></p>
+                <ul>
+                    <li>과학기술분야 기초연구사업 기획·평가·관리 (2.6조원 규모)</li>
+                    <li>인문사회분야 학술연구사업 지원 (2,810억원 규모)</li>
+                    <li>국책연구사업 및 연구진흥·인재양성사업 추진</li>
+                    <li>국제협력연구사업 및 학문후속세대 지원</li>
+                    <li>한국학술지인용색인(KCI) 운영 및 학술정보 서비스</li>
+                </ul>
+                <div style="margin-top: 15px;">
+                    <span class="tag">과학기술정보통신부 산하</span>
+                    <span class="tag">위탁집행형 준정부기관</span>
+                    <span class="tag">2009년 설립</span>
+                    <span class="tag">연구관리전문기관</span>
+                </div>
+            </div>
+
+            <div class="methodology">
+                <h3>🔍 분석 방법론</h3>
+                <p>NRF의 설립목적, 주요기능, 담당업무를 기준으로 123개 국정과제와의 연관성을 다음 기준으로 평가하였습니다:</p>
+                <ul>
+                    <li><strong>직접적 관련성:</strong> 기초연구, 과학기술혁신, 인재양성 등 NRF의 핵심 업무 영역</li>
+                    <li><strong>간접적 관련성:</strong> AI·디지털 기술, 교육혁신 등 NRF 업무와 연계 가능한 영역</li>
+                    <li><strong>추진체계 적합성:</strong> 과학기술정보통신부, 교육부 등 관련 부처 소관 과제</li>
+                </ul>
+            </div>
+
+            <!-- 최우선 관련과제 -->
+            <div class="task-card">
+                <div class="task-header priority-high">
+                    🔥 최우선 관련과제 1: 과학기술 5대강국 실현을 위한 시스템 혁신 (과제 26번)
+                    <span class="relevance-score high-score">관련성 98%</span>
+                </div>
+                <div class="task-content">
+                    <div class="section">
+                        <h4>📝 질의 요지</h4>
+                        <div class="section-content">
+                            과학기술 5대강국 달성을 위한 R&D 시스템 혁신에서 한국연구재단의 역할과 구체적인 기여 방안은 무엇인가?
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>💡 답변 요지</h4>
+                        <div class="section-content">
+                            NRF는 <span class="highlight">국가 R&D 시스템의 핵심 허브</span>로서 연구관리 혁신, 평가체계 고도화, 국제협력 확대를 통해 과학기술 5대강국 실현의 기반을 마련할 것입니다. 특히 기초연구 투자 확대와 연구생태계 혁신을 선도하겠습니다.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>📊 답변 근거</h4>
+                        <div class="section-content">
+                            <ul>
+                                <li>NRF의 설립목적: "국가 기초연구지원시스템의 효율화 및 선진화"</li>
+                                <li>주요기능: 전 학문분야 연구사업 기획·평가·관리 전담</li>
+                                <li>과학기술분야 기초연구사업 2.6조원 규모 관리 경험</li>
+                                <li>과학기술정보통신부 산하 기관으로서 정책 연계성 확보</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>🚀 향후 구체적인 계획 예상</h4>
+                        <div class="section-content">
+                            <ul>
+                                <li><strong>2025-2027:</strong> 기초연구 예산 30% 확대 및 연구자 중심 지원체계 구축</li>
+                                <li><strong>시스템 혁신:</strong> AI 기반 연구관리시스템 도입, 범부처 R&D 통합관리 강화</li>
+                                <li><strong>국제협력:</strong> 글로벌 연구재단과의 전략적 파트너십 확대</li>
+                                <li><strong>인재양성:</strong> 차세대 과학기술 리더 1만명 양성 프로그램 신설</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-header priority-high">
+                    🔥 최우선 관련과제 2: 기초연구 생태계 조성과 과학기술 인재강국 실현 (과제 27번)
+                    <span class="relevance-score high-score">관련성 100%</span>
+                </div>
+                <div class="task-content">
+                    <div class="section">
+                        <h4>📝 질의 요지</h4>
+                        <div class="section-content">
+                            기초연구 생태계 조성과 과학기술 인재강국 실현에서 NRF가 담당할 핵심 역할과 추진 전략은?
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>💡 답변 요지</h4>
+                        <div class="section-content">
+                            NRF는 <span class="highlight">기초연구 생태계의 컨트롤타워</span>로서 기초연구 투자 확대, 연구자 자율성 보장, 학문후속세대 체계적 양성을 통해 창의적 연구환경을 조성하고 글로벌 수준의 과학기술 인재를 육성할 것입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>📊 답변 근거</h4>
+                        <div class="section-content">
+                            <ul>
+                                <li>기초연구사업 25,911억원 규모 운영 실적</li>
+                                <li>학문후속세대지원: 석·박사과정생 연구장려금, 박사후 연수 등 체계적 프로그램</li>
+                                <li>연구진흥 및 인재양성사업 42,678억원 규모 관리</li>
+                                <li>국내외 연구기관·단체 간 교류협력 지원 경험</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>🚀 향후 구체적인 계획 예상</h4>
+                        <div class="section-content">
+                            <ul>
+                                <li><strong>기초연구 확대:</strong> GDP 대비 기초연구 투자비율 1.5% 달성 지원</li>
+                                <li><strong>인재양성:</strong> 박사급 연구인력 연간 3,000명 양성 목표</li>
+                                <li><strong>연구환경:</strong> 연구자 중심의 자율적 연구환경 조성</li>
+                                <li><strong>국제화:</strong> 해외 우수 연구기관과의 공동연구 프로그램 확대</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-header priority-high">
+                    🔥 최우선 관련과제 3: 세계를 선도할 넥스트(NEXT) 전략기술 육성 (과제 28번)
+                    <span class="relevance-score high-score">관련성 85%</span>
+                </div>
+                <div class="task-content">
+                    <div class="section">
+                        <h4>📝 질의 요지</h4>
+                        <div class="section-content">
+                            차세대 전략기술 육성에서 NRF의 기초연구 지원 역할과 미래기술 발굴·육성 방안은?
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>💡 답변 요지</h4>
+                        <div class="section-content">
+                            NRF는 <span class="highlight">미래 전략기술의 기초연구 토대 구축</span> 역할을 담당하여 양자기술, 바이오, 우주항공 등 차세대 기술 분야의 기초연구를 체계적으로 지원하고, 창의도전연구사업을 통해 혁신적 아이디어를 발굴·육성할 것입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>🚀 향후 구체적인 계획 예상</h4>
+                        <div class="section-content">
+                            <ul>
+                                <li><strong>전략기술 연구:</strong> 차세대 전략기술 분야 기초연구 집중 투자</li>
+                                <li><strong>창의연구:</strong> 고위험-고수익 창의도전연구 확대</li>
+                                <li><strong>융합연구:</strong> 학제간 융합연구센터 확대 운영</li>
+                                <li><strong>글로벌 협력:</strong> 국제공동연구 프로그램을 통한 기술경쟁력 확보</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-header priority-medium">
+                    ⚡ 중요 관련과제 1: AI 3대 강국 도약을 위한 AI고속도로 구축 (과제 20번)
+                    <span class="relevance-score medium-score">관련성 70%</span>
+                </div>
+                <div class="task-content">
+                    <div class="section">
+                        <h4>📝 질의 요지</h4>
+                        <div class="section-content">
+                            AI 3대 강국 달성에서 NRF가 AI 기초연구 및 인재양성 분야에서 기여할 방안은?
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>💡 답변 요지</h4>
+                        <div class="section-content">
+                            NRF는 <span class="highlight">AI 기초연구의 든든한 뒷받침</span> 역할을 수행하여 AI 알고리즘, 머신러닝 이론 등 핵심 기초연구를 지원하고, AI 전문인력 양성을 위한 학문후속세대 프로그램을 확대 운영할 것입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-header priority-medium">
+                    ⚡ 중요 관련과제 2: 초격차 AI 선도기술·인재 확보 (과제 22번)
+                    <span class="relevance-score medium-score">관련성 68%</span>
+                </div>
+                <div class="task-content">
+                    <div class="section">
+                        <h4>📝 질의 요지</h4>
+                        <div class="section-content">
+                            AI 선도기술 확보와 인재 육성에서 NRF의 기초연구 지원 및 인재양성 프로그램 역할은?
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>💡 답변 요지</h4>
+                        <div class="section-content">
+                            NRF는 AI 분야 <span class="highlight">기초연구 강화와 우수인재 발굴</span>을 통해 AI 원천기술 확보의 토대를 마련하고, 글로벌 수준의 AI 연구인력 양성을 위한 지원체계를 구축할 것입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-header priority-medium">
+                    ⚡ 중요 관련과제 3: AI 디지털시대 미래인재 양성 (과제 99번)
+                    <span class="relevance-score medium-score">관련성 75%</span>
+                </div>
+                <div class="task-content">
+                    <div class="section">
+                        <h4>📝 질의 요지</h4>
+                        <div class="section-content">
+                            AI 디지털시대 미래인재 양성에서 NRF가 고등교육 및 연구인력 양성 분야에서 담당할 역할은?
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>💡 답변 요지</h4>
+                        <div class="section-content">
+                            NRF는 <span class="highlight">대학 연구역량 강화와 융합인재 양성</span>을 통해 AI·디지털 시대에 적합한 창의적 연구인력을 체계적으로 육성하고, 산학연 협력을 통한 실무형 인재 양성을 지원할 것입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-header priority-medium">
+                    ⚡ 중요 관련과제 4: 시민교육 강화로 전인적 역량 함양 (과제 100번)
+                    <span class="relevance-score medium-score">관련성 60%</span>
+                </div>
+                <div class="task-content">
+                    <div class="section">
+                        <h4>📝 질의 요지</h4>
+                        <div class="section-content">
+                            시민교육 강화에서 NRF가 인문사회분야 연구지원을 통해 기여할 방안은?
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>💡 답변 요지</h4>
+                        <div class="section-content">
+                            NRF는 <span class="highlight">인문사회분야 학술연구 지원</span>을 통해 시민교육의 이론적 기반을 제공하고, 교육학, 사회학 등 관련 분야 연구를 활성화하여 전인적 역량 함양을 위한 학문적 토대를 마련할 것입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #e6fffa; border: 1px solid #81e6d9; border-radius: 8px; padding: 20px; margin-top: 30px;">
+                <h3 style="color: #234e52; margin-top: 0;">📈 결론 및 제언</h3>
+                <p>한국연구재단은 이재명 정부의 과학기술 혁신과 인재강국 실현의 <strong>핵심 실행기관</strong>으로서 다음과 같은 역할을 수행할 것으로 예상됩니다:</p>
+                <ul>
+                    <li><strong>연구생태계 혁신:</strong> 기초연구 투자 확대와 연구자 중심 지원체계 구축으로 창의적 연구환경 조성</li>
+                    <li><strong>인재양성 확대:</strong> 학문후속세대 지원 강화와 글로벌 수준의 연구인력 양성 프로그램 운영</li>
+                    <li><strong>국제협력 확대:</strong> 해외 우수 연구기관과의 전략적 파트너십을 통한 글로벌 연구네트워크 구축</li>
+                    <li><strong>융합연구 촉진:</strong> 학제간 융합연구 활성화로 미래 전략기술 확보의 기초 마련</li>
+                    <li><strong>평가체계 혁신:</strong> AI 기반 연구관리시스템 도입과 성과중심 평가체계 고도화</li>
+                </ul>
+                <p style="margin-bottom: 0;"><strong>향후 5년간 NRF는 국가 R&D 시스템의 혁신을 주도하며, 과학기술 5대강국 실현의 든든한 기반을 마련하게 될 것입니다.</strong></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
