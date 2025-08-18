@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공주 박물관 테마 여행 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        h2 {
+            color: #4a5568;
+            border-left: 5px solid #667eea;
+            padding-left: 15px;
+            margin: 30px 0 20px 0;
+            font-size: 1.5em;
+        }
+        
+        h3 {
+            color: #2d3748;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-table th {
+            background-color: #667eea;
+            color: white;
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .schedule-table td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        .schedule-table tr:hover {
+            background-color: #f7fafc;
+        }
+        
+        .time {
+            background-color: #edf2f7;
+            font-weight: bold;
+            color: #2d3748;
+            white-space: nowrap;
+            width: 120px;
+        }
+        
+        .highlight {
+            background-color: #fff5cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f6e05e;
+            margin: 15px 0;
+        }
+        
+        .museum-guide {
+            background-color: #f0fff4;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #68d391;
+            margin: 20px 0;
+        }
+        
+        .museum-guide h4 {
+            color: #22543d;
+            margin-bottom: 10px;
+        }
+        
+        .tips {
+            background-color: #e6fffa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4fd1c7;
+            margin: 15px 0;
+        }
+        
+        .tips h4 {
+            color: #2c7a7b;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .day-header {
+            background: linear-gradient(90deg, #4299e1 0%, #667eea 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .warning {
+            background-color: #fed7d7;
+            border: 1px solid #fc8181;
+            color: #742a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .address {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .schedule-table {
+                font-size: 0.9em;
+            }
+            
+            .schedule-table th,
+            .schedule-table td {
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛️ 공주 박물관 테마 여행</h1>
+            <div class="subtitle">백제의 역사와 선사시대를 만나는 1박 2일 여행</div>
+            <div class="subtitle">📅 2025년 10월 9일(목) - 10월 10일(금)</div>
+        </header>
+
+        <div class="highlight">
+            <strong>🎯 여행 테마:</strong> 고고학 전공 희망 중학생을 위한 박물관 집중 탐방<br>
+            <strong>🚗 출발지:</strong> 북수원 → 공주<br>
+            <strong>👨‍👩‍👦 참여자:</strong> 가족 3명 (중학교 2학년 남학생 + 부모)
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ 교통 주의사항:</strong> 10월 9일은 한글날 공휴일로 오전 교통량이 많을 수 있습니다. 평소보다 30분 일찍 출발하시는 것을 권장합니다.
+        </div>
+
+        <div class="day-header">
+            📅 1일차: 웅진백제의 심장부를 만나다 (10월 9일, 목)
+        </div>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>시간</th>
+                    <th>활동 내용</th>
+                    <th>세부 정보 및 팁</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time">09:00</td>
+                    <td><strong>북수원에서 출발</strong></td>
+                    <td>
+                        • 예상 소요 시간: 약 1시간 30분 ~ 2시간<br>
+                        • 한글날 공휴일 교통 상황을 고려해 여유롭게 출발
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time">11:30</td>
+                    <td><strong>점심 식사 (공주 시내)</strong></td>
+                    <td>
+                        • <strong>추천 메뉴:</strong> 공주 칼국수, 공산성 근처 한식<br>
+                        • 박물관 관람 전 든든하게 식사를 먼저 하는 것을 추천
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time">13:00</td>
+                    <td><strong>국립공주박물관 관람</strong></td>
+                    <td>
+                        <span class="address">📍 충남 공주시 관광단지길 34</span><br>
+                        • 무령왕릉에서 출토된 국보급 유물들의 '진품' 관람<br>
+                        • 화려한 금제관식, 진묘수 등 백제 예술의 정수 확인<br>
+                        • 휴관일: 설날/추석 당일, 매주 월요일 (한글날은 정상 운영)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time">15:00</td>
+                    <td><strong>송산리 고분군 (무령왕릉) 탐방</strong></td>
+                    <td>
+                        <span class="address">📍 충남 공주시 왕릉로 37 (국립공주박물관 바로 옆)</span><br>
+                        • 실물과 똑같이 재현된 무덤 내부 전시관 체험<br>
+                        • 백제 왕릉의 구조를 이해하기에 최적
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time">17:00</td>
+                    <td><strong>숙소 체크인 및 휴식</strong></td>
+                    <td>
+                        • <strong>추천 지역:</strong> 공산성 또는 박물관 단지 근처<br>
+                        • 동선이 편리한 위치의 숙소 선택
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time">18:30</td>
+                    <td><strong>저녁 식사 및 공산성 야간 관람</strong></td>
+                    <td>
+                        • 공주 특산물인 밤을 이용한 한정식 추천<br>
+                        • 🌙 저녁 식사 후 조명이 켜진 공산성 성곽 산책<br>
+                        • 금강과 어우러진 야경 감상 (야간 개장 시간 확인 필요)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="day-header">
+            📅 2일차: 선사시대로 떠나는 시간 여행 (10월 10일, 금)
+        </div>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>시간</th>
+                    <th>활동 내용</th>
+                    <th>세부 정보 및 팁</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time">09:30</td>
+                    <td><strong>체크아웃 후 이동</strong></td>
+                    <td>숙소에서 체크아웃 후 다음 목적지로 이동</td>
+                </tr>
+                <tr>
+                    <td class="time">10:00</td>
+                    <td><strong>석장리박물관 관람</strong></td>
+                    <td>
+                        <span class="address">📍 충남 공주시 금벽로 990</span><br>
+                        • 한반도 구석기 시대의 역사가 시작된 곳<br>
+                        • 야외 움집 등 생활상 재현 시설 관람<br>
+                        • 금강을 바라보는 경치도 일품<br>
+                        • 휴관일: 설날/추석 당일, 매주 월요일
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time">12:30</td>
+                    <td><strong>점심 식사</strong></td>
+                    <td>석장리박물관 근처나 금강변 경치 좋은 식당/카페</td>
+                </tr>
+                <tr>
+                    <td class="time">14:00</td>
+                    <td><strong>충청남도 역사박물관 (선택)</strong></td>
+                    <td>
+                        <span class="address">📍 충남 공주시 대추골1길 18-9</span><br>
+                        • 조선시대 충청감영의 중심지였던 공주의 역사<br>
+                        • 규모가 크지 않아 가볍게 들르기 좋음
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time">15:30</td>
+                    <td><strong>수원으로 출발</strong></td>
+                    <td>금요일 오후 교통량을 고려하여 조금 서둘러 출발 권장</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>🎯 고고학 전공 희망자를 위한 특별 관람 포인트</h2>
+
+        <div class="museum-guide">
+            <h3>1. 국립공주박물관: 웅진백제, 그 화려함의 증거</h3>
+            <h4>🔍 고고학 전공자를 위한 관람 포인트:</h4>
+            <ul>
+                <li><strong>무령왕릉 출토품의 제작 기법과 재료 분석:</strong><br>
+                    금 알갱이를 붙여 문양을 만든 '누금 기법(Granulation)', 금실을 꼬아 만든 '타출 기법' 등 백제 장인들의 금속 공예 기술 수준 관찰</li>
+                <li><strong>유물의 '출처'를 통한 국제 교류망 추적:</strong><br>
+                    중국 남조 청자, 일본산 금송 목관, 동남아시아 유리구슬 등을 통해 5~6세기 백제의 해상 교역 허브 역할 이해</li>
+                <li><strong>유물의 '용도'와 '배치'를 통한 의례 연구:</strong><br>
+                    두침(머리 받침), 족좌(발 받침) 등의 배치를 통해 백제인들의 내세관과 장례 의례 연구</li>
+            </ul>
+        </div>
+
+        <div class="museum-guide">
+            <h3>2. 송산리 고분군 (무령왕릉): 무덤, 고대의 타임캡슐</h3>
+            <h4>🔍 고고학 전공자를 위한 관람 포인트:</h4>
+            <ul>
+                <li><strong>무덤의 '구조와 축조 방식' 이해:</strong><br>
+                    전축분(벽돌무덤)과 석실분(돌방무덤)의 차이점과 변천사 관찰</li>
+                <li><strong>'지석(무덤 주인공의 신분증)'의 발견 의미:</strong><br>
+                    문헌 기록과 고고학 자료를 결합하는 '역사 고고학'의 중요성 이해</li>
+                <li><strong>유물 배치 복원도 관찰:</strong><br>
+                    발굴 당시 유물 배치를 통한 피장자의 삶과 장례 절차 복원 과정 학습</li>
+            </ul>
+        </div>
+
+        <div class="museum-guide">
+            <h3>3. 석장리박물관: 한반도 구석기 시대를 열다</h3>
+            <h4>🔍 고고학 전공자를 위한 관람 포인트:</h4>
+            <ul>
+                <li><strong>'퇴적층(Stratigraphy)'의 이해:</strong><br>
+                    여러 시대의 문화층이 차곡차곡 쌓인 층위학의 원리 학습</li>
+                <li><strong>'석기(뗀석기)'의 종류와 제작 기술 관찰:</strong><br>
+                    주먹도끼, 찍개, 긁개 등을 통한 초기 인류의 도구 발달사 이해</li>
+                <li><strong>'자연환경 복원'의 과정 상상하기:</strong><br>
+                    동물 뼈, 꽃가루 분석을 통한 수만 년 전 기후와 생태 환경 복원 과정 이해</li>
+            </ul>
+        </div>
+
+        <h2>📋 효과적인 박물관 관람법</h2>
+
+        <div class="tips">
+            <h4>📚 관람 전 준비</h4>
+            <ul>
+                <li>박물관 홈페이지에서 전시 구성과 주요 전시품 미리 확인</li>
+                <li>관람 맵(지도)과 주요 정보 다운로드 또는 입장 시 안내 데스크에서 수령</li>
+                <li>관람하고자 하는 테마나 관심 전시를 미리 선정</li>
+            </ul>
+        </div>
+
+        <div class="tips">
+            <h4>👀 관람 중 실천</h4>
+            <ul>
+                <li>박물관 입구 안내문과 전시 자료를 먼저 읽어 전체 흐름 파악</li>
+                <li>오디오 가이드, 해설사 프로그램, 모바일 앱 등 해설 서비스 적극 활용</li>
+                <li>중요한 전시품은 메모하거나 사진(허용 구역 한정)으로 기록</li>
+                <li>휴식 공간을 활용해 체력 관리</li>
+            </ul>
+        </div>
+
+        <div class="tips">
+            <h4>📝 관람 후 복습</h4>
+            <ul>
+                <li>워크북이나 가이드북을 이용해 관람 내용 정리</li>
+                <li>교과서와 연관된 내용 찾아 학습 효과 극대화</li>
+                <li>궁금한 점은 해설사에게 직접 질문하여 해결</li>
+            </ul>
+        </div>
+
+        <h2>💡 맞춤형 여행 팁</h2>
+
+        <div class="highlight">
+            <ul>
+                <li><strong>국립공주박물관, 공산성, 무령왕릉</strong>은 모두 웅진백제 유적지(세계유산)로 고고학 전공 희망 학생에게 최적</li>
+                <li>주말 공산성에서는 <strong>수문병 교대식</strong> 등 행사 관람 가능 (시즌별 운영)</li>
+                <li>가족 단위로 <strong>'유적 발굴 과정', '왕릉 발굴 이야기'</strong> 등을 미리 브리핑하면 더 풍부한 체험 가능</li>
+                <li>차량 이동 기준으로 접근성이 매우 좋음 (대중교통은 불편)</li>
+                <li>한옥마을, 박물관, 고분군 간 거리가 짧아 이동이 편리</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background-color: #f7fafc; border-radius: 10px;">
+            <h3>🎉 즐겁고 유익한 공주 박물관 여행 되세요! 🎉</h3>
+            <p>백제의 역사 속으로 깊이 빠져드는 소중한 경험이 되길 바랍니다.</p>
+        </div>
+    </div>
+</body>
+</html>
