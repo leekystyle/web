@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공공기관 경영평가 제도 개선 및 성과연봉제 폐지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563EB 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            color: #ffffff;
+        }
+
+        .header .meta {
+            text-align: right;
+            font-size: 16px;
+            color: #e2e8f0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #2563EB;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #1e40af;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "📋";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .content {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .problem-list {
+            margin: 20px 0;
+        }
+
+        .problem-item {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 3px solid #f59e0b;
+        }
+
+        .problem-item h4 {
+            color: #1e40af;
+            font-size: 15px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .priority-high {
+            border-left-color: #ef4444;
+        }
+
+        .priority-medium {
+            border-left-color: #f59e0b;
+        }
+
+        .priority-low {
+            border-left-color: #10b981;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+            border: 1px solid #2563EB;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .summary-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .summary-section h2 {
+            color: #059669;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-section h2::before {
+            content: "💡";
+            margin-right: 8px;
+        }
+
+        .grade-table {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .grade-item {
+            display: inline-block;
+            background: white;
+            padding: 8px 12px;
+            margin: 3px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .solution-box h4 {
+            color: #92400e;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .impact-section {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .impact-section h4 {
+            color: #b91c1c;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 12px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>공공기관 경영평가 제도 개선</h1>
+                <div class="subtitle">효율적 운영을 위한 제도 혁신 방안</div>
+            </div>
+            <div class="meta">
+                <div>정책 분석 보고서</div>
+                <div>2024.08</div>
+            </div>
+        </div>
+
+        <div class="summary-section">
+            <h2>핵심 요약</h2>
+            <div class="content">
+                현재 공공기관 경영평가 제도는 매년 실시되면서 기관 운영의 비효율을 야기하고 있습니다. 
+                본사 조직의 비대화와 사업소 정원 부족 문제가 심각하며, 간부 직원의 성과연봉제로 인한 
+                업무 스트레스와 승진 기피 현상이 인재 양성을 저해하고 있습니다.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">1. 공공기관 경영평가 제도 개선</div>
+            
+            <div class="content">
+                공공기관 경영평가는 매년 실시되고 있으며, 이로 인한 공공기관의 실질적인 비효율이 다수 발생하고 있습니다. 
+                특히 경영평가를 위한 본사 조직의 비대화와 사업소 조직의 정원 부족 문제가 심각한 상황입니다.
+            </div>
+
+            <div class="problem-list">
+                <div class="problem-item priority-high">
+                    <h4>첫째, 경영평가 성과급 지급 문제</h4>
+                    <div class="content">
+                        현재 평가 등급에 따른 성과급 지급 방식의 문제점과 개선 필요성
+                    </div>
+                    <div class="grade-table">
+                        <strong>현재 등급별 성과급:</strong>
+                        <span class="grade-item">S등급 300%</span>
+                        <span class="grade-item">A등급 240%</span>
+                        <span class="grade-item">B등급 180%</span>
+                        <span class="grade-item">C등급 120%</span>
+                        <span class="grade-item">D등급 0%</span>
+                    </div>
+                    <div class="solution-box">
+                        <h4>🎯 개선방안</h4>
+                        <div>공공기관장의 3년 임기를 고려하여 2년 6개월에 한 번씩 평가 실시. 
+                        2년간은 기존 200% 상여금을 지급하고, 2년 6개월마다 현행 등급별 성과급을 적용하는 방식으로 전환</div>
+                    </div>
+                </div>
+
+                <div class="problem-item priority-medium">
+                    <h4>둘째, 경영평가 실적 기간 산정 문제</h4>
+                    <div class="content">
+                        매년 연초부터 연말까지 일괄적인 평가 진행으로 인한 문제점 존재
+                    </div>
+                    <div class="solution-box">
+                        <h4>🎯 개선방안</h4>
+                        <div>2년 6개월 주기 평가로 변경하여 공공기관의 비효율적 업무 해결</div>
+                    </div>
+                </div>
+
+                <div class="problem-item priority-medium">
+                    <h4>셋째, 경영평가 전문가 선정 문제</h4>
+                    <div class="content">
+                        현재 교수, 회계사, 변호사 등 평가 전문가들이 해당 공공기관과 사전 연구사업 및 특혜성 지원 관계 형성
+                    </div>
+                    <div class="solution-box">
+                        <h4>🎯 개선방안</h4>
+                        <div>해당 공공기관과 연구사업 등 관계가 있는 전문가는 해당 기관 평가에서 제외</div>
+                    </div>
+                </div>
+
+                <div class="problem-item priority-low">
+                    <h4>넷째, 공공기관 경영평가 분류 문제</h4>
+                    <div class="content">
+                        공공기관 설립 목적에 따른 사업 추진보다 항목별 배점에 따른 일관된 평가 진행
+                    </div>
+                    <div class="solution-box">
+                        <h4>🎯 개선방안</h4>
+                        <div>공공기관의 설립 목적에 맞는 배점 기준 마련 및 공기업 특성에 따른 시장형 공기업 지정 철회</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">2. 공공기관 간부 직원의 성과연봉제 폐지</div>
+            
+            <div class="content">
+                2014년 박근혜 정권에서 시작된 성과연봉제가 문재인 정부를 거쳐 윤석열 정부까지 지속되고 있으나, 
+                직무성과급제로 변경될 뿐 근본적인 폐지는 이루어지지 않고 있습니다.
+            </div>
+
+            <div class="impact-section">
+                <h4>⚠️ 현재 문제점</h4>
+                <div class="content">
+                    <strong>개인 평가에 따른 성과급 격차</strong>로 업무 스트레스 지수가 높아지고, 
+                    승진에 따른 괴롭힘 발생 환경이 조성되어 초급간부 응시율이 저하되고 있습니다.
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="content">
+                    <strong>유능한 인재들의 초급간부 회피 현상</strong>이 확산되어 공공기관의 성장을 저해하고 
+                    인재 양성에 부정적 영향을 미치고 있어 제도의 전면적 개선이 시급한 상황입니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-section">
+            <h2>결론 및 제언</h2>
+            <div class="content">
+                공공기관의 효율적 운영과 인재 양성을 위해서는 경영평가 제도의 주기적 개선과 
+                성과연봉제의 단계적 폐지가 필요합니다. 이를 통해 공공기관 본연의 역할 수행에 
+                집중할 수 있는 환경을 조성해야 합니다.
+            </div>
+        </div>
+
+        <div class="footer">
+            공공기관 경영평가 제도 개선 방안 | 정책연구 자료
+        </div>
+    </div>
+</body>
+</html>
