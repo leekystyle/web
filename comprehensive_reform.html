@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공공기관 경영평가 제도 종합 개선방안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #334155;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563EB, #1e40af);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .header .subtitle {
+            font-size: 18px;
+            color: #e2e8f0;
+            margin-top: 10px;
+        }
+
+        .header .meta {
+            text-align: right;
+            font-size: 16px;
+            color: #e2e8f0;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #1e40af;
+            font-weight: bold;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            font-size: 28px;
+        }
+
+        .diagnosis .section-title::before { content: "📊"; }
+        .conflict .section-title::before { content: "🔄"; }
+        .solution .section-title::before { content: "🎯"; }
+        .effect .section-title::before { content: "📈"; }
+        .conclusion .section-title::before { content: "🔍"; }
+
+        .problem-list {
+            margin: 20px 0;
+        }
+
+        .problem-item {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-left: 4px solid #ef4444;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .problem-item h4 {
+            color: #dc2626;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .option-card {
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .option-1 {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid #ef4444;
+        }
+
+        .option-2 {
+            background: linear-gradient(135deg, #f0f9ff, #dbeafe);
+            border: 2px solid #2563EB;
+        }
+
+        .option-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .option-1 .option-title {
+            color: #dc2626;
+        }
+
+        .option-2 .option-title {
+            color: #1e40af;
+        }
+
+        .pros-cons {
+            margin: 16px 0;
+        }
+
+        .pros, .cons {
+            margin: 12px 0;
+        }
+
+        .pros h5 {
+            color: #059669;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pros h5::before {
+            content: "✅";
+        }
+
+        .cons h5 {
+            color: #dc2626;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cons h5::before {
+            content: "❌";
+        }
+
+        .bullet-point {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bullet-point::before {
+            content: "•";
+            color: #2563EB;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .stage-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .stage-card {
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .stage-1 {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .stage-2 {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #2563EB;
+        }
+
+        .stage-3 {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-left: 4px solid #10b981;
+        }
+
+        .stage-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stage-1 .stage-title {
+            color: #92400e;
+        }
+
+        .stage-2 .stage-title {
+            color: #1e40af;
+        }
+
+        .stage-3 .stage-title {
+            color: #065f46;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 2px solid #2563EB;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .highlight-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 12px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .principle-item {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid #cbd5e1;
+        }
+
+        .principle-title {
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .effect-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .effect-card {
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .quantitative {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid #10b981;
+        }
+
+        .qualitative {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .effect-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantitative .effect-title {
+            color: #065f46;
+        }
+
+        .qualitative .effect-title {
+            color: #92400e;
+        }
+
+        .conclusion-section {
+            background: linear-gradient(135deg, #1e293b, #475569);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .conclusion-section h2 {
+            color: #fbbf24;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .emphasis {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        .number-badge {
+            display: inline-block;
+            background: #2563EB;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container,
+            .effect-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>공공기관 경영평가 제도<br>종합 개선방안</h1>
+                <div class="subtitle">4개 정책제안서 종합분석 및 통합 개선안</div>
+            </div>
+            <div class="meta">
+                <div>종합 정책 보고서</div>
+                <div>2024.08</div>
+            </div>
+        </div>
+
+        <div class="section diagnosis">
+            <div class="section-title">현황 진단 및 문제점 종합</div>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">공통으로 지적되는 핵심 문제점</div>
+                <p>4개 정책제안서에서 공통적으로 지적하는 근본적 문제점들을 종합 분석하였습니다.</p>
+            </div>
+
+            <div class="problem-list">
+                <div class="problem-item">
+                    <h4>1. 비효율적 비용구조</h4>
+                    <div class="bullet-point">기재부 공공정책국과 각 기관의 경영평가 전담조직 운영으로 국가 차원의 인력 낭비</div>
+                    <div class="bullet-point">경영평가단 운영비, 고객만족도 조사 등 상당한 부대비용 발생</div>
+                </div>
+
+                <div class="problem-item">
+                    <h4>2. 낮은 동기부여 효과</h4>
+                    <div class="bullet-point">일반 직원들의 성과급이 개인별 평균 <strong>200만원 수준</strong>으로 실질적 동기요인으로 작용하지 않음</div>
+                    <div class="bullet-point">임원 외 일반 직원들의 경영평가에 대한 관심도가 매우 낮음</div>
+                </div>
+
+                <div class="problem-item">
+                    <h4>3. 본말전도 현상 심화</h4>
+                    <div class="bullet-point">지표 달성에만 집중하여 <strong>정작 중요한 업무가 후순위</strong>로 밀림</div>
+                    <div class="bullet-point">경영평가를 위한 불필요한 업무 창출로 장기적 국가이익에 반하는 결과 초래</div>
+                </div>
+
+                <div class="problem-item">
+                    <h4>4. 불공정한 보상체계</h4>
+                    <div class="bullet-point">기관장과 임원 중심의 성과급 배분으로 실제 성과 창출 주체와 보상 수혜자 간 불일치</div>
+                    <div class="bullet-point">성과 기여도 기반 차등 지급 시스템의 부재</div>
+                </div>
+
+                <div class="problem-item">
+                    <h4>5. 제도에 대한 낮은 신뢰도</h4>
+                    <div class="bullet-point">기관별 성격과 지표가 다름에도 상대평가로 인한 낮은 수용도</div>
+                    <div class="bullet-point">성과 달성 변수에 대한 통제가 불가능한 경우가 다수 존재</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section conflict">
+            <div class="section-title">상충하는 개선안 분석</div>
+            
+            <h3 style="color: #1e40af; margin: 24px 0 16px 0;">⚖️ 쟁점 1: 경영평가 제도의 존폐</h3>
+            
+            <div class="comparison-container">
+                <div class="option-card option-1">
+                    <div class="option-title">1안) 전면 폐지</div>
+                    <p style="margin-bottom: 16px;"><strong>내용:</strong> 공공기관 경영평가 제도 전면 폐지 및 관련 조직 해체</p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h5>장점</h5>
+                            <div class="bullet-point">조 단위의 예산·비용 절약효과 극대화</div>
+                            <div class="bullet-point">기관별 경영평가 업무 감소로 대국민 서비스 향상에 집중 가능</div>
+                            <div class="bullet-point">불필요한 사회적 비용 완전 제거</div>
+                            <div class="bullet-point">본말전도 현상 근본적 해결</div>
+                        </div>
+                        
+                        <div class="cons">
+                            <h5>단점</h5>
+                            <div class="bullet-point">공공기관 관리·감독 공백 발생 우려</div>
+                            <div class="bullet-point">기관 간 성과 비교 및 개선 동기 상실</div>
+                            <div class="bullet-point">기존 감독체계만으로는 한계</div>
+                            <div class="bullet-point">급진적 변화로 인한 제도적 혼란 가능성</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-card option-2">
+                    <div class="option-title">2안) 제도 개선·유지</div>
+                    <p style="margin-bottom: 16px;"><strong>내용:</strong> 기존 제도를 유지하되 평가방식, 주기, 지표 등을 대폭 개선</p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h5>장점</h5>
+                            <div class="bullet-point">기존 제도 인프라 활용으로 안정적 전환 가능</div>
+                            <div class="bullet-point">공공기관 성과관리 체계 지속 유지</div>
+                            <div class="bullet-point">점진적 개선을 통한 부작용 최소화</div>
+                            <div class="bullet-point">국제적 공공부문 성과관리 트렌드와 부합</div>
+                        </div>
+                        
+                        <div class="cons">
+                            <h5>단점</h5>
+                            <div class="bullet-point">근본적 비용구조 문제 해결에 한계</div>
+                            <div class="bullet-point">제도 개선 과정에서 추가 비용 발생 가능</div>
+                            <div class="bullet-point">기존 문제점들의 완전한 해결 보장 어려움</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: #1e40af; margin: 24px 0 16px 0;">⚖️ 쟁점 2: 평가 주기 조정</h3>
+            
+            <div class="comparison-container">
+                <div class="option-card option-1">
+                    <div class="option-title">현행 유지 (연 1회)</div>
+                    <div class="pros">
+                        <h5>장점</h5>
+                        <div class="bullet-point">기존 시스템 활용</div>
+                        <div class="bullet-point">연간 성과관리 체계 유지</div>
+                    </div>
+                    <div class="cons">
+                        <h5>단점</h5>
+                        <div class="bullet-point">단기성과 중심 평가의 한계 지속</div>
+                    </div>
+                </div>
+
+                <div class="option-card option-2">
+                    <div class="option-title">2년 6개월 주기</div>
+                    <div class="pros">
+                        <h5>장점</h5>
+                        <div class="bullet-point">기관장 3년 임기를 고려한 현실적 평가 주기</div>
+                        <div class="bullet-point">중장기 성과 관리 가능</div>
+                        <div class="bullet-point">평가 업무 부담 경감</div>
+                    </div>
+                    <div class="cons">
+                        <h5>단점</h5>
+                        <div class="bullet-point">성과관리 공백기 발생 우려</div>
+                        <div class="bullet-point">연간 예산 편성과의 연계성 약화</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section solution">
+            <div class="section-title">종합 개선방안 (권고안)</div>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">🎯 단계별 추진 전략</div>
+                <p>제도의 안정성을 유지하면서도 효율성과 공정성을 대폭 개선하는 점진적 접근법을 제안합니다.</p>
+            </div>
+
+            <div class="stage-container">
+                <div class="stage-card stage-1">
+                    <div class="stage-title">1단계: 즉시 추진 (6개월 내)</div>
+                    <div class="bullet-point"><strong>평가 주기 조정:</strong> 2년 6개월 주기로 변경</div>
+                    <div class="bullet-point"><strong>성과급 배분 개선:</strong> 기관장/임원과 일반직원 성과급 산정 기준 분리</div>
+                    <div class="bullet-point"><strong>차등 지급 시스템:</strong> 팀별 성과, 개인 실적, 협업도 기반 차등 지급</div>
+                    <div class="bullet-point"><strong>평가 전문가 선정 기준 강화:</strong> 해당 기관과 연구사업 등 관계 있는 전문가 제외</div>
+                </div>
+
+                <div class="stage-card stage-2">
+                    <div class="stage-title">2단계: 중기 개선 (1-2년)</div>
+                    <div class="bullet-point"><strong>미션 중심 평가 병행 도입:</strong> 기존 경영평가와 병행하여 '미션 이행 점검' 시스템 구축</div>
+                    <div class="bullet-point"><strong>기관 존치/개편 판단 기준:</strong> 설립 목적 대비 실효성 평가 기준 마련</div>
+                    <div class="bullet-point"><strong>기관장 전용 평가지표:</strong> 리더십, 조직문화 개선, 이해관계자 만족도 등 정성적 지표 중심</div>
+                    <div class="bullet-point"><strong>평가 투명성 강화:</strong> 성과급 지급 기준과 결과 공개, 평가 피드백 공유</div>
+                </div>
+
+                <div class="stage-card stage-3">
+                    <div class="stage-title">3단계: 장기 혁신 (3-5년)</div>
+                    <div class="bullet-point"><strong>제도 통합 및 간소화:</strong> 주무부처 중심의 간소화된 평가체계로 전환</div>
+                    <div class="bullet-point"><strong>기재부 역할 축소:</strong> 공공정책국의 역할을 정책조정 및 제도 운영으로 축소</div>
+                    <div class="bullet-point"><strong>성과연봉제 개선:</strong> 개인평가 격차로 인한 업무 스트레스 완화 방안 마련</div>
+                    <div class="bullet-point"><strong>팀 단위 평가 확대:</strong> 팀 단위 성과 평가 비중 확대</div>
+                </div>
+            </div>
+
+            <h3 style="color: #1e40af; margin: 32px 0 16px 0;">🎯 핵심 개선 원칙</h3>
+            
+            <div class="principles-grid">
+                <div class="principle-item">
+                    <div class="principle-title">비용 효율성</div>
+                    <div>조 단위 예산 절약을 위한 조직 및 절차 간소화</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-title">공정성</div>
+                    <div>성과 창출 주체와 보상 수혜자 간 일치</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-title">투명성</div>
+                    <div>평가 기준, 과정, 결과의 투명한 공개</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-title">실효성</div>
+                    <div>기관 본연의 임무 수행에 집중할 수 있는 평가체계</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-title">지속가능성</div>
+                    <div>장기적 관점에서 안정적으로 운영 가능한 시스템</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section effect">
+            <div class="section-title">기대효과</div>
+            
+            <div class="effect-grid">
+                <div class="effect-card quantitative">
+                    <div class="effect-title">📊 정량적 효과</div>
+                    <div class="bullet-point"><strong>예산 절감:</strong> 경영평가 관련 직접 비용 연간 수백억원 절약</div>
+                    <div class="bullet-point"><strong>인력 효율화:</strong> 각 기관별 경영평가 전담 인력의 본업 복귀</div>
+                    <div class="bullet-point"><strong>성과급 형평성:</strong> 실제 성과 기여자에 대한 정당한 보상 실현</div>
+                </div>
+
+                <div class="effect-card qualitative">
+                    <div class="effect-title">🎯 정성적 효과</div>
+                    <div class="bullet-point"><strong>조직문화 개선:</strong> 과도한 수치 중심 경영문화에서 탈피</div>
+                    <div class="bullet-point"><strong>국민 신뢰 제고:</strong> 공공기관 운영의 투명성과 합리성 향상</div>
+                    <div class="bullet-point"><strong>정책 품질 향상:</strong> 기관 본연의 임무에 집중하여 국민이 체감하는 성과 증대</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion-section">
+            <h2>🔍 결론 및 제언</h2>
+            <p style="font-size: 16px; line-height: 1.8; margin-bottom: 24px;">
+                공공기관 경영평가 제도는 <span class="emphasis">전면 폐지보다는 근본적 개선</span>을 통해 본래 목적에 부합하도록 혁신해야 합니다. 
+                단계별 접근을 통해 제도의 안정성을 유지하면서도 효율성과 공정성을 대폭 개선할 수 있을 것입니다.
+            </p>
+            <p style="font-size: 16px; line-height: 1.8;">
+                특히 <span class="emphasis">미션 중심 평가 도입</span>과 <span class="emphasis">성과급 배분의 공정성 확보</span>를 통해 
+                공공기관이 국민을 위한 본연의 역할에 충실할 수 있는 환경을 조성하는 것이 핵심입니다.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
