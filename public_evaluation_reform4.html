@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공공기관 경영평가 제도의 문제점과 개선방안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563EB, #1e40af);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .date-source {
+            font-size: 16px;
+            color: #e2e8f0;
+            text-align: right;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #2563EB;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #1e40af;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "📋";
+            margin-right: 10px;
+        }
+
+        .status-section .section-title::before {
+            content: "📊";
+        }
+
+        .problems-section .section-title::before {
+            content: "⚠️";
+        }
+
+        .solutions-section .section-title::before {
+            content: "💡";
+        }
+
+        .effects-section .section-title::before {
+            content: "🎯";
+        }
+
+        .content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .problem-item {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .problem-title {
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 10px;
+        }
+
+        .solution-item {
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .solution-title {
+            font-weight: bold;
+            color: #0284c7;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #f59e0b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-title {
+            font-weight: bold;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+
+        .current-status {
+            background: #f1f5f9;
+            border-left: 4px solid #475569;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .bullet-point {
+            margin: 8px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .bullet-point::before {
+            content: "•";
+            color: #2563EB;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .emphasis {
+            color: #1e40af;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #64748b;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">공공기관 경영평가 제도의<br>문제점과 개선방안</div>
+            <div class="date-source">
+                2025년 8월<br>
+                정책 분석 보고서
+            </div>
+        </div>
+
+        <div class="section status-section">
+            <div class="section-title">현재 운영 현황</div>
+            <div class="content">
+                <div class="current-status">
+                    <p>현재 대한민국은 <span class="emphasis">기획재정부 공공정책국</span>이 중심이 되어 공공기관운영에관한 법률에 따라 모든 공공기관에 대한 경영평가를 실시하고 있습니다.</p>
+                </div>
+                <p>공공기관과 공공서비스에 대한 평가의 필요성은 인정되지만, 현재의 방식은 비효율적이며 부작용이 더 많은 상황입니다. 이미 공무원과 공공기관은 예산과 인력 통제, 국회 국정감사, 감사원, 총리실, 주무부처 등의 다양한 감독을 받고 있어 중복적인 측면이 존재합니다.</p>
+            </div>
+        </div>
+
+        <div class="section problems-section">
+            <div class="section-title">주요 문제점 분석</div>
+            <div class="content">
+                <div class="problem-item">
+                    <div class="problem-title">1. 비효율적인 비용 구조</div>
+                    <div class="bullet-point">공무원, 공공기관 인력 및 예산 낭비와 평가단 교수들의 시간 낭비로 비용 대비 효익이 미흡</div>
+                    <div class="bullet-point">이미 다양한 감독체계가 존재하며, 계량지표는 숫자로 명확히 판별 가능</div>
+                    <div class="bullet-point">비계량지표들은 정부 정책이나 감독관청에서 충분히 관리 가능</div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-title">2. 낮은 직원 동기부여 효과</div>
+                    <div class="bullet-point">임원 외 일반 직원들의 경영평가에 대한 관심도가 매우 낮음</div>
+                    <div class="bullet-point">성과급이 개인별 평균 <span class="emphasis">200만원 수준</span>으로 실질적인 동기요인으로 작용하지 않음</div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-title">3. 막대한 인력 및 예산 낭비</div>
+                    <div class="bullet-point">기획재정부 공공정책국과 각 기관의 경영평가 전담조직 운영으로 국가 차원의 인력 낭비</div>
+                    <div class="bullet-point">경영평가단 운영비, 고객만족도 조사 등 상당한 부대비용 발생</div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-title">4. 불필요한 부대활동 증가</div>
+                    <div class="bullet-point">평가단 교수 주관 강연 참석, 도서 구입 등 본업과 무관한 활동</div>
+                    <div class="bullet-point">경영평가 컨설팅 이용으로 기관 인력과 예산의 비효율적 사용</div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-title">5. 제도에 대한 낮은 신뢰도</div>
+                    <div class="bullet-point">공운법상 공공기관과 그렇지 않은 기관 간의 차별적 평가</div>
+                    <div class="bullet-point">기관별 성격과 지표가 다름에도 상대평가로 인한 낮은 수용도</div>
+                    <div class="bullet-point">성과 달성 변수에 대한 통제가 불가능한 경우가 다수 존재</div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-title">6. 본말전도 현상 심화</div>
+                    <div class="bullet-point">지표 달성에만 집중하여 <span class="emphasis">정작 중요한 업무가 후순위</span>로 밀림</div>
+                    <div class="bullet-point">경영평가를 위한 불필요한 업무 창출로 장기적 국가이익에 반하는 결과 초래</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section solutions-section">
+            <div class="section-title">개선방안 제시</div>
+            <div class="content">
+                <div class="solution-item">
+                    <div class="solution-title">개선방안 1: 전면 폐지</div>
+                    <div class="bullet-point">공공기관 경영평가 제도 전면 폐지</div>
+                    <div class="bullet-point">기재부 공공정책국 및 각 기관의 경영평가 관련 조직 폐지</div>
+                    <div class="bullet-point">관련 인력을 각 기관의 본연 업무로 복귀시켜 대국민 서비스 개선</div>
+                </div>
+
+                <div class="solution-item">
+                    <div class="solution-title">개선방안 2: 간소화된 평가체계</div>
+                    <div class="bullet-point">1차적으로 주무부처에서 정책 이행도와 재무성과 중심의 평가 실시</div>
+                    <div class="bullet-point">주무부처 내에서 상대평가 후, 기재부·국무조정실·대통령실에서 감독·조정</div>
+                    <div class="bullet-point">현재보다 대폭 간소화된 평가체계 구축</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section effects-section">
+            <div class="section-title">기대 정책효과</div>
+            <div class="content">
+                <div class="highlight-box">
+                    <div class="highlight-title">종합적 효과 분석</div>
+                    <div class="bullet-point">공무원, 공기업 관련 인력 및 경영평가단 직접 예산 절감</div>
+                    <div class="bullet-point">각 기관별 경영평가 업무 감소로 대국민 서비스 향상</div>
+                    <div class="bullet-point">경평 컨설팅, 강연회 등 불필요한 사회적 비용 제거</div>
+                    <div class="bullet-point"><span class="emphasis">조 단위의 예산·비용 절약효과</span> 기대</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            본 분석은 현행 공공기관 경영평가 제도의 개선 필요성을 제시한 정책 제안서입니다.
+        </div>
+    </div>
+</body>
+</html>
