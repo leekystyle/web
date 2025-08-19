@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공공기관 경영평가 제도 개선방안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 헤더 스타일 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #2563EB, #1e40af);
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .date-source {
+            font-size: 16px;
+            color: #e2e8f0;
+            text-align: right;
+        }
+
+        /* 카드 스타일 */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* 섹션 제목 스타일 */
+        .section-title {
+            font-size: 18px;
+            color: #1e40af;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: "●";
+            color: #2563EB;
+            font-size: 20px;
+        }
+
+        /* 본문 텍스트 */
+        .content-text {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* 중요도 표시 */
+        .priority-high {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .priority-medium {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+
+        .priority-low {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* 하이라이트 박스 */
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-left: 4px solid #2563EB;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* 문제점 박스 */
+        .problem-box {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border-left: 4px solid #ef4444;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* 개선방안 박스 */
+        .solution-box {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* 넘버링 스타일 */
+        .number-badge {
+            display: inline-block;
+            background: #2563EB;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* 강조 텍스트 */
+        .emphasis {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        /* 통계 박스 */
+        .stat-box {
+            background: #475569;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        /* 결론 박스 */
+        .conclusion-box {
+            background: linear-gradient(135deg, #1e293b, #475569);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .conclusion-box h3 {
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <h1>공공기관 경영평가 제도 개선방안</h1>
+            <div class="date-source">
+                <div>2024.08.19</div>
+                <div>정책 제안서</div>
+            </div>
+        </div>
+
+        <!-- 제안 배경 -->
+        <div class="card">
+            <div class="section-title">제안 배경</div>
+            <div class="content-text">
+                공공기관 경영평가는 공기업 및 준정부기관의 연간 업무 성과를 체계적으로 평가하여 성과급 지급, 제도 개선, 정책 방향 설정에 활용되는 핵심 제도입니다. 이 제도는 공공기관의 경영 효율성과 책무성을 제고하고, 공공서비스 품질을 향상시키는 것을 목적으로 합니다.
+            </div>
+            <div class="problem-box">
+                <div class="priority-high">현재 제도의 구조적 한계</div>
+                <div class="content-text" style="margin-top: 10px;">
+                    ① 실질적 성과 창출 직원들의 노력이 충분히 보상받지 못함<br>
+                    ② 기관장과 임원 중심의 성과급 배분으로 보상 형평성 훼손<br>
+                    ③ 기관장의 리더십, 경영혁신 등이 별도 평가되지 않아 실질적 기여도 미반영
+                </div>
+            </div>
+        </div>
+
+        <!-- 현행 제도의 주요 문제점 -->
+        <div class="card">
+            <div class="section-title">현행 제도의 주요 문제점</div>
+            
+            <div class="highlight-box">
+                <span class="number-badge">1</span><strong>성과급 배분의 불균형</strong>
+                <div class="content-text" style="margin-top: 15px;">
+                    현행 제도는 기관장 및 임원에게 과도한 수준의 보상이 집중되는 구조를 갖고 있습니다.
+                </div>
+                <div class="stat-box">일반 직원: 연 평균 200만~300만원</div>
+                <div class="stat-box">기관장: 연봉 기준 수천만원</div>
+                <div class="content-text">
+                    이는 <span class="emphasis">'성과 창출 주체'와 '보상 수혜자' 간의 불일치</span>를 초래하며, 내부 구성원의 상대적 박탈감과 조직 내 불신을 심화시킵니다.
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <span class="number-badge">2</span><strong>기관장 평가 기준의 미비</strong>
+                <div class="content-text" style="margin-top: 15px;">
+                    현재의 경영평가는 조직 전체의 정량적 성과(예산 집행률, 사업 달성률 등)에만 집중되어 있어, 기관장의 고유한 역할과 리더십, 전략적 경영 능력 등을 별도로 평가하지 않습니다.
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <span class="number-badge">3</span><strong>평가 지표의 단기성과 일방성</strong>
+                <div class="content-text" style="margin-top: 15px;">
+                    경영평가 지표가 단기적 성과에 집중됨에 따라, 조직은 장기적인 전략 수립이나 지속가능한 혁신보다는 <span class="priority-medium">수치 중심의 단기 실적 달성</span>에 매몰되는 경향이 있습니다.
+                </div>
+            </div>
+        </div>
+
+        <!-- 개선방안 -->
+        <div class="card">
+            <div class="section-title">개선방안</div>
+            
+            <div class="solution-box">
+                <span class="number-badge">1</span><strong class="priority-low">성과급 배분 체계의 공정성 제고</strong>
+                <div class="content-text" style="margin-top: 15px;">
+                    <strong>성과급 산정 기준의 이원화:</strong> 기관장과 직원의 성과급 산정 기준을 명확히 분리하고, 기관장에게는 리더십, 조직개혁, 외부성과 등 정성적 지표를 중심으로 한 고유 KPI를 적용합니다.
+                </div>
+                <div class="content-text">
+                    <strong>성과기여도 기반 차등 지급 시스템:</strong> 팀별 성과, 개인 실적, 협업도, 동료 평가 등을 기반으로 성과급을 차등 지급하는 체계를 구축합니다.
+                </div>
+            </div>
+
+            <div class="solution-box">
+                <span class="number-badge">2</span><strong class="priority-low">기관장 전용 평가 지표 신설</strong>
+                <div class="content-text" style="margin-top: 15px;">
+                    <strong>기관장 전용 KPI 도입:</strong> 리더십, 경영 혁신 성과, 조직문화 개선 노력, 이해관계자 만족도, 윤리경영 등 조직 전체 발전에 기여한 고유 영역을 평가하는 별도 지표를 도입합니다.
+                </div>
+                <div class="content-text">
+                    <strong>공과(功過) 평가 제도:</strong> 기관장의 성과뿐만 아니라 조직 내 문제를 종합 평가하는 시스템을 도입하여 실질적 책임성을 강화합니다.
+                </div>
+            </div>
+
+            <div class="solution-box">
+                <span class="number-badge">3</span><strong class="priority-low">경영평가 운영의 투명성과 참여성 강화</strong>
+                <div class="content-text" style="margin-top: 15px;">
+                    <strong>다층적 평가 시스템:</strong> 내부 직원과 외부 전문가가 공동으로 참여하는 평가 시스템을 도입하여 평가의 객관성과 신뢰성을 확보합니다.
+                </div>
+                <div class="content-text">
+                    <strong>성과급 지급 내역의 투명한 공개:</strong> 기관장 및 임직원의 성과급 지급 기준과 산정 결과를 공개하고, 평가 피드백을 조직 구성원과 공유합니다.
+                </div>
+            </div>
+        </div>
+
+        <!-- 기대효과 -->
+        <div class="card">
+            <div class="section-title">기대효과</div>
+            
+            <div class="highlight-box">
+                <div class="content-text">
+                    <span class="number-badge">1</span><strong class="priority-low">조직 내 공정성 및 신뢰 회복</strong><br>
+                    성과 창출에 실질적으로 기여한 직원에게 정당한 보상이 이루어짐으로써 조직 구성원의 만족도와 신뢰가 회복되며, 자발적 성과 창출 동기가 유발됩니다.
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="content-text">
+                    <span class="number-badge">2</span><strong class="priority-low">기관장의 책임경영 강화</strong><br>
+                    기관장의 성과가 조직의 질적 성장, 공공성 강화 등으로 직결되도록 평가 체계를 개편함으로써 리더십의 책임성과 전략적 역량이 강화됩니다.
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="content-text">
+                    <span class="number-badge">3</span><strong class="priority-low">조직문화 개선 및 업무 효율성 향상</strong><br>
+                    공정한 평가 및 보상 체계를 통해 과도한 업무 강도, 수치 중심 경영, 상명하복식 조직문화가 개선되어 지속가능한 경영환경이 조성됩니다.
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="content-text">
+                    <span class="number-badge">4</span><strong class="priority-low">국민 신뢰 제고</strong><br>
+                    공공기관 경영의 투명성과 형평성이 향상됨으로써 국민의 공공부문에 대한 신뢰가 증진되고, 공공서비스에 대한 사회적 지지도 함께 제고됩니다.
+                </div>
+            </div>
+        </div>
+
+        <!-- 결론 -->
+        <div class="conclusion-box">
+            <h3>결론</h3>
+            <div class="content-text">
+                공공기관 경영평가는 단순한 연간 성과 측정이 아니라, 공공부문 조직의 지속가능성과 공공성 강화를 위한 제도적 장치입니다. 성과급 지급의 형평성 제고, 기관장 고유 평가 체계 도입, 평가 참여의 다양화 및 제도의 투명성 확보를 통해 경영평가 제도를 본래 목적에 부합하는 방향으로 개편해야 합니다.
+            </div>
+            <div class="content-text" style="margin-top: 15px;">
+                <span class="emphasis">이를 통해 공공기관은 보다 책임 있고 혁신적인 조직으로 거듭날 수 있으며, 국민에게 신뢰받는 공공서비스 제공기관으로 자리매김할 수 있을 것입니다.</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
