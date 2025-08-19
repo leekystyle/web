@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일 안 하는 공공기관, 이대로 괜찮습니까?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2563EB, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            max-width: 600px;
+        }
+
+        .date-source {
+            font-size: 16px;
+            color: #475569;
+            text-align: right;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #1e40af;
+            font-weight: bold;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "▶";
+            color: #2563EB;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #2563EB;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .fact-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+
+        .fact-title {
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .priority-high {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-left: 4px solid #ef4444;
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            margin: 8px 0;
+        }
+
+        .priority-medium {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-left: 4px solid #f59e0b;
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            margin: 8px 0;
+        }
+
+        .priority-low {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-left: 4px solid #10b981;
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            margin: 8px 0;
+        }
+
+        .step-box {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border: 2px solid #8b5cf6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #7c3aed;
+            margin-bottom: 12px;
+        }
+
+        .bullet-point {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .bullet-point::before {
+            content: "•";
+            color: #2563EB;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .action-box {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .action-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #059669;
+            margin-bottom: 12px;
+        }
+
+        .emphasis {
+            font-weight: bold;
+            color: #1e40af;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            border-left: 3px solid #64748b;
+        }
+
+        .number-badge {
+            display: inline-block;
+            background: #2563EB;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-right: 8px;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            border: 2px solid #6b7280;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .conclusion-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">일 안 하는 공공기관, 이대로 괜찮습니까?</h1>
+            <div class="date-source">
+                <div>2024년 정책 제안서</div>
+                <div>국민을 위한 개혁</div>
+            </div>
+        </div>
+
+        <div class="subtitle">
+            국민을 위한 공공기관 '미션 중심 평가' 제안
+        </div>
+
+        <div class="card">
+            <div class="section-title">제안의 핵심: 무엇을 하자는 건가요?</div>
+            <div class="highlight-box">
+                <div class="emphasis">한 문장 요약:</div> 각 법률에 의거 설립된 진흥원, 공단, 공기업 등 공공기관이 설립 목적에 맞게 제대로 일하는지 주기적으로 점검하고, 그 결과에 따라 과감히 바꾸는 시스템을 만들자는 것입니다.
+            </div>
+            
+            <p>기존의 경영평가를 넘어 사회 변화에 따른 시대적 존재 이유를 확인하는 정기적인 평가가 필요합니다. 현재 국민의 시각에서는 많은 공공기관이 국민을 위한 '임무(미션)' 수행 대신, '조직 생존' 자체를 목표로 삼고 있습니다.</p>
+            
+            <div class="priority-high">
+                <strong>평가 기준 전환:</strong> "어떻게 살아남을까?" → "주어진 임무를 완수했는가?"
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">무엇이, 얼마나 문제인가요?</div>
+            <div class="priority-high">
+                <div class="emphasis">핵심 문제:</div> 기관의 목표가 유기체와 같이 '생존'으로 바뀌었습니다. 국민 세금으로 운영되는 기관이 본래 임무는 뒷전이고, 조직의 몸집을 불리고 예산을 따내는 데만 몰두하고 있습니다.
+            </div>
+
+            <div style="margin: 20px 0; font-weight: bold; color: #1e40af;">📊 팩트 체크: 현실은 이렇습니다</div>
+
+            <div class="fact-box">
+                <div class="fact-title">팩트 ① | 엉뚱한 곳에 쓰는 돈</div>
+                <div class="bullet-point">한국사회적기업진흥원: 정작 사회적기업 지원은 부실하게 하면서 엉뚱한 곳에 예산 사용 (감사원 지적)</div>
+                <div class="bullet-point">소상공인·중소기업 지원 기관들: 경영 성과는 나쁜데도 과도한 월급과 복지 잔치 (매년 비판)</div>
+            </div>
+
+            <div class="fact-box">
+                <div class="fact-title">팩트 ② | 통계로 증명된 낭비</div>
+                <div class="bullet-point">공공기관 전체 예산 중 <span class="emphasis">무려 9%</span>가 설립 목적과 상관없는 '딴짓'에 사용 (국회 분석)</div>
+                <div class="bullet-point">국민의 세금이 줄줄 새고 있는 상황</div>
+            </div>
+
+            <div class="fact-box">
+                <div class="fact-title">팩트 ③ | 해외에서는 이미...</div>
+                <div class="bullet-point">영국: 일을 제대로 못 하던 지역개발청을 과감히 해산</div>
+                <div class="bullet-point">기준: "조직이 살아남았는가가 아니라 국민을 위한 임무를 달성했는가?"</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">왜 하필 지금일까요?</div>
+            <p>더 이상 미룰 수 없는 3가지 이유가 있습니다.</p>
+
+            <div class="priority-high">
+                <div class="number-badge">1</div><strong>재정 & 신뢰의 위기</strong><br>
+                나라 살림은 어려운데, 국민들은 "저 기관이 왜 필요한지 모르겠다"며 정부 정책에 대한 신뢰를 거두고 있습니다.
+            </div>
+
+            <div class="priority-medium">
+                <div class="number-badge">2</div><strong>개혁의 골든타임</strong><br>
+                OECD는 새 정부 출범 2년이 조직을 바꿀 가장 좋은 기회라고 강조합니다. 이 '골든타임'을 놓치면 개혁 비용과 저항은 눈덩이처럼 불어납니다.
+            </div>
+
+            <div class="priority-medium">
+                <div class="number-badge">3</div><strong>예산 편성 D-day</strong><br>
+                당장 9월에 내년도 나라 살림이 결정됩니다. 지금 점검을 시작해야 다음 해 예산안에서 '헛돈'을 걷어낼 수 있습니다.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">어떻게 바꿀 수 있나요?</div>
+            <p>뜬구름 잡는 이야기가 아닙니다. 새로운 법을 만들 필요도 없습니다. 이미 있는 법과 제도를 활용해 저비용으로, 단계적으로 추진할 수 있습니다.</p>
+
+            <div style="margin: 20px 0; font-weight: bold; color: #1e40af; text-align: center;">🎯 2-Step 실행 전략</div>
+
+            <div class="step-box">
+                <div class="step-title">STEP 1 : 저비용 '건강검진'부터 시작</div>
+                <div class="bullet-point">비싼 연구 용역 없이, 정부가 가진 데이터(ALIO, 감사원·국감 자료 등)만으로도 1차 진단 가능</div>
+                <div class="bullet-point">기관별 '미션 이행 점수표' 작성: A(우수), B(보통), C(개선시급) 등급 분류</div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-title">STEP 2 : 결과에 따른 '맞춤형 처방'</div>
+                <div class="bullet-point">진단 결과에 따라 기능 조정, 예산 재배치, 통폐합 등 구체적 조치 실행</div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="emphasis">한국사회적기업진흥원 사례</div>
+                <div class="bullet-point"><strong>진단:</strong> 중앙 기관이 현장 지원성은 떨어지는데 시설 및 인력 운영과 행정·홍보에 예산 사용</div>
+                <div class="bullet-point"><strong>처방:</strong> 행정·홍보 예산을 떼어내 전국 기초 지자체 사회적경제 지원센터 설립과 운영 예산으로 직접 이관</div>
+                <div class="bullet-point"><strong>결과:</strong> 현장 지원 속도는 2배 빨라지고, 중앙은 인증·평가 등 핵심 임무에만 집중해 효율성 극대화</div>
+            </div>
+
+            <div class="quote">
+                이미 성공한 해외 사례들이 길을 보여줍니다. 캐나다는 부실 기관을 18개월 만에 정리했고, 독일은 정부 기관의 '목적 외 지출'을 정기적으로 점검하는 시스템을 갖췄습니다.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">무엇이, 어떻게 좋아지나요?</div>
+            <p>예산 절감은 기본, 4가지 효과를 동시에 얻을 수 있습니다.</p>
+
+            <div class="priority-low">
+                <div class="number-badge">1</div><strong>예산 효율 UP</strong><br>
+                낭비되던 관리비를 현장으로 돌려 같은 돈으로 더 큰 효과를 냅니다.
+            </div>
+
+            <div class="priority-low">
+                <div class="number-badge">2</div><strong>정책 품질 UP</strong><br>
+                기관 본연의 임무에 집중해 국민이 체감하는 성과가 늘어납니다.
+            </div>
+
+            <div class="priority-low">
+                <div class="number-badge">3</div><strong>투명성·책임성 UP</strong><br>
+                평가 결과가 공개되면, 기관이 스스로 혁신하는 문화가 만들어집니다.
+            </div>
+
+            <div class="priority-low">
+                <div class="number-badge">4</div><strong>협업 시너지 UP</strong><br>
+                기능 중복이 사라져 부처 간 불필요한 조정 비용과 시간이 절약됩니다.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="conclusion-box">
+                <div class="conclusion-title">결론 및 제언</div>
+                <p>이제 공공기관의 평가 기준을 바꿔야 합니다. "어떻게 살아남을까?"가 아니라 "주어진 임무를 완수했는가?"를 물어야 합니다. 기관이 스스로 존재 이유를 증명하고, 국민은 그 결과로 평가하는 문화를 만들어야 합니다.</p>
+            </div>
+
+            <div class="action-box">
+                <div class="action-title">🎯 구체적인 다음 행동</div>
+                <p>정부는 다음 3가지를 즉시 시작해야 합니다.</p>
+                
+                <div class="bullet-point"><strong>즉시 착수:</strong> 기존 데이터(기관 경영평가)를 활용한 1차 '미션 점검'과 실효성 분석에 바로 착수할 것</div>
+                <div class="bullet-point"><strong>제도화:</strong> 이 점검을 일회성으로 끝내지 말고 정기적으로 시행하는 시스템을 구축할 것</div>
+                <div class="bullet-point"><strong>투명한 공개:</strong> 모든 평가 결과와 조치 계획을 국민에게 투명하게 공개할 것</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
