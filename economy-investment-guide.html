@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경제·경영·투자 전문성 향상을 위한 완전 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 150px;
+        }
+
+        .nav-tab:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .tab-content {
+            padding: 30px;
+            min-height: 600px;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #495057;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .book-item, .person-item, .media-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .book-item:hover, .person-item:hover, .media-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .book-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .book-author {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        .book-publisher {
+            color: #95a5a6;
+            font-size: 0.9em;
+        }
+
+        .person-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .person-title {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .person-description {
+            color: #5d6d7e;
+            line-height: 1.6;
+        }
+
+        .media-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .media-host {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .media-description {
+            color: #5d6d7e;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .category-count {
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+
+            .nav-tab {
+                flex: none;
+                min-width: 120px;
+                font-size: 14px;
+            }
+
+            .tab-content {
+                padding: 20px;
+            }
+        }
+
+        .alert {
+            background: rgba(255, 235, 59, 0.2);
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .alert strong {
+            color: #6c5700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📈 경제·경영·투자 전문성 향상 가이드</h1>
+            <p>체계적인 학습을 위한 도서, 전문가, 미디어 추천 리스트</p>
+        </div>
+
+        <div class="content">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="books">📚 도서</button>
+                <button class="nav-tab" data-tab="investment-books">💰 투자 도서</button>
+                <button class="nav-tab" data-tab="experts">👨‍💼 유명 전문가</button>
+                <button class="nav-tab" data-tab="bloggers">✍️ 재야 고수</button>
+                <button class="nav-tab" data-tab="podcasts">🎙️ 팟캐스트</button>
+                <button class="nav-tab" data-tab="youtube">📺 유튜브</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- 경제 도서 탭 -->
+                <div class="tab-pane active" id="books">
+                    <h2>📖 경제학 기초 및 이론서</h2>
+                    
+                    <h3>📊 경제의 전반적 틀과 흐름 이해 <span class="category-count">9권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">호황 VS 불황</div>
+                        <div class="book-author">군터 뒤크 저, 안성철 역</div>
+                        <div class="book-publisher">원더박스</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">도넛 경제학</div>
+                        <div class="book-author">케이트 레이워스 저, 홍기빈 역</div>
+                        <div class="book-publisher">학고재</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">복잡하지만 단순하게</div>
+                        <div class="book-author">닐 존슨 저, 한국복잡계학회 역</div>
+                        <div class="book-publisher">바다출판사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">복잡계 개론</div>
+                        <div class="book-author">채승병 저</div>
+                        <div class="book-publisher">삼성경제연구소</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">불황의 경제학</div>
+                        <div class="book-author">폴 크루그먼 저, 안진환 역</div>
+                        <div class="book-publisher">세종서적</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">신호와 소음</div>
+                        <div class="book-author">네이트 실버 저, 이경식 역</div>
+                        <div class="book-publisher">더퀘스트</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">돈은 어떻게 움직이는가</div>
+                        <div class="book-author">임경 저</div>
+                        <div class="book-publisher">생각비행</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">위기는 왜 반복되는가</div>
+                        <div class="book-author">로버트 B. 라이시 저, 안진환/박슬라 공역</div>
+                        <div class="book-publisher">김영사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">댄 애리얼리, 경제 심리학</div>
+                        <div class="book-author">댄 애리얼리 저, 김원호 역</div>
+                        <div class="book-publisher">청림출판</div>
+                    </div>
+
+                    <h3>🏭 자본주의의 본질 이해 <span class="category-count">7권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">EBS 다큐프라임 자본주의</div>
+                        <div class="book-author">EBS 자본주의 제작팀 저</div>
+                        <div class="book-publisher">가나출판사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">자본주의 4.0</div>
+                        <div class="book-author">아나톨 칼레츠키 저, 위선주 역</div>
+                        <div class="book-publisher">컬처앤스토리</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">성장숭배</div>
+                        <div class="book-author">클라이브 해밀턴 저, 김홍식 역</div>
+                        <div class="book-publisher">바오</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">보통 사람들의 전쟁</div>
+                        <div class="book-author">앤드루 양 저, 장용원 역</div>
+                        <div class="book-publisher">흐름출판</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">그들이 말하지 않는 23가지</div>
+                        <div class="book-author">장하준 저, 김희정/안세민 공역</div>
+                        <div class="book-publisher">부키</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">부는 어디에서 오는가</div>
+                        <div class="book-author">에릭 바인하커 저, 안현실/정성철 공역</div>
+                        <div class="book-publisher">알에이치코리아</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">불평등의 대가</div>
+                        <div class="book-author">조지프 스티글리츠 저, 이순희 역</div>
+                        <div class="book-publisher">열린책들</div>
+                    </div>
+
+                    <h3>📚 경제, 금융의 역사 <span class="category-count">6권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">세계 금융시장을 뒤흔든 투자 아이디어</div>
+                        <div class="book-author">피터 L. 번스타인 저, 강남규 역</div>
+                        <div class="book-publisher">이손</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">금융 투기의 역사</div>
+                        <div class="book-author">에드워드 챈슬러 저, 강남규 역</div>
+                        <div class="book-publisher">국일증권경제연구소</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">화폐전쟁</div>
+                        <div class="book-author">쑹홍빙 저, 차혜정 역</div>
+                        <div class="book-publisher">알에이치코리아</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">금융 오디세이</div>
+                        <div class="book-author">차현진 저</div>
+                        <div class="book-publisher">인물과사상사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">붕괴</div>
+                        <div class="book-author">애덤 투즈 저, 우진하 역</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">용의 지배</div>
+                        <div class="book-author">나일 퍼슨 저, 김선영 역</div>
+                        <div class="book-publisher">민음사</div>
+                    </div>
+
+                    <h3>🎓 경제학자와 이론 <span class="category-count">7권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">죽은 경제학자의 살아있는 아이디어</div>
+                        <div class="book-author">토드 부크홀츠 저, 류현 역</div>
+                        <div class="book-publisher">김영사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">세속의 철학자들</div>
+                        <div class="book-author">로버트 L. 하일브로너 저, 장상환 역</div>
+                        <div class="book-publisher">이마고</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">지금 애덤 스미스를 다시 읽는다</div>
+                        <div class="book-author">도메 다쿠오 저, 우경봉 역</div>
+                        <div class="book-publisher">동아시아</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">공산당 선언</div>
+                        <div class="book-author">칼 마르크스, 프리드리히 엥겔스 공저, 이진우 역</div>
+                        <div class="book-publisher">책세상</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">자본론 공부</div>
+                        <div class="book-author">김수행 저</div>
+                        <div class="book-publisher">돌베개</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">자본주의와 자유</div>
+                        <div class="book-author">밀턴 프리드먼 저, 심준보/변동열 공역</div>
+                        <div class="book-publisher">청어람미디어</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">21세기 자본</div>
+                        <div class="book-author">토마 피케티 저, 장경덕 역</div>
+                        <div class="book-publisher">글항아리</div>
+                    </div>
+
+                    <h3>🌍 인간의 삶과 경제 관계 <span class="category-count">4권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">총, 균, 쇠</div>
+                        <div class="book-author">재레드 다이아몬드 저, 김진준 역</div>
+                        <div class="book-publisher">문학사상</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">문명의 붕괴</div>
+                        <div class="book-author">재레드 다이아몬드 저, 강주헌 역</div>
+                        <div class="book-publisher">김영사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">사피엔스</div>
+                        <div class="book-author">유발 하라리 저, 조현욱 역</div>
+                        <div class="book-publisher">김영사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">에너지 혁명 2030</div>
+                        <div class="book-author">토니 세바 저, 박영숙 역</div>
+                        <div class="book-publisher">교보문고</div>
+                    </div>
+                </div>
+
+                <!-- 투자 도서 탭 -->
+                <div class="tab-pane" id="investment-books">
+                    <h2>💼 실전 투자 공부 도서</h2>
+
+                    <h3>🎯 투자 개념 정립 <span class="category-count">10권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">현명한 투자자</div>
+                        <div class="book-author">벤저민 그레이엄 저, 이건 역</div>
+                        <div class="book-publisher">국일증권경제연구소</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">피터 린치의 투자 이야기</div>
+                        <div class="book-author">피터 린치/존 로스차일드 공저</div>
+                        <div class="book-publisher">국일증권경제연구소</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">사이클의 법칙</div>
+                        <div class="book-author">하워드 막스 저, 이주영 역</div>
+                        <div class="book-publisher">비즈니스북스</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">통섭과 투자</div>
+                        <div class="book-author">마이클 모부신 저, 이건/오인석 공역</div>
+                        <div class="book-publisher">에프엔미디어</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">돈, 뜨겁게 사랑하고 차갑게 다루어라</div>
+                        <div class="book-author">앙드레 코스톨라니 저, 김재경 역</div>
+                        <div class="book-publisher">미래의창</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">보도 섀퍼의 돈</div>
+                        <div class="book-author">보도 섀퍼 저, 이병서 역</div>
+                        <div class="book-publisher">북플러스</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">원칙 Principles</div>
+                        <div class="book-author">레이 달리오 저, 고영태 역</div>
+                        <div class="book-publisher">한빛비즈</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">행운에 속지 마라</div>
+                        <div class="book-author">나심 니콜라스 탈레브 저, 이건 역</div>
+                        <div class="book-publisher">중앙북스</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">경제를 읽는 기술</div>
+                        <div class="book-author">조지프 엘리스 저, 이진원 역</div>
+                        <div class="book-publisher">리더스북</div>
+                    </div>
+
+                    <h3>📈 주식 투자 <span class="category-count">8권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">위대한 기업에 투자하라</div>
+                        <div class="book-author">필립 피셔 저, 박정태 역</div>
+                        <div class="book-publisher">굿모닝북스</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">시장변화를 이기는 투자</div>
+                        <div class="book-author">버튼 G. 맬킬 저, 이건/김흥식 공역</div>
+                        <div class="book-publisher">국일증권경제연구소</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">소음과 투자</div>
+                        <div class="book-author">리처드 번스타인 저, 한지영/이상민 공역</div>
+                        <div class="book-publisher">북돋움</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">문병로 교수의 메트릭 스튜디오</div>
+                        <div class="book-author">문병로 저</div>
+                        <div class="book-publisher">김영사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">가치투자, 주식황제 존 네프처럼 하라</div>
+                        <div class="book-author">존 네프/스티븐 L. 민츠 공저, 김광수 역</div>
+                        <div class="book-publisher">시대의창</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">전략적 가치투자</div>
+                        <div class="book-author">신진오 저</div>
+                        <div class="book-publisher">이콘</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">주식 시장을 이긴 전략들</div>
+                        <div class="book-author">박상우 저</div>
+                        <div class="book-publisher">도서출판 원</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">치과의사 피트씨의 똑똑한 배당주 투자</div>
+                        <div class="book-author">피트 황 저</div>
+                        <div class="book-publisher">스마트북스</div>
+                    </div>
+
+                    <h3>💎 펀드 투자 <span class="category-count">5권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">모든 주식을 소유하라</div>
+                        <div class="book-author">존 보글 저, 이은주 역</div>
+                        <div class="book-publisher">비즈니스맵</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">현명한 자산배분 투자자</div>
+                        <div class="book-author">윌리엄 번스타인 저, 김성일 역</div>
+                        <div class="book-publisher">에이지21</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">뮤추얼 펀드</div>
+                        <div class="book-author">존 보글 저, 황영기/노동래 공역</div>
+                        <div class="book-publisher">연암사</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">펀드투자 핵심 노하우</div>
+                        <div class="book-author">마경환/이관순 저</div>
+                        <div class="book-publisher">이레미디어</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">좋은 펀드 나쁜 펀드</div>
+                        <div class="book-author">신관수 저</div>
+                        <div class="book-publisher">이레미디어</div>
+                    </div>
+
+                    <h3>📊 ETF 투자 <span class="category-count">5권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">현명한 ETF 투자자</div>
+                        <div class="book-author">리처드 페리 저, 이건 역</div>
+                        <div class="book-publisher">리딩리더</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">ETF 투자 무작정 따라하기</div>
+                        <div class="book-author">윤재수 저</div>
+                        <div class="book-publisher">길벗</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">주식투자 ETF로 시작하라</div>
+                        <div class="book-author">systrader79/이성규 공저</div>
+                        <div class="book-publisher">이레미디어</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">마법의 돈 굴리기</div>
+                        <div class="book-author">김성일 저</div>
+                        <div class="book-publisher">에이지21</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">ETF 투자의 신</div>
+                        <div class="book-author">강홍보 저</div>
+                        <div class="book-publisher">한스미디어</div>
+                    </div>
+
+                    <h3>🏠 부동산 투자 <span class="category-count">7권</span></h3>
+                    <div class="book-item">
+                        <div class="book-title">대한민국 부동산 투자</div>
+                        <div class="book-author">김학렬 저</div>
+                        <div class="book-publisher">알에이치코리아</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">다시 부동산을 생각한다</div>
+                        <div class="book-author">채상욱 저</div>
+                        <div class="book-publisher">라이프런</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">부동산 투자, 흐름이 정답이다</div>
+                        <div class="book-author">김수현 저</div>
+                        <div class="book-publisher">한국경제신문</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">앞으로 10년, 대한민국 부동산</div>
+                        <div class="book-author">김장섭 저</div>
+                        <div class="book-publisher">트러스트북스</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">부동산 투자 이렇게 쉬웠어?</div>
+                        <div class="book-author">신현강 저</div>
+                        <div class="book-publisher">지혜로</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">아파트 투자의 정석</div>
+                        <div class="book-author">제네시스박 저</div>
+                        <div class="book-publisher">비즈니스북스</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">나는 부동산 싸게 사기로 했다</div>
+                        <div class="book-author">김효진 저</div>
+                        <div class="book-publisher">카멜북스</div>
+                    </div>
+                </div>
+
+                <!-- 유명 전문가 탭 -->
+                <div class="tab-pane" id="experts">
+                    <h2>👨‍💼 언론계 유명 경제 전문가</h2>
+
+                    <div class="person-item">
+                        <div class="person-name">홍춘욱</div>
+                        <div class="person-title">프리즘 투자자문 대표이사, 전 EAR Research 대표</div>
+                        <div class="person-description">
+                            <span class="highlight">숭실대학교 금융경제학과 겸임교수</span>, 대표적 애널리스트 출신의 경제 전문가입니다. 
+                            『환율의 미래』, 『50대 사건으로 보는 돈의 역사』, 『대한민국 돈의 역사』, 『머니 트렌드 2023』, 『돈의 역사는 되풀이된다』 등 
+                            다수 베스트셀러 저자입니다. 1999년부터 <strong>'홍춘욱의 시장을 보는 눈'</strong> 블로그를 운영하며 
+                            유튜브 채널 <strong>'홍춘욱의 경제강의노트'</strong>를 통해 활발히 활동 중입니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 다양하고 체계적인 경제 상식과 관점, 역사적 통찰을 바탕으로 한 경제 분석
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">한상춘</div>
+                        <div class="person-title">한국경제신문 객원논설위원</div>
+                        <div class="person-description">
+                            국제 경제에 일가견이 있는 경제 전문가입니다. 글로벌 경제 동향과 국제 정세 분석에 뛰어납니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 국제 정세와 글로벌 경제 움직임에 대한 깊이 있는 분석
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">현문학</div>
+                        <div class="person-title">매일경제 중국 전문 기자</div>
+                        <div class="person-description">
+                            중국 사회의 산업, 기업, 시장 등 다양한 경제 현황에 대한 전문적인 분석을 제공합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 중국 경제 및 비즈니스 환경에 대한 현장감 있는 정보
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">김학균</div>
+                        <div class="person-title">신영증권 리서치센터장</div>
+                        <div class="person-description">
+                            금융, 금리, 상품, 투자 전망 등 다양한 금융 분야에 대한 전문적인 분석을 제공합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 금융시장에 대한 실무진의 전문적 시각과 투자 인사이트
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">성태윤</div>
+                        <div class="person-title">연세대학교 경제학부 교수</div>
+                        <div class="person-description">
+                            경제 흐름과 전망을 통계적 수치와 함께 다양한 관점에서 분석합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 학계의 체계적 접근법과 데이터 기반 경제 분석
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">서명수</div>
+                        <div class="person-title">중앙일보 기획위원</div>
+                        <div class="person-description">
+                            투자에 대한 다양한 시각을 키워주는 칼럼을 주로 작성합니다. 
+                            <span class="highlight">'이솝투자학'</span> 시리즈로 유명합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 투자 철학과 인사이트를 쉽고 재미있게 전달하는 문체
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">김현석</div>
+                        <div class="person-title">한국경제신문 뉴욕 특파원</div>
+                        <div class="person-description">
+                            <span class="highlight">'월스트리트나우'</span> 칼럼을 통해 뉴욕 금융시장에서 발생하는 
+                            각종 이벤트의 상세 소식을 전달합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 월스트리트 현장에서의 생생한 금융시장 정보
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 재야 고수 탭 -->
+                <div class="tab-pane" id="bloggers">
+                    <h2>✍️ 재야 고수 블로거</h2>
+
+                    <div class="person-item">
+                        <div class="person-name">김성일 (지민지호아빠)</div>
+                        <div class="person-title">『마법의 돈 굴리기』 저자</div>
+                        <div class="person-description">
+                            <span class="highlight">'삶 사랑 사람(지민지호아빠)'</span> 블로그 운영자로, 
+                            자산 배분 전략과 경제 인사이트에 대한 다양한 상식을 제공합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> ETF와 자산배분 투자에 대한 실용적인 조언
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">Santacroce</div>
+                        <div class="person-title">글로벌 경제 분석가</div>
+                        <div class="person-description">
+                            <span class="highlight">'Santacroce의 세상 이야기'</span> 블로그를 통해 
+                            여러 국가들의 다양한 제도와 경제 상황을 쉽고 알차게 설명합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 글로벌 경제에 대한 폭넓은 시각과 비교 분석
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">레비앙</div>
+                        <div class="person-title">부동산 전문 블로거</div>
+                        <div class="person-description">
+                            <span class="highlight">'레비앙의 부동산 공부'</span> 블로그를 운영하며, 
+                            부동산 공부를 원하는 사람들을 위한 기초부터 중급까지의 내용을 제공합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 체계적인 부동산 투자 교육 콘텐츠
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">문선생</div>
+                        <div class="person-title">부동산·경제 뉴스 큐레이터</div>
+                        <div class="person-description">
+                            <span class="highlight">'문선생의 도시와 경제 이야기'</span> 블로그에서 
+                            부동산 관련 상식과 주요 경제 뉴스를 매일 요약하여 공유합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 매일 업데이트되는 경제 뉴스 요약과 부동산 인사이트
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">nomorebets</div>
+                        <div class="person-title">금융공학 전공자</div>
+                        <div class="person-description">
+                            <span class="highlight">'No more bets'</span> 블로그를 통해 
+                            공학자의 관점에서 경제와 금융에 대한 분석을 제공합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 정량적이고 논리적인 접근법의 경제·금융 분석
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">카난</div>
+                        <div class="person-title">경제학 전문 블로거</div>
+                        <div class="person-description">
+                            <span class="highlight">'경제학 산책'</span> 블로그에서 
+                            거시경제, 미시경제 등 경제학에 대한 폭넓은 자료를 제공합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 경제학 이론에 대한 체계적인 학습 자료
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">플레인바닐라</div>
+                        <div class="person-title">투자자문 전문가</div>
+                        <div class="person-description">
+                            <span class="highlight">'플레인바닐라투자자문'</span> 블로그에서 
+                            펀드, 해외상품 투자 등 심화 투자 정보를 제공합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 전문적인 투자 상품 분석과 포트폴리오 구성 조언
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">댕기왕자</div>
+                        <div class="person-title">개인 투자자</div>
+                        <div class="person-description">
+                            <span class="highlight">'댕기왕자의 투자 이야기'</span> 블로그에서 
+                            개인 투자자의 관점에서 주식 투자 경험을 공유합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 실제 투자 경험에 기반한 현실적인 조언
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">성용</div>
+                        <div class="person-title">재정 자립 추진자</div>
+                        <div class="person-description">
+                            <span class="highlight">'45세 F.I.R.E 프로젝트'</span> 블로그에서 
+                            매일 돈 공부와 자기계발에 대한 실천 내용을 공유합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 경제적 자립(FIRE)을 위한 구체적인 실행 방법론
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">바보 아저씨</div>
+                        <div class="person-title">『바보 아저씨의 경제 이야기』 저자</div>
+                        <div class="person-description">
+                            실생활에 도움이 되는 경제 정보를 친근하고 이해하기 쉽게 전달합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 네이버 포스트<br>
+                            <strong>추천 이유:</strong> 일상 경제에 대한 실용적이고 쉬운 설명
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">꿈꾸는 자본가</div>
+                        <div class="person-title">『토익보다 돈 공부』 저자</div>
+                        <div class="person-description">
+                            <span class="highlight">'돈이 그대를 춤추게 하라'</span> 블로그에서 
+                            주식 투자와 자기계발에 대한 이야기를 다룹니다.
+                            <br><br>
+                            <strong>플랫폰:</strong> 네이버 블로그<br>
+                            <strong>추천 이유:</strong> 투자와 자기계발의 균형잡힌 접근
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">Toriteller</div>
+                        <div class="person-title">『잘 쓰기 위한 재테크』 저자</div>
+                        <div class="person-description">
+                            <span class="highlight">'사회초년생을 위한 재테크 튜토리얼'</span>에서 
+                            재테크, 경제, 금리, 이자율 등 다양한 주제를 다룹니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 브런치<br>
+                            <strong>추천 이유:</strong> 사회초년생에게 특화된 실용적인 재테크 가이드
+                        </div>
+                    </div>
+
+                    <div class="person-item">
+                        <div class="person-name">차칸양</div>
+                        <div class="person-title">경제 교육 콘텐츠 크리에이터</div>
+                        <div class="person-description">
+                            <span class="highlight">'차칸양의 돈 걱정 없애주는 경제 이야기'</span>에서 
+                            돈 걱정 없이 살기 위해 필요한 다양한 경제 지식을 전달합니다.
+                            <br><br>
+                            <strong>플랫폼:</strong> 브런치<br>
+                            <strong>추천 이유:</strong> 경제적 안정을 위한 실생활 밀착형 조언
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 팟캐스트 탭 -->
+                <div class="tab-pane" id="podcasts">
+                    <h2>🎙️ 경제 팟캐스트</h2>
+
+                    <div class="media-item">
+                        <div class="media-title">김동환, 이진우, 정영진의 신과 함께</div>
+                        <div class="media-host">김동환(금융 전문가), 이진우(경제 기자), 정영진(방송인)</div>
+                        <div class="media-description">
+                            <span class="highlight">팟캐스트 경제 부문 부동의 1위</span> 방송입니다. 
+                            각 분야별 경제의 신들과 함께 하는 접신 방송으로, 주식 시장, 유명 경제 도서 리뷰, 
+                            미국 금리, 원자재 시장(유가), 각종 통계 분석, 부동산시장 전망 등 
+                            다양한 경제 주제를 깊이 있게 다룹니다.
+                            <br><br>
+                            현재는 <strong>'삼프로TV-경제의 신과함께'</strong>로 유튜브에서도 활동 중입니다 (구독자 50만+).
+                            평일 매일 아침 7시 30분, 저녁 6시 유튜브 생방송을 진행합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 공중파에서는 듣기 어려운 날것의 경제 정보와 전문적인 분석
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">이진우의 손에 잡히는 경제</div>
+                        <div class="media-host">이진우</div>
+                        <div class="media-description">
+                            MBC 라디오 프로그램을 팟캐스트로 제작한 방송입니다. 
+                            경제 초보자들도 쉽고 부담 없이 들을 수 있는 것이 장점입니다.
+                            <br><br>
+                            우리 실생활과 관련된 경제 정보를 알기 쉽게 설명하며, 
+                            8년 넘게 꾸준히 진행되고 있는 장수 프로그램입니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 경제 입문자를 위한 친화적이고 이해하기 쉬운 설명
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">부동산 클라우드 팟캐스트</div>
+                        <div class="media-host">부동산 전문가들</div>
+                        <div class="media-description">
+                            부동산에 대해 더욱 많은 것을 알고자 하는 사람들을 위한 전문 방송입니다.
+                            <br><br>
+                            <strong>⚠️ 참고사항:</strong> 2018년 9월부로 방송이 종료되어 더 이상 새로운 내용이 
+                            올라오지 않습니다. 그러나 기존 에피소드들을 통한 부동산 기초 학습에는 여전히 유용합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 부동산 투자 기초부터 심화까지 체계적인 교육 콘텐츠
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">발칙한 경제</div>
+                        <div class="media-host">현직 기자들</div>
+                        <div class="media-description">
+                            현직 기자들이 진행하는 팟캐스트로 다양한 경제 이야기를 재미있게 풀어냅니다.
+                            동명의 책도 출간되어 있어 팟캐스트와 함께 읽어보면 더욱 효과적입니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 기자들의 현장감 있는 경제 뉴스 해석과 배경 설명
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <strong>💡 팟캐스트 이용 팁:</strong><br>
+                        • 출퇴근 시간, 운동 시간 등을 활용하여 꾸준히 청취하세요<br>
+                        • 중요한 내용은 메모하거나 관련 자료를 추가로 찾아보세요<br>
+                        • 여러 프로그램을 번갈아 들으며 다양한 시각을 접해보세요
+                    </div>
+                </div>
+
+                <!-- 유튜브 탭 -->
+                <div class="tab-pane" id="youtube">
+                    <h2>📺 경제 유튜브 채널</h2>
+
+                    <div class="media-item">
+                        <div class="media-title">기가막힌 이야기, 이웃 이야기 (슈카)</div>
+                        <div class="media-host">슈카 (재야 고수)</div>
+                        <div class="media-description">
+                            어렵고 딱딱한 경제, 시사, 금융 이야기를 쉽고 유쾌하게 풀어내는 채널입니다.
+                            특유의 유머러스한 진행으로 복잡한 경제 개념을 재미있게 설명합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 경제 뉴스와 이슈를 재미있고 이해하기 쉽게 설명
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">정현두의 경제학 1교시</div>
+                        <div class="media-host">정현두 (전 SBS 돈워리스쿨 돈쌤)</div>
+                        <div class="media-description">
+                            SBS 돈워리스쿨의 시즌1 돈쌤이 운영하는 유튜브로, 
+                            경제 역사, 시사, 상식 등 다양한 부분에 대해 쉽게 설명합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 방송 경험을 바탕으로 한 체계적이고 교육적인 콘텐츠
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">최진기의 생존경제 (완결, 총 28편)</div>
+                        <div class="media-host">최진기</div>
+                        <div class="media-description">
+                            『지금 당장 경제공부』, 『경제 상식 오늘부터 1일』의 저자인 최진기 강사가 
+                            '오마이스쿨'에서 진행한 <span class="highlight">완전한 강의 시리즈</span>입니다.
+                            <br><br>
+                            총 28편으로 구성된 완결 시리즈로, 경제학 기초부터 심화까지 체계적으로 학습할 수 있습니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 경제학 전 과정을 체계적으로 완주할 수 있는 완결형 콘텐츠
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">단희TV</div>
+                        <div class="media-host">단희쌤 (행복 주치의)</div>
+                        <div class="media-description">
+                            <span class="highlight">'부', '힐링', '1인 기업'</span>이라는 세 가지 키워드를 중심으로 
+                            주로 부동산 관련 이야기를 다룹니다.
+                            <br><br>
+                            부동산 투자와 함께 개인의 성장과 힐링에 대한 콘텐츠도 함께 제공합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 부동산 투자와 개인 성장을 연계한 독특한 접근
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">캔들 스토리</div>
+                        <div class="media-host">캔들 스토리 팀</div>
+                        <div class="media-description">
+                            경제, 상식, 역사, 국제정세, 정치, 인문 등 <span class="highlight">다양한 경로를 통해 경제 이야기</span>를 
+                            풀어내는 것이 특징입니다.
+                            <br><br>
+                            단순한 경제 정보를 넘어 경제 현상의 배경과 맥락을 이해할 수 있도록 도와줍니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 경제에 관한 다양한 관점과 종합적 사고력 향상
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">더 나은 삶 TV / 더 나은 경제를 위해</div>
+                        <div class="media-host">더 나은 삶 TV 팀</div>
+                        <div class="media-description">
+                            더 나은 삶을 위해 <span class="highlight">더 많은 돈, 더 많은 행복, 더 많은 지식</span>을 
+                            소개하고 소통하는 채널입니다.
+                            <br><br>
+                            경제 파트만 보고 싶다면 '더 나은 경제를 위해' 채널을 별도로 구독할 수 있습니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 삶의 질 향상을 위한 종합적인 경제 정보
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">집코노미 TV</div>
+                        <div class="media-host">한국경제신문 × 한경닷컴</div>
+                        <div class="media-description">
+                            한국경제신문과 한경닷컴이 함께하는 <span class="highlight">부동산 전문 채널</span>입니다.
+                            <br><br>
+                            부동산 시장 분석, 투자 전략, 정책 변화 등 부동산과 관련된 모든 정보를 전문적으로 다룹니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 언론사의 공신력 있는 부동산 전문 정보
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">박문환 '새벽을 여는 편지'</div>
+                        <div class="media-host">박문환 이사 (필명: 샤프슈터, 하나금융투자)</div>
+                        <div class="media-description">
+                            글로벌 경제에서 발생하는 다양한 이벤트에 대한 <span class="highlight">전문적인 소견</span>을 
+                            들을 수 있는 경제 스페셜 리포트입니다.
+                            <br><br>
+                            금융투자 전문가의 관점에서 세계 경제 동향과 투자 인사이트를 제공합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 금융 전문가의 깊이 있는 글로벌 경제 분석
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">티끌모아 한솔</div>
+                        <div class="media-host">한솔</div>
+                        <div class="media-description">
+                            <span class="highlight">대학생, 사회 초년생들을 위한</span> 저축, 투자, 금융 상품, 
+                            자산 관리 방법 등에 대해 상당히 꼼꼼하고 자세하게 설명합니다.
+                            <br><br>
+                            초보자도 따라할 수 있는 실용적인 재테크 방법을 단계별로 안내합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 재테크 입문자를 위한 친절하고 상세한 가이드
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">챔CHAM, 돈 공부방</div>
+                        <div class="media-host">챔CHAM</div>
+                        <div class="media-description">
+                            경제 초보들을 위한 <span class="highlight">경제/금융 공부방</span>으로 
+                            쉬운 투자 공부와 함께 주식, ETF의 기본 개념에 대해 쉽고 자세히 설명합니다.
+                            <br><br>
+                            복잡한 금융 용어와 개념을 초보자도 이해할 수 있도록 친근하게 설명합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 투자 초보자를 위한 기초 개념 학습에 최적화
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-title">홍춘욱의 경제강의노트</div>
+                        <div class="media-host">홍춘욱 (프리즘 투자자문 대표)</div>
+                        <div class="media-description">
+                            베스트셀러 『50대 사건으로 보는 돈의 역사』, 『돈의 역사는 되풀이된다』 저자이자 
+                            <span class="highlight">28년차 이코노미스트</span>가 운영하는 채널입니다.
+                            <br><br>
+                            복잡한 경제 및 금융시장 지식을 쉽게 전달하며, 역사적 관점에서 경제를 분석합니다.
+                            <br><br>
+                            <strong>추천 이유:</strong> 전문가 수준의 경제 분석과 역사적 통찰
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <strong>🎯 유튜브 활용법:</strong><br>
+                        • 구독과 알림 설정으로 최신 콘텐츠를 놓치지 마세요<br>
+                        • 재생 목록을 만들어 체계적으로 학습하세요<br>
+                        • 댓글과 커뮤니티 기능을 통해 다른 시청자들과 소통하세요<br>
+                        • 속도 조절 기능을 활용해 자신에게 맞는 속도로 시청하세요
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>💡 지속적인 학습과 다양한 관점의 정보 습득이 경제·투자 전문성 향상의 핵심입니다.</p>
+            <p>📅 정기적으로 업데이트되는 최신 정보와 트렌드도 놓치지 마세요!</p>
+        </div>
+    </div>
+
+    <script>
+        // 탭 전환 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const panes = document.querySelectorAll('.tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.dataset.tab;
+
+                    // 모든 탭 비활성화
+                    tabs.forEach(t => t.classList.remove('active'));
+                    panes.forEach(p => p.classList.remove('active'));
+
+                    // 클릭된 탭과 해당 패널 활성화
+                    this.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
