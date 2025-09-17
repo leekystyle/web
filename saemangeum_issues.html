@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에기평 새만금 사업 문제점 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', 'Apple Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .summary-box {
+            background: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .summary-box h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .issue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .issue-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .issue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .issue-number {
+            background: #e74c3c;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .issue-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .issue-content {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .issue-impact {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+        }
+        
+        .impact-label {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .impact-text {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .financial-impact {
+            background: #fff5f5;
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .financial-amount {
+            color: #e74c3c;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .status-critical {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .status-pending {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc02;
+        }
+        
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        
+        .timeline h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .issue-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>에기평 새만금 사업 문제점 분석</h1>
+            <p>사업 추진 과정에서 발생한 주요 이슈 및 해결 과제</p>
+        </div>
+        
+        <div class="summary-box">
+            <h2>⚠️ 긴급 대응 필요</h2>
+            <p>총 4개의 핵심 문제점이 식별되었으며, 즉시 해결책 마련이 필요한 상황입니다.</p>
+        </div>
+        
+        <div class="issue-grid">
+            <div class="issue-card">
+                <div class="issue-number">1</div>
+                <div class="issue-title">PPA 전력 무료 사용 불가 문제</div>
+                <div class="issue-content">
+                    전력연구원의 풍력발전기를 통해 생산된 전기를 무료로 사용할 수 없는 상황이 발생했습니다. 
+                    이는 전체 사업 계획의 기본 전제 조건이 무너진 것을 의미합니다.
+                </div>
+                <div class="issue-impact">
+                    <span class="impact-label">영향도</span>
+                    <span class="impact-text">전체 사업 구조에 근본적 영향, 연쇄 문제 발생</span>
+                </div>
+                <span class="status-indicator status-critical">즉시 해결 필요</span>
+            </div>
+            
+            <div class="issue-card">
+                <div class="issue-number">2</div>
+                <div class="issue-title">ESS 보조사업 손해배상 위험</div>
+                <div class="issue-content">
+                    에너지공단 ESS 보조사업에 참여한 사기업이 1번 문제로 인해 무료 전기를 확보할 수 없게 되면서, 
+                    에기평을 상대로 손해배상을 청구할 수 있는 상황입니다.
+                </div>
+                <div class="financial-impact">
+                    <span class="impact-label">예상 손해액</span>
+                    <div class="financial-amount">💰 10억원</div>
+                </div>
+                <span class="status-indicator status-critical">법적 분쟁 위험</span>
+            </div>
+            
+            <div class="issue-card">
+                <div class="issue-number">3</div>
+                <div class="issue-title">BEMS 사업 자부담 문제</div>
+                <div class="issue-content">
+                    제로에너지빌딩 구축을 위한 BEMS 에너지공단 지원 사업 추진 과정에서 
+                    별도 기관운영 예산 확보 없이 진행하여 예상치 못한 비용 부담이 발생했습니다.
+                </div>
+                <div class="financial-impact">
+                    <span class="impact-label">추가 부담 비용</span>
+                    <div class="financial-amount">💸 5,000만원</div>
+                </div>
+                <span class="status-indicator status-pending">예산 조정 필요</span>
+            </div>
+            
+            <div class="issue-card">
+                <div class="issue-number">4</div>
+                <div class="issue-title">공익법인 지정 업무 지연</div>
+                <div class="issue-content">
+                    사업 종료 후 자산 인수 시 발생할 증여세 문제 해결을 위한 공익법인 지정 업무가 
+                    경영부서로 이관되면서 진행이 중단된 상황입니다.
+                </div>
+                <div class="issue-impact">
+                    <span class="impact-label">리스크</span>
+                    <span class="impact-text">자산 인수 시 막대한 증여세 부담 위험</span>
+                </div>
+                <span class="status-indicator status-pending">업무 체계 재정립 필요</span>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <h3>📋 종합 대응 방안</h3>
+            <div style="text-align: left; color: #555; line-height: 2;">
+                <p><strong>우선순위 1:</strong> PPA 전력 사용 문제 해결 방안 마련</p>
+                <p><strong>우선순위 2:</strong> 손해배상 분쟁 예방을 위한 사기업과의 협의</p>
+                <p><strong>우선순위 3:</strong> BEMS 사업 예산 확보 및 조정</p>
+                <p><strong>우선순위 4:</strong> 공익법인 지정 업무 체계 재구축</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>문서 작성일: 2025년 9월 17일 | 에기평 새만금 사업 현황 분석</p>
+        </div>
+    </div>
+</body>
+</html>
