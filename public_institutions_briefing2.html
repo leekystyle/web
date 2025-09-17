@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기후에너지환경부 공공기관 개편방안</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            color: #1e3c72;
+            margin: 0;
+            font-size: 2.4em;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #2a5298;
+            font-size: 1.3em;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            color: #1e3c72;
+            border-left: 6px solid #e74c3c;
+            padding-left: 25px;
+            margin: 35px 0 25px 0;
+            font-size: 1.6em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '🏢';
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+        
+        .institution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .institution-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .institution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+        }
+        
+        .institution-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        
+        .institution-status {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .restructure-plan {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .restructure-plan h3 {
+            margin-top: 0;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .restructure-plan h3::before {
+            content: '⚡';
+            margin-right: 10px;
+        }
+        
+        .coal-power-stats {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6348;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .stat-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .new-institutions {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #00d2ff;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #6c757d;
+            margin: 25px 0;
+            position: relative;
+            font-style: italic;
+        }
+        
+        .quote-box::before {
+            content: '"';
+            font-size: 4em;
+            color: #6c757d;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        .quote-box .speaker {
+            font-weight: 600;
+            color: #495057;
+            margin-top: 15px;
+            font-style: normal;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #e74c3c, #f39c12, #2ecc71);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            margin-left: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 25px;
+            width: 18px;
+            height: 18px;
+            background: #e74c3c;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(231, 76, 60, 0.5);
+        }
+        
+        .timeline-item:nth-child(2)::before { background: #f39c12; }
+        .timeline-item:nth-child(3)::before { background: #2ecc71; }
+        
+        .priority-box {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #ff6b9d;
+        }
+        
+        .priority-box h3 {
+            color: #ad1457;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .priority-box h3::before {
+            content: '🎯';
+            margin-right: 10px;
+        }
+        
+        .vacancy-alert {
+            background: linear-gradient(135deg, #ffd3a5, #fd9853);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #ff8c00;
+        }
+        
+        .vacancy-alert h3 {
+            color: #d84315;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .vacancy-alert h3::before {
+            content: '⚠️';
+            margin-right: 10px;
+        }
+        
+        .integration-plan {
+            background: linear-gradient(135deg, #cfd9df, #e2ebf0);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #4a6741;
+        }
+        
+        .integration-plan h3 {
+            color: #2e7d32;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .integration-plan h3::before {
+            content: '🔗';
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+            
+            .header, .content-card {
+                padding: 25px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .institution-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .timeline {
+                padding-left: 25px;
+            }
+            
+            .timeline-item {
+                margin-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>공공기관 개편 및 구조조정 방안</h1>
+            <div class="subtitle">기후에너지환경부 출범에 따른 에너지 공기업 재편계획</div>
+            <div style="color: #7f8c8d; margin-top: 15px;">김성환 장관 기자회견 (2025.9.10)</div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">석탄발전 공기업 구조조정</h2>
+            
+            <div class="coal-power-stats">
+                <h3 style="color: #c0392b; margin-top: 0;">현황 분석</h3>
+                <div class="stats-row">
+                    <div class="stat-label">석탄발전 공기업 수</div>
+                    <div class="stat-value">5개</div>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-label">공기업당 평균 석탄발전소</div>
+                    <div class="stat-value">8개</div>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-label">폐지 목표연도</div>
+                    <div class="stat-value">2040년</div>
+                </div>
+            </div>
+
+            <div class="restructure-plan">
+                <h3>구조조정 방안</h3>
+                <p><strong>현실적 과제:</strong> 2040년까지 모든 석탄발전소 폐지라는 대선공약을 현실로 만들기 위해 5개 공기업의 적정 규모 구조조정 필요</p>
+                
+                <div style="margin-top: 20px;">
+                    <p><strong>📌 방안 1:</strong> 조금씩 규모를 줄여나가는 방법</p>
+                    <p><strong>📌 방안 2:</strong> 한전 자회사 발전 공기업들을 묶어서 줄이고, 신규로 해상풍력이나 다른 재생에너지 사업을 맡을 수 있도록 전환</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                에너지 체제 개편과 거기서 일하고 있는 노동자들의 정의로운 전환 문제 역시 미루지 않고 로드맵을 바로 세워서 추진해야 될 과제라고 생각하고 있습니다.
+                <div class="speaker">- 김성환 장관</div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">신규 기관 설립 계획</h2>
+            
+            <div class="new-institutions">
+                <h3 style="color: #1565c0; margin-top: 0;">통합 지원기구 신설 필요성</h3>
+                <p>기후를 총괄하는 환경부 기후실과 실행 수단을 가진 산업부 에너지차관실 통합에 맞는 지원체계 구축</p>
+            </div>
+
+            <div class="integration-plan">
+                <h3>기존 기관 통합 방안</h3>
+                <p><strong>현재 상황:</strong> 온실가스 정보센터, 환경과학원의 기후변화 관련 기능 등이 흩어져 있음</p>
+                <p><strong>통합 목표:</strong> 보다 과학적인 분석과 대책을 세울 수 있는 통합 기구 구성</p>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 8px;">
+                    <strong>🔬 가칭: 기후과학원 또는 기후과학센터</strong><br>
+                    <small style="color: #666;">※ 다른 부처와의 합의·협의를 통해 최종 결정 예정</small>
+                </div>
+            </div>
+
+            <div class="priority-box">
+                <h3>추진 원칙</h3>
+                <p><strong>인력 증원 없이</strong> 흩어져 있는 기능을 통합하여 보다 체계적이고 전문적인 기구를 구성</p>
+                <p>→ 효율성 증대와 전문성 강화 동시 달성</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">주요 에너지 공기업 현황</h2>
+            
+            <div class="institution-grid">
+                <div class="institution-card">
+                    <div class="institution-name">한국전력공사 (KEPCO)</div>
+                    <div class="institution-status">기후에너지환경부 이관</div>
+                    <p>전력 송배전 및 전력시장 운영 총괄</p>
+                    <p>• 전력망 현대화 및 지능형 전력망 구축 주도</p>
+                    <p>• 재생에너지 시대 전력시스템 전환 핵심기관</p>
+                </div>
+                
+                <div class="institution-card">
+                    <div class="institution-name">한국수력원자력 (KHNP)</div>
+                    <div class="institution-status">기후에너지환경부 이관</div>
+                    <p>원자력 및 수력발전 운영</p>
+                    <p>• 원전 수출 사업 주력 담당</p>
+                    <p>• 양수발전을 통한 홍수조절 기능 보유</p>
+                </div>
+                
+                <div class="institution-card">
+                    <div class="institution-name">한국가스공사 (KOGAS)</div>
+                    <div class="institution-status">산업부 잔류</div>
+                    <p>천연가스 도입 및 공급 담당</p>
+                    <p>• 자원 영역과 에너지 영역 경계선상</p>
+                    <p>• 향후 협의를 통한 조정 가능성</p>
+                </div>
+                
+                <div class="institution-card">
+                    <div class="institution-name">한국석유공사 (KNOC)</div>
+                    <div class="institution-status">산업부 잔류</div>
+                    <p>석유자원 개발 및 비축 담당</p>
+                    <p>• 자원 파트로 분류되어 잔류</p>
+                    <p>• 에너지 전환 시대 역할 재정립 필요</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                개인적으로는 석유공사와 가스공사가 에너지 파트와 더 잘 협력하는게 좋겠다고 판단합니다만, 앞으로도 산업부와 기후에너지환경부는 거의 형제처럼 진행해야 되고 또 NDC 계획을 매년 점검하고 조정해야 되기 때문에 그 과정에서 가스의 수요도 충분히 조절할 수 있다.
+                <div class="speaker">- 김성환 장관</div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">원전 수출 및 해외사업</h2>
+            
+            <div class="restructure-plan">
+                <h3>수출 전략 재편</h3>
+                <p><strong>기본 방향:</strong> 한수원 중심의 수출 전략으로 전환</p>
+                
+                <div style="margin-top: 20px;">
+                    <p><strong>💡 배경:</strong> 바라카 원전 사례에서 한전이 참여하면서 적자 누적 문제 발생</p>
+                    <p><strong>🎯 목표:</strong> 한수원 중심으로 몸집을 가볍게 하면서 움직일 수 있는 수출 체계 구축</p>
+                    <p><strong>📋 추진방식:</strong> 국내 에너지믹스와 해외 수출 부문의 긴밀한 협력 체계 유지</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">공기업 인사 현안</h2>
+            
+            <div class="vacancy-alert">
+                <h3>주요 기관 공석 현황</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>한국전력공사</strong><br>
+                        사장 공석 상태 - 몇 달째 분석 중
+                    </div>
+                    <div class="timeline-item">
+                        <strong>에너지공단</strong><br>
+                        이사장 인사 완료 필요
+                    </div>
+                    <div class="timeline-item">
+                        <strong>KPS (한국발전기술)</strong><br>
+                        작년 말부터 사장 선임 지연
+                    </div>
+                    <div class="timeline-item">
+                        <strong>한국수력원자력</strong><br>
+                        사장 임기 만료 임박
+                    </div>
+                </div>
+            </div>
+
+            <div class="priority-box">
+                <h3>인사 정상화 방안</h3>
+                <p><strong>추진 계획:</strong> 정부 조직개편 완성과 함께 대통령실과 적극 협의</p>
+                <p><strong>목표:</strong> 각 자리에 꼭 맞는 인사 배치로 공기업들이 제 역할을 신속하게 수행할 수 있도록 조치</p>
+                
+                <div style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 8px;">
+                    <strong>⏰ 시급성:</strong> 전력 수급이 중요한 시기에 주요 기관 책임자 공석은 리스크 요인
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">향후 추진 계획</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>조직개편 완성 후 (10월)</strong><br>
+                    • 공기업 구조조정 세부계획 수립<br>
+                    • 주요 기관장 인사 정상화<br>
+                    • 통합 기후과학 기구 설립 검토
+                </div>
+                <div class="timeline-item">
+                    <strong>2025년 말까지</strong><br>
+                    • 석탄발전 공기업 구조조정 로드맵 확정<br>
+                    • 노동자 정의로운 전환 계획 수립<br>
+                    • 신재생에너지 사업 전환 방안 마련
+                </div>
+                <div class="timeline-item">
+                    <strong>중장기 (2030년까지)</strong><br>
+                    • 5개 석탄발전 공기업의 단계적 구조조정 실행<br>
+                    • 재생에너지 중심 공기업 체계 완성<br>
+                    • 지능형 전력망 구축을 위한 공기업 역할 재정립
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
