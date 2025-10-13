@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2차 공공기관 지방이전 지역 설정 평가 지표</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro-section {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+        
+        .intro-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        
+        .category {
+            margin-bottom: 45px;
+        }
+        
+        .category-header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .category-number {
+            background: rgba(255,255,255,0.3);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        
+        .category-title {
+            flex: 1;
+        }
+        
+        .category-title h2 {
+            font-size: 1.6em;
+            margin-bottom: 5px;
+        }
+        
+        .category-title p {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+        
+        .indicator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .indicator-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .indicator-card h3 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .indicator-icon {
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+        
+        .indicator-desc {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .sub-indicators {
+            margin-top: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #e9ecef;
+        }
+        
+        .sub-indicator-item {
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.92em;
+        }
+        
+        .sub-indicator-item:before {
+            content: "▹";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .weight-badge {
+            display: inline-block;
+            background: #ffeaa7;
+            color: #d63031;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .implementation-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        
+        .implementation-note h3 {
+            color: #856404;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .implementation-note p {
+            color: #856404;
+            line-height: 1.7;
+        }
+        
+        footer {
+            background: #2d3436;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        footer p {
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.6em;
+            }
+            
+            .indicator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>2차 공공기관 지방이전 지역 설정 평가 지표</h1>
+            <p>국토교통부 | 2차 공공기관 이전 실행지원 용역</p>
+        </header>
+        
+        <div class="content">
+            <div class="intro-section">
+                <h2>📋 평가 개요</h2>
+                <p>본 평가 지표는 지방분권균형발전법에 따른 2차 공공기관 지방이전 사업의 수립을 위해 개발되었습니다. 1차 이전 사업의 성과와 한계를 반영하여, 지역별 특성과 전략산업과의 연계성을 강화하고, 실질적인 지역경제 발전과 균형발전을 도모하기 위한 체계적인 평가 기준을 제시합니다.</p>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-number">1</div>
+                    <div class="category-title">
+                        <h2>지역경제 및 산업구조 분석</h2>
+                        <p>지역의 경제적 역량과 산업생태계 평가</p>
+                    </div>
+                </div>
+                
+                <div class="indicator-grid">
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">📊</span>지역 전략산업 연계성</h3>
+                        <p class="indicator-desc">이전 대상 공공기관의 업무 특성과 해당 지역의 전략산업 간 시너지 효과 가능성을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">산업클러스터 연계 가능성</div>
+                            <div class="sub-indicator-item">지역 특화산업과의 매칭도</div>
+                            <div class="sub-indicator-item">산학연 협력 기반 존재 여부</div>
+                        </div>
+                        <span class="weight-badge">가중치: 높음</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">💼</span>지역경제 파급효과</h3>
+                        <p class="indicator-desc">공공기관 이전으로 인한 직간접적 경제적 효과와 고용 창출 가능성을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">직접 고용 창출 규모</div>
+                            <div class="sub-indicator-item">관련 산업 동반 성장 가능성</div>
+                            <div class="sub-indicator-item">지역 내 소비 및 투자 증대 효과</div>
+                        </div>
+                        <span class="weight-badge">가중치: 높음</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🏭</span>산업기반 시설 현황</h3>
+                        <p class="indicator-desc">공공기관 운영에 필요한 산업 인프라와 협력 가능한 기업 생태계를 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">관련 산업단지 존재 여부</div>
+                            <div class="sub-indicator-item">연구개발(R&D) 인프라</div>
+                            <div class="sub-indicator-item">협력 가능 기업 및 기관 수</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-number">2</div>
+                    <div class="category-title">
+                        <h2>지역 낙후도 및 균형발전 기여도</h2>
+                        <p>국가 균형발전 목표 달성을 위한 지역 여건 평가</p>
+                    </div>
+                </div>
+                
+                <div class="indicator-grid">
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">📉</span>지역발전지수</h3>
+                        <p class="indicator-desc">인구, 경제, 사회 분야의 종합적 발전 수준을 평가하여 낙후도를 측정합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">1인당 GRDP 수준</div>
+                            <div class="sub-indicator-item">인구 증감률 및 고령화 비율</div>
+                            <div class="sub-indicator-item">재정자립도</div>
+                        </div>
+                        <span class="weight-badge">가중치: 높음</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🎓</span>인재 유출입 현황</h3>
+                        <p class="indicator-desc">지역의 인구 감소와 청년층 유출 정도를 평가하여 정주 여건 개선 필요성을 판단합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">청년층(20-39세) 순이동률</div>
+                            <div class="sub-indicator-item">대학 졸업자 역외 취업률</div>
+                            <div class="sub-indicator-item">전문인력 유입 가능성</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">⚖️</span>지역 간 균형도</h3>
+                        <p class="indicator-desc">수도권 대비 해당 지역의 상대적 발전도와 공공기관 배분 현황을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">수도권 대비 경제력 격차</div>
+                            <div class="sub-indicator-item">기존 공공기관 분포 현황</div>
+                            <div class="sub-indicator-item">광역권 내 균형 분산 필요성</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-number">3</div>
+                    <div class="category-title">
+                        <h2>이전 실행 가능성 및 정주 여건</h2>
+                        <p>신속한 이전과 안정적 운영을 위한 기반 조건 평가</p>
+                    </div>
+                </div>
+                
+                <div class="indicator-grid">
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🚄</span>교통 및 접근성</h3>
+                        <p class="indicator-desc">수도권 및 주요 거점과의 연결성과 대중교통 인프라를 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">KTX/SRT 등 광역철도 접근성</div>
+                            <div class="sub-indicator-item">고속도로 IC 접근 거리</div>
+                            <div class="sub-indicator-item">공항 접근성 및 국제선 운항</div>
+                            <div class="sub-indicator-item">대중교통 편의성</div>
+                        </div>
+                        <span class="weight-badge">가중치: 높음</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🏘️</span>주거 및 생활 인프라</h3>
+                        <p class="indicator-desc">임직원의 정주 여건과 가족의 생활 만족도를 좌우하는 기반 시설을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">양질의 주거단지 공급 가능성</div>
+                            <div class="sub-indicator-item">교육시설(초중고, 대학) 수준</div>
+                            <div class="sub-indicator-item">의료시설(종합병원) 접근성</div>
+                            <div class="sub-indicator-item">문화·여가 인프라</div>
+                        </div>
+                        <span class="weight-badge">가중치: 높음</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🏗️</span>부지 확보 용이성</h3>
+                        <p class="indicator-desc">이전 부지의 확보 가능성과 개발 여건을 평가하여 신속한 이전을 지원합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">적정 규모 부지 확보 가능성</div>
+                            <div class="sub-indicator-item">토지 보상 및 민원 발생 가능성</div>
+                            <div class="sub-indicator-item">개발제한구역 등 규제 현황</div>
+                            <div class="sub-indicator-item">기반시설 연결 비용</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">💻</span>디지털 인프라</h3>
+                        <p class="indicator-desc">정보통신 기술 발전에 대응하는 디지털 인프라와 스마트시티 조성 여건을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">초고속 통신망 구축 현황</div>
+                            <div class="sub-indicator-item">데이터센터 접근성</div>
+                            <div class="sub-indicator-item">스마트시티 관련 계획</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-number">4</div>
+                    <div class="category-title">
+                        <h2>기관 특성 및 업무 연계성</h2>
+                        <p>공공기관의 고유 업무와 지역 특성의 적합성 평가</p>
+                    </div>
+                </div>
+                
+                <div class="indicator-grid">
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🎯</span>기관 업무 특성 매칭도</h3>
+                        <p class="indicator-desc">공공기관의 핵심 업무가 해당 지역에서 효과적으로 수행될 수 있는지 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">업무의 지역 밀착성</div>
+                            <div class="sub-indicator-item">협력 대상 기관·기업 인접성</div>
+                            <div class="sub-indicator-item">업무 연속성 보장 가능성</div>
+                        </div>
+                        <span class="weight-badge">가중치: 높음</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">👥</span>필요 전문인력 확보 가능성</h3>
+                        <p class="indicator-desc">기관 운영에 필요한 전문인력의 지역 내 공급 가능성을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">관련 학과 설치 대학 존재</div>
+                            <div class="sub-indicator-item">유사 업종 인력풀 규모</div>
+                            <div class="sub-indicator-item">직업훈련 및 재교육 시설</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🤝</span>유관기관 협력체계</h3>
+                        <p class="indicator-desc">지방자치단체 및 지역 기관과의 협력 가능성과 지원 의지를 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">지자체 지원 계획 및 예산</div>
+                            <div class="sub-indicator-item">지역 대학·연구소 협력 의향</div>
+                            <div class="sub-indicator-item">민간기업 네트워크</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-number">5</div>
+                    <div class="category-title">
+                        <h2>지속가능성 및 발전 잠재력</h2>
+                        <p>장기적 관점의 지역발전 기여도와 성장 가능성 평가</p>
+                    </div>
+                </div>
+                
+                <div class="indicator-grid">
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🌱</span>지역 성장 잠재력</h3>
+                        <p class="indicator-desc">중장기적 관점에서 해당 지역의 발전 가능성과 성장 동력을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">국가 및 지역 발전계획 포함 여부</div>
+                            <div class="sub-indicator-item">신산업 육성 계획 및 투자</div>
+                            <div class="sub-indicator-item">인구 유입 및 정주 증가 추세</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">🌍</span>환경·기후 대응성</h3>
+                        <p class="indicator-desc">탄소중립 등 환경 정책 대응과 재해 안전성을 평가합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">신재생에너지 인프라</div>
+                            <div class="sub-indicator-item">친환경 교통체계</div>
+                            <div class="sub-indicator-item">자연재해 안전성</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <h3><span class="indicator-icon">📈</span>1차 이전 성과 학습</h3>
+                        <p class="indicator-desc">1차 혁신도시 사업의 성공 요인과 실패 요인을 분석하여 개선점을 반영합니다.</p>
+                        <div class="sub-indicators">
+                            <div class="sub-indicator-item">1차 이전지의 정착 성공 사례</div>
+                            <div class="sub-indicator-item">임직원 만족도 조사 결과</div>
+                            <div class="sub-indicator-item">지역경제 기여도 실증 분석</div>
+                        </div>
+                        <span class="weight-badge">가중치: 중간</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="implementation-note">
+                <h3>⚠️ 평가 운영 시 유의사항</h3>
+                <p><strong>종합평가 방식:</strong> 각 평가 지표는 독립적으로 평가되나, 최종 이전지 결정 시에는 모든 지표를 종합적으로 고려하여 판단해야 합니다. 특히 "지역 전략산업 연계성"과 "지역경제 파급효과"는 2차 이전의 핵심 목표이므로 높은 가중치를 부여합니다.</p>
+                <p><strong>이해관계자 참여:</strong> 평가 과정에서 이전 대상 공공기관, 지방자치단체, 지역 주민, 전문가 등 다양한 이해관계자의 의견을 수렴하여 공정성과 수용성을 확보해야 합니다.</p>
+                <p><strong>1차 이전 교훈 반영:</strong> 1차 공공기관 이전 과정에서 나타난 정주 여건 부족, 산업 연계 미흡 등의 문제점을 개선하고, 성공적으로 정착한 사례의 요인을 적극 반영합니다.</p>
+                <p><strong>맞춤형 평가:</strong> 공공기관의 규모, 업무 특성, 필요 인력 등에 따라 일부 지표의 가중치를 조정하여 기관별로 최적의 이전지를 선정할 수 있도록 유연성을 확보합니다.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>국토교통부 | 2차 공공기관 이전 실행지원 용역</strong></p>
+            <p>본 자료는 지방분권균형발전법에 근거하여 작성되었습니다.</p>
+            <p>© 2025 Ministry of Land, Infrastructure and Transport</p>
+        </footer>
+    </div>
+</body>
+</html>
