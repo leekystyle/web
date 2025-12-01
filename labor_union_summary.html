@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노동조합 임원 임기 만료 대응방안 - 핵심 요약</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+        
+        .summary-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .issue-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .issue-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .issue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .issue-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .issue-number {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .issue-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .issue-content {
+            padding: 25px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .status-not-found {
+            background: #fee;
+            color: #e74c3c;
+        }
+        
+        .status-possible {
+            background: #e8f8f5;
+            color: #27ae60;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #f39c12;
+        }
+        
+        .solution-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .requirement-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .requirement-list li {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+            display: flex;
+            align-items: center;
+        }
+        
+        .requirement-list li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .alert-box {
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .alert-title {
+            color: #e53e3e;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .alert-title::before {
+            content: "⚠";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+        
+        .recommendation-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .recommendation-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .recommendation-content {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .timeline-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .timeline-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: #e0e0e0;
+        }
+        
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .timeline-content strong {
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .issue-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>노동조합 임원 임기 만료 대응방안</h1>
+            <div class="subtitle">핵심 검토사항 요약</div>
+        </div>
+        
+        <div class="summary-box">
+            <h2 style="color: #2c3e50; margin-bottom: 15px; text-align: center;">📋 전체 요약</h2>
+            <p style="text-align: center; color: #555; line-height: 1.8;">
+                임원 임기 만료 시 조합 운영 공백을 최소화하기 위해 <strong style="color: #3498db;">대의원대회 의결</strong>을 통한 임시 조치 또는 
+                <strong style="color: #3498db;">비상대책위원회 구성</strong>이 가능합니다. 
+                단, <strong style="color: #e74c3c;">임기 만료 전 사전 준비가 필수</strong>입니다.
+            </p>
+        </div>
+        
+        <div class="issue-cards">
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-number">문제 1</div>
+                    <div class="issue-title">기존 임원의 임기 연장 가능 여부</div>
+                </div>
+                <div class="issue-content">
+                    <div class="status-badge status-not-found">규약에 명시 없음</div>
+                    
+                    <div class="solution-box">
+                        <div class="solution-title">💡 해결방안</div>
+                        <p><strong>대의원대회 의결</strong>을 통해 한시적 임기 연장 가능</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>근거: 규약 제16조 '기타 중요한 사항'</li>
+                            <li>근거: 규약 제19조 '조합운영 대책수립'</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-number">문제 2</div>
+                    <div class="issue-title">비상대책위원회 구성 가능 여부</div>
+                </div>
+                <div class="issue-content">
+                    <div class="status-badge status-possible">규약상 가능</div>
+                    
+                    <div class="solution-box">
+                        <div class="solution-title">💡 구성 요건</div>
+                        <ul class="requirement-list">
+                            <li>상무집행위원회 의결</li>
+                            <li>설치목적 명확화 및 조합원 공지</li>
+                            <li>위원장이 위원 임명</li>
+                            <li>상무집행위원 과반수 이상 포함</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert-box">
+                        <div class="alert-title">주의사항</div>
+                        <p>임기 만료 후에는 위원장 부재로 임명권 행사 불가 → <strong>반드시 임기 만료 전 구성 필요</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-title">🗓️ 권장 진행 순서</div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">1</div>
+                <div class="timeline-content">
+                    <strong>임기 만료 2~3주 전</strong><br>
+                    상무집행위원회 소집 및 대응방안 논의
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">2</div>
+                <div class="timeline-content">
+                    <strong>옵션 A: 대의원대회 경로</strong><br>
+                    대의원대회 소집 → 기존 임원 한시적 임기 연장 의결
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">3</div>
+                <div class="timeline-content">
+                    <strong>옵션 B: 비대위 경로</strong><br>
+                    상무집행위원회 의결 → 위원장이 비대위 구성 → 조합원 공지
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">4</div>
+                <div class="timeline-content">
+                    <strong>임기 만료 후</strong><br>
+                    비대위 또는 연장된 임원이 차기 임원 선출까지 조합 운영
+                </div>
+            </div>
+        </div>
+        
+        <div class="recommendation-box">
+            <div class="recommendation-title">🎯 최종 권고사항</div>
+            <div class="recommendation-content">
+                임기 만료 전 비상대책위원회를 미리 구성하는 것이 가장 안전하고 효율적입니다.<br>
+                비대위는 제30조에 따라 설치목적에 한정된 권한만 가지므로,<br>
+                차기 임원 선출을 최우선 과제로 신속히 진행해야 합니다.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
