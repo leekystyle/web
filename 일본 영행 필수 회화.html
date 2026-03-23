@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일본 여행 필수 회화</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --deep: #16213e;
+    --sakura: #e8a0b0;
+    --sakura-light: #f5d5dd;
+    --gold: #c9a84c;
+    --gold-light: #f0d98a;
+    --cream: #fdf8f0;
+    --paper: #faf4e8;
+    --muted: #7a7a8a;
+    --red: #c0392b;
+    --card-bg: rgba(255,255,255,0.75);
+    --shadow: 0 4px 24px rgba(26,26,46,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--cream);
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(232,160,176,0.13) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(201,168,76,0.10) 0%, transparent 40%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e8a0b0' fill-opacity='0.07'%3E%3Cpath d='M30 0 C30 0 45 15 45 30 C45 45 30 60 30 60 C30 60 15 45 15 30 C15 15 30 0 30 0Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0 0 60px 0;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--deep) 0%, #0f3460 60%, #1a1a2e 100%);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='32' fill='none' stroke='rgba(232,160,176,0.08)' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='rgba(232,160,176,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .hero-kana {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 72px;
+    color: rgba(232,160,176,0.18);
+    letter-spacing: 0.3em;
+    position: absolute;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(232,160,176,0.18);
+    border: 1px solid rgba(232,160,176,0.35);
+    color: var(--sakura);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .hero h1 span {
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+    position: relative;
+  }
+  .sakura-row {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  .sakura-row span {
+    font-size: 22px;
+    opacity: 0.75;
+    animation: float 3s ease-in-out infinite;
+  }
+  .sakura-row span:nth-child(2) { animation-delay: 0.4s; }
+  .sakura-row span:nth-child(3) { animation-delay: 0.8s; }
+  .sakura-row span:nth-child(4) { animation-delay: 1.2s; }
+  .sakura-row span:nth-child(5) { animation-delay: 1.6s; }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Section Title ── */
+  .section {
+    margin-top: 44px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow);
+  }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--deep);
+  }
+  .section-title-line {
+    height: 2px;
+    flex: 1;
+    background: linear-gradient(to right, var(--gold), transparent);
+    border-radius: 1px;
+    margin-left: 6px;
+  }
+
+  /* ── Cards ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 600px) {
+    .card-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .phrase-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    border-radius: 14px 0 0 14px;
+  }
+  .phrase-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(26,26,46,0.14);
+  }
+  .phrase-card .ko {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+  .phrase-card .romaji {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .phrase-card .jp {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* accent colors per section */
+  .accent-1 .phrase-card::before { background: linear-gradient(to bottom, #e8a0b0, #f5c6d0); }
+  .accent-2 .phrase-card::before { background: linear-gradient(to bottom, #f4a261, #f7c59f); }
+  .accent-3 .phrase-card::before { background: linear-gradient(to bottom, #52b788, #95d5b2); }
+  .accent-4 .phrase-card::before { background: linear-gradient(to bottom, #4895ef, #90e0ef); }
+  .accent-5 .phrase-card::before { background: linear-gradient(to bottom, #c77dff, #e0aaff); }
+  .accent-6 .phrase-card::before { background: linear-gradient(to bottom, #c9a84c, #f0d98a); }
+  .accent-tip .phrase-card::before { background: linear-gradient(to bottom, #c0392b, #e74c3c); }
+
+  /* icon bg colors */
+  .icon-1 { background: linear-gradient(135deg, #f9c6d0, #f5d5dd); }
+  .icon-2 { background: linear-gradient(135deg, #fde8d0, #fdd9b5); }
+  .icon-3 { background: linear-gradient(135deg, #d4efdf, #abebc6); }
+  .icon-4 { background: linear-gradient(135deg, #d6eaf8, #aed6f1); }
+  .icon-5 { background: linear-gradient(135deg, #e8d5ff, #d7bde2); }
+  .icon-6 { background: linear-gradient(135deg, #fdebd0, #f9e4b7); }
+  .icon-tip { background: linear-gradient(135deg, #ffd7d5, #ffb3ae); }
+
+  /* ── Sub-label for multi-phrase (like 인사) ── */
+  .phrase-sublabel {
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--muted);
+    display: inline-block;
+    border-radius: 20px;
+    padding: 1px 8px;
+    margin-bottom: 6px;
+    letter-spacing: 0.08em;
+  }
+  .phrase-sublabel.morning { background: #f4a261; }
+  .phrase-sublabel.noon { background: #52b788; }
+  .phrase-sublabel.evening { background: #4895ef; }
+
+  /* ── Tips ── */
+  .tip-card {
+    background: linear-gradient(135deg, #fff9f0, #fff3e0);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 14px;
+    padding: 18px 20px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: var(--shadow);
+  }
+  .tip-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .tip-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--deep);
+    margin-bottom: 4px;
+  }
+  .tip-desc {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.7;
+  }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 600px) {
+    .tips-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 60px;
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, var(--deep), #0f3460);
+    position: relative;
+    overflow: hidden;
+  }
+  .footer::before {
+    content: 'いってらっしゃい';
+    font-family: 'Shippori Mincho', serif;
+    font-size: 80px;
+    color: rgba(232,160,176,0.07);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .footer-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .footer-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    font-style: italic;
+    position: relative;
+  }
+  .footer-divider {
+    width: 48px; height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 14px auto;
+    position: relative;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-kana">日本語</div>
+  <div class="hero-badge">🇯🇵 Travel Korean Guide</div>
+  <h1>일본 여행 <span>필수 회화</span></h1>
+  <p class="hero-sub">일본 여행 중 유용하게 쓰일 수 있는 기본적인 회화 표현들을 모아 정리했습니다.</p>
+  <div class="sakura-row">
+    <span>🌸</span><span>⛩️</span><span>🗻</span><span>🍣</span><span>🌸</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 인사 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-1">👋</div>
+      <div class="section-title">인사 및 기본 표현</div>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="card-grid accent-1">
+      <div class="phrase-card">
+        <div class="ko">안녕하세요 (아침)</div>
+        <div class="phrase-sublabel morning">🌅 아침</div>
+        <div class="romaji">오하요우 고자이마스</div>
+        <div class="jp">おはようございます</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">안녕하세요 (낮)</div>
+        <div class="phrase-sublabel noon">☀️ 낮</div>
+        <div class="romaji">곤니치와</div>
+        <div class="jp">こんにちは</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">안녕하세요 (저녁)</div>
+        <div class="phrase-sublabel evening">🌙 저녁</div>
+        <div class="romaji">곤방와</div>
+        <div class="jp">こんばんは</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">감사합니다</div>
+        <div class="romaji">아리가토우 고자이마스</div>
+        <div class="jp">ありがとうございます</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">죄송합니다 / 실례합니다</div>
+        <div class="romaji">스미마셍</div>
+        <div class="jp">すみません</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">네</div>
+        <div class="romaji">하이</div>
+        <div class="jp">はい</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">아니요</div>
+        <div class="romaji">이에</div>
+        <div class="jp">いいえ</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">잘 모르겠습니다</div>
+        <div class="romaji">와카리마셍</div>
+        <div class="jp">分かりません</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 식당 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-2">🍜</div>
+      <div class="section-title">식당에서</div>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="card-grid accent-2">
+      <div class="phrase-card">
+        <div class="ko">메뉴판을 주세요</div>
+        <div class="romaji">메뉴 오 네가이시마스</div>
+        <div class="jp">メニューをお願いします</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">이것 주세요</div>
+        <div class="romaji">코레 오 네가이시마스</div>
+        <div class="jp">これをお願いします</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">물을 주세요</div>
+        <div class="romaji">미즈 오 네가이시마스</div>
+        <div class="jp">水を下さい</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">계산서를 주세요</div>
+        <div class="romaji">카이세이쇼 오 네가이시마스</div>
+        <div class="jp">会計書をお願いします</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">맛있습니다</div>
+        <div class="romaji">오이시이 데스</div>
+        <div class="jp">美味しいです</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 숙소 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-3">🏨</div>
+      <div class="section-title">숙소에서</div>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="card-grid accent-3">
+      <div class="phrase-card">
+        <div class="ko">체크인하고 싶습니다</div>
+        <div class="romaji">체크인 시타이 데스</div>
+        <div class="jp">チェックインしたいです</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">방을 바꿔주세요</div>
+        <div class="romaji">헤야 오 카에테 쿠다사이</div>
+        <div class="jp">部屋を変えてください</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">수건을 더 주세요</div>
+        <div class="romaji">테누구리 오 모우 이치 마이 쿠다사이</div>
+        <div class="jp">タオルをもう一枚ください</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 길 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-4">🗺️</div>
+      <div class="section-title">길을 물을 때</div>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="card-grid accent-4">
+      <div class="phrase-card">
+        <div class="ko">OO에 어떻게 가나요?</div>
+        <div class="romaji">OO 에 이쿠니와 도우 시마스 카?</div>
+        <div class="jp">OOに行くにはどうしますか？</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">가장 가까운 지하철역은 어디인가요?</div>
+        <div class="romaji">이치반 치카이 지카쿠 엑키와 도코 데스 카?</div>
+        <div class="jp">一番近い地下鉄駅はどこですか？</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">화장실은 어디에 있나요?</div>
+        <div class="romaji">토이레 와 도코 데스 카?</div>
+        <div class="jp">トイレはどこですか？</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 쇼핑 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-5">🛍️</div>
+      <div class="section-title">쇼핑할 때</div>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="card-grid accent-5">
+      <div class="phrase-card">
+        <div class="ko">이것 얼마예요?</div>
+        <div class="romaji">코레 와 이쿠라 데스 카?</div>
+        <div class="jp">これはいくらですか？</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">좀 깎아주실 수 있나요?</div>
+        <div class="romaji">춚토 마케테 쿠다사이마셍 카?</div>
+        <div class="jp">ちょっとまけてくれませんか？</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 기타 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-6">💬</div>
+      <div class="section-title">기타 유용한 표현</div>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="card-grid accent-6">
+      <div class="phrase-card">
+        <div class="ko">도와주세요!</div>
+        <div class="romaji">타스케테 쿠다사이</div>
+        <div class="jp">助けてください</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">천천히 말해주세요</div>
+        <div class="romaji">춚토 유쿠리 한앗테 쿠다사이</div>
+        <div class="jp">ちょっとゆっくり話してください</div>
+      </div>
+      <div class="phrase-card">
+        <div class="ko">사진 찍어주세요</div>
+        <div class="romaji">샤신 오 토ッ테 쿠다사이</div>
+        <div class="jp">写真を撮ってください</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Tips ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-tip">💡</div>
+      <div class="section-title">여행 팁</div>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="tips-grid accent-tip">
+      <div class="tip-card">
+        <div class="tip-icon">🗣️</div>
+        <div>
+          <div class="tip-title">발음</div>
+          <div class="tip-desc">정확하지 않아도 괜찮아요. 최대한 비슷하게 발음하려는 노력만으로도 의사소통이 훨씬 원활해집니다.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🙌</div>
+        <div>
+          <div class="tip-title">몸짓 활용</div>
+          <div class="tip-desc">말과 함께 손짓·몸짓을 활용하면 언어 장벽을 훨씬 효과적으로 넘을 수 있어요.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📱</div>
+        <div>
+          <div class="tip-title">번역 앱 활용</div>
+          <div class="tip-desc">번역 앱으로 문장을 검색해 현지인에게 보여주는 방법도 아주 유용합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <div class="footer-text">🌸 즐거운 일본 여행 되세요! 🌸</div>
+  <div class="footer-divider"></div>
+  <div class="footer-sub">いってらっしゃい — 잘 다녀오세요</div>
+</div>
+
+</body>
+</html>
