@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026년 공공기관등 공문서 평가 설명회 질의응답</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary:    #1a3a6b;
+      --color-secondary:  #2563eb;
+      --color-accent:     #0ea5e9;
+      --color-bg:         #ffffff;
+      --color-surface:    #f8fafc;
+      --color-border:     #e2e8f0;
+      --color-text:       #1e293b;
+      --color-text-muted: #64748b;
+      --color-q-bg:       #eff6ff;
+      --color-q-border:   #93c5fd;
+      --color-a-bg:       #f0fdf4;
+      --color-a-border:   #86efac;
+      --color-tag1:       #dbeafe;
+      --color-tag2:       #fef9c3;
+      --color-tag3:       #fce7f3;
+      --color-tag4:       #ede9fe;
+      --color-tag5:       #dcfce7;
+      --color-tag6:       #fff7ed;
+      --color-tag7:       #f1f5f9;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+                   "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
+      background: #eef2f7;
+      color: var(--color-text);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    /* ─── 헤더 ─── */
+    .page-header {
+      background: linear-gradient(135deg, #1a3a6b 0%, #2563eb 100%);
+      color: #fff;
+      padding: 44px 0 36px;
+      text-align: center;
+    }
+    .page-header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: 4px 18px;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+    .page-header h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .page-header .meta {
+      font-size: 0.9rem;
+      opacity: 0.82;
+    }
+
+    /* ─── 메인 ─── */
+    .page-main { padding: 36px 0 60px; }
+    .container  { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    /* ─── 개요 카드 ─── */
+    .overview-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-left: 5px solid var(--color-secondary);
+      border-radius: 10px;
+      padding: 22px 28px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .overview-card h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .overview-card h2::before {
+      content: "📋";
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .overview-item {
+      background: var(--color-surface);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .overview-item .label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      margin-bottom: 4px;
+    }
+    .overview-item .value {
+      font-size: 0.88rem;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* ─── 요약 표 ─── */
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--color-secondary);
+    }
+
+    .summary-table-wrap {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      margin-bottom: 36px;
+    }
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+    }
+    .summary-table thead tr {
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .summary-table th {
+      padding: 13px 16px;
+      text-align: left;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .summary-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+    .summary-table tbody tr:last-child td { border-bottom: none; }
+    .summary-table tbody tr:hover { background: var(--color-surface); }
+
+    .cat-badge {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .cat-1 { background: var(--color-tag1); color: #1d4ed8; }
+    .cat-2 { background: var(--color-tag2); color: #854d0e; }
+    .cat-3 { background: var(--color-tag3); color: #9d174d; }
+    .cat-4 { background: var(--color-tag4); color: #5b21b6; }
+    .cat-5 { background: var(--color-tag5); color: #166534; }
+    .cat-6 { background: var(--color-tag6); color: #9a3412; }
+    .cat-7 { background: var(--color-tag7); color: #475569; }
+
+    .summary-q { color: var(--color-text); font-weight: 500; }
+    .summary-a {
+      color: var(--color-text-muted);
+      font-size: 0.84rem;
+      margin-top: 4px;
+    }
+
+    /* ─── 상세 Q&A ─── */
+    .qa-section {
+      margin-bottom: 36px;
+    }
+    .qa-section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 13px 20px;
+      border-radius: 10px 10px 0 0;
+    }
+    .qa-section-header .icon { font-size: 1.1rem; }
+    .qa-section-header h3 { font-size: 0.97rem; font-weight: 700; }
+
+    .qa-list {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .qa-item {
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .qa-item:last-child { border-bottom: none; }
+
+    .qa-q {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .qa-q-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-secondary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .qa-q-text {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.65;
+      padding-top: 3px;
+    }
+    .qa-q-text .footnote {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    .qa-a {
+      display: flex;
+      gap: 12px;
+    }
+    .qa-a-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #16a34a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .qa-a-body {
+      background: var(--color-a-bg);
+      border-left: 3px solid var(--color-a-border);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #166534;
+      flex: 1;
+    }
+    .qa-a-body p + p { margin-top: 8px; }
+
+    /* 참고 박스 */
+    .ref-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 12px;
+      font-size: 0.84rem;
+      color: #78350f;
+    }
+    .ref-box .ref-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 0.86rem;
+    }
+    .ref-box ul { padding-left: 18px; }
+    .ref-box li { margin-bottom: 5px; line-height: 1.6; }
+    .ref-box .note {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #92400e;
+    }
+
+    /* 예시 박스 */
+    .example-box {
+      background: #f8fafc;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 8px;
+      font-size: 0.83rem;
+      color: var(--color-text-muted);
+    }
+    .example-box .ex-label {
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+    }
+
+    /* 공지 박스 */
+    .notice {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+    }
+    .notice-info { background: #eff6ff; border-left: 4px solid #2563eb; color: #1e40af; }
+    .notice-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* 목차 */
+    .toc-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    }
+    .toc-card h2 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 14px;
+    }
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .toc-list li a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 0.86rem;
+      padding: 7px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--color-border);
+      transition: background 0.15s;
+    }
+    .toc-list li a:hover { background: var(--color-surface); }
+    .toc-list li a .toc-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--color-secondary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* 푸터 */
+    .page-footer {
+      background: var(--color-primary);
+      color: rgba(255,255,255,.7);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.82rem;
+    }
+    .page-footer strong { color: #fff; }
+
+    /* 반응형 */
+    @media (max-width: 640px) {
+      .page-header h1 { font-size: 1.35rem; }
+      .qa-item { padding: 16px; }
+      .summary-table { font-size: 0.82rem; }
+      .summary-table th, .summary-table td { padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ 헤더 ═══ -->
+<header class="page-header">
+  <div class="badge">문화체육관광부 · 국립국어원</div>
+  <h1>2026년 공공기관등 공문서 평가<br>온라인 설명회 질의응답</h1>
+  <p class="meta">2026. 3. 10.(화) 14:00~15:40 &nbsp;|&nbsp; 온라인 설명회</p>
+</header>
+
+<!-- ═══ 메인 ═══ -->
+<main class="page-main">
+  <div class="container">
+
+    <!-- 설명회 개요 -->
+    <div class="overview-card">
+      <h2>설명회 개요</h2>
+      <div class="overview-grid">
+        <div class="overview-item">
+          <div class="label">일시 / 장소</div>
+          <div class="value">2026. 3. 10.(화) 14:00～15:40 / 온라인 설명회</div>
+        </div>
+        <div class="overview-item">
+          <div class="label">내부 참석자</div>
+          <div class="value">국어정책과 담당 사무관·전문관(문체부), 국립국어원 공공언어과장·담당 연구관·연구사·연구원</div>
+        </div>
+        <div class="overview-item">
+          <div class="label">외부 참석자</div>
+          <div class="value">피평가기관 담당자 150여 명</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 목차 -->
+    <div class="toc-card">
+      <h2>📌 질의응답 분류</h2>
+      <ul class="toc-list">
+        <li><a href="#sec1"><span class="toc-num">1</span>평가 대상 자료 (보도자료)</a></li>
+        <li><a href="#sec2"><span class="toc-num">2</span>평가 대상 자료 (홍보물)</a></li>
+        <li><a href="#sec3"><span class="toc-num">3</span>평가 대상 자료가 없는 경우</a></li>
+        <li><a href="#sec4"><span class="toc-num">4</span>용이성 평가</a></li>
+        <li><a href="#sec5"><span class="toc-num">5</span>용이성 평가 용어 목록</a></li>
+        <li><a href="#sec6"><span class="toc-num">6</span>소통성 평가</a></li>
+        <li><a href="#sec7"><span class="toc-num">7</span>평가 결과</a></li>
+        <li><a href="#sec8"><span class="toc-num">8</span>기타</a></li>
+      </ul>
+    </div>
+
+    <!-- ─── 주요 질의 요약표 ─── -->
+    <p class="section-title">주요 질의 요약</p>
+
+    <div class="summary-table-wrap">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th style="width:130px;">분류</th>
+            <th style="width:35%;">질의 내용</th>
+            <th>답변 요약</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cat-badge cat-1">보도자료</span></td>
+            <td class="summary-q">평가 대상 보도자료의 기준은?</td>
+            <td class="summary-a">평가 기간(3~9월) 기관 누리집에 게시된 정책 보도자료 월 1건 (설명·해명·인사·동정·단순 행사 보도자료 제외)</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-1">보도자료</span></td>
+            <td class="summary-q">누리집에 보도자료가 없는 경우?</td>
+            <td class="summary-a">해당 기관을 평가에서 제외하며, 결과 발표 시 함께 발표함</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-1">보도자료</span></td>
+            <td class="summary-q">기준에 부합하는 보도자료가 없는 달?</td>
+            <td class="summary-a">해당 달만 평가에서 제외함</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-2">홍보물</span></td>
+            <td class="summary-q">평가 대상 홍보물 기준은?</td>
+            <td class="summary-a">평가 기간(3~10월) 기관 누리집에 게시된 대국민 홍보물 2건 임의 선정</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-3">용이성</span></td>
+            <td class="summary-q">평가용 용어 대상?</td>
+            <td class="summary-a">'2026년 용이성 평가용 목록' 기준 평가</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-3">용이성</span></td>
+            <td class="summary-q">목록에 없는 용어의 지적 여부?</td>
+            <td class="summary-a">지적 대상 아님. 단, 외국 글자로 표기 시 무조건 지적</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-3">용이성</span></td>
+            <td class="summary-q">보도자료에 외국 글자가 여러 번 나오는 경우?</td>
+            <td class="summary-a">'이하 UN' 표기 후에도 중복 지적됨 → 모두 한글/우리말로 표기해야 함</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-3">용이성</span></td>
+            <td class="summary-q">평가용 용어 목록 갱신 주기?</td>
+            <td class="summary-a">수시 갱신 후 별도 배포. 새로 추가된 용어는 배포 전 자료에 소급 적용 안 함</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-5">평가 결과</span></td>
+            <td class="summary-q">평가 결과는 언제 받을 수 있나요?</td>
+            <td class="summary-a">3월 말부터 결과 요청 회신 기관 순으로 담당자에게 발송 예정</td>
+          </tr>
+          <tr>
+            <td><span class="cat-badge cat-7">기타</span></td>
+            <td class="summary-q">보도자료 진단 도구/시스템 유무?</td>
+            <td class="summary-a">정부 배포 검사 도구 없음. 표준국어대사전·어문 규범 정보 참고</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ─── 상세 질의응답 ─── -->
+    <p class="section-title">상세 질의응답</p>
+
+    <!-- SEC 1: 평가 대상 자료 (보도자료) -->
+    <div class="qa-section" id="sec1">
+      <div class="qa-section-header">
+        <span class="icon">📄</span>
+        <h3>1. 평가 대상 자료 — 보도자료</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">우리 기관은 보도자료를 배포하지 않습니다. 평가 대상이 아닌가요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">기관 누리집에서 배포되는 보도자료가 전혀 없는 경우 <strong>홍보물만 평가 대상</strong>이 됩니다.</div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">정책 보도자료에 해당하는 자료가 없는 달은 평가에서 제외되나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body"><strong>제외됩니다.</strong> 해당 달만 평가에서 제외합니다.</div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">학술지 발행과 관련된 보도자료도 평가 대상인가요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body"><strong>정책적인 내용이 포함된 보도자료</strong>라면 평가 대상 보도자료로 선정할 수 있습니다.</div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">단순한 행사성 보도자료에 정책이 언급된 경우에도 평가 대상이 되나요? 기관에서 정책성 보도자료는 배포하지 않고 행사성 보도자료만 배포하는 경우, 평가 대상 보도자료가 없다고 판단해도 되나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">행사성 보도자료이더라도 <strong>정책 내용이 포함되어 있다면 평가 대상이 될 수 있습니다.</strong></div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="ref-box">
+            <div class="ref-title">《참고》 평가 대상이 아닌 보도자료</div>
+            <ul>
+              <li><strong>(자료 내용)</strong> 설명, 해명, 인사, 기관장 등의 동정, 단순 행사 관련 보도자료</li>
+              <li><strong>(생산 주체)</strong> 기관에서 작성하지 않은 보도자료, 중앙/지자체/타 공공기관 등과 공동 작성한 보도자료</li>
+              <li><strong>(게시 방법)</strong> 기관 누리집이 아닌 누리집, 사회관계망 서비스(SNS) 등에 게시한 보도자료</li>
+              <li><strong>(게시일)</strong> 평가 대상 기간(3월~9월)이 아닌 때에 게시된 보도자료</li>
+            </ul>
+            <p class="note">※ 기관 누리집에 게시된 게시일을 기준으로 보도자료를 수집함.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 2: 평가 대상 자료 (홍보물) -->
+    <div class="qa-section" id="sec2">
+      <div class="qa-section-header">
+        <span class="icon">🖼️</span>
+        <h3>2. 평가 대상 자료 — 홍보물</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">평가 대상 홍보물의 선정 기준이 궁금합니다.</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p>평가 대상 기간(3월~10월)에 기관 누리집에 게시되었으며, 기관의 대표적인 행사나 정책 내용을 담은 <strong>대국민 홍보물로서 포스터, 공지 사항 등을 포함하여 임의로 선정</strong>합니다.</p>
+              <p>주로 알림/공지 등의 게시판에 올라온 자료가 되겠으나, 기관마다 특성이 다르므로 특정하기는 어렵습니다.</p>
+              <p>'대표성'의 기준은 대국민 인지도나 노출도, 접근성 등을 종합적으로 고려하여 판단하며, 보도자료 선정 기준(내용, 생산 주체, 게시 방법 등)을 준용할 계획입니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="ref-box">
+            <div class="ref-title">《참고》 평가 대상이 아닌 홍보물</div>
+            <ul>
+              <li><strong>(자료 내용/성격)</strong> 대국민성이 약한 자료, 외국인 대상 홍보물 등</li>
+              <li><strong>(생산 주체)</strong> 기관에서 작성하지 않은 홍보물(상위/유관 기관 홍보물 등)</li>
+              <li><strong>(게시 방법)</strong> 사내망에 기안한 문서, 기관 누리집이 아닌 SNS나 블로그 등에 게시된 홍보물</li>
+              <li><strong>(게시일)</strong> 평가 대상 기간(3월~10월)이 아닌 때에 게시된 홍보물, 게시일이 명시되지 않은 홍보물(예: 자주 묻는 질문)</li>
+            </ul>
+            <p class="note">※ 기관 누리집에 게시된 게시일을 기준으로 홍보물을 수집함.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 3: 평가 대상 자료가 없는 경우 -->
+    <div class="qa-section" id="sec3">
+      <div class="qa-section-header">
+        <span class="icon">🚫</span>
+        <h3>3. 평가 대상 자료가 없는 경우</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">보도자료나 홍보물이 없는 기관은 어떻게 평가되나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">평가 기준에 부합하는 평가 자료가 전혀 없는 기관은 <strong>평가에서 제외</strong>되며, 결과 발표 시 해당 기관은 평가에서 제외되었음을 알립니다.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 4: 용이성 평가 -->
+    <div class="qa-section" id="sec4">
+      <div class="qa-section-header">
+        <span class="icon">🔤</span>
+        <h3>4. 용이성 평가</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">
+              명칭 변경에 권한이 없거나 이미 굳어져 널리 쓰이는 행사명·제도명·사업명 등의 외국어 명칭을 그대로 써서 외국어·로마자로 표기했을 때 감점을 피할 수 있는 방법이 없나요?
+              <span class="footnote">* 용역 사업, 상위 부처에서 수행하는 사업명, 국제 콘퍼런스(행사)명, 외부 기관에서 수상한 상 이름, 법률 용어, 책 제목, 비정기적인 행사의 이름 등</span>
+            </div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p>공공언어 평가의 취지는 대국민 대상 자료만큼은 알기 쉬운 용어와 문장을 사용하여 한글로 표기하자는 것입니다.</p>
+              <p>국제 행사, 사업명, 제도명 등 단어의 성격과 관계없이 우리말로 바꾸어 쓸 수 있는 어려운 용어를 사용하였거나 <strong>한글 표기를 먼저 제시하지 않고 외국 글자로 표기한 경우 지적 대상</strong>이 됩니다.</p>
+              <p><strong>한국어 표현이나 한글 표기를 먼저 적은 뒤 괄호 안에 이에 대응하는 외국어·외국 문자·한자를 적으면 감점되지 않습니다.</strong></p>
+            </div>
+          </div>
+          <div class="ref-box">
+            <div class="ref-title">《참고》 용이성 평가 지표</div>
+            <ul>
+              <li><strong>외국 문자·어려운 외국어 사용 여부</strong> (배점 50%)
+                <br>예) AI 전문가 → 인공지능(AI) 전문가 ☞ 외국 문자 사용 지적
+                <br>예) 기후플레이션 → 기후발 물가 상승 ☞ 2026년 용이성 평가용 목록 용어
+              </li>
+              <li><strong>정책 용어·정책명·행사명 등에 외국어·외국 글자 사용 여부</strong> (배점 10%)
+                <br>예) (사업명) AX 혁신 기술 개발 사업, 세계軍문화엑스포
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">'OTT'는 평가 대상 용어 목록에 없는데, 이런 경우 그대로 사용할 수 있나요? 감점되지 않도록 표기하는 방법이 궁금합니다.</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p><strong>로마자나 한자 등 외국 글자로 표기된 경우에는 용어 목록에 있는지와 관계없이 무조건 지적 대상</strong>입니다.</p>
+              <p>'인터넷 동영상 서비스(OTT)'와 같이 우리말 번역어를 먼저 제시하기를 권장하나, 어렵다면 '<strong>오티티(OTT)</strong>'와 같이 써도 지적 대상은 아닙니다.</p>
+              <p>단, '오티티(OTT)'라고 썼더라도 '오티티'가 평가용 용어 목록에 포함되어 있다면 감점 대상이므로 우리말 대체어로 써야 합니다. 배포된 2026년 용이성 평가용 목록을 참고하시기 바랍니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">한 건의 보도자료 내에서 로마자가 여러 번 등장하는 경우, 모두 우리말이나 한글로 써야 하나요?<br><span style="font-size:0.82rem;font-weight:400;color:#64748b;">예) 'UN'이 여러 번 나오는 경우, '국제연합(이하 UN)'이라고 표기하고 이후 등장하는 'UN'은 'UN'으로 표기한 경우</span></div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p><strong>'(이하 UN)'이라고 명시하더라도 중복으로 지적</strong>됩니다. 'UN'을 모두 다음과 같이 표기해야 합니다.</p>
+              <div class="example-box">
+                <div class="ex-label">올바른 표기 예</div>
+                '국제연합', '국제연합(UN)', '유엔', '유엔(UN)' 등으로 <strong>모두</strong> 표기
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 5: 용이성 평가 용어 목록 -->
+    <div class="qa-section" id="sec5">
+      <div class="qa-section-header">
+        <span class="icon">📋</span>
+        <h3>5. 용이성 평가 용어 목록 관련</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">'쉬운 우리말을 쓰자' 누리집 하단의 '정부 보도자료 평가용 용어'를 참고해도 되나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body"><strong>공문으로 보내 드린 용어 목록을 참고</strong>하시기 바랍니다. 목록이 갱신되면 별도로 안내해 드리겠습니다.</div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">평가 대상 용어 목록에 있는 단어 중 일부만 사용하는 경우도 감점 대상인가요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p><strong>평가 대상 용어 목록에 실린 용어 전체와 일치하는 경우에만 지적 대상</strong>입니다. 용어 일부만 사용된 경우에는 감점이 되지 않습니다.</p>
+              <p>단, 평가 대상 단어 전체가 더 긴 단어 안에 포함되어 있는 경우 지적 대상이 됩니다.</p>
+              <div class="example-box">
+                <div class="ex-label">예시</div>
+                평가 대상 용어: '피지컬 에이아이'<br>
+                ∙ '피지컬'이나 '에이아이'만 사용 → 감점 대상 <strong>아님</strong><br>
+                ∙ '피지컬 에이아이 랩' 사용 → '피지컬 에이아이'를 포함하므로 감점 대상 <strong>임</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">평가 대상 용어 목록에 없다면 감점 대상이 아닌가요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p>용어 목록에 없는 경우 용이성 평가의 감점 대상은 아닙니다.</p>
+              <p>그러나 이해가능성과 공공성을 전반적으로 살피는 <strong>소통성 지표의 평가 대상이 될 수 있으니</strong> 가급적 쉬운 말을 사용하여 한글로 표기해 주시기 바랍니다.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 6: 소통성 평가 -->
+    <div class="qa-section" id="sec6">
+      <div class="qa-section-header">
+        <span class="icon">💬</span>
+        <h3>6. 소통성 평가</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">소통성 평가는 무엇을 어떻게 평가하나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p>소통성 평가는 <strong>홍보물을 대상</strong>으로 <strong>이해가능성</strong>*과 <strong>공공성</strong>을 평가합니다.</p>
+              <ul style="padding-left:18px; margin-top:8px; font-size:0.88rem;">
+                <li><strong>이해가능성:</strong> 외국 문자, 한자, 어려운 한자어, 외국어(외래어) 사용 평가</li>
+                <li><strong>공공성:</strong> 권위적·차별적 표현 사용 평가</li>
+              </ul>
+              <p style="margin-top:8px;">이 평가는 소통성 정도를 <strong>1점(미흡)에서 5점(우수)</strong> 척도로 점수를 부여하는 <strong>정성평가</strong>로 진행됩니다.</p>
+              <p style="margin-top:6px;font-size:0.83rem;color:#166534;">* 정책 용어·사업명, 목록 외 용어 등도 평가 대상에 포함됨.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 7: 평가 결과 -->
+    <div class="qa-section" id="sec7">
+      <div class="qa-section-header">
+        <span class="icon">📊</span>
+        <h3>7. 평가 결과</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">평가 결과를 알고 싶습니다.</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p>2025년 평가 결과 배포 일정과 방법은 공문으로 안내해 드렸습니다.</p>
+              <p>결과 요청을 회신한 기관을 대상으로 <strong>3월 말부터 차례대로</strong> 평가 결과를 기관의 공문서 평가 담당자에게 발송할 예정입니다.</p>
+              <p>2025년 및 2024년 평가 결과는 문화체육관광부 누리집의 <strong>'알림·소식' 게시판</strong>에 공개되어 있습니다.</p>
+              <p style="font-size:0.83rem;color:#166534; margin-top:6px;">※ '2025년 공공기관등의 공문서등 평가 결과 안내(2026.3.10.)' 공문 참고</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">요청 시, 기관의 순위를 알 수 있나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body"><strong>순위는 공개하지 않습니다.</strong></div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">평가 결과가 미흡한 기관에 대한 교육 프로그램 등이 따로 있나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">현재 <strong>월 1회</strong> 교육 자료를 배포하고 있습니다. 교육 자료는 평가 결과에서 자주 틀리는 내용을 바탕으로 제작하고 있으니 참고하여 주시기 바랍니다. 추후 검토하겠습니다.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 8: 기타 -->
+    <div class="qa-section" id="sec8">
+      <div class="qa-section-header">
+        <span class="icon">🔍</span>
+        <h3>8. 기타</h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">교육 자료를 받아 보고 싶습니다.</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p>평가 결과 안내 시 보내 드린 공문에 적힌 주소로 <strong>기관 담당자 정보와 전자우편 주소</strong>를 보내 주시면 교육 자료 발송 목록을 현행화하여 교육자료를 보내 드릴 예정입니다.</p>
+              <p style="font-size:0.83rem;color:#166534; margin-top:6px;">※ '2025년 공공기관등의 공문서등 평가 결과 안내(2025.3.10.)' 공문 참고</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">작성한 보도자료가 어법에 맞게 쓰였는지 확인하는 도구나 시스템이 있나요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">정부에서 따로 배포하는 검사 도구는 없습니다. <strong>표준국어대사전</strong> 및 <strong>국어원 어문 규범 정보</strong> 등을 참고하시기 바랍니다.</div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">오늘 설명회 녹화본과 설명회 자료를 받고 싶습니다.</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">설명회 녹화본은 따로 제공하지 않습니다. 보내 드리는 <strong>설명회 자료와 질의응답 내용을 참고</strong>하여 주시기 바랍니다.</div>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q">
+            <div class="qa-q-icon">Q</div>
+            <div class="qa-q-text">문의 사항이 있을 경우 어디로 연락하면 될까요?</div>
+          </div>
+          <div class="qa-a">
+            <div class="qa-a-icon">A</div>
+            <div class="qa-a-body">
+              <p><strong>평가 운영 관련 사항:</strong> 공문에 실려 있는 전자우편 주소로 문의하시면 답변해 드리겠습니다.</p>
+              <p style="margin-top:8px;"><strong>공문서 작성 관련 국어 사용 상담:</strong> 국립국어원 국어생활 종합상담실을 이용해 주시기 바랍니다.</p>
+              <div class="ref-box" style="margin-top:10px;">
+                <ul>
+                  <li><strong>온라인 상담:</strong> 국립국어원 누리집 '온라인가나다'</li>
+                  <li><strong>전화 상담:</strong> 가나다전화 ☎ 1599-9979</li>
+                  <li><strong>카카오톡 상담:</strong> '우리말365'</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ═══ 푸터 ═══ -->
+<footer class="page-footer">
+  <div class="container">
+    <p>문의: <strong>국어정책과(문화체육관광부) · 국립국어원 공공언어과</strong> &nbsp;|&nbsp; 가나다전화: <strong>1599-9979</strong> &nbsp;|&nbsp; 작성일: <strong>2026. 3. 10.</strong></p>
+  </div>
+</footer>
+
+</body>
+</html>
