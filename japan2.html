@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일본어 발음으로 외우기 🔊</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fff8f0 0%, #fff3e0 100%);
+    min-height: 100vh;
+    color: #333;
+  }
+
+  header {
+    background: linear-gradient(90deg, #ff7043, #ffa726);
+    color: white;
+    text-align: center;
+    padding: 16px 16px 12px;
+    box-shadow: 0 2px 12px rgba(255,112,67,0.3);
+  }
+  header h1 { font-size: 1.4rem; letter-spacing: 0.5px; }
+  header p { font-size: 0.82rem; opacity: 0.92; margin-top: 3px; }
+
+  /* 탭 */
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 3px solid #ffe0cc;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 4px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #bbb;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+  }
+  .tab-btn.active { color: #ff7043; border-bottom-color: #ff7043; background: #fff8f5; }
+  .tab-btn:hover:not(.active) { background: #f9f9f9; color: #999; }
+
+  .tab-panel { display: none; padding: 20px 16px; max-width: 900px; margin: 0 auto; }
+  .tab-panel.active { display: block; }
+
+  /* 공용 버튼 */
+  .btn {
+    padding: 9px 20px;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn-orange { background: #ff7043; color: white; }
+  .btn-orange:hover { background: #e64a19; }
+  .btn-amber { background: #ffa726; color: white; }
+  .btn-amber:hover { background: #fb8c00; }
+  .btn-teal { background: #26c6da; color: white; }
+  .btn-teal:hover { background: #00acc1; }
+  .btn-gray { background: #f0f0f0; color: #666; }
+  .btn-gray:hover { background: #e0e0e0; }
+
+  /* ====== 탭1: 단어 학습 ====== */
+  .search-box {
+    width: 100%;
+    padding: 10px 18px;
+    border: 2px solid #ffe0cc;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 14px;
+    transition: border 0.2s;
+    background: white;
+  }
+  .search-box:focus { border-color: #ff7043; }
+
+  .word-count-label {
+    font-size: 0.78rem;
+    color: #bbb;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .study-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .study-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 14px 14px;
+    box-shadow: 0 2px 10px rgba(255,112,67,0.08);
+    border: 1px solid #ffe8d6;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .study-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255,112,67,0.16); }
+  .study-card .s-num { font-size: 0.7rem; color: #ccc; margin-bottom: 6px; }
+  .study-card .s-reading {
+    font-size: 2rem; font-weight: 800; color: #ff7043; line-height: 1;
+    letter-spacing: 1px;
+  }
+  .study-card .s-jp {
+    font-size: 0.95rem; color: #aaa; margin: 4px 0 6px;
+    font-weight: 500;
+  }
+  .study-card .s-kr {
+    font-size: 1.05rem; font-weight: 700; color: #333;
+    padding: 4px 0;
+    border-top: 1px dashed #ffe0cc;
+    margin-top: 4px;
+  }
+  .study-card .s-mnemonic {
+    font-size: 0.72rem; color: #999; margin-top: 8px;
+    background: #fff8f0; border-radius: 8px; padding: 6px 8px;
+    line-height: 1.5; border-left: 3px solid #ffd0b0;
+  }
+
+  /* ====== 탭2: 소리 카드 ====== */
+  .flash-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+  }
+  .flash-prog { font-size: 0.9rem; color: #aaa; font-weight: 600; }
+
+  .progress-bar-wrap {
+    background: #ffe0cc; border-radius: 10px; height: 7px;
+    margin-bottom: 18px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff7043, #ffa726);
+    border-radius: 10px; transition: width 0.3s;
+  }
+
+  .sound-scene {
+    width: 100%; max-width: 480px; height: 300px;
+    margin: 0 auto 22px;
+    perspective: 1000px; cursor: pointer;
+  }
+  .sound-card {
+    width: 100%; height: 100%;
+    position: relative; transform-style: preserve-3d;
+    transition: transform 0.55s;
+  }
+  .sound-card.flipped { transform: rotateY(180deg); }
+
+  .sound-face {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden; border-radius: 24px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    box-shadow: 0 8px 32px rgba(255,112,67,0.22);
+  }
+  .sound-front {
+    background: linear-gradient(135deg, #ff7043, #ffa726);
+    color: white;
+  }
+  .sound-back {
+    background: linear-gradient(135deg, #26c6da, #4db6ac);
+    color: white;
+    transform: rotateY(180deg);
+  }
+
+  /* 앞면 */
+  .sound-front .reading-huge {
+    font-size: 3.8rem; font-weight: 900; line-height: 1;
+    letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .sound-front .jp-small {
+    font-size: 1.3rem; opacity: 0.8; margin-top: 10px;
+    letter-spacing: 3px;
+  }
+  .sound-front .flip-hint {
+    font-size: 0.8rem; opacity: 0.7; margin-top: 14px;
+  }
+
+  /* 뒷면 */
+  .sound-back .meaning-big {
+    font-size: 2.6rem; font-weight: 800; line-height: 1.2;
+    text-align: center; padding: 0 18px;
+  }
+  .sound-back .mnemonic-back {
+    font-size: 0.78rem; margin-top: 14px;
+    background: rgba(255,255,255,0.22); border-radius: 12px;
+    padding: 7px 14px; line-height: 1.55; text-align: center;
+    max-width: 88%;
+  }
+
+  .flash-controls {
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  }
+
+  /* ====== 탭3: 뜻 퀴즈 (발음→뜻) ====== */
+  /* ====== 탭4: 발음 퀴즈 (뜻→발음) ====== */
+  .quiz-info {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+  }
+  .quiz-prog-text { font-size: 0.9rem; color: #aaa; font-weight: 600; }
+  .score-badge {
+    background: #ff7043; color: white;
+    padding: 4px 14px; border-radius: 20px;
+    font-size: 0.85rem; font-weight: 700;
+  }
+
+  .q-card {
+    background: white; border-radius: 20px;
+    padding: 28px 20px; text-align: center;
+    box-shadow: 0 4px 18px rgba(255,112,67,0.1);
+    border: 2px solid #ffe8d6; margin-bottom: 18px;
+  }
+  .q-card .q-label { font-size: 0.75rem; color: #ccc; margin-bottom: 8px; font-weight: 600; }
+  .q-card .q-reading {
+    font-size: 3.8rem; font-weight: 900; color: #ff7043;
+    line-height: 1; letter-spacing: 2px;
+  }
+  .q-card .q-jp-sub { font-size: 1rem; color: #bbb; margin-top: 8px; letter-spacing: 2px; }
+  .q-card .q-meaning-big {
+    font-size: 2.2rem; font-weight: 800; color: #26c6da; line-height: 1.2;
+  }
+  .q-card .q-jp-sub2 { font-size: 1rem; color: #bbb; margin-top: 8px; letter-spacing: 2px; }
+  .q-card .q-sub-hint { font-size: 0.82rem; color: #ccc; margin-top: 10px; }
+
+  .options-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 14px;
+  }
+  .opt {
+    padding: 14px 8px; border: 2px solid #ffe0cc;
+    border-radius: 14px; background: white;
+    cursor: pointer; font-size: 0.95rem; font-weight: 700;
+    color: #555; transition: all 0.15s; text-align: center;
+    line-height: 1.3;
+  }
+  .opt:hover:not(:disabled) {
+    border-color: #ff7043; background: #fff5f0; color: #ff7043;
+    transform: scale(1.02);
+  }
+  .opt.correct { background: #d4f8e8; border-color: #2ecc71; color: #1a8a50; }
+  .opt.wrong   { background: #ffe0e0; border-color: #e74c3c; color: #c0392b; }
+  .opt:disabled { cursor: default; }
+
+  .q-feedback {
+    min-height: 52px; text-align: center;
+    font-size: 0.95rem; font-weight: 700;
+    margin-bottom: 10px; line-height: 1.6;
+  }
+  .fb-correct { color: #2ecc71; }
+  .fb-wrong   { color: #e74c3c; }
+
+  .result-panel {
+    background: white; border-radius: 22px;
+    padding: 32px 22px; text-align: center;
+    box-shadow: 0 4px 22px rgba(255,112,67,0.13);
+  }
+  .result-panel h2 { font-size: 1.4rem; color: #ff7043; margin-bottom: 6px; }
+  .result-score { font-size: 3.8rem; font-weight: 900; color: #ffa726; margin: 10px 0; }
+  .result-msg { color: #aaa; font-size: 0.95rem; margin-bottom: 18px; }
+
+  .wrong-list { text-align: left; margin-top: 18px; }
+  .wrong-list h3 { font-size: 0.88rem; color: #bbb; font-weight: 700; margin-bottom: 10px; }
+  .wrong-item {
+    background: #fff8f0; border: 1px solid #ffd0b0;
+    border-radius: 12px; padding: 10px 14px; margin-bottom: 8px;
+  }
+  .wrong-item .wi-top {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
+  }
+  .wrong-item .wi-reading { font-size: 1.4rem; font-weight: 800; color: #ff7043; }
+  .wrong-item .wi-jp { font-size: 0.9rem; color: #bbb; }
+  .wrong-item .wi-meaning { font-size: 1rem; font-weight: 700; color: #333; }
+  .wrong-item .wi-mnemonic { font-size: 0.72rem; color: #aaa; margin-top: 4px; line-height: 1.4; }
+
+  /* 학습 단계 배지 */
+  .step-badge {
+    display: inline-block;
+    padding: 4px 12px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 700; margin-bottom: 14px;
+  }
+  .step-orange { background: #fff3e0; color: #ff7043; border: 1.5px solid #ffd0b0; }
+  .step-teal   { background: #e0f7fa; color: #00acc1; border: 1.5px solid #b2ebf2; }
+
+  @media (max-width: 480px) {
+    .study-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 10px; }
+    .sound-front .reading-huge { font-size: 3rem; }
+    .q-card .q-reading { font-size: 3rem; }
+    .options-grid { grid-template-columns: 1fr; }
+    .tab-btn { font-size: 0.73rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔊 발음으로 외우는 일본어</h1>
+  <p>히라가나 몰라도 OK! 한글 발음으로 단어 완전 정복 🎯</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('study', this)">📖 단어 학습</button>
+  <button class="tab-btn" onclick="showTab('sound', this)">🔊 소리 카드</button>
+  <button class="tab-btn" onclick="showTab('quiz-meaning', this)">🎯 뜻 퀴즈</button>
+  <button class="tab-btn" onclick="showTab('quiz-reading', this)">🔤 발음 퀴즈</button>
+</div>
+
+<!-- ====== 탭1: 단어 학습 ====== -->
+<div id="tab-study" class="tab-panel active">
+  <span class="step-badge step-orange">STEP 1 · 발음 + 뜻 함께 익히기</span>
+  <input class="search-box" type="text" id="searchInput"
+    placeholder="🔍 검색 (발음·한국어·번호)" oninput="filterStudy()">
+  <p class="word-count-label" id="studyCount">전체 40개</p>
+  <div class="study-grid" id="studyGrid"></div>
+</div>
+
+<!-- ====== 탭2: 소리 카드 ====== -->
+<div id="tab-sound" class="tab-panel">
+  <span class="step-badge step-orange">STEP 2 · 발음 카드 뒤집기</span>
+  <div class="flash-header">
+    <span class="flash-prog" id="soundProg">1 / 40</span>
+    <button class="btn btn-amber" onclick="shuffleSound()">🔀 섞기</button>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="soundBar" style="width:2.5%"></div>
+  </div>
+
+  <div class="sound-scene" onclick="flipSound()">
+    <div class="sound-card" id="soundCard">
+      <div class="sound-face sound-front">
+        <div class="reading-huge" id="sc-reading">아사</div>
+        <div class="jp-small" id="sc-jp">あさ</div>
+        <div class="flip-hint">👆 탭해서 뜻 확인!</div>
+      </div>
+      <div class="sound-face sound-back">
+        <div class="meaning-big" id="sc-meaning">아침</div>
+        <div class="mnemonic-back" id="sc-mnemonic"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flash-controls">
+    <button class="btn btn-gray" onclick="prevSound()">◀ 이전</button>
+    <button class="btn btn-orange" onclick="nextSound()">다음 ▶</button>
+  </div>
+</div>
+
+<!-- ====== 탭3: 뜻 퀴즈 (발음 보고 뜻 맞추기) ====== -->
+<div id="tab-quiz-meaning" class="tab-panel">
+  <span class="step-badge step-orange">STEP 3 · 발음 보고 뜻 맞추기</span>
+  <div id="qm-area">
+    <div class="quiz-info">
+      <span class="quiz-prog-text" id="qmProg">문제 1 / 10</span>
+      <span class="score-badge" id="qmScore">점수 0</span>
+    </div>
+    <div class="q-card">
+      <div class="q-label">이 발음의 뜻은?</div>
+      <div class="q-reading" id="qm-reading">아사</div>
+      <div class="q-jp-sub" id="qm-jp">あさ</div>
+      <div class="q-sub-hint">보기에서 뜻을 골라보세요</div>
+    </div>
+    <div class="options-grid" id="qmOptions"></div>
+    <div class="q-feedback" id="qmFeedback"></div>
+    <div style="text-align:center">
+      <button class="btn btn-orange" id="qmNextBtn" onclick="nextQM()" style="display:none">다음 문제 ▶</button>
+    </div>
+  </div>
+  <div id="qm-result" style="display:none">
+    <div class="result-panel">
+      <h2>뜻 퀴즈 완료!</h2>
+      <div class="result-score" id="qmFinalScore">0 / 10</div>
+      <p class="result-msg" id="qmResultMsg"></p>
+      <button class="btn btn-orange" onclick="startQM()" style="margin-bottom:20px;">🔄 다시 풀기</button>
+      <div class="wrong-list" id="qmWrongList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 탭4: 발음 퀴즈 (뜻 보고 발음 맞추기) ====== -->
+<div id="tab-quiz-reading" class="tab-panel">
+  <span class="step-badge step-teal">STEP 4 · 뜻 보고 발음 맞추기</span>
+  <div id="qr-area">
+    <div class="quiz-info">
+      <span class="quiz-prog-text" id="qrProg">문제 1 / 10</span>
+      <span class="score-badge" id="qrScore" style="background:#26c6da;">점수 0</span>
+    </div>
+    <div class="q-card">
+      <div class="q-label">이 단어의 발음은?</div>
+      <div class="q-meaning-big" id="qr-meaning">아침</div>
+      <div class="q-jp-sub2" id="qr-jp">あさ</div>
+      <div class="q-sub-hint">보기에서 발음을 골라보세요</div>
+    </div>
+    <div class="options-grid" id="qrOptions"></div>
+    <div class="q-feedback" id="qrFeedback"></div>
+    <div style="text-align:center">
+      <button class="btn btn-teal" id="qrNextBtn" onclick="nextQR()" style="display:none">다음 문제 ▶</button>
+    </div>
+  </div>
+  <div id="qr-result" style="display:none">
+    <div class="result-panel">
+      <h2>발음 퀴즈 완료!</h2>
+      <div class="result-score" id="qrFinalScore" style="color:#26c6da;">0 / 10</div>
+      <p class="result-msg" id="qrResultMsg"></p>
+      <button class="btn btn-teal" onclick="startQR()" style="margin-bottom:20px;">🔄 다시 풀기</button>
+      <div class="wrong-list" id="qrWrongList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const words = [
+  { num:1,  jp:"あさ",     reading:"아사",    kr:"아침",           mnemonic:"💡 아침에 일어나 '아~ 살아있다!' → 아사 = 아침" },
+  { num:2,  jp:"あし",     reading:"아시",    kr:"발, 다리",       mnemonic:"💡 아시아를 두 발로 걸어다닌다 → 아시 = 발" },
+  { num:3,  jp:"あめ",     reading:"아메",    kr:"비",             mnemonic:"💡 비 오는 날 '아, 메... 우산 없어!' → 아메 = 비" },
+  { num:4,  jp:"いけ",     reading:"이케",    kr:"연못",           mnemonic:"💡 잘생긴 이케남이 연못 앞에서 셀카 → 이케 = 연못" },
+  { num:5,  jp:"いす",     reading:"이스",    kr:"의자",           mnemonic:"💡 '이~ 스트레칭!' 의자에 앉아 기지개 → 이스 = 의자" },
+  { num:6,  jp:"いち",     reading:"이치",    kr:"일, 1",          mnemonic:"💡 1등! '이치이치!' 외치며 우승 세리머니 → 이치 = 1" },
+  { num:7,  jp:"いぬ",     reading:"이누",    kr:"개",             mnemonic:"💡 '이리 누워!' 하면 바로 눕는 착한 개 → 이누 = 개" },
+  { num:8,  jp:"うえ",     reading:"우에",    kr:"위",             mnemonic:"💡 '우에~!' 하고 위를 쳐다보며 감탄 → 우에 = 위" },
+  { num:9,  jp:"うた",     reading:"우타",    kr:"노래",           mnemonic:"💡 울면서 타악기 치며 노래 부르기 → 우타 = 노래" },
+  { num:10, jp:"えき",     reading:"에키",    kr:"역",             mnemonic:"💡 에~ 기차역 에키에 기차 도착! → 에키 = 역" },
+  { num:11, jp:"おはよう", reading:"오하요",  kr:"안녕 (아침인사)", mnemonic:"💡 '오빠! 하여간! 요즘 아침인사도 안 해!' → 오하요" },
+  { num:12, jp:"かさ",     reading:"카사",    kr:"우산",           mnemonic:"💡 비 오는 날 '카사 어딨어!' 우산 찾기 → 카사 = 우산" },
+  { num:13, jp:"くつ",     reading:"쿠츠",    kr:"신발",           mnemonic:"💡 '쿠츠쿠츠~' 새 신발 소리 내며 걷기 → 쿠츠 = 신발" },
+  { num:14, jp:"くま",     reading:"쿠마",    kr:"곰",             mnemonic:"💡 쿠마몬(구마모토 캐릭터)은 검은 곰! → 쿠마 = 곰" },
+  { num:15, jp:"くるま",   reading:"쿠루마",  kr:"자동차",         mnemonic:"💡 자동차가 '쿠루쿠루~' 마을을 돌아다님 → 쿠루마 = 자동차" },
+  { num:16, jp:"くろ",     reading:"쿠로",    kr:"검정",           mnemonic:"💡 크로아티아 검은 유니폼처럼 새까매! → 쿠로 = 검정" },
+  { num:17, jp:"さかな",   reading:"사카나",  kr:"생선",           mnemonic:"💡 생선 사고 싶어서 '사카나~!' 시장 달려감 → 사카나 = 생선" },
+  { num:18, jp:"さくら",   reading:"사쿠라",  kr:"벚꽃",           mnemonic:"💡 이미 유명! 봄 소풍의 사쿠라 = 벚꽃 🌸" },
+  { num:19, jp:"さむい",   reading:"사무이",  kr:"춥다",           mnemonic:"💡 겨울 사무실이 너무 추워서 '사무이~' 덜덜 → 사무이 = 춥다" },
+  { num:20, jp:"せかい",   reading:"세카이",  kr:"세계",           mnemonic:"💡 발음이 거의 같아! '세카이' ≈ '세계' → 세카이 = 세계" },
+  { num:21, jp:"そら",     reading:"소라",    kr:"하늘",           mnemonic:"💡 파란 하늘 = 파란 소라(나팔고둥) 색깔! → 소라 = 하늘" },
+  { num:22, jp:"たこ",     reading:"타코",    kr:"문어",           mnemonic:"💡 타코야키 안에 문어(たこ)가 쏙! → 타코 = 문어" },
+  { num:23, jp:"ちかてつ", reading:"치카테츠", kr:"지하철",        mnemonic:"💡 지하철이 '치카치카~' 달린다 → 치카테츠 = 지하철" },
+  { num:24, jp:"なつ",     reading:"나츠",    kr:"여름",           mnemonic:"💡 뜨거운 여름에 '나 죽겠다, 더워!' → 나츠 = 여름" },
+  { num:25, jp:"にく",     reading:"니쿠",    kr:"고기",           mnemonic:"💡 '니쿠~' 고기 먹고 싶다! 肉(고기 육) → 니쿠 = 고기" },
+  { num:26, jp:"にほん",   reading:"니홍",    kr:"일본",           mnemonic:"💡 이미 아는 단어! 日本(일본) → 니홍 = 일본" },
+  { num:27, jp:"ねこ",     reading:"네코",    kr:"고양이",         mnemonic:"💡 고양이가 네 발로 코 박고 자는 모습 → 네코 = 고양이" },
+  { num:28, jp:"のり",     reading:"노리",    kr:"김",             mnemonic:"💡 김을 '노릇노릇' 구우면 맛있어! → 노리 = 김" },
+  { num:29, jp:"はな",     reading:"하나",    kr:"꽃",             mnemonic:"💡 '꽃 하나 주세요~' 꽃집에서 하나 달라고! → 하나 = 꽃" },
+  { num:30, jp:"ひと",     reading:"히토",    kr:"사람",           mnemonic:"💡 사람을 히트(hit)하면 절대 안 돼! → 히토 = 사람" },
+  { num:31, jp:"ふゆ",     reading:"후유",    kr:"겨울",           mnemonic:"💡 겨울 추운 날 입에서 '후유~' 입김이 나옴 → 후유 = 겨울" },
+  { num:32, jp:"へや",     reading:"헤야",    kr:"방",             mnemonic:"💡 '헤야!' 내 방에서 태권도 기합 넣기 → 헤야 = 방" },
+  { num:33, jp:"ほし",     reading:"호시",    kr:"별",             mnemonic:"💡 별을 '호시탐탐' 노리는 우주 탐험가 → 호시 = 별" },
+  { num:34, jp:"まつり",   reading:"마츠리",  kr:"축제",           mnemonic:"💡 '마이크 틀어~' 신나는 축제! → 마츠리 = 축제" },
+  { num:35, jp:"みなさん", reading:"미나상",  kr:"여러분",         mnemonic:"💡 '미나'(모두) + '상'(님) = 여러분! → 미나상 = 여러분" },
+  { num:36, jp:"やま",     reading:"야마",    kr:"산",             mnemonic:"💡 야마하 오토바이 타고 산 정상 등반! → 야마 = 산" },
+  { num:37, jp:"ゆき",     reading:"유키",    kr:"눈",             mnemonic:"💡 눈이 '유키유키~' 하늘에서 내려옴 → 유키 = 눈" },
+  { num:38, jp:"よる",     reading:"요루",    kr:"밤",             mnemonic:"💡 밤에 혼자 '요리(요루)' 해 먹기 → 요루 = 밤" },
+  { num:39, jp:"れきし",   reading:"레키시",  kr:"역사",           mnemonic:"💡 역사 공부를 '레크리에이션'처럼 즐겁게! → 레키시 = 역사" },
+  { num:40, jp:"わたし",   reading:"와타시",  kr:"나",             mnemonic:"💡 '와! 탔어!' 나야 나, 내가 주인공! → 와타시 = 나" },
+];
+
+/* ====== 탭 전환 ====== */
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ====== 탭1: 단어 학습 ====== */
+function renderStudy(list) {
+  document.getElementById('studyGrid').innerHTML = list.map(w => `
+    <div class="study-card">
+      <div class="s-num">${w.num}번</div>
+      <div class="s-reading">${w.reading}</div>
+      <div class="s-jp">${w.jp}</div>
+      <div class="s-kr">${w.kr}</div>
+      <div class="s-mnemonic">${w.mnemonic}</div>
+    </div>
+  `).join('');
+  document.getElementById('studyCount').textContent = `전체 ${list.length}개`;
+}
+function filterStudy() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) { renderStudy(words); return; }
+  renderStudy(words.filter(w =>
+    w.reading.includes(q) || w.kr.includes(q) ||
+    w.jp.includes(q) || w.num.toString() === q
+  ));
+}
+renderStudy(words);
+
+/* ====== 탭2: 소리 카드 ====== */
+let sDeck = [...words], sIdx = 0, sFlipped = false;
+
+function updateSoundCard() {
+  const w = sDeck[sIdx];
+  document.getElementById('sc-reading').textContent = w.reading;
+  document.getElementById('sc-jp').textContent = w.jp;
+  document.getElementById('sc-meaning').textContent = w.kr;
+  document.getElementById('sc-mnemonic').textContent = w.mnemonic;
+  document.getElementById('soundProg').textContent = `${sIdx + 1} / ${sDeck.length}`;
+  document.getElementById('soundBar').style.width = `${((sIdx + 1) / sDeck.length) * 100}%`;
+  const card = document.getElementById('soundCard');
+  card.classList.remove('flipped');
+  sFlipped = false;
+}
+function flipSound() {
+  sFlipped = !sFlipped;
+  document.getElementById('soundCard').classList.toggle('flipped', sFlipped);
+}
+function nextSound() { sIdx = (sIdx + 1) % sDeck.length; updateSoundCard(); }
+function prevSound() { sIdx = (sIdx - 1 + sDeck.length) % sDeck.length; updateSoundCard(); }
+function shuffleSound() {
+  sDeck = [...words].sort(() => Math.random() - 0.5);
+  sIdx = 0; updateSoundCard();
+}
+updateSoundCard();
+
+/* ====== 공용 유틸 ====== */
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+function scoreMsg(s) {
+  if (s <= 3) return '조금 더 연습해봐요! 💪';
+  if (s <= 5) return '괜찮아요, 다시 도전! 🔥';
+  if (s <= 7) return '잘했어요! 👍';
+  if (s <= 9) return '훌륭해요! ⭐';
+  return '완벽해요! 🏆';
+}
+function wrongListHTML(arr) {
+  if (!arr.length) return '<p style="color:#2ecc71;font-weight:700;text-align:center;">오답 없음! 완벽! 🏆</p>';
+  return `<h3>오답 목록 (${arr.length}개)</h3>` + arr.map(w => `
+    <div class="wrong-item">
+      <div class="wi-top">
+        <span class="wi-reading">${w.reading}</span>
+        <span class="wi-jp">${w.jp}</span>
+        <span class="wi-meaning">→ ${w.kr}</span>
+      </div>
+      <div class="wi-mnemonic">${w.mnemonic}</div>
+    </div>
+  `).join('');
+}
+
+/* ====== 탭3: 뜻 퀴즈 ====== */
+let qmQ = [], qmIdx = 0, qmScore = 0, qmAnswered = false, qmWrong = [];
+
+function startQM() {
+  qmQ = shuffle(words).slice(0, 10);
+  qmIdx = 0; qmScore = 0; qmAnswered = false; qmWrong = [];
+  document.getElementById('qm-area').style.display = 'block';
+  document.getElementById('qm-result').style.display = 'none';
+  renderQM();
+}
+function renderQM() {
+  qmAnswered = false;
+  const q = qmQ[qmIdx];
+  document.getElementById('qm-reading').textContent = q.reading;
+  document.getElementById('qm-jp').textContent = q.jp;
+  document.getElementById('qmProg').textContent = `문제 ${qmIdx + 1} / 10`;
+  document.getElementById('qmScore').textContent = `점수 ${qmScore}`;
+  document.getElementById('qmFeedback').textContent = '';
+  document.getElementById('qmNextBtn').style.display = 'none';
+
+  const opts = shuffle([q, ...shuffle(words.filter(w => w.jp !== q.jp)).slice(0, 3)]);
+  document.getElementById('qmOptions').innerHTML = opts.map((o, i) => `
+    <button class="opt" id="qm-opt-${i}"
+      onclick="selectQM(${i}, '${o.jp}', '${q.jp}')">
+      ${o.kr}
+    </button>
+  `).join('');
+}
+function selectQM(i, sel, correct) {
+  if (qmAnswered) return;
+  qmAnswered = true;
+  const q = qmQ[qmIdx];
+  const fb = document.getElementById('qmFeedback');
+  document.querySelectorAll('#qmOptions .opt').forEach(b => b.disabled = true);
+  if (sel === correct) {
+    qmScore++;
+    document.getElementById(`qm-opt-${i}`).classList.add('correct');
+    fb.innerHTML = `🎉 정답! <strong>${q.kr}</strong>`;
+    fb.className = 'q-feedback fb-correct';
+  } else {
+    document.getElementById(`qm-opt-${i}`).classList.add('wrong');
+    document.querySelectorAll('#qmOptions .opt').forEach(b => {
+      if (b.textContent.trim() === q.kr) b.classList.add('correct');
+    });
+    fb.innerHTML = `❌ 틀렸어요! 정답: <strong>${q.kr}</strong><br><span style="font-size:0.82rem">${q.mnemonic}</span>`;
+    fb.className = 'q-feedback fb-wrong';
+    qmWrong.push(q);
+  }
+  document.getElementById('qmScore').textContent = `점수 ${qmScore}`;
+  if (qmIdx < 9) document.getElementById('qmNextBtn').style.display = 'inline-block';
+  else setTimeout(showQMResult, 1200);
+}
+function nextQM() { qmIdx++; renderQM(); }
+function showQMResult() {
+  document.getElementById('qm-area').style.display = 'none';
+  document.getElementById('qm-result').style.display = 'block';
+  document.getElementById('qmFinalScore').textContent = `${qmScore} / 10`;
+  document.getElementById('qmResultMsg').textContent = scoreMsg(qmScore);
+  document.getElementById('qmWrongList').innerHTML = wrongListHTML(qmWrong);
+}
+startQM();
+
+/* ====== 탭4: 발음 퀴즈 ====== */
+let qrQ = [], qrIdx = 0, qrScore = 0, qrAnswered = false, qrWrong = [];
+
+function startQR() {
+  qrQ = shuffle(words).slice(0, 10);
+  qrIdx = 0; qrScore = 0; qrAnswered = false; qrWrong = [];
+  document.getElementById('qr-area').style.display = 'block';
+  document.getElementById('qr-result').style.display = 'none';
+  renderQR();
+}
+function renderQR() {
+  qrAnswered = false;
+  const q = qrQ[qrIdx];
+  document.getElementById('qr-meaning').textContent = q.kr;
+  document.getElementById('qr-jp').textContent = q.jp;
+  document.getElementById('qrProg').textContent = `문제 ${qrIdx + 1} / 10`;
+  document.getElementById('qrScore').textContent = `점수 ${qrScore}`;
+  document.getElementById('qrFeedback').textContent = '';
+  document.getElementById('qrNextBtn').style.display = 'none';
+
+  const opts = shuffle([q, ...shuffle(words.filter(w => w.jp !== q.jp)).slice(0, 3)]);
+  document.getElementById('qrOptions').innerHTML = opts.map((o, i) => `
+    <button class="opt" id="qr-opt-${i}"
+      onclick="selectQR(${i}, '${o.jp}', '${q.jp}')"
+      style="font-size:1.2rem;font-weight:800;color:#ff7043;letter-spacing:1px;">
+      ${o.reading}
+    </button>
+  `).join('');
+}
+function selectQR(i, sel, correct) {
+  if (qrAnswered) return;
+  qrAnswered = true;
+  const q = qrQ[qrIdx];
+  const fb = document.getElementById('qrFeedback');
+  document.querySelectorAll('#qrOptions .opt').forEach(b => b.disabled = true);
+  if (sel === correct) {
+    qrScore++;
+    document.getElementById(`qr-opt-${i}`).classList.add('correct');
+    fb.innerHTML = `🎉 정답! <strong>${q.reading}</strong> = ${q.kr}`;
+    fb.className = 'q-feedback fb-correct';
+  } else {
+    document.getElementById(`qr-opt-${i}`).classList.add('wrong');
+    document.querySelectorAll('#qrOptions .opt').forEach(b => {
+      if (b.textContent.trim() === q.reading) b.classList.add('correct');
+    });
+    fb.innerHTML = `❌ 틀렸어요! 정답 발음: <strong>${q.reading}</strong><br><span style="font-size:0.82rem">${q.mnemonic}</span>`;
+    fb.className = 'q-feedback fb-wrong';
+    qrWrong.push(q);
+  }
+  document.getElementById('qrScore').textContent = `점수 ${qrScore}`;
+  if (qrIdx < 9) document.getElementById('qrNextBtn').style.display = 'inline-block';
+  else setTimeout(showQRResult, 1200);
+}
+function nextQR() { qrIdx++; renderQR(); }
+function showQRResult() {
+  document.getElementById('qr-area').style.display = 'none';
+  document.getElementById('qr-result').style.display = 'block';
+  document.getElementById('qrFinalScore').textContent = `${qrScore} / 10`;
+  document.getElementById('qrResultMsg').textContent = scoreMsg(qrScore);
+  document.getElementById('qrWrongList').innerHTML = wrongListHTML(qrWrong);
+}
+startQR();
+</script>
+</body>
+</html>
