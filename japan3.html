@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일본어 문자 학습 - 히라가나 &amp; 가타가나</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f3ee;
+      --primary: #2d3561;
+      --accent: #c84b31;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --text-light: #666;
+      --border: #e0d8ce;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── 화면 전환 ── */
+    .screen { display: none; }
+    .screen.active { display: flex; flex-direction: column; min-height: 100vh; }
+
+    /* ════════════════════════════════
+       모드 선택 화면
+    ════════════════════════════════ */
+    #screen-mode {
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px 60px;
+    }
+    .mode-logo {
+      display: flex; gap: 12px; margin-bottom: 12px;
+    }
+    .mode-logo span {
+      font-family: 'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif;
+      font-size: 52px;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .mode-logo span:last-child { color: var(--accent); }
+    .mode-title {
+      font-size: 26px; font-weight: 700; color: var(--primary);
+      margin-bottom: 6px; text-align: center;
+    }
+    .mode-subtitle {
+      font-size: 14px; color: var(--text-light);
+      margin-bottom: 36px; text-align: center;
+    }
+
+    /* 모드 버튼 3개 */
+    .mode-buttons {
+      display: flex; flex-direction: column; gap: 14px;
+      width: 100%; max-width: 400px; margin-bottom: 36px;
+    }
+    .mode-btn {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--card-bg); border: 2px solid var(--border);
+      border-radius: var(--radius); padding: 18px 24px;
+      cursor: pointer; transition: all 0.2s; text-align: left;
+    }
+    .mode-btn:hover, .mode-btn.selected {
+      border-color: var(--primary); background: #f0f2ff;
+      transform: translateY(-2px); box-shadow: var(--shadow);
+    }
+    .mode-btn.selected { border-color: var(--accent); background: #fff5f3; }
+    .mode-char {
+      font-family: 'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif;
+      font-size: 36px; color: var(--primary); min-width: 60px; text-align: center;
+    }
+    .mode-info { flex: 1; }
+    .mode-label { font-size: 16px; font-weight: 700; color: var(--text); display: block; }
+    .mode-count { font-size: 12px; color: var(--text-light); margin-top: 2px; display: block; }
+    .mode-arrow { font-size: 20px; color: var(--text-light); }
+
+    /* 설정 섹션 */
+    .settings-box {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 24px;
+      width: 100%; max-width: 400px; margin-bottom: 28px;
+    }
+    .settings-title {
+      font-size: 13px; font-weight: 700; color: var(--text-light);
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .cb-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .cb-label {
+      display: flex; align-items: center; gap: 10px;
+      cursor: pointer; font-size: 14px; color: var(--text);
+    }
+    .cb-label input[type=checkbox] {
+      width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;
+    }
+    .cb-count { font-size: 12px; color: var(--text-light); margin-left: auto; }
+    .divider { height: 1px; background: var(--border); margin: 14px 0; }
+    .order-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .order-label { font-size: 14px; color: var(--text); }
+    .toggle-group {
+      display: flex; background: var(--bg); border-radius: 8px;
+      padding: 3px; gap: 3px;
+    }
+    .toggle-btn {
+      padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 500;
+      border: none; cursor: pointer; background: transparent; color: var(--text-light);
+      transition: all 0.2s;
+    }
+    .toggle-btn.active {
+      background: var(--primary); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    /* 시작 버튼 */
+    .start-btn {
+      width: 100%; max-width: 400px;
+      padding: 16px; font-size: 17px; font-weight: 700;
+      background: var(--primary); color: #fff;
+      border: none; border-radius: var(--radius); cursor: pointer;
+      transition: all 0.2s; letter-spacing: 0.03em;
+    }
+    .start-btn:hover { background: #1e2447; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,53,97,0.3); }
+    .start-btn:disabled { background: #bbb; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ════════════════════════════════
+       학습 화면
+    ════════════════════════════════ */
+    #screen-study { background: var(--bg); }
+
+    /* 헤더 */
+    .study-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 10;
+    }
+    .back-btn, .chart-btn {
+      background: none; border: none; cursor: pointer;
+      font-size: 13px; color: var(--primary); font-weight: 600;
+      padding: 6px 10px; border-radius: 8px; transition: background 0.2s;
+    }
+    .back-btn:hover, .chart-btn:hover { background: #f0f2ff; }
+    .header-center { text-align: center; }
+    .progress-text { font-size: 15px; font-weight: 700; color: var(--text); display: block; }
+    .mode-badge {
+      display: inline-block; font-size: 11px; padding: 2px 8px;
+      border-radius: 20px; background: var(--primary); color: #fff;
+      margin-top: 2px;
+    }
+    .mode-badge.katakana { background: var(--accent); }
+    .mode-badge.both { background: #6c63ff; }
+
+    /* 진행률 바 */
+    .progress-bar {
+      height: 4px; background: var(--border); overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.4s ease; width: 0%;
+    }
+
+    /* 카드 영역 */
+    .study-area {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; padding: 30px 20px 40px;
+    }
+
+    /* 플래시카드 */
+    .card-scene {
+      perspective: 1200px;
+      width: 100%; max-width: 340px; height: 280px;
+      margin-bottom: 28px; cursor: pointer;
+    }
+    .card-inner {
+      width: 100%; height: 100%;
+      position: relative; transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-inner.flipped { transform: rotateY(180deg); }
+    .card-face {
+      position: absolute; inset: 0;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      backface-visibility: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .card-back-face { transform: rotateY(180deg); }
+
+    /* 앞면 */
+    .char-badge {
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; background: #f0f2ff; color: var(--primary);
+      margin-bottom: 16px; letter-spacing: 0.05em;
+    }
+    .char-badge.kata { background: #fff5f3; color: var(--accent); }
+    .main-char {
+      font-family: 'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif;
+      font-size: 140px; line-height: 1; color: var(--text);
+      user-select: none;
+    }
+    .card-tap-hint {
+      font-size: 12px; color: #bbb; margin-top: 16px;
+    }
+
+    /* 뒷면 */
+    .hint-romaji {
+      font-size: 44px; font-weight: 700; color: var(--primary);
+      letter-spacing: 0.05em; margin-bottom: 8px;
+    }
+    .hint-korean {
+      font-size: 28px; color: var(--accent); font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .hint-divider { width: 40px; height: 2px; background: var(--border); margin-bottom: 16px; border-radius: 2px; }
+    .hint-row-label {
+      font-size: 11px; color: var(--text-light); margin-bottom: 6px;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .hint-row-chars {
+      font-family: 'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif;
+      font-size: 22px; color: var(--text); letter-spacing: 0.08em;
+      text-align: center; line-height: 1.8;
+    }
+    .hint-row-chars .current-char {
+      color: var(--accent); font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* 버튼 영역 */
+    .hint-btn-area { width: 100%; max-width: 340px; margin-bottom: 16px; }
+    .hint-btn {
+      width: 100%; padding: 14px; font-size: 15px; font-weight: 600;
+      background: var(--card-bg); color: var(--primary);
+      border: 2px solid var(--primary); border-radius: 12px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .hint-btn:hover { background: var(--primary); color: #fff; }
+
+    .action-btns {
+      display: flex; gap: 12px;
+      width: 100%; max-width: 340px; margin-bottom: 16px;
+    }
+    .btn-practice, .btn-known {
+      flex: 1; padding: 14px; font-size: 14px; font-weight: 700;
+      border: none; border-radius: 12px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-practice {
+      background: #fff3f0; color: var(--accent); border: 2px solid #ffd5cc;
+    }
+    .btn-practice:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-known {
+      background: #f0fff4; color: #1a7a3a; border: 2px solid #b2f0c5;
+    }
+    .btn-known:hover { background: #1a7a3a; color: #fff; border-color: #1a7a3a; }
+
+    /* 네비게이션 */
+    .nav-row {
+      display: flex; align-items: center; gap: 20px;
+      width: 100%; max-width: 340px; justify-content: center;
+    }
+    .nav-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--card-bg); border: 1px solid var(--border);
+      font-size: 18px; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light);
+    }
+    .nav-btn:hover:not(:disabled) { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .nav-counter { font-size: 13px; color: var(--text-light); min-width: 60px; text-align: center; }
+
+    /* 결과 아이콘 표시 */
+    .card-result-icon {
+      position: absolute; top: 12px; right: 12px;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700;
+    }
+    .card-result-icon.known { background: #d4f7e0; color: #1a7a3a; }
+    .card-result-icon.practice { background: #ffe4de; color: var(--accent); }
+
+    /* ════════════════════════════════
+       결과 화면
+    ════════════════════════════════ */
+    #screen-result {
+      align-items: center; justify-content: center;
+      padding: 40px 20px;
+    }
+    .result-container {
+      width: 100%; max-width: 380px; text-align: center;
+    }
+    .result-emoji { font-size: 64px; margin-bottom: 16px; display: block; }
+    .result-title {
+      font-size: 28px; font-weight: 700; color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .result-message {
+      font-size: 15px; color: var(--text-light); margin-bottom: 32px;
+    }
+    .result-stats {
+      display: flex; gap: 16px; margin-bottom: 32px;
+    }
+    .stat-card {
+      flex: 1; background: var(--card-bg); border-radius: 16px;
+      padding: 20px 12px; box-shadow: var(--shadow);
+    }
+    .stat-num {
+      font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 6px;
+    }
+    .stat-card.stat-known .stat-num { color: #1a7a3a; }
+    .stat-card.stat-practice .stat-num { color: var(--accent); }
+    .stat-label { font-size: 13px; color: var(--text-light); }
+    .result-btns { display: flex; flex-direction: column; gap: 10px; }
+    .result-btn {
+      width: 100%; padding: 14px; font-size: 15px; font-weight: 600;
+      border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s;
+    }
+    .result-btn-retry { background: var(--primary); color: #fff; }
+    .result-btn-retry:hover { background: #1e2447; }
+    .result-btn-retry:disabled { background: #ccc; cursor: not-allowed; }
+    .result-btn-all { background: var(--card-bg); color: var(--primary); border: 2px solid var(--primary); }
+    .result-btn-all:hover { background: #f0f2ff; }
+    .result-btn-home { background: transparent; color: var(--text-light); border: 1px solid var(--border); }
+    .result-btn-home:hover { background: var(--card-bg); }
+
+    /* ════════════════════════════════
+       오십음도 모달
+    ════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 100; display: flex; align-items: flex-end; justify-content: center;
+    }
+    .modal-sheet {
+      background: var(--card-bg); border-radius: 20px 20px 0 0;
+      width: 100%; max-width: 600px; max-height: 85vh;
+      overflow-y: auto; padding: 20px 16px 40px;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-handle {
+      width: 40px; height: 4px; background: var(--border);
+      border-radius: 2px; margin: 0 auto 16px;
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .modal-title { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 50%; border: none;
+      background: var(--bg); font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light);
+    }
+    /* 차트 탭 */
+    .chart-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+    .chart-tab {
+      flex: 1; padding: 10px; font-size: 14px; font-weight: 600;
+      border-radius: 10px; border: 2px solid var(--border);
+      background: var(--bg); color: var(--text-light); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chart-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    /* 오십음도 테이블 */
+    .chart-section-title {
+      font-size: 12px; font-weight: 700; color: var(--text-light);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin: 18px 0 8px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .kana-table {
+      width: 100%; border-collapse: collapse; margin-bottom: 4px;
+    }
+    .kana-table td {
+      text-align: center; padding: 6px 4px;
+      border: 1px solid var(--border);
+    }
+    .kana-table thead td {
+      background: var(--primary); color: #fff;
+      font-size: 11px; font-weight: 700; padding: 7px 4px;
+    }
+    .kana-table tbody tr:first-child td { background: #f5f5f5; font-size: 11px; font-weight: 600; color: var(--text-light); }
+    .kana-cell { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+    .kana-char {
+      font-family: 'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif;
+      font-size: 20px; color: var(--text); line-height: 1;
+    }
+    .kana-rom { font-size: 10px; color: var(--text-light); }
+    .kana-table td.empty { background: #fafafa; }
+
+    /* 반응형 */
+    @media (max-width: 380px) {
+      .main-char { font-size: 110px; }
+      .hint-romaji { font-size: 36px; }
+      .hint-korean { font-size: 22px; }
+      .card-scene { height: 240px; }
+      .kana-char { font-size: 16px; }
+      .kana-rom { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     화면 1: 모드 선택
+══════════════════════════════ -->
+<div id="screen-mode" class="screen active">
+  <div class="mode-logo"><span>あ</span><span>ア</span></div>
+  <h1 class="mode-title">일본어 문자 학습</h1>
+  <p class="mode-subtitle">히라가나와 가타가나를 처음부터 차근차근</p>
+
+  <div class="mode-buttons">
+    <button class="mode-btn" data-mode="hiragana">
+      <span class="mode-char">あ</span>
+      <div class="mode-info">
+        <span class="mode-label">히라가나</span>
+        <span class="mode-count">기본 46자 포함</span>
+      </div>
+      <span class="mode-arrow">›</span>
+    </button>
+    <button class="mode-btn" data-mode="katakana">
+      <span class="mode-char">ア</span>
+      <div class="mode-info">
+        <span class="mode-label">가타가나</span>
+        <span class="mode-count">기본 46자 포함</span>
+      </div>
+      <span class="mode-arrow">›</span>
+    </button>
+    <button class="mode-btn" data-mode="both">
+      <span class="mode-char" style="font-size:28px">あア</span>
+      <div class="mode-info">
+        <span class="mode-label">히라가나 + 가타가나</span>
+        <span class="mode-count">두 문자 세트 함께</span>
+      </div>
+      <span class="mode-arrow">›</span>
+    </button>
+  </div>
+
+  <div class="settings-box">
+    <div class="settings-title">학습 범위</div>
+    <div class="cb-group">
+      <label class="cb-label">
+        <input type="checkbox" id="cb-basic" checked>
+        <span>기본 문자</span>
+        <span class="cb-count">46자</span>
+      </label>
+      <label class="cb-label">
+        <input type="checkbox" id="cb-dakuten">
+        <span>탁음 · 반탁음 (が、ざ… ぱ行)</span>
+        <span class="cb-count">30자</span>
+      </label>
+      <label class="cb-label">
+        <input type="checkbox" id="cb-combo">
+        <span>조합 문자 (きゃ、しゃ… 등)</span>
+        <span class="cb-count">33자</span>
+      </label>
+    </div>
+    <div class="divider"></div>
+    <div class="order-row">
+      <span class="order-label">학습 순서</span>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="btn-seq">순서대로</button>
+        <button class="toggle-btn" id="btn-rnd">랜덤</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="start-btn" id="btn-start">학습 시작 →</button>
+</div>
+
+<!-- ══════════════════════════════
+     화면 2: 학습
+══════════════════════════════ -->
+<div id="screen-study" class="screen">
+  <div class="study-header">
+    <button class="back-btn" id="btn-back">← 돌아가기</button>
+    <div class="header-center">
+      <span class="progress-text" id="progress-text">1 / 46</span>
+      <span class="mode-badge" id="mode-badge">히라가나</span>
+    </div>
+    <button class="chart-btn" id="btn-chart">오십음도 📋</button>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+  <div class="study-area">
+    <div class="card-scene" id="card-scene" title="클릭하면 힌트를 볼 수 있어요">
+      <div class="card-inner" id="card-inner">
+        <!-- 앞면 -->
+        <div class="card-face card-front-face">
+          <div id="result-icon" class="card-result-icon" style="display:none"></div>
+          <div class="char-badge" id="char-badge">히라가나</div>
+          <div class="main-char" id="main-char">あ</div>
+          <div class="card-tap-hint">👆 탭하면 힌트</div>
+        </div>
+        <!-- 뒷면 -->
+        <div class="card-face card-back-face">
+          <div class="hint-romaji" id="hint-romaji">a</div>
+          <div class="hint-korean" id="hint-korean">아</div>
+          <div class="hint-divider"></div>
+          <div class="hint-row-label" id="hint-row-label">あ행</div>
+          <div class="hint-row-chars" id="hint-row-chars">あ い う え お</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hint-btn-area" id="hint-btn-area">
+      <button class="hint-btn" id="btn-hint">💡 힌트 보기</button>
+    </div>
+
+    <div class="action-btns" id="action-btns" style="display:none">
+      <button class="btn-practice" id="btn-practice">🔁 더 연습</button>
+      <button class="btn-known" id="btn-known">✓ 알았어요</button>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn" id="btn-prev" title="이전">‹</button>
+      <span class="nav-counter" id="nav-counter">1 / 46</span>
+      <button class="nav-btn" id="btn-next" title="다음">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     화면 3: 결과
+══════════════════════════════ -->
+<div id="screen-result" class="screen">
+  <div class="result-container">
+    <span class="result-emoji" id="result-emoji">🎉</span>
+    <h2 class="result-title">학습 완료!</h2>
+    <p class="result-message" id="result-message">잘 하고 있어요!</p>
+    <div class="result-stats">
+      <div class="stat-card stat-known">
+        <div class="stat-num" id="stat-known">0</div>
+        <div class="stat-label">✓ 알았어요</div>
+      </div>
+      <div class="stat-card stat-practice">
+        <div class="stat-num" id="stat-practice">0</div>
+        <div class="stat-label">🔁 더 연습</div>
+      </div>
+    </div>
+    <div class="result-btns">
+      <button class="result-btn result-btn-retry" id="btn-retry-practice">🔁 더 연습 문자만 다시</button>
+      <button class="result-btn result-btn-all" id="btn-retry-all">전체 다시 시작</button>
+      <button class="result-btn result-btn-home" id="btn-home">🏠 처음으로</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     오십음도 모달
+══════════════════════════════ -->
+<div class="modal-overlay" id="modal-chart" style="display:none">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <span class="modal-title">오십음도 (五十音図)</span>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <div class="chart-tabs">
+      <button class="chart-tab active" data-chart="hiragana">히라가나 あ</button>
+      <button class="chart-tab" data-chart="katakana">가타가나 ア</button>
+    </div>
+    <div id="chart-hiragana"></div>
+    <div id="chart-katakana" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  문자 데이터
+// ══════════════════════════════════════════
+const ROWS = {
+  hiragana: {
+    basic: [
+      { rowName: 'あ행', chars: [
+        {c:'あ',r:'a',k:'아'},{c:'い',r:'i',k:'이'},{c:'う',r:'u',k:'우'},{c:'え',r:'e',k:'에'},{c:'お',r:'o',k:'오'}
+      ]},
+      { rowName: 'か행', chars: [
+        {c:'か',r:'ka',k:'카'},{c:'き',r:'ki',k:'키'},{c:'く',r:'ku',k:'쿠'},{c:'け',r:'ke',k:'케'},{c:'こ',r:'ko',k:'코'}
+      ]},
+      { rowName: 'さ행', chars: [
+        {c:'さ',r:'sa',k:'사'},{c:'し',r:'shi',k:'시'},{c:'す',r:'su',k:'스'},{c:'せ',r:'se',k:'세'},{c:'そ',r:'so',k:'소'}
+      ]},
+      { rowName: 'た행', chars: [
+        {c:'た',r:'ta',k:'타'},{c:'ち',r:'chi',k:'치'},{c:'つ',r:'tsu',k:'츠'},{c:'て',r:'te',k:'테'},{c:'と',r:'to',k:'토'}
+      ]},
+      { rowName: 'な행', chars: [
+        {c:'な',r:'na',k:'나'},{c:'に',r:'ni',k:'니'},{c:'ぬ',r:'nu',k:'누'},{c:'ね',r:'ne',k:'네'},{c:'の',r:'no',k:'노'}
+      ]},
+      { rowName: 'は행', chars: [
+        {c:'は',r:'ha',k:'하'},{c:'ひ',r:'hi',k:'히'},{c:'ふ',r:'fu',k:'후'},{c:'へ',r:'he',k:'헤'},{c:'ほ',r:'ho',k:'호'}
+      ]},
+      { rowName: 'ま행', chars: [
+        {c:'ま',r:'ma',k:'마'},{c:'み',r:'mi',k:'미'},{c:'む',r:'mu',k:'무'},{c:'め',r:'me',k:'메'},{c:'も',r:'mo',k:'모'}
+      ]},
+      { rowName: 'や행', chars: [
+        {c:'や',r:'ya',k:'야'},{c:'ゆ',r:'yu',k:'유'},{c:'よ',r:'yo',k:'요'}
+      ]},
+      { rowName: 'ら행', chars: [
+        {c:'ら',r:'ra',k:'라'},{c:'り',r:'ri',k:'리'},{c:'る',r:'ru',k:'루'},{c:'れ',r:'re',k:'레'},{c:'ろ',r:'ro',k:'로'}
+      ]},
+      { rowName: 'わ행', chars: [
+        {c:'わ',r:'wa',k:'와'},{c:'を',r:'wo',k:'오(조사)'},{c:'ん',r:'n',k:'응(받침)'}
+      ]}
+    ],
+    dakuten: [
+      { rowName: 'が행', chars: [
+        {c:'が',r:'ga',k:'가'},{c:'ぎ',r:'gi',k:'기'},{c:'ぐ',r:'gu',k:'구'},{c:'げ',r:'ge',k:'게'},{c:'ご',r:'go',k:'고'}
+      ]},
+      { rowName: 'ざ행', chars: [
+        {c:'ざ',r:'za',k:'자'},{c:'じ',r:'ji',k:'지'},{c:'ず',r:'zu',k:'즈'},{c:'ぜ',r:'ze',k:'제'},{c:'ぞ',r:'zo',k:'조'}
+      ]},
+      { rowName: 'だ행', chars: [
+        {c:'だ',r:'da',k:'다'},{c:'ぢ',r:'ji',k:'지'},{c:'づ',r:'zu',k:'즈'},{c:'で',r:'de',k:'데'},{c:'ど',r:'do',k:'도'}
+      ]},
+      { rowName: 'ば행', chars: [
+        {c:'ば',r:'ba',k:'바'},{c:'び',r:'bi',k:'비'},{c:'ぶ',r:'bu',k:'부'},{c:'べ',r:'be',k:'베'},{c:'ぼ',r:'bo',k:'보'}
+      ]},
+      { rowName: 'ぱ행', chars: [
+        {c:'ぱ',r:'pa',k:'파'},{c:'ぴ',r:'pi',k:'피'},{c:'ぷ',r:'pu',k:'푸'},{c:'ぺ',r:'pe',k:'페'},{c:'ぽ',r:'po',k:'포'}
+      ]}
+    ],
+    combo: [
+      { rowName: 'きゃ행', chars: [{c:'きゃ',r:'kya',k:'캬'},{c:'きゅ',r:'kyu',k:'큐'},{c:'きょ',r:'kyo',k:'쿄'}]},
+      { rowName: 'しゃ행', chars: [{c:'しゃ',r:'sha',k:'샤'},{c:'しゅ',r:'shu',k:'슈'},{c:'しょ',r:'sho',k:'쇼'}]},
+      { rowName: 'ちゃ행', chars: [{c:'ちゃ',r:'cha',k:'차'},{c:'ちゅ',r:'chu',k:'츄'},{c:'ちょ',r:'cho',k:'초'}]},
+      { rowName: 'にゃ행', chars: [{c:'にゃ',r:'nya',k:'냐'},{c:'にゅ',r:'nyu',k:'뉴'},{c:'にょ',r:'nyo',k:'뇨'}]},
+      { rowName: 'ひゃ행', chars: [{c:'ひゃ',r:'hya',k:'햐'},{c:'ひゅ',r:'hyu',k:'휴'},{c:'ひょ',r:'hyo',k:'효'}]},
+      { rowName: 'みゃ행', chars: [{c:'みゃ',r:'mya',k:'먀'},{c:'みゅ',r:'myu',k:'뮤'},{c:'みょ',r:'myo',k:'묘'}]},
+      { rowName: 'りゃ행', chars: [{c:'りゃ',r:'rya',k:'랴'},{c:'りゅ',r:'ryu',k:'류'},{c:'りょ',r:'ryo',k:'료'}]},
+      { rowName: 'ぎゃ행', chars: [{c:'ぎゃ',r:'gya',k:'갸'},{c:'ぎゅ',r:'gyu',k:'규'},{c:'ぎょ',r:'gyo',k:'교'}]},
+      { rowName: 'じゃ행', chars: [{c:'じゃ',r:'ja',k:'자'},{c:'じゅ',r:'ju',k:'주'},{c:'じょ',r:'jo',k:'조'}]},
+      { rowName: 'びゃ행', chars: [{c:'びゃ',r:'bya',k:'뱌'},{c:'びゅ',r:'byu',k:'뷰'},{c:'びょ',r:'byo',k:'뵤'}]},
+      { rowName: 'ぴゃ행', chars: [{c:'ぴゃ',r:'pya',k:'퍄'},{c:'ぴゅ',r:'pyu',k:'퓨'},{c:'ぴょ',r:'pyo',k:'표'}]}
+    ]
+  },
+  katakana: {
+    basic: [
+      { rowName: 'ア행', chars: [
+        {c:'ア',r:'a',k:'아'},{c:'イ',r:'i',k:'이'},{c:'ウ',r:'u',k:'우'},{c:'エ',r:'e',k:'에'},{c:'オ',r:'o',k:'오'}
+      ]},
+      { rowName: 'カ행', chars: [
+        {c:'カ',r:'ka',k:'카'},{c:'キ',r:'ki',k:'키'},{c:'ク',r:'ku',k:'쿠'},{c:'ケ',r:'ke',k:'케'},{c:'コ',r:'ko',k:'코'}
+      ]},
+      { rowName: 'サ행', chars: [
+        {c:'サ',r:'sa',k:'사'},{c:'シ',r:'shi',k:'시'},{c:'ス',r:'su',k:'스'},{c:'セ',r:'se',k:'세'},{c:'ソ',r:'so',k:'소'}
+      ]},
+      { rowName: 'タ행', chars: [
+        {c:'タ',r:'ta',k:'타'},{c:'チ',r:'chi',k:'치'},{c:'ツ',r:'tsu',k:'츠'},{c:'テ',r:'te',k:'테'},{c:'ト',r:'to',k:'토'}
+      ]},
+      { rowName: 'ナ행', chars: [
+        {c:'ナ',r:'na',k:'나'},{c:'ニ',r:'ni',k:'니'},{c:'ヌ',r:'nu',k:'누'},{c:'ネ',r:'ne',k:'네'},{c:'ノ',r:'no',k:'노'}
+      ]},
+      { rowName: 'ハ행', chars: [
+        {c:'ハ',r:'ha',k:'하'},{c:'ヒ',r:'hi',k:'히'},{c:'フ',r:'fu',k:'후'},{c:'ヘ',r:'he',k:'헤'},{c:'ホ',r:'ho',k:'호'}
+      ]},
+      { rowName: 'マ행', chars: [
+        {c:'マ',r:'ma',k:'마'},{c:'ミ',r:'mi',k:'미'},{c:'ム',r:'mu',k:'무'},{c:'メ',r:'me',k:'메'},{c:'モ',r:'mo',k:'모'}
+      ]},
+      { rowName: 'ヤ행', chars: [
+        {c:'ヤ',r:'ya',k:'야'},{c:'ユ',r:'yu',k:'유'},{c:'ヨ',r:'yo',k:'요'}
+      ]},
+      { rowName: 'ラ행', chars: [
+        {c:'ラ',r:'ra',k:'라'},{c:'リ',r:'ri',k:'리'},{c:'ル',r:'ru',k:'루'},{c:'レ',r:'re',k:'레'},{c:'ロ',r:'ro',k:'로'}
+      ]},
+      { rowName: 'ワ행', chars: [
+        {c:'ワ',r:'wa',k:'와'},{c:'ヲ',r:'wo',k:'오(조사)'},{c:'ン',r:'n',k:'응(받침)'}
+      ]}
+    ],
+    dakuten: [
+      { rowName: 'ガ행', chars: [
+        {c:'ガ',r:'ga',k:'가'},{c:'ギ',r:'gi',k:'기'},{c:'グ',r:'gu',k:'구'},{c:'ゲ',r:'ge',k:'게'},{c:'ゴ',r:'go',k:'고'}
+      ]},
+      { rowName: 'ザ행', chars: [
+        {c:'ザ',r:'za',k:'자'},{c:'ジ',r:'ji',k:'지'},{c:'ズ',r:'zu',k:'즈'},{c:'ゼ',r:'ze',k:'제'},{c:'ゾ',r:'zo',k:'조'}
+      ]},
+      { rowName: 'ダ행', chars: [
+        {c:'ダ',r:'da',k:'다'},{c:'ヂ',r:'ji',k:'지'},{c:'ヅ',r:'zu',k:'즈'},{c:'デ',r:'de',k:'데'},{c:'ド',r:'do',k:'도'}
+      ]},
+      { rowName: 'バ행', chars: [
+        {c:'バ',r:'ba',k:'바'},{c:'ビ',r:'bi',k:'비'},{c:'ブ',r:'bu',k:'부'},{c:'ベ',r:'be',k:'베'},{c:'ボ',r:'bo',k:'보'}
+      ]},
+      { rowName: 'パ행', chars: [
+        {c:'パ',r:'pa',k:'파'},{c:'ピ',r:'pi',k:'피'},{c:'プ',r:'pu',k:'푸'},{c:'ペ',r:'pe',k:'페'},{c:'ポ',r:'po',k:'포'}
+      ]}
+    ],
+    combo: [
+      { rowName: 'キャ행', chars: [{c:'キャ',r:'kya',k:'캬'},{c:'キュ',r:'kyu',k:'큐'},{c:'キョ',r:'kyo',k:'쿄'}]},
+      { rowName: 'シャ행', chars: [{c:'シャ',r:'sha',k:'샤'},{c:'シュ',r:'shu',k:'슈'},{c:'ショ',r:'sho',k:'쇼'}]},
+      { rowName: 'チャ행', chars: [{c:'チャ',r:'cha',k:'차'},{c:'チュ',r:'chu',k:'츄'},{c:'チョ',r:'cho',k:'초'}]},
+      { rowName: 'ニャ행', chars: [{c:'ニャ',r:'nya',k:'냐'},{c:'ニュ',r:'nyu',k:'뉴'},{c:'ニョ',r:'nyo',k:'뇨'}]},
+      { rowName: 'ヒャ행', chars: [{c:'ヒャ',r:'hya',k:'햐'},{c:'ヒュ',r:'hyu',k:'휴'},{c:'ヒョ',r:'hyo',k:'효'}]},
+      { rowName: 'ミャ행', chars: [{c:'ミャ',r:'mya',k:'먀'},{c:'ミュ',r:'myu',k:'뮤'},{c:'ミョ',r:'myo',k:'묘'}]},
+      { rowName: 'リャ행', chars: [{c:'リャ',r:'rya',k:'랴'},{c:'リュ',r:'ryu',k:'류'},{c:'リョ',r:'ryo',k:'료'}]},
+      { rowName: 'ギャ행', chars: [{c:'ギャ',r:'gya',k:'갸'},{c:'ギュ',r:'gyu',k:'규'},{c:'ギョ',r:'gyo',k:'교'}]},
+      { rowName: 'ジャ행', chars: [{c:'ジャ',r:'ja',k:'자'},{c:'ジュ',r:'ju',k:'주'},{c:'ジョ',r:'jo',k:'조'}]},
+      { rowName: 'ビャ행', chars: [{c:'ビャ',r:'bya',k:'뱌'},{c:'ビュ',r:'byu',k:'뷰'},{c:'ビョ',r:'byo',k:'뵤'}]},
+      { rowName: 'ピャ행', chars: [{c:'ピャ',r:'pya',k:'퍄'},{c:'ピュ',r:'pyu',k:'퓨'},{c:'ピョ',r:'pyo',k:'표'}]}
+    ]
+  }
+};
+
+// ── 카드 데이터 평탄화 ──────────────────
+function buildDeck(mode, useBasic, useDakuten, useCombo) {
+  const types = mode === 'both' ? ['hiragana', 'katakana']
+              : mode === 'hiragana' ? ['hiragana']
+              : ['katakana'];
+  const cards = [];
+  types.forEach(type => {
+    const rowSet = ROWS[type];
+    if (useBasic) rowSet.basic.forEach(row => {
+      row.chars.forEach(ch => cards.push({ ...ch, type, rowName: row.rowName, rowChars: row.chars }));
+    });
+    if (useDakuten) rowSet.dakuten.forEach(row => {
+      row.chars.forEach(ch => cards.push({ ...ch, type, rowName: row.rowName, rowChars: row.chars }));
+    });
+    if (useCombo) rowSet.combo.forEach(row => {
+      row.chars.forEach(ch => cards.push({ ...ch, type, rowName: row.rowName, rowChars: row.chars }));
+    });
+  });
+  return cards;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ══════════════════════════════════════════
+//  상태
+// ══════════════════════════════════════════
+let state = {
+  mode: null,
+  deck: [],
+  index: 0,
+  results: {},   // index -> 'known' | 'practice'
+  hintShown: false,
+  isRandom: false
+};
+
+// ══════════════════════════════════════════
+//  화면 전환
+// ══════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ══════════════════════════════════════════
+//  모드 선택 화면
+// ══════════════════════════════════════════
+let selectedMode = null;
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedMode = btn.dataset.mode;
+    updateStartBtn();
+  });
+});
+
+document.getElementById('btn-seq').addEventListener('click', () => {
+  document.getElementById('btn-seq').classList.add('active');
+  document.getElementById('btn-rnd').classList.remove('active');
+  state.isRandom = false;
+});
+document.getElementById('btn-rnd').addEventListener('click', () => {
+  document.getElementById('btn-rnd').classList.add('active');
+  document.getElementById('btn-seq').classList.remove('active');
+  state.isRandom = true;
+});
+
+document.getElementById('cb-basic').addEventListener('change', updateStartBtn);
+document.getElementById('cb-dakuten').addEventListener('change', updateStartBtn);
+document.getElementById('cb-combo').addEventListener('change', updateStartBtn);
+
+function updateStartBtn() {
+  const anyChecked = document.getElementById('cb-basic').checked
+    || document.getElementById('cb-dakuten').checked
+    || document.getElementById('cb-combo').checked;
+  document.getElementById('btn-start').disabled = !selectedMode || !anyChecked;
+}
+updateStartBtn();
+
+document.getElementById('btn-start').addEventListener('click', () => {
+  const useBasic = document.getElementById('cb-basic').checked;
+  const useDakuten = document.getElementById('cb-dakuten').checked;
+  const useCombo = document.getElementById('cb-combo').checked;
+  let deck = buildDeck(selectedMode, useBasic, useDakuten, useCombo);
+  if (state.isRandom) deck = shuffle(deck);
+  state.mode = selectedMode;
+  state.deck = deck;
+  state.index = 0;
+  state.results = {};
+  startStudy();
+});
+
+// ══════════════════════════════════════════
+//  학습 화면
+// ══════════════════════════════════════════
+function startStudy() {
+  showScreen('screen-study');
+  updateModeBadge();
+  renderCard();
+}
+
+function updateModeBadge() {
+  const badge = document.getElementById('mode-badge');
+  if (state.mode === 'hiragana') { badge.textContent = '히라가나'; badge.className = 'mode-badge'; }
+  else if (state.mode === 'katakana') { badge.textContent = '가타가나'; badge.className = 'mode-badge katakana'; }
+  else { badge.textContent = '히라가나+가타가나'; badge.className = 'mode-badge both'; }
+}
+
+function renderCard() {
+  const { deck, index, results } = state;
+  const card = deck[index];
+  const total = deck.length;
+
+  // 진행률
+  const done = Object.keys(results).length;
+  document.getElementById('progress-text').textContent = `${done} / ${total}`;
+  document.getElementById('nav-counter').textContent = `${index + 1} / ${total}`;
+  document.getElementById('progress-fill').style.width = `${(done / total) * 100}%`;
+
+  // 앞면
+  document.getElementById('main-char').textContent = card.c;
+  const badge = document.getElementById('char-badge');
+  if (card.type === 'hiragana') { badge.textContent = '히라가나'; badge.className = 'char-badge'; }
+  else { badge.textContent = '가타가나'; badge.className = 'char-badge kata'; }
+
+  // 결과 아이콘
+  const iconEl = document.getElementById('result-icon');
+  const res = results[index];
+  if (res === 'known') { iconEl.style.display = 'flex'; iconEl.textContent = '✓'; iconEl.className = 'card-result-icon known'; }
+  else if (res === 'practice') { iconEl.style.display = 'flex'; iconEl.textContent = '↺'; iconEl.className = 'card-result-icon practice'; }
+  else { iconEl.style.display = 'none'; }
+
+  // 뒷면 힌트
+  document.getElementById('hint-romaji').textContent = card.r;
+  document.getElementById('hint-korean').textContent = card.k;
+  document.getElementById('hint-row-label').textContent = card.rowName;
+  // 같은 행 문자 (현재 문자 강조)
+  const rowHtml = card.rowChars.map(rc =>
+    rc.c === card.c
+      ? `<span class="current-char">${rc.c}</span>`
+      : rc.c
+  ).join('  ');
+  document.getElementById('hint-row-chars').innerHTML = rowHtml;
+
+  // 카드 상태 초기화
+  resetCardState();
+
+  // 네비게이션 버튼
+  document.getElementById('btn-prev').disabled = index === 0;
+  document.getElementById('btn-next').disabled = index === total - 1;
+}
+
+function resetCardState() {
+  state.hintShown = false;
+  document.getElementById('card-inner').classList.remove('flipped');
+  document.getElementById('hint-btn-area').style.display = 'block';
+  document.getElementById('action-btns').style.display = 'none';
+}
+
+function showHint() {
+  if (state.hintShown) return;
+  state.hintShown = true;
+  document.getElementById('card-inner').classList.add('flipped');
+  document.getElementById('hint-btn-area').style.display = 'none';
+  document.getElementById('action-btns').style.display = 'flex';
+}
+
+// 카드 클릭으로 힌트
+document.getElementById('card-scene').addEventListener('click', showHint);
+document.getElementById('btn-hint').addEventListener('click', showHint);
+
+document.getElementById('btn-known').addEventListener('click', () => {
+  state.results[state.index] = 'known';
+  goNextAuto();
+});
+document.getElementById('btn-practice').addEventListener('click', () => {
+  state.results[state.index] = 'practice';
+  goNextAuto();
+});
+
+function goNextAuto() {
+  // 아이콘 잠깐 보여주고 이동
+  const iconEl = document.getElementById('result-icon');
+  const res = state.results[state.index];
+  if (res === 'known') { iconEl.style.display = 'flex'; iconEl.textContent = '✓'; iconEl.className = 'card-result-icon known'; }
+  else { iconEl.style.display = 'flex'; iconEl.textContent = '↺'; iconEl.className = 'card-result-icon practice'; }
+  // 카드 앞면으로
+  document.getElementById('card-inner').classList.remove('flipped');
+  document.getElementById('action-btns').style.display = 'none';
+
+  const allAnswered = Object.keys(state.results).length >= state.deck.length;
+  if (allAnswered) {
+    setTimeout(showResult, 600);
+    return;
+  }
+  setTimeout(() => {
+    if (state.index < state.deck.length - 1) {
+      state.index++;
+    } else {
+      // 아직 안 한 카드로 이동
+      for (let i = 0; i < state.deck.length; i++) {
+        if (state.results[i] === undefined) { state.index = i; break; }
+      }
+    }
+    renderCard();
+  }, 350);
+}
+
+document.getElementById('btn-prev').addEventListener('click', () => {
+  if (state.index > 0) { state.index--; renderCard(); }
+});
+document.getElementById('btn-next').addEventListener('click', () => {
+  if (state.index < state.deck.length - 1) { state.index++; renderCard(); }
+});
+
+document.getElementById('btn-back').addEventListener('click', () => {
+  if (confirm('학습을 종료하고 처음으로 돌아갈까요?')) showScreen('screen-mode');
+});
+
+// ══════════════════════════════════════════
+//  결과 화면
+// ══════════════════════════════════════════
+function showResult() {
+  const known = Object.values(state.results).filter(v => v === 'known').length;
+  const practice = Object.values(state.results).filter(v => v === 'practice').length;
+  const total = state.deck.length;
+  const pct = total > 0 ? known / total : 0;
+
+  document.getElementById('stat-known').textContent = known;
+  document.getElementById('stat-practice').textContent = practice;
+
+  let emoji, msg;
+  if (pct === 1) { emoji = '🌸'; msg = '완벽해요! 모든 문자를 마스터했어요!'; }
+  else if (pct >= 0.8) { emoji = '💪'; msg = '잘 하고 있어요! 조금만 더 연습하면 완벽해져요!'; }
+  else { emoji = '📚'; msg = '계속 연습해요! 반복하다 보면 자연스럽게 외워져요!'; }
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-message').textContent = msg;
+
+  const btnRetry = document.getElementById('btn-retry-practice');
+  btnRetry.disabled = practice === 0;
+  if (practice === 0) btnRetry.textContent = '(더 연습할 문자 없음)';
+  else btnRetry.textContent = `🔁 더 연습 문자만 다시 (${practice}자)`;
+
+  showScreen('screen-result');
+}
+
+document.getElementById('btn-retry-practice').addEventListener('click', () => {
+  const practiceIndices = Object.entries(state.results)
+    .filter(([, v]) => v === 'practice')
+    .map(([i]) => parseInt(i));
+  const newDeck = practiceIndices.map(i => state.deck[i]);
+  state.deck = state.isRandom ? shuffle(newDeck) : newDeck;
+  state.index = 0;
+  state.results = {};
+  startStudy();
+});
+
+document.getElementById('btn-retry-all').addEventListener('click', () => {
+  state.index = 0;
+  state.results = {};
+  if (state.isRandom) state.deck = shuffle(state.deck);
+  startStudy();
+});
+
+document.getElementById('btn-home').addEventListener('click', () => {
+  selectedMode = null;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
+  updateStartBtn();
+  showScreen('screen-mode');
+});
+
+// ══════════════════════════════════════════
+//  오십음도 모달
+// ══════════════════════════════════════════
+document.getElementById('btn-chart').addEventListener('click', () => {
+  buildChart();
+  document.getElementById('modal-chart').style.display = 'flex';
+});
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('modal-chart').style.display = 'none';
+});
+document.getElementById('modal-chart').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modal-chart')) {
+    document.getElementById('modal-chart').style.display = 'none';
+  }
+});
+
+document.querySelectorAll('.chart-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('chart-hiragana').style.display = tab.dataset.chart === 'hiragana' ? '' : 'none';
+    document.getElementById('chart-katakana').style.display = tab.dataset.chart === 'katakana' ? '' : 'none';
+  });
+});
+
+let chartBuilt = false;
+function buildChart() {
+  if (chartBuilt) return;
+  chartBuilt = true;
+  ['hiragana', 'katakana'].forEach(type => {
+    const container = document.getElementById(`chart-${type}`);
+    const rowSet = ROWS[type];
+
+    ['basic', 'dakuten', 'combo'].forEach(group => {
+      const sectionTitle = document.createElement('div');
+      sectionTitle.className = 'chart-section-title';
+      sectionTitle.textContent = group === 'basic' ? '기본 오십음도'
+        : group === 'dakuten' ? '탁음 · 반탁음'
+        : '조합 문자 (요음)';
+      container.appendChild(sectionTitle);
+
+      const table = document.createElement('table');
+      table.className = 'kana-table';
+
+      // 헤더행
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      headerRow.innerHTML = '<td>행</td><td>あ단</td><td>い단</td><td>う단</td><td>え단</td><td>お단</td>';
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      rowSet[group].forEach(row => {
+        const tr = document.createElement('tr');
+        // 행 이름
+        const tdName = document.createElement('td');
+        tdName.textContent = row.rowName;
+        tr.appendChild(tdName);
+        // 최대 5칸
+        for (let col = 0; col < 5; col++) {
+          const td = document.createElement('td');
+          if (col < row.chars.length) {
+            const ch = row.chars[col];
+            td.innerHTML = `<div class="kana-cell"><span class="kana-char">${ch.c}</span><span class="kana-rom">${ch.r}</span></div>`;
+          } else {
+            td.className = 'empty';
+            td.textContent = '―';
+          }
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      container.appendChild(table);
+    });
+  });
+}
+</script>
+</body>
+</html>
