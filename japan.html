@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>よんで みましょう - 일본어 단어 공부</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f5f7ff 0%, #fff0f5 100%);
+    min-height: 100vh;
+    color: #333;
+  }
+
+  header {
+    background: linear-gradient(90deg, #6c63ff, #ff6584);
+    color: white;
+    text-align: center;
+    padding: 18px 16px 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  header h1 { font-size: 1.5rem; letter-spacing: 1px; }
+  header p { font-size: 0.85rem; opacity: 0.9; margin-top: 2px; }
+
+  /* 탭 */
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 3px solid #e8e0ff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 13px 4px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #999;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+  }
+  .tab-btn.active {
+    color: #6c63ff;
+    border-bottom-color: #6c63ff;
+    background: #f8f7ff;
+  }
+  .tab-btn:hover:not(.active) { background: #f5f5f5; color: #666; }
+
+  /* 탭 패널 */
+  .tab-panel { display: none; padding: 20px 16px; max-width: 900px; margin: 0 auto; }
+  .tab-panel.active { display: block; }
+
+  /* ===== 단어장 탭 ===== */
+  .search-box {
+    width: 100%;
+    padding: 10px 16px;
+    border: 2px solid #e0e0ff;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 16px;
+    transition: border 0.2s;
+  }
+  .search-box:focus { border-color: #6c63ff; }
+
+  .word-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .word-card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.1);
+    border: 1px solid #ede9ff;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+  .word-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(108,99,255,0.18); }
+  .word-card .num { font-size: 0.72rem; color: #aaa; margin-bottom: 4px; }
+  .word-card .jp { font-size: 1.6rem; color: #6c63ff; font-weight: 700; line-height: 1.2; }
+  .word-card .reading { font-size: 0.78rem; color: #ff6584; margin: 3px 0 2px; }
+  .word-card .kr { font-size: 0.95rem; color: #444; font-weight: 600; }
+
+  /* ===== 플래시카드 탭 ===== */
+  .flash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .flash-progress { font-size: 0.9rem; color: #888; font-weight: 600; }
+  .btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-purple { background: #6c63ff; color: white; }
+  .btn-purple:hover { background: #5a52d5; }
+  .btn-pink { background: #ff6584; color: white; }
+  .btn-pink:hover { background: #e55070; }
+  .btn-gray { background: #f0f0f0; color: #555; }
+  .btn-gray:hover { background: #e0e0e0; }
+
+  .flashcard-scene {
+    width: 100%;
+    max-width: 460px;
+    height: 260px;
+    margin: 0 auto 24px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  .flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+
+  .flashcard-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 30px rgba(108,99,255,0.2);
+  }
+  .flashcard-front {
+    background: linear-gradient(135deg, #6c63ff, #a78bfa);
+    color: white;
+  }
+  .flashcard-back {
+    background: linear-gradient(135deg, #ff6584, #ffb3c1);
+    color: white;
+    transform: rotateY(180deg);
+  }
+  .flashcard-front .jp-big { font-size: 4.5rem; font-weight: 700; line-height: 1; }
+  .flashcard-front .hint { font-size: 0.85rem; opacity: 0.8; margin-top: 14px; }
+  .flashcard-back .kr-big { font-size: 2.4rem; font-weight: 700; line-height: 1.2; text-align: center; padding: 0 20px; }
+  .flashcard-back .reading-big { font-size: 1.1rem; opacity: 0.9; margin-top: 12px; }
+
+  .flash-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .progress-bar-wrap {
+    background: #e8e0ff;
+    border-radius: 10px;
+    height: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6c63ff, #ff6584);
+    border-radius: 10px;
+    transition: width 0.3s;
+  }
+
+  /* ===== 퀴즈 탭 ===== */
+  .quiz-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .quiz-score-badge {
+    background: #6c63ff;
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .quiz-question-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(108,99,255,0.12);
+    margin-bottom: 20px;
+    border: 2px solid #ede9ff;
+  }
+  .quiz-question-card .q-num { font-size: 0.8rem; color: #aaa; margin-bottom: 8px; }
+  .quiz-question-card .q-jp { font-size: 3.5rem; color: #6c63ff; font-weight: 700; line-height: 1; }
+  .quiz-question-card .q-hint { font-size: 0.85rem; color: #bbb; margin-top: 10px; }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .opt-btn {
+    padding: 14px 10px;
+    border: 2px solid #e0e0ff;
+    border-radius: 14px;
+    background: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: #6c63ff; background: #f8f7ff; color: #6c63ff; transform: scale(1.02); }
+  .opt-btn.correct { background: #d4f8e8; border-color: #2ecc71; color: #1a8a50; }
+  .opt-btn.wrong { background: #ffe0e0; border-color: #e74c3c; color: #c0392b; }
+  .opt-btn:disabled { cursor: default; }
+
+  .quiz-feedback {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    min-height: 28px;
+    margin-bottom: 10px;
+  }
+  .feedback-correct { color: #2ecc71; }
+  .feedback-wrong { color: #e74c3c; }
+
+  .quiz-result-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(108,99,255,0.15);
+  }
+  .quiz-result-panel h2 { font-size: 1.4rem; color: #6c63ff; margin-bottom: 8px; }
+  .big-score { font-size: 3.5rem; font-weight: 700; color: #ff6584; margin: 10px 0; }
+  .wrong-list { text-align: left; margin-top: 20px; }
+  .wrong-list h3 { font-size: 0.9rem; color: #888; margin-bottom: 10px; font-weight: 600; }
+  .wrong-item {
+    background: #fff8f9;
+    border: 1px solid #ffd0d8;
+    border-radius: 10px;
+    padding: 8px 14px;
+    margin-bottom: 6px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .wrong-item .jp { font-size: 1.3rem; color: #6c63ff; font-weight: 700; }
+  .wrong-item .kr { font-size: 0.95rem; color: #444; }
+  .wrong-item .reading { font-size: 0.78rem; color: #ff6584; }
+
+  /* ===== 받아쓰기 탭 ===== */
+  .dictation-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(108,99,255,0.12);
+    margin-bottom: 20px;
+    border: 2px solid #ede9ff;
+  }
+  .dictation-card .d-num { font-size: 0.8rem; color: #aaa; margin-bottom: 8px; }
+  .dictation-card .d-kr { font-size: 2.2rem; font-weight: 700; color: #ff6584; margin-bottom: 6px; }
+  .dictation-card .d-hint { font-size: 0.85rem; color: #bbb; }
+
+  .dictation-input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .dictation-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e0e0ff;
+    border-radius: 14px;
+    font-size: 1.4rem;
+    outline: none;
+    text-align: center;
+    transition: border 0.2s;
+    color: #6c63ff;
+    font-weight: 700;
+  }
+  .dictation-input:focus { border-color: #6c63ff; }
+  .dictation-input.correct { border-color: #2ecc71; background: #d4f8e8; }
+  .dictation-input.wrong { border-color: #e74c3c; background: #ffe0e0; }
+
+  .dictation-feedback {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    min-height: 26px;
+    margin-bottom: 12px;
+  }
+  .dict-correct { color: #2ecc71; }
+  .dict-wrong { color: #e74c3c; }
+
+  .dictation-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .section-title {
+    font-size: 0.8rem;
+    color: #aaa;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .word-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+    .flashcard-front .jp-big { font-size: 3.5rem; }
+    .quiz-question-card .q-jp { font-size: 2.8rem; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .tab-btn { font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>よんで みましょう ✨</h1>
+  <p>중학교 일본어 단어 40개 완전 정복!</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('wordlist')">📚 단어장</button>
+  <button class="tab-btn" onclick="showTab('flashcard')">🃏 플래시카드</button>
+  <button class="tab-btn" onclick="showTab('quiz')">✏️ 퀴즈</button>
+  <button class="tab-btn" onclick="showTab('dictation')">🎯 받아쓰기</button>
+</div>
+
+<!-- ===== 단어장 탭 ===== -->
+<div id="tab-wordlist" class="tab-panel active">
+  <input class="search-box" type="text" id="searchInput" placeholder="🔍 단어 검색 (일본어 또는 한국어)..." oninput="filterWords()">
+  <p class="section-title" id="word-count">전체 40개</p>
+  <div class="word-grid" id="wordGrid"></div>
+</div>
+
+<!-- ===== 플래시카드 탭 ===== -->
+<div id="tab-flashcard" class="tab-panel">
+  <div class="flash-header">
+    <span class="flash-progress" id="flashProgress">1 / 40</span>
+    <button class="btn btn-pink" onclick="shuffleFlash()">🔀 섞기</button>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="flashProgressBar" style="width:2.5%"></div>
+  </div>
+  <div class="flashcard-scene" onclick="flipCard()">
+    <div class="flashcard" id="flashcard">
+      <div class="flashcard-face flashcard-front">
+        <div class="jp-big" id="flash-jp">あさ</div>
+        <div class="hint">👆 클릭하면 뒤집어요!</div>
+      </div>
+      <div class="flashcard-face flashcard-back">
+        <div class="kr-big" id="flash-kr">아침</div>
+        <div class="reading-big" id="flash-reading">아사</div>
+      </div>
+    </div>
+  </div>
+  <div class="flash-controls">
+    <button class="btn btn-gray" onclick="prevCard()">◀ 이전</button>
+    <button class="btn btn-purple" onclick="nextCard()">다음 ▶</button>
+  </div>
+</div>
+
+<!-- ===== 퀴즈 탭 ===== -->
+<div id="tab-quiz" class="tab-panel">
+  <div id="quiz-area">
+    <div class="quiz-info">
+      <span id="quizProgress" style="font-size:0.9rem;color:#888;font-weight:600;">문제 1 / 10</span>
+      <span class="quiz-score-badge" id="quizScoreBadge">점수 0</span>
+    </div>
+    <div class="quiz-question-card">
+      <div class="q-num" id="q-num">1번</div>
+      <div class="q-jp" id="q-jp">あさ</div>
+      <div class="q-hint">이 단어의 뜻은?</div>
+    </div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div style="text-align:center">
+      <button class="btn btn-purple" id="nextQuizBtn" onclick="nextQuiz()" style="display:none">다음 문제 ▶</button>
+    </div>
+  </div>
+  <div id="quiz-result" style="display:none">
+    <div class="quiz-result-panel">
+      <h2>퀴즈 완료!</h2>
+      <div class="big-score" id="finalScore">0 / 10</div>
+      <p id="scoreMsg" style="color:#888;font-size:0.95rem;margin-bottom:16px;"></p>
+      <button class="btn btn-purple" onclick="startQuiz()" style="margin-bottom:20px;">🔄 다시 풀기</button>
+      <div class="wrong-list" id="wrongList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 받아쓰기 탭 ===== -->
+<div id="tab-dictation" class="tab-panel">
+  <div class="flash-header">
+    <span class="flash-progress" id="dictProgress">1 / 40</span>
+    <button class="btn btn-pink" onclick="shuffleDict()">🔀 섞기</button>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="dictProgressBar" style="width:2.5%"></div>
+  </div>
+  <div class="dictation-card">
+    <div class="d-num" id="d-num">1번</div>
+    <div class="d-kr" id="d-kr">아침</div>
+    <div class="d-hint">위의 뜻을 가진 일본어 단어를 히라가나로 입력하세요</div>
+  </div>
+  <div class="dictation-input-row">
+    <input class="dictation-input" type="text" id="dictInput"
+      placeholder="히라가나 입력..."
+      onkeydown="if(event.key==='Enter') checkDict()">
+  </div>
+  <div class="dictation-feedback" id="dictFeedback"></div>
+  <div class="dictation-controls">
+    <button class="btn btn-gray" onclick="prevDict()">◀ 이전</button>
+    <button class="btn btn-purple" onclick="checkDict()">확인 ✓</button>
+    <button class="btn btn-gray" onclick="nextDict()">다음 ▶</button>
+    <button class="btn btn-pink" onclick="showDictAnswer()">정답 보기</button>
+  </div>
+  <div style="margin-top:16px;text-align:center">
+    <span id="dictStats" style="font-size:0.85rem;color:#aaa;"></span>
+  </div>
+</div>
+
+<script>
+const words = [
+  { num:1,  jp:"あさ",     reading:"아사",    kr:"아침" },
+  { num:2,  jp:"あし",     reading:"아시",    kr:"발, 다리" },
+  { num:3,  jp:"あめ",     reading:"아메",    kr:"비" },
+  { num:4,  jp:"いけ",     reading:"이케",    kr:"연못" },
+  { num:5,  jp:"いす",     reading:"이스",    kr:"의자" },
+  { num:6,  jp:"いち",     reading:"이치",    kr:"일, 1" },
+  { num:7,  jp:"いぬ",     reading:"이누",    kr:"개" },
+  { num:8,  jp:"うえ",     reading:"우에",    kr:"위" },
+  { num:9,  jp:"うた",     reading:"우타",    kr:"노래" },
+  { num:10, jp:"えき",     reading:"에키",    kr:"역" },
+  { num:11, jp:"おはよう", reading:"오하요",  kr:"안녕 (아침인사)" },
+  { num:12, jp:"かさ",     reading:"카사",    kr:"우산" },
+  { num:13, jp:"くつ",     reading:"쿠츠",    kr:"신발" },
+  { num:14, jp:"くま",     reading:"쿠마",    kr:"곰" },
+  { num:15, jp:"くるま",   reading:"쿠루마",  kr:"자동차" },
+  { num:16, jp:"くろ",     reading:"쿠로",    kr:"검정" },
+  { num:17, jp:"さかな",   reading:"사카나",  kr:"생선" },
+  { num:18, jp:"さくら",   reading:"사쿠라",  kr:"벚꽃" },
+  { num:19, jp:"さむい",   reading:"사무이",  kr:"춥다" },
+  { num:20, jp:"せかい",   reading:"세카이",  kr:"세계" },
+  { num:21, jp:"そら",     reading:"소라",    kr:"하늘" },
+  { num:22, jp:"たこ",     reading:"타코",    kr:"문어" },
+  { num:23, jp:"ちかてつ", reading:"치카테츠", kr:"지하철" },
+  { num:24, jp:"なつ",     reading:"나츠",    kr:"여름" },
+  { num:25, jp:"にく",     reading:"니쿠",    kr:"고기" },
+  { num:26, jp:"にほん",   reading:"니홍",    kr:"일본" },
+  { num:27, jp:"ねこ",     reading:"네코",    kr:"고양이" },
+  { num:28, jp:"のり",     reading:"노리",    kr:"김" },
+  { num:29, jp:"はな",     reading:"하나",    kr:"꽃" },
+  { num:30, jp:"ひと",     reading:"히토",    kr:"사람" },
+  { num:31, jp:"ふゆ",     reading:"후유",    kr:"겨울" },
+  { num:32, jp:"へや",     reading:"헤야",    kr:"방" },
+  { num:33, jp:"ほし",     reading:"호시",    kr:"별" },
+  { num:34, jp:"まつり",   reading:"마츠리",  kr:"축제" },
+  { num:35, jp:"みなさん", reading:"미나상",  kr:"여러분" },
+  { num:36, jp:"やま",     reading:"야마",    kr:"산" },
+  { num:37, jp:"ゆき",     reading:"유키",    kr:"눈" },
+  { num:38, jp:"よる",     reading:"요루",    kr:"밤" },
+  { num:39, jp:"れきし",   reading:"레키시",  kr:"역사" },
+  { num:40, jp:"わたし",   reading:"와타시",  kr:"나" },
+];
+
+// ===== 탭 전환 =====
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== 단어장 =====
+function renderWordGrid(list) {
+  const grid = document.getElementById('wordGrid');
+  grid.innerHTML = list.map(w => `
+    <div class="word-card">
+      <div class="num">${w.num}번</div>
+      <div class="jp">${w.jp}</div>
+      <div class="reading">${w.reading}</div>
+      <div class="kr">${w.kr}</div>
+    </div>
+  `).join('');
+  document.getElementById('word-count').textContent = `전체 ${list.length}개`;
+}
+
+function filterWords() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (!q) { renderWordGrid(words); return; }
+  const filtered = words.filter(w =>
+    w.jp.includes(q) || w.kr.includes(q) || w.reading.includes(q) ||
+    w.num.toString() === q
+  );
+  renderWordGrid(filtered);
+}
+
+renderWordGrid(words);
+
+// ===== 플래시카드 =====
+let flashDeck = [...words];
+let flashIdx = 0;
+let isFlipped = false;
+
+function updateFlashCard() {
+  const w = flashDeck[flashIdx];
+  document.getElementById('flash-jp').textContent = w.jp;
+  document.getElementById('flash-kr').textContent = w.kr;
+  document.getElementById('flash-reading').textContent = w.reading;
+  document.getElementById('flashProgress').textContent = `${flashIdx + 1} / ${flashDeck.length}`;
+  document.getElementById('flashProgressBar').style.width = `${((flashIdx + 1) / flashDeck.length) * 100}%`;
+  const card = document.getElementById('flashcard');
+  card.classList.remove('flipped');
+  isFlipped = false;
+}
+
+function flipCard() {
+  const card = document.getElementById('flashcard');
+  isFlipped = !isFlipped;
+  card.classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  flashIdx = (flashIdx + 1) % flashDeck.length;
+  updateFlashCard();
+}
+
+function prevCard() {
+  flashIdx = (flashIdx - 1 + flashDeck.length) % flashDeck.length;
+  updateFlashCard();
+}
+
+function shuffleFlash() {
+  flashDeck = [...words].sort(() => Math.random() - 0.5);
+  flashIdx = 0;
+  updateFlashCard();
+}
+
+updateFlashCard();
+
+// ===== 퀴즈 =====
+let quizQuestions = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+let quizWrong = [];
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function startQuiz() {
+  quizQuestions = shuffle(words).slice(0, 10);
+  quizIdx = 0; quizScore = 0; quizAnswered = false; quizWrong = [];
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  renderQuiz();
+}
+
+function renderQuiz() {
+  quizAnswered = false;
+  const q = quizQuestions[quizIdx];
+  document.getElementById('q-num').textContent = `${quizIdx + 1}번`;
+  document.getElementById('q-jp').textContent = q.jp;
+  document.getElementById('quizProgress').textContent = `문제 ${quizIdx + 1} / 10`;
+  document.getElementById('quizScoreBadge').textContent = `점수 ${quizScore}`;
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('nextQuizBtn').style.display = 'none';
+
+  // 보기 4개: 정답 + 오답 3개
+  const others = shuffle(words.filter(w => w.jp !== q.jp)).slice(0, 3);
+  const options = shuffle([q, ...others]);
+
+  const container = document.getElementById('quizOptions');
+  container.innerHTML = options.map((opt, i) => `
+    <button class="opt-btn" id="opt-${i}" onclick="selectAnswer(${i}, '${opt.jp}', '${q.jp}')">
+      ${opt.kr}
+    </button>
+  `).join('');
+}
+
+function selectAnswer(i, selected, correct) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const fb = document.getElementById('quizFeedback');
+  const q = quizQuestions[quizIdx];
+
+  document.querySelectorAll('.opt-btn').forEach(btn => btn.disabled = true);
+
+  if (selected === correct) {
+    quizScore++;
+    document.getElementById(`opt-${i}`).classList.add('correct');
+    fb.textContent = '🎉 정답! 잘했어요!';
+    fb.className = 'quiz-feedback feedback-correct';
+  } else {
+    document.getElementById(`opt-${i}`).classList.add('wrong');
+    // 정답 버튼 강조
+    document.querySelectorAll('.opt-btn').forEach(btn => {
+      if (btn.textContent.trim() === q.kr) btn.classList.add('correct');
+    });
+    fb.textContent = `❌ 틀렸어요! 정답: ${q.kr} (${q.reading})`;
+    fb.className = 'quiz-feedback feedback-wrong';
+    quizWrong.push(q);
+  }
+
+  document.getElementById('quizScoreBadge').textContent = `점수 ${quizScore}`;
+
+  if (quizIdx < 9) {
+    document.getElementById('nextQuizBtn').style.display = 'inline-block';
+  } else {
+    setTimeout(showResult, 1200);
+  }
+}
+
+function nextQuiz() {
+  quizIdx++;
+  renderQuiz();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'block';
+  document.getElementById('finalScore').textContent = `${quizScore} / 10`;
+
+  const msgs = ['조금 더 연습해봐요! 💪', '괜찮아요, 다시 도전! 🔥', '잘했어요! 👍', '훌륭해요! ⭐', '완벽해요! 🏆'];
+  const mi = quizScore <= 3 ? 0 : quizScore <= 5 ? 1 : quizScore <= 7 ? 2 : quizScore <= 9 ? 3 : 4;
+  document.getElementById('scoreMsg').textContent = msgs[mi];
+
+  const wl = document.getElementById('wrongList');
+  if (quizWrong.length === 0) {
+    wl.innerHTML = '<p style="color:#2ecc71;font-weight:700;text-align:center;">오답이 없어요! 완벽! 🏆</p>';
+  } else {
+    wl.innerHTML = `<h3>오답 목록 (${quizWrong.length}개)</h3>` +
+      quizWrong.map(w => `
+        <div class="wrong-item">
+          <span class="jp">${w.jp}</span>
+          <span>→</span>
+          <div>
+            <div class="kr">${w.kr}</div>
+            <div class="reading">${w.reading}</div>
+          </div>
+        </div>
+      `).join('');
+  }
+}
+
+startQuiz();
+
+// ===== 받아쓰기 =====
+let dictDeck = [...words];
+let dictIdx = 0;
+let dictCorrect = 0;
+let dictTotal = 0;
+
+function updateDictCard() {
+  const w = dictDeck[dictIdx];
+  document.getElementById('d-num').textContent = `${dictIdx + 1}번`;
+  document.getElementById('d-kr').textContent = w.kr;
+  document.getElementById('dictProgress').textContent = `${dictIdx + 1} / ${dictDeck.length}`;
+  document.getElementById('dictProgressBar').style.width = `${((dictIdx + 1) / dictDeck.length) * 100}%`;
+  const input = document.getElementById('dictInput');
+  input.value = '';
+  input.className = 'dictation-input';
+  input.disabled = false;
+  input.focus();
+  document.getElementById('dictFeedback').textContent = '';
+  document.getElementById('dictFeedback').className = 'dictation-feedback';
+}
+
+function checkDict() {
+  const w = dictDeck[dictIdx];
+  const input = document.getElementById('dictInput');
+  const val = input.value.trim();
+  const fb = document.getElementById('dictFeedback');
+
+  if (!val) { fb.textContent = '단어를 입력해주세요!'; fb.className='dictation-feedback'; return; }
+
+  dictTotal++;
+  if (val === w.jp) {
+    dictCorrect++;
+    input.className = 'dictation-input correct';
+    fb.textContent = `🎉 정답! ${w.jp} (${w.reading})`;
+    fb.className = 'dictation-feedback dict-correct';
+  } else {
+    input.className = 'dictation-input wrong';
+    fb.textContent = `❌ 틀렸어요! 정답: ${w.jp} (${w.reading})`;
+    fb.className = 'dictation-feedback dict-wrong';
+  }
+  input.disabled = true;
+  updateDictStats();
+}
+
+function showDictAnswer() {
+  const w = dictDeck[dictIdx];
+  const fb = document.getElementById('dictFeedback');
+  fb.textContent = `정답: ${w.jp} (${w.reading})`;
+  fb.className = 'dictation-feedback';
+  document.getElementById('dictInput').value = w.jp;
+  document.getElementById('dictInput').disabled = true;
+}
+
+function nextDict() {
+  dictIdx = (dictIdx + 1) % dictDeck.length;
+  updateDictCard();
+}
+
+function prevDict() {
+  dictIdx = (dictIdx - 1 + dictDeck.length) % dictDeck.length;
+  updateDictCard();
+}
+
+function shuffleDict() {
+  dictDeck = [...words].sort(() => Math.random() - 0.5);
+  dictIdx = 0;
+  dictCorrect = 0; dictTotal = 0;
+  updateDictCard();
+  updateDictStats();
+}
+
+function updateDictStats() {
+  if (dictTotal === 0) { document.getElementById('dictStats').textContent = ''; return; }
+  document.getElementById('dictStats').textContent = `정답률: ${dictCorrect}/${dictTotal} (${Math.round(dictCorrect/dictTotal*100)}%)`;
+}
+
+updateDictCard();
+</script>
+</body>
+</html>
