@@ -91,6 +91,11 @@
   .word-card .jp { font-size: 1.6rem; color: #6c63ff; font-weight: 700; line-height: 1.2; }
   .word-card .reading { font-size: 0.78rem; color: #ff6584; margin: 3px 0 2px; }
   .word-card .kr { font-size: 0.95rem; color: #444; font-weight: 600; }
+  .word-card .mnemonic {
+    font-size: 0.72rem; color: #888; margin-top: 8px;
+    background: #f8f7ff; border-radius: 8px; padding: 5px 7px;
+    line-height: 1.4; text-align: left; border-left: 3px solid #c4b5fd;
+  }
 
   /* ===== 플래시카드 탭 ===== */
   .flash-header {
@@ -156,8 +161,14 @@
   }
   .flashcard-front .jp-big { font-size: 4.5rem; font-weight: 700; line-height: 1; }
   .flashcard-front .hint { font-size: 0.85rem; opacity: 0.8; margin-top: 14px; }
-  .flashcard-back .kr-big { font-size: 2.4rem; font-weight: 700; line-height: 1.2; text-align: center; padding: 0 20px; }
-  .flashcard-back .reading-big { font-size: 1.1rem; opacity: 0.9; margin-top: 12px; }
+  .flashcard-back .kr-big { font-size: 2.2rem; font-weight: 700; line-height: 1.2; text-align: center; padding: 0 16px; }
+  .flashcard-back .reading-big { font-size: 1rem; opacity: 0.9; margin-top: 8px; }
+  .flashcard-back .mnemonic-big {
+    font-size: 0.78rem; opacity: 0.95; margin-top: 10px;
+    background: rgba(255,255,255,0.25); border-radius: 10px;
+    padding: 6px 12px; text-align: center; line-height: 1.5;
+    max-width: 85%;
+  }
 
   .flash-controls {
     display: flex;
@@ -375,6 +386,7 @@
       <div class="flashcard-face flashcard-back">
         <div class="kr-big" id="flash-kr">아침</div>
         <div class="reading-big" id="flash-reading">아사</div>
+        <div class="mnemonic-big" id="flash-mnemonic"></div>
       </div>
     </div>
   </div>
@@ -446,46 +458,46 @@
 
 <script>
 const words = [
-  { num:1,  jp:"あさ",     reading:"아사",    kr:"아침" },
-  { num:2,  jp:"あし",     reading:"아시",    kr:"발, 다리" },
-  { num:3,  jp:"あめ",     reading:"아메",    kr:"비" },
-  { num:4,  jp:"いけ",     reading:"이케",    kr:"연못" },
-  { num:5,  jp:"いす",     reading:"이스",    kr:"의자" },
-  { num:6,  jp:"いち",     reading:"이치",    kr:"일, 1" },
-  { num:7,  jp:"いぬ",     reading:"이누",    kr:"개" },
-  { num:8,  jp:"うえ",     reading:"우에",    kr:"위" },
-  { num:9,  jp:"うた",     reading:"우타",    kr:"노래" },
-  { num:10, jp:"えき",     reading:"에키",    kr:"역" },
-  { num:11, jp:"おはよう", reading:"오하요",  kr:"안녕 (아침인사)" },
-  { num:12, jp:"かさ",     reading:"카사",    kr:"우산" },
-  { num:13, jp:"くつ",     reading:"쿠츠",    kr:"신발" },
-  { num:14, jp:"くま",     reading:"쿠마",    kr:"곰" },
-  { num:15, jp:"くるま",   reading:"쿠루마",  kr:"자동차" },
-  { num:16, jp:"くろ",     reading:"쿠로",    kr:"검정" },
-  { num:17, jp:"さかな",   reading:"사카나",  kr:"생선" },
-  { num:18, jp:"さくら",   reading:"사쿠라",  kr:"벚꽃" },
-  { num:19, jp:"さむい",   reading:"사무이",  kr:"춥다" },
-  { num:20, jp:"せかい",   reading:"세카이",  kr:"세계" },
-  { num:21, jp:"そら",     reading:"소라",    kr:"하늘" },
-  { num:22, jp:"たこ",     reading:"타코",    kr:"문어" },
-  { num:23, jp:"ちかてつ", reading:"치카테츠", kr:"지하철" },
-  { num:24, jp:"なつ",     reading:"나츠",    kr:"여름" },
-  { num:25, jp:"にく",     reading:"니쿠",    kr:"고기" },
-  { num:26, jp:"にほん",   reading:"니홍",    kr:"일본" },
-  { num:27, jp:"ねこ",     reading:"네코",    kr:"고양이" },
-  { num:28, jp:"のり",     reading:"노리",    kr:"김" },
-  { num:29, jp:"はな",     reading:"하나",    kr:"꽃" },
-  { num:30, jp:"ひと",     reading:"히토",    kr:"사람" },
-  { num:31, jp:"ふゆ",     reading:"후유",    kr:"겨울" },
-  { num:32, jp:"へや",     reading:"헤야",    kr:"방" },
-  { num:33, jp:"ほし",     reading:"호시",    kr:"별" },
-  { num:34, jp:"まつり",   reading:"마츠리",  kr:"축제" },
-  { num:35, jp:"みなさん", reading:"미나상",  kr:"여러분" },
-  { num:36, jp:"やま",     reading:"야마",    kr:"산" },
-  { num:37, jp:"ゆき",     reading:"유키",    kr:"눈" },
-  { num:38, jp:"よる",     reading:"요루",    kr:"밤" },
-  { num:39, jp:"れきし",   reading:"레키시",  kr:"역사" },
-  { num:40, jp:"わたし",   reading:"와타시",  kr:"나" },
+  { num:1,  jp:"あさ",     reading:"아사",    kr:"아침",          mnemonic:"💡 아침에 일어나 '아~ 살아있다!' → 아사 = 아침" },
+  { num:2,  jp:"あし",     reading:"아시",    kr:"발, 다리",      mnemonic:"💡 아시아를 두 발로 걸어다닌다 → 아시 = 발" },
+  { num:3,  jp:"あめ",     reading:"아메",    kr:"비",            mnemonic:"💡 비 오는 날 '아, 메... 우산 없어!' → 아메 = 비" },
+  { num:4,  jp:"いけ",     reading:"이케",    kr:"연못",          mnemonic:"💡 잘생긴 이케남이 연못 앞에서 셀카 → 이케 = 연못" },
+  { num:5,  jp:"いす",     reading:"이스",    kr:"의자",          mnemonic:"💡 '이~ 스트레칭!' 의자에 앉아 기지개 → 이스 = 의자" },
+  { num:6,  jp:"いち",     reading:"이치",    kr:"일, 1",         mnemonic:"💡 1등! '이치이치!' 외치며 우승 세리머니 → 이치 = 1" },
+  { num:7,  jp:"いぬ",     reading:"이누",    kr:"개",            mnemonic:"💡 '이리 누워!' 하면 바로 눕는 착한 개 → 이누 = 개" },
+  { num:8,  jp:"うえ",     reading:"우에",    kr:"위",            mnemonic:"💡 '우에~!' 하고 위를 쳐다보며 감탄 → 우에 = 위" },
+  { num:9,  jp:"うた",     reading:"우타",    kr:"노래",          mnemonic:"💡 울면서 타악기 치며 노래 부르기 → 우타 = 노래" },
+  { num:10, jp:"えき",     reading:"에키",    kr:"역",            mnemonic:"💡 에~ 기차역 에키(역)에 기차 도착! → 에키 = 역" },
+  { num:11, jp:"おはよう", reading:"오하요",  kr:"안녕 (아침인사)", mnemonic:"💡 '오빠! 하여간! 요즘 아침인사도 안 해!' → 오하요" },
+  { num:12, jp:"かさ",     reading:"카사",    kr:"우산",          mnemonic:"💡 비 오는 날 '카사 어딨어!' 우산 찾기 → 카사 = 우산" },
+  { num:13, jp:"くつ",     reading:"쿠츠",    kr:"신발",          mnemonic:"💡 '쿠츠쿠츠~' 새 신발 소리 내며 걷기 → 쿠츠 = 신발" },
+  { num:14, jp:"くま",     reading:"쿠마",    kr:"곰",            mnemonic:"💡 쿠마몬(구마모토 캐릭터)은 검은 곰! → 쿠마 = 곰" },
+  { num:15, jp:"くるま",   reading:"쿠루마",  kr:"자동차",        mnemonic:"💡 자동차가 '쿠루쿠루~' 마을을 돌아다님 → 쿠루마 = 자동차" },
+  { num:16, jp:"くろ",     reading:"쿠로",    kr:"검정",          mnemonic:"💡 크로아티아 검은 유니폼처럼 새까매! → 쿠로 = 검정" },
+  { num:17, jp:"さかな",   reading:"사카나",  kr:"생선",          mnemonic:"💡 생선 사고 싶어서 '사카나~!' 시장 달려감 → 사카나 = 생선" },
+  { num:18, jp:"さくら",   reading:"사쿠라",  kr:"벚꽃",          mnemonic:"💡 이미 유명! 봄 소풍의 사쿠라 = 벚꽃 🌸" },
+  { num:19, jp:"さむい",   reading:"사무이",  kr:"춥다",          mnemonic:"💡 겨울 사무실이 너무 추워서 '사무이~' 덜덜 → 사무이 = 춥다" },
+  { num:20, jp:"せかい",   reading:"세카이",  kr:"세계",          mnemonic:"💡 발음이 거의 같아! '세카이' ≈ '세계' → 세카이 = 세계" },
+  { num:21, jp:"そら",     reading:"소라",    kr:"하늘",          mnemonic:"💡 파란 하늘 = 파란 소라(나팔고둥) 색깔! → 소라 = 하늘" },
+  { num:22, jp:"たこ",     reading:"타코",    kr:"문어",          mnemonic:"💡 타코야키 안에 문어(たこ)가 쏙! → 타코 = 문어" },
+  { num:23, jp:"ちかてつ", reading:"치카테츠", kr:"지하철",       mnemonic:"💡 지하철이 '치카치카~' 달린다 → 치카테츠 = 지하철" },
+  { num:24, jp:"なつ",     reading:"나츠",    kr:"여름",          mnemonic:"💡 뜨거운 여름에 '나 죽겠다, 더워!' → 나츠 = 여름" },
+  { num:25, jp:"にく",     reading:"니쿠",    kr:"고기",          mnemonic:"💡 '니쿠~' 고기 먹고 싶다! 肉(고기 육) → 니쿠 = 고기" },
+  { num:26, jp:"にほん",   reading:"니홍",    kr:"일본",          mnemonic:"💡 이미 아는 단어! 日本(일본) → 니홍 = 일본" },
+  { num:27, jp:"ねこ",     reading:"네코",    kr:"고양이",        mnemonic:"💡 고양이가 네 발로 코 박고 자는 모습 → 네코 = 고양이" },
+  { num:28, jp:"のり",     reading:"노리",    kr:"김",            mnemonic:"💡 김을 '노릇노릇' 구우면 맛있어! → 노리 = 김" },
+  { num:29, jp:"はな",     reading:"하나",    kr:"꽃",            mnemonic:"💡 '꽃 하나 주세요~' 꽃집에서 하나 달라고! → 하나 = 꽃" },
+  { num:30, jp:"ひと",     reading:"히토",    kr:"사람",          mnemonic:"💡 사람을 히트(hit)하면 절대 안 돼! → 히토 = 사람" },
+  { num:31, jp:"ふゆ",     reading:"후유",    kr:"겨울",          mnemonic:"💡 겨울 추운 날 입에서 '후유~' 입김이 나옴 → 후유 = 겨울" },
+  { num:32, jp:"へや",     reading:"헤야",    kr:"방",            mnemonic:"💡 '헤야!' 내 방에서 태권도 기합 넣기 → 헤야 = 방" },
+  { num:33, jp:"ほし",     reading:"호시",    kr:"별",            mnemonic:"💡 별을 '호시탐탐' 노리는 우주 탐험가 → 호시 = 별" },
+  { num:34, jp:"まつり",   reading:"마츠리",  kr:"축제",          mnemonic:"💡 '마이크 틀어~' 신나는 축제! → 마츠리 = 축제" },
+  { num:35, jp:"みなさん", reading:"미나상",  kr:"여러분",        mnemonic:"💡 '미나'(모두) + '상'(님) = 여러분! → 미나상 = 여러분" },
+  { num:36, jp:"やま",     reading:"야마",    kr:"산",            mnemonic:"💡 야마하 오토바이 타고 산 정상 등반! → 야마 = 산" },
+  { num:37, jp:"ゆき",     reading:"유키",    kr:"눈",            mnemonic:"💡 눈이 '유키유키~' 하늘에서 내려옴 → 유키 = 눈" },
+  { num:38, jp:"よる",     reading:"요루",    kr:"밤",            mnemonic:"💡 밤에 혼자 '요리(요루)' 해 먹기 → 요루 = 밤" },
+  { num:39, jp:"れきし",   reading:"레키시",  kr:"역사",          mnemonic:"💡 역사 공부를 '레크리에이션'처럼 즐겁게! → 레키시 = 역사" },
+  { num:40, jp:"わたし",   reading:"와타시",  kr:"나",            mnemonic:"💡 '와! 탔어!' 나야 나, 내가 주인공! → 와타시 = 나" },
 ];
 
 // ===== 탭 전환 =====
@@ -505,6 +517,7 @@ function renderWordGrid(list) {
       <div class="jp">${w.jp}</div>
       <div class="reading">${w.reading}</div>
       <div class="kr">${w.kr}</div>
+      <div class="mnemonic">${w.mnemonic}</div>
     </div>
   `).join('');
   document.getElementById('word-count').textContent = `전체 ${list.length}개`;
@@ -532,6 +545,7 @@ function updateFlashCard() {
   document.getElementById('flash-jp').textContent = w.jp;
   document.getElementById('flash-kr').textContent = w.kr;
   document.getElementById('flash-reading').textContent = w.reading;
+  document.getElementById('flash-mnemonic').textContent = w.mnemonic;
   document.getElementById('flashProgress').textContent = `${flashIdx + 1} / ${flashDeck.length}`;
   document.getElementById('flashProgressBar').style.width = `${((flashIdx + 1) / flashDeck.length) * 100}%`;
   const card = document.getElementById('flashcard');
@@ -621,7 +635,7 @@ function selectAnswer(i, selected, correct) {
     document.querySelectorAll('.opt-btn').forEach(btn => {
       if (btn.textContent.trim() === q.kr) btn.classList.add('correct');
     });
-    fb.textContent = `❌ 틀렸어요! 정답: ${q.kr} (${q.reading})`;
+    fb.innerHTML = `❌ 틀렸어요! 정답: <strong>${q.kr}</strong> (${q.reading})<br><span style="font-size:0.85rem;color:#e74c3c;opacity:0.85">${q.mnemonic}</span>`;
     fb.className = 'quiz-feedback feedback-wrong';
     quizWrong.push(q);
   }
@@ -661,6 +675,7 @@ function showResult() {
           <div>
             <div class="kr">${w.kr}</div>
             <div class="reading">${w.reading}</div>
+            <div style="font-size:0.72rem;color:#a78bfa;margin-top:3px;">${w.mnemonic}</div>
           </div>
         </div>
       `).join('');
@@ -706,7 +721,7 @@ function checkDict() {
     fb.className = 'dictation-feedback dict-correct';
   } else {
     input.className = 'dictation-input wrong';
-    fb.textContent = `❌ 틀렸어요! 정답: ${w.jp} (${w.reading})`;
+    fb.innerHTML = `❌ 틀렸어요! 정답: <strong>${w.jp}</strong> (${w.reading})<br><span style="font-size:0.82rem;opacity:0.85">${w.mnemonic}</span>`;
     fb.className = 'dictation-feedback dict-wrong';
   }
   input.disabled = true;
