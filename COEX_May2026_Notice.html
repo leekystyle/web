@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026년 5월 COEX 주요 전시회 안내 | 한국에너지기술평가원</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-primary:    #0d3f6e;
+      --color-secondary:  #1a7abf;
+      --color-bg:         #f4f7fb;
+      --color-border:     #dde4ef;
+      --color-text:       #1a2340;
+      --color-text-muted: #5a6a82;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+                   "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #0d3f6e 0%, #1a5c99 60%, #0e7a5a 100%);
+      color: #fff; padding: 40px 0 36px; position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: ""; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 80px);
+    }
+    .header-inner { max-width: 960px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+    .org-label {
+      display: inline-block; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px; padding: 4px 14px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 14px;
+    }
+    .page-title { font-size: 1.75rem; font-weight: 800; line-height: 1.3; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .page-subtitle { font-size: 0.95rem; opacity: 0.85; }
+    .header-badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .hbadge {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px; padding: 6px 14px; font-size: 0.82rem; font-weight: 600;
+    }
+    .page-main { padding: 32px 0 48px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 28px; }
+    .notice-box {
+      background: #eff6ff; border-left: 5px solid #2563eb; border-radius: 0 10px 10px 0;
+      padding: 16px 20px; margin-bottom: 28px; font-size: 0.9rem; color: #1e3a6e; line-height: 1.7;
+    }
+    .notice-box strong { color: #1a3a6b; }
+    .section-title {
+      font-size: 1.05rem; font-weight: 700; color: var(--color-primary);
+      margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--color-border);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-title .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-secondary); }
+    .table-wrapper { overflow-x: auto; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.08); margin-bottom: 32px; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: #fff; }
+    .data-table thead tr { background: var(--color-primary); color: #fff; }
+    .data-table th { padding: 13px 16px; text-align: left; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.12); }
+    .data-table th:last-child { border-right: none; }
+    .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+    .data-table tbody tr:hover { background: #f0f6ff; }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+    .tag-ai   { background: #f0eaff; color: #6c3fce; border: 1px solid #d4b8ff; }
+    .tag-elec { background: #e0f0ff; color: #1a5c99; border: 1px solid #a8d0f0; }
+    .tag-env  { background: #e0f7ee; color: #007a50; border: 1px solid #8fd9be; }
+    .fee-free { color: #007a50; font-weight: 700; }
+    .fee-paid { color: #c05a00; font-weight: 600; }
+    .expo-card {
+      background: #fff; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      margin-bottom: 24px; overflow: hidden; border: 1px solid var(--color-border);
+    }
+    .expo-card-header {
+      padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .expo-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .expo-icon-ai   { background: #f0eaff; }
+    .expo-icon-elec { background: #e0f0ff; }
+    .expo-icon-env  { background: #e0f7ee; }
+    .expo-name { font-size: 1.05rem; font-weight: 800; color: var(--color-text); line-height: 1.3; }
+    .expo-name-en { font-size: 0.78rem; color: var(--color-text-muted); font-weight: 500; margin-top: 2px; }
+    .expo-card-body { padding: 20px 24px; }
+    .expo-meta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .meta-item { background: #f8faff; border: 1px solid #e2ecff; border-radius: 8px; padding: 10px 14px; }
+    .meta-label { font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .meta-value { font-size: 0.9rem; font-weight: 700; color: var(--color-text); line-height: 1.4; }
+    .meta-value.highlight-date { color: #c53030; }
+    .meta-value.highlight-free { color: #007a50; }
+    .items-label { font-size: 0.8rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .items-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .item-chip { padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .chip-ai   { background: #f0eaff; color: #6c3fce; }
+    .chip-elec { background: #e0f0ff; color: #1a5c99; }
+    .chip-env  { background: #e0f7ee; color: #007a50; }
+    .organizer-row { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--color-border); font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.6; }
+    .organizer-row strong { color: var(--color-text); }
+    .tip-box {
+      background: #fff8ec; border: 1px solid #fdd8a0; border-left: 5px solid #f59e0b;
+      border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 28px; font-size: 0.88rem; color: #7c5000; line-height: 1.7;
+    }
+    .tip-box .tip-title { font-weight: 800; margin-bottom: 6px; font-size: 0.9rem; }
+    .tip-box ul { padding-left: 18px; margin-top: 6px; }
+    .tip-box li { margin-bottom: 4px; }
+    @media (max-width: 620px) {
+      .page-title { font-size: 1.35rem; }
+      .expo-meta-grid { grid-template-columns: 1fr 1fr; }
+      .expo-card-body, .expo-card-header { padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div style="display:flex; flex-direction:column; min-height:100vh;">
+
+  <header class="page-header">
+    <div class="header-inner">
+      <div class="org-label">🏢 한국에너지기술평가원 (KETEP) 사내 공지</div>
+      <h1 class="page-title">2026년 5월 COEX 주요 전시회 안내</h1>
+      <p class="page-subtitle">에너지·AI·환경 분야 전문 전시회 참관 정보를 안내드립니다</p>
+      <div class="header-badge-row">
+        <div class="hbadge">📍 서울 COEX</div>
+        <div class="hbadge">📅 5월 6일 ~ 5월 22일</div>
+        <div class="hbadge">🎪 전시회 3건</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main" style="flex:1;">
+    <div class="container">
+
+      <div class="notice-box">
+        <strong>📢 안내드립니다.</strong><br>
+        오는 2026년 5월, 서울 COEX에서 에너지·AI·환경 분야 주요 국제 전시회가 연이어 개최됩니다.<br>
+        관련 부서 및 관심 있는 직원 여러분의 적극적인 참관을 권장하며, 아래 전시회 정보를 참고하시기 바랍니다.
+      </div>
+
+      <div class="section-title"><span class="dot"></span> 전시회 일정 한눈에 보기</div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr><th>전시회명</th><th>기간</th><th>장소</th><th>관람시간</th><th>입장료</th><th>분야</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AI EXPO KOREA 2026</strong><br><span style="font-size:0.8rem;color:#888;">국제인공지능대전</span></td>
+              <td style="white-space:nowrap;"><strong>5/6(수) ~ 5/8(금)</strong></td>
+              <td>COEX Hall A</td>
+              <td>10:00 ~ 17:00</td>
+              <td class="fee-paid">20,000원</td>
+              <td><span class="tag tag-ai">AI</span></td>
+            </tr>
+            <tr>
+              <td><strong>2026 국제 전기전력 전시회</strong><br><span style="font-size:0.8rem;color:#888;">EPTK 2026</span></td>
+              <td style="white-space:nowrap;"><strong>5/6(수) ~ 5/8(금)</strong></td>
+              <td>COEX Hall C</td>
+              <td>10:00 ~ 17:00<br><span style="font-size:0.78rem;color:#888;">(입장마감 16:30)</span></td>
+              <td><span class="fee-free">무료</span><br><span style="font-size:0.78rem;color:#888;">사전등록 시</span></td>
+              <td><span class="tag tag-elec">에너지·전기</span></td>
+            </tr>
+            <tr>
+              <td><strong>제47회 국제환경산업기술&amp;그린에너지전</strong><br><span style="font-size:0.8rem;color:#888;">ENVEX 2026</span></td>
+              <td style="white-space:nowrap;"><strong>5/20(수) ~ 5/22(금)</strong></td>
+              <td>COEX Hall A</td>
+              <td>10:00 ~ 18:00<br><span style="font-size:0.78rem;color:#888;">(마지막날 ~16:00)</span></td>
+              <td><span class="fee-free">무료</span><br><span style="font-size:0.78rem;color:#888;">사전등록 시</span></td>
+              <td><span class="tag tag-env">환경·그린에너지</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-title">💡 참관 전 확인사항</div>
+        <ul>
+          <li>국제 전기전력 전시회·국제환경산업기술&amp;그린에너지전은 <strong>온라인 사전등록 시 무료입장</strong>이 가능합니다.</li>
+          <li>AI EXPO KOREA는 <strong>B2B 전문 전시회</strong>로, 비즈니스 네트워킹 및 투자상담 등 다양한 부대행사가 운영됩니다.</li>
+          <li>5월 6일~8일에는 AI EXPO와 국제 전기전력 전시회가 <strong>동시 개최</strong>되므로 방문 일정을 효율적으로 계획하시기 바랍니다.</li>
+        </ul>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;"><span class="dot"></span> 전시회별 상세 정보</div>
+
+      <!-- AI EXPO -->
+      <div class="expo-card">
+        <div class="expo-card-header">
+          <div class="expo-icon expo-icon-ai">🤖</div>
+          <div>
+            <div class="expo-name">AI EXPO KOREA 2026 · 국제인공지능대전</div>
+            <div class="expo-name-en">International AI Exhibition | www.aiexpo.co.kr</div>
+          </div>
+        </div>
+        <div class="expo-card-body">
+          <div class="expo-meta-grid">
+            <div class="meta-item"><div class="meta-label">📅 기간</div><div class="meta-value highlight-date">2026.05.06(수) ~ 05.08(금)</div></div>
+            <div class="meta-item"><div class="meta-label">📍 장소</div><div class="meta-value">COEX 1층 Hall A</div></div>
+            <div class="meta-item"><div class="meta-label">🕐 관람시간</div><div class="meta-value">10:00 ~ 17:00</div></div>
+            <div class="meta-item"><div class="meta-label">💰 입장료</div><div class="meta-value">20,000원</div></div>
+            <div class="meta-item"><div class="meta-label">🏢 규모</div><div class="meta-value">약 350개사 · 600부스</div></div>
+            <div class="meta-item"><div class="meta-label">👥 목표 참관</div><div class="meta-value">50,000명</div></div>
+          </div>
+          <div class="items-label">주요 전시 품목</div>
+          <div class="items-tags">
+            <span class="item-chip chip-ai">AI 솔루션 (DL/ML, NLP, 영상·음성 인식)</span>
+            <span class="item-chip chip-ai">AI 인프라 &amp; 플랫폼</span>
+            <span class="item-chip chip-ai">클라우드 · 엣지 AI</span>
+            <span class="item-chip chip-ai">AI+X 융합 (제조·의료·금융·교육 등)</span>
+            <span class="item-chip chip-ai">로봇 · 스마트시티 · 메타버스</span>
+          </div>
+          <div class="organizer-row">
+            <strong>주최/주관:</strong> (사)한국인공지능협회, ㈜서울메쎄, 인공지능신문 &nbsp;|&nbsp;
+            <strong>후원:</strong> 과학기술정보통신부, 산업통상자원부, 한국지능정보사회진흥원, KAIST 김재철AI대학원 외<br>
+            <strong>주요 부대행사:</strong> X+AI Conference, Global AI Summit, 1:1 VC 투자유치상담회, AI Excellence Summit Awards
+          </div>
+        </div>
+      </div>
+
+      <!-- 국제 전기전력 -->
+      <div class="expo-card">
+        <div class="expo-card-header">
+          <div class="expo-icon expo-icon-elec">⚡</div>
+          <div>
+            <div class="expo-name">2026 국제 전기전력 전시회 (EPTK 2026)</div>
+            <div class="expo-name-en">International Electric Power Exhibition | electrickorea.org</div>
+          </div>
+        </div>
+        <div class="expo-card-body">
+          <div class="expo-meta-grid">
+            <div class="meta-item"><div class="meta-label">📅 기간</div><div class="meta-value highlight-date">2026.05.06(수) ~ 05.08(금)</div></div>
+            <div class="meta-item"><div class="meta-label">📍 장소</div><div class="meta-value">COEX Hall C / Conference Center</div></div>
+            <div class="meta-item"><div class="meta-label">🕐 관람시간</div><div class="meta-value">10:00 ~ 17:00<br><span style="font-size:0.78rem;color:#888;">(입장마감 16:30)</span></div></div>
+            <div class="meta-item"><div class="meta-label">💰 입장료</div><div class="meta-value highlight-free">무료 (사전등록 시)<br><span style="font-size:0.78rem;color:#888;">현장 10,000원</span></div></div>
+          </div>
+          <div class="items-label">주요 전시 품목</div>
+          <div class="items-tags">
+            <span class="item-chip chip-elec">발전·원자력 플랜트</span>
+            <span class="item-chip chip-elec">전기전력설비 (송·배전, 변환/감시)</span>
+            <span class="item-chip chip-elec">스마트그리드 · 분산에너지</span>
+            <span class="item-chip chip-elec">친환경 재생에너지 (태양광·풍력·수소)</span>
+            <span class="item-chip chip-elec">에너지 고효율 관리시스템 (EMS/BEMS)</span>
+            <span class="item-chip chip-elec">소형모듈원자로 (SMR)</span>
+            <span class="item-chip chip-elec">전기차 충전 인프라</span>
+            <span class="item-chip chip-elec">ESS · LED 조명</span>
+          </div>
+          <div class="organizer-row">
+            <strong>주최:</strong> 한국전기기술인협회 &nbsp;|&nbsp; <strong>주관:</strong> K.FAIRS㈜, ㈜서울메쎄, 스마트앤컴퍼니㈜<br>
+            <strong>후원:</strong> 한국전력공사, 한국서부발전㈜, 한국수력원자력㈜, 한국동서발전㈜, 한국중부발전㈜, 한국남동발전㈜, 한국남부발전㈜<br>
+            <strong>부대행사:</strong> 해외바이어 초청 수출상담회, 신제품(NEP) 공공구매상담회, 전기전력·에너지·환경산업 컨퍼런스
+          </div>
+        </div>
+      </div>
+
+      <!-- ENVEX -->
+      <div class="expo-card">
+        <div class="expo-card-header">
+          <div class="expo-icon expo-icon-env">🌿</div>
+          <div>
+            <div class="expo-name">제47회 국제환경산업기술&amp;그린에너지전 (ENVEX 2026)</div>
+            <div class="expo-name-en">The 47th International Exhibition on Environmental Technology &amp; Green Energy | envex.or.kr</div>
+          </div>
+        </div>
+        <div class="expo-card-body">
+          <div class="expo-meta-grid">
+            <div class="meta-item"><div class="meta-label">📅 기간</div><div class="meta-value highlight-date">2026.05.20(수) ~ 05.22(금)</div></div>
+            <div class="meta-item"><div class="meta-label">📍 장소</div><div class="meta-value">COEX Hall A</div></div>
+            <div class="meta-item"><div class="meta-label">🕐 관람시간</div><div class="meta-value">10:00 ~ 18:00<br><span style="font-size:0.78rem;color:#888;">(5.22 마지막날 ~16:00)</span></div></div>
+            <div class="meta-item"><div class="meta-label">💰 입장료</div><div class="meta-value highlight-free">무료 (사전등록·초청장)<br><span style="font-size:0.78rem;color:#888;">현장 5,000원</span></div></div>
+            <div class="meta-item"><div class="meta-label">🏛 역사</div><div class="meta-value">1979년 시작, 국내 최장기 환경전시회</div></div>
+            <div class="meta-item"><div class="meta-label">👥 참관규모</div><div class="meta-value">260여개사 참가 · 45,000명+</div></div>
+          </div>
+          <div class="items-label">주요 전시 품목</div>
+          <div class="items-tags">
+            <span class="item-chip chip-env">탄소 포집·이용·저장 (CCUS)</span>
+            <span class="item-chip chip-env">수소 및 연료전지</span>
+            <span class="item-chip chip-env">태양광·태양열·풍력</span>
+            <span class="item-chip chip-env">소수력 · 지열 · 바이오에너지</span>
+            <span class="item-chip chip-env">수처리 · 대기오염방지</span>
+            <span class="item-chip chip-env">폐기물 처리 및 재활용</span>
+            <span class="item-chip chip-env">친환경 자동차</span>
+            <span class="item-chip chip-env">측정분석기</span>
+          </div>
+          <div class="organizer-row">
+            <strong>주최:</strong> 한국환경보전원, 한국수자원공사, 한국환경공단, 한국환경산업기술원, 수도권매립지관리공사<br>
+            <strong>주관:</strong> 한국환경보전원 &nbsp;|&nbsp; <strong>후원(예정):</strong> 기후에너지환경부, 국토교통부, 중소벤처기업부, 서울특별시, KOTRA 외 다수
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

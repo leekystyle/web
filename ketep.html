@@ -1,606 +1,333 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한국산업기술진흥원 평균보수 현황 분석 (2020-2024)</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-light: #93c5fd;
-            --primary-dark: #1e40af;
-            --secondary: #e2e8f0;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-        }
-        
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: #f8fafc;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        
-        header {
-            background-color: var(--primary);
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        
-        header .container {
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-        
-        h1, h2, h3, h4 {
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-        
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 0;
-        }
-        
-        h2 {
-            font-size: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary-light);
-            margin-top: 2rem;
-        }
-        
-        h3 {
-            font-size: 1.25rem;
-            color: var(--primary-dark);
-        }
-        
-        h4 {
-            font-size: 1.125rem;
-        }
-        
-        p {
-            margin-bottom: 1rem;
-        }
-        
-        .text-primary { color: var(--primary); }
-        .text-success { color: var(--success); }
-        .text-danger { color: var(--danger); }
-        .text-warning { color: var(--warning); }
-        
-        .bg-light {
-            background-color: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            border: 1px solid #e5e7eb;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .summary-card {
-            background-color: #eff6ff;
-            border-left: 4px solid var(--primary);
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1.5rem;
-        }
-        
-        table th, table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        table th {
-            background-color: #f9fafb;
-            font-weight: 600;
-        }
-        
-        tbody tr:hover {
-            background-color: #f9fafb;
-        }
-        
-        .trend-up::before {
-            content: "▲";
-            color: var(--success);
-            margin-right: 0.25rem;
-        }
-        
-        .trend-down::before {
-            content: "▼";
-            color: var(--danger);
-            margin-right: 0.25rem;
-        }
-        
-        .chart-container {
-            height: 300px;
-            margin: 2rem 0;
-            position: relative;
-        }
-        
-        .bar-chart {
-            display: flex;
-            height: 100%;
-            align-items: flex-end;
-            margin: 2rem 0;
-            border-bottom: 2px solid #e5e7eb;
-            border-left: 2px solid #e5e7eb;
-            padding-right: 1rem;
-        }
-        
-        .bar-group {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            align-items: center;
-            height: 100%;
-            margin: 0 0.5rem;
-        }
-        
-        .bar {
-            background-color: var(--primary);
-            width: 50px;
-            border-radius: 4px 4px 0 0;
-            position: relative;
-            transition: height 0.3s ease;
-        }
-        
-        .bar-value {
-            position: absolute;
-            top: -25px;
-            width: 100%;
-            text-align: center;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-        
-        .bar-label {
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            text-align: center;
-        }
-        
-        .line-chart {
-            height: 100%;
-            width: 100%;
-            position: relative;
-            margin: 2rem 0;
-        }
-        
-        .line-path {
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 3;
-        }
-        
-        .line-point {
-            fill: white;
-            stroke: var(--primary);
-            stroke-width: 3;
-        }
-        
-        .year-label {
-            text-align: center;
-            font-size: 0.875rem;
-            position: absolute;
-            bottom: -25px;
-        }
-        
-        .grid-line {
-            position: absolute;
-            width: 100%;
-            border-top: 1px dashed #e5e7eb;
-        }
-        
-        .axis-label {
-            position: absolute;
-            left: -60px;
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
-        
-        .comparison-table {
-            width: 100%;
-            margin-top: 1.5rem;
-        }
-        
-        .comparison-table th {
-            background-color: #f1f5f9;
-            text-align: center;
-        }
-        
-        .comparison-table td {
-            text-align: center;
-        }
-        
-        .footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국에너지기술평가원 내선번호부</title>
+<style>
+  :root {
+    --primary: #003087;
+    --primary-light: #0044b8;
+    --accent: #00a0e9;
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --border: #dde3ec;
+    --text: #1a2438;
+    --muted: #6b7a99;
+    --hover: #edf2fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
+  
+  /* Header */
+  .header { background: var(--primary); color: white; padding: 18px 24px 14px; }
+  .header-top { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { width: 42px; height: 42px; background: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-mark span { color: var(--primary); font-weight: 900; font-size: 13px; line-height: 1.1; text-align: center; }
+  .org-name { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .org-sub { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+  .header-info { display: flex; gap: 20px; margin-top: 12px; font-size: 12px; opacity: 0.85; flex-wrap: wrap; }
+  .header-info span { display: flex; align-items: center; gap: 4px; }
+  
+  /* Search bar */
+  .search-bar { background: white; border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; gap: 10px; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .search-wrap { position: relative; flex: 1; max-width: 400px; }
+  .search-wrap input { width: 100%; padding: 8px 12px 8px 36px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; pointer-events: none; }
+  .result-count { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  
+  /* Filters */
+  .filter-bar { background: white; border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .filter-label { font-size: 12px; color: var(--muted); margin-right: 4px; }
+  .filter-btn { padding: 4px 12px; border: 1.5px solid var(--border); border-radius: 20px; background: white; font-size: 12px; font-family: inherit; cursor: pointer; color: var(--text); transition: all 0.15s; white-space: nowrap; }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+  .dept-row { display: flex; align-items: center; gap: 8px; width: 100%; padding-top: 6px; border-top: 1px solid var(--border); margin-top: 4px; flex-wrap: wrap; }
+  .dept-select { padding: 5px 28px 5px 10px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 13px; font-family: inherit; color: var(--text); background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7a99'/%3E%3C/svg%3E") no-repeat right 10px center; appearance: none; cursor: pointer; min-width: 200px; max-width: 340px; outline: none; transition: border-color 0.2s; }
+  .dept-select:focus { border-color: var(--accent); }
+  .dept-select.filtered { border-color: var(--primary); color: var(--primary); font-weight: 600; }
+  
+  /* Main content */
+  .main { padding: 16px 24px; max-width: 1400px; margin: 0 auto; }
+  
+  /* Table */
+  .table-wrap { background: var(--card); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: #f0f3fa; }
+  th { padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1.5px solid var(--border); white-space: nowrap; }
+  td { padding: 9px 14px; border-bottom: 1px solid #f0f3f8; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--hover); }
+  .dept-cell { font-size: 12px; color: var(--muted); max-width: 160px; }
+  .dept-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; background: #edf2fb; color: var(--primary); white-space: nowrap; }
+  .name-cell { font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .pos-cell { font-size: 12px; color: #4a5568; white-space: nowrap; }
+  .ext-cell { white-space: nowrap; }
+  .ext-link { color: var(--primary); font-weight: 700; font-size: 15px; text-decoration: none; letter-spacing: 0.3px; }
+  .ext-link:hover { color: var(--accent); }
+  .ext-dash { color: var(--muted); font-size: 13px; }
+  .role-cell { font-size: 12px; color: var(--muted); max-width: 260px; }
+  .tag-pageon { background: #fff3e0; color: #e65100; font-size: 11px; padding: 1px 7px; border-radius: 8px; font-weight: 600; }
+  .tag-leave { background: #f3e5f5; color: #7b1fa2; font-size: 11px; padding: 1px 7px; border-radius: 8px; font-weight: 600; }
+  
+  /* Floor badge colors */
+  .floor-2f { background:#e3f2fd; color:#1565c0; }
+  .floor-3f { background:#e8f5e9; color:#2e7d32; }
+  .floor-4f { background:#fff3e0; color:#e65100; }
+  .floor-5f { background:#fce4ec; color:#c62828; }
+  .floor-6f { background:#f3e5f5; color:#6a1b9a; }
+  .floor-7f { background:#e0f2f1; color:#00695c; }
+  
+  /* Special section */
+  .special-section { margin-top: 20px; }
+  .section-title { font-size: 13px; font-weight: 700; color: var(--muted); padding: 8px 0 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .special-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .special-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+  .special-label { font-size: 12px; color: var(--text); font-weight: 500; }
+  .special-num { font-size: 14px; font-weight: 700; color: var(--primary); }
+  .special-num a { color: inherit; text-decoration: none; }
+  .special-num a:hover { color: var(--accent); }
+  
+  /* Empty state */
+  .empty { text-align: center; padding: 48px; color: var(--muted); }
+  .empty-icon { font-size: 36px; margin-bottom: 8px; }
+  
+  /* Highlight */
+  mark { background: #fff176; padding: 0 1px; border-radius: 2px; }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .header { padding: 14px 16px; }
+    .search-bar, .filter-bar { padding: 10px 16px; }
+    .main { padding: 12px 16px; }
+    th, td { padding: 8px 10px; }
+    .role-cell { display: none; }
+    .org-name { font-size: 16px; }
+    .header-info { gap: 12px; }
+    .dept-cell { max-width: 100px; }
+  }
+  @media (max-width: 480px) {
+    .dept-cell { display: none; }
+    table { font-size: 13px; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>한국산업기술진흥원 평균보수 현황 분석 (2020-2024)</h1>
-        </div>
-    </header>
-    
-    <div class="container">
-        <div class="card summary-card">
-            <h3>주요 분석 결과</h3>
-            <ul>
-                <li><strong>5년간 증가율:</strong> <span class="text-success">9.62%</span> (71,091천원 → 77,931천원)</li>
-                <li><strong>순위 변동:</strong> 2020년 8위 → 2024년 7위 (<span class="text-success">1단계 상승</span>)</li>
-                <li><strong>증가율 순위:</strong> 전체 13개 기관 중 <strong>4위</strong> (평균 5.90% 대비 높음)</li>
-                <li><strong>특징:</strong> 꾸준한 성장세를 보이며 2023년 이후 성장 속도 가속화</li>
-            </ul>
-        </div>
-        
-        <h2>1. 평균보수 추이 (2020-2024)</h2>
-        
-        <div class="chart-container">
-            <svg width="100%" height="100%" viewBox="0 0 800 300" preserveAspectRatio="none">
-                <!-- 격자선 -->
-                <line x1="50" y1="250" x2="750" y2="250" stroke="#e5e7eb" stroke-width="2" />
-                <line x1="50" y1="200" x2="750" y2="200" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
-                <line x1="50" y1="150" x2="750" y2="150" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
-                <line x1="50" y1="100" x2="750" y2="100" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
-                <line x1="50" y1="50" x2="750" y2="50" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5" />
-                <line x1="50" y1="0" x2="50" y2="250" stroke="#e5e7eb" stroke-width="2" />
-                
-                <!-- Y축 레이블 -->
-                <text x="45" y="250" text-anchor="end" alignment-baseline="middle" font-size="12">70,000</text>
-                <text x="45" y="200" text-anchor="end" alignment-baseline="middle" font-size="12">72,000</text>
-                <text x="45" y="150" text-anchor="end" alignment-baseline="middle" font-size="12">74,000</text>
-                <text x="45" y="100" text-anchor="end" alignment-baseline="middle" font-size="12">76,000</text>
-                <text x="45" y="50" text-anchor="end" alignment-baseline="middle" font-size="12">78,000</text>
-                
-                <!-- X축 레이블 -->
-                <text x="90" y="270" text-anchor="middle" font-size="12">2020년</text>
-                <text x="230" y="270" text-anchor="middle" font-size="12">2021년</text>
-                <text x="370" y="270" text-anchor="middle" font-size="12">2022년</text>
-                <text x="510" y="270" text-anchor="middle" font-size="12">2023년</text>
-                <text x="650" y="270" text-anchor="middle" font-size="12">2024년</text>
-                
-                <!-- 선 그래프 -->
-                <polyline
-                    points="
-                        90,179 
-                        230,174 
-                        370,159 
-                        510,150 
-                        650,108
-                    "
-                    fill="none"
-                    stroke="#2563eb"
-                    stroke-width="3"
-                />
-                
-                <!-- 데이터 포인트 -->
-                <circle cx="90" cy="179" r="5" fill="white" stroke="#2563eb" stroke-width="3" />
-                <circle cx="230" cy="174" r="5" fill="white" stroke="#2563eb" stroke-width="3" />
-                <circle cx="370" cy="159" r="5" fill="white" stroke="#2563eb" stroke-width="3" />
-                <circle cx="510" cy="150" r="5" fill="white" stroke="#2563eb" stroke-width="3" />
-                <circle cx="650" cy="108" r="5" fill="white" stroke="#2563eb" stroke-width="3" />
-                
-                <!-- 값 레이블 -->
-                <text x="90" y="159" text-anchor="middle" font-size="12" font-weight="500">71,091</text>
-                <text x="230" y="154" text-anchor="middle" font-size="12" font-weight="500">71,521</text>
-                <text x="370" y="139" text-anchor="middle" font-size="12" font-weight="500">73,063</text>
-                <text x="510" y="130" text-anchor="middle" font-size="12" font-weight="500">73,985</text>
-                <text x="650" y="88" text-anchor="middle" font-size="12" font-weight="500">77,931</text>
-            </svg>
-        </div>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>연도</th>
-                    <th>평균보수 (천원)</th>
-                    <th>전년 대비 증감</th>
-                    <th>증감률</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2020년</td>
-                    <td>71,091</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2021년</td>
-                    <td>71,521</td>
-                    <td>+430</td>
-                    <td class="text-success">+0.60%</td>
-                </tr>
-                <tr>
-                    <td>2022년</td>
-                    <td>73,063</td>
-                    <td>+1,542</td>
-                    <td class="text-success">+2.16%</td>
-                </tr>
-                <tr>
-                    <td>2023년</td>
-                    <td>73,985</td>
-                    <td>+922</td>
-                    <td class="text-success">+1.26%</td>
-                </tr>
-                <tr>
-                    <td>2024년</td>
-                    <td>77,931</td>
-                    <td>+3,946</td>
-                    <td class="text-success">+5.33%</td>
-                </tr>
-                <tr style="font-weight: 600; background-color: #f9fafb;">
-                    <td>5년간 변화</td>
-                    <td>+6,840</td>
-                    <td>-</td>
-                    <td class="text-success">+9.62%</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <div class="bg-light">
-            <h3>연도별 증감 분석</h3>
-            <p>한국산업기술진흥원의 평균보수는 2020년부터 2024년까지 <strong>꾸준한 증가세</strong>를 보였습니다. 특히 2023년에서 2024년 사이에 가장 큰 폭으로 증가하여 전년 대비 <span class="text-success">5.33%</span>의 높은 증가율을 기록했습니다. 5년간 전체 증가율은 <span class="text-success">9.62%</span>로, 연노련 소속 13개 기관의 평균 증가율(5.90%)보다 <strong>3.72%p 높은 수치</strong>입니다.</p>
-        </div>
-        
-        <h2>2. 순위 변동 분석</h2>
-        
-        <div class="card">
-            <table>
-                <thead>
-                    <tr>
-                        <th>연도</th>
-                        <th>순위</th>
-                        <th>순위 변동</th>
-                        <th>전체 평균과의 차이</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2020년</td>
-                        <td>8위</td>
-                        <td>-</td>
-                        <td>-3,202천원 (-4.31%)</td>
-                    </tr>
-                    <tr>
-                        <td>2021년</td>
-                        <td>8위</td>
-                        <td><span>변동없음</span></td>
-                        <td>-2,994천원 (-4.02%)</td>
-                    </tr>
-                    <tr>
-                        <td>2022년</td>
-                        <td>8위</td>
-                        <td><span>변동없음</span></td>
-                        <td>-1,424천원 (-1.91%)</td>
-                    </tr>
-                    <tr>
-                        <td>2023년</td>
-                        <td>8위</td>
-                        <td><span>변동없음</span></td>
-                        <td>-2,029천원 (-2.67%)</td>
-                    </tr>
-                    <tr>
-                        <td>2024년</td>
-                        <td>7위</td>
-                        <td><span class="trend-up">1단계 상승</span></td>
-                        <td>-766천원 (-0.97%)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <p>한국산업기술진흥원은 2020년부터 2023년까지 <strong>8위</strong>를 유지하다가 2024년에 <strong>7위</strong>로 <span class="text-success">1단계 상승</span>했습니다. 특히 주목할 점은 전체 평균과의 격차가 지속적으로 줄어들고 있다는 점입니다. 2020년에는 전체 평균보다 <strong>4.31% 낮았으나</strong>, 2024년에는 그 차이가 <strong>0.97%로 크게 감소</strong>했습니다.</p>
-        
-        <h2>3. 증가율 비교 분석</h2>
-        
-        <div class="chart-container">
-            <div class="bar-chart">
-                <div class="bar-group">
-                    <div class="bar" style="height: 27%; background-color: #bfdbfe;">
-                        <div class="bar-value">5.90%</div>
-                    </div>
-                    <div class="bar-label">전체 평균</div>
-                </div>
-                <div class="bar-group">
-                    <div class="bar" style="height: 32%; background-color: #2563eb;">
-                        <div class="bar-value">9.62%</div>
-                    </div>
-                    <div class="bar-label">산업기술진흥원</div>
-                </div>
-                <div class="bar-group">
-                    <div class="bar" style="height: 48%; background-color: #10b981;">
-                        <div class="bar-value">14.40%</div>
-                    </div>
-                    <div class="bar-label">최고 증가율<br>(기상산업기술원)</div>
-                </div>
-                <div class="bar-group">
-                    <div class="bar" style="height: 0%; background-color: #ef4444;">
-                        <div class="bar-value">-3.88%</div>
-                    </div>
-                    <div class="bar-label">최저 증가율<br>(농림식품기술기획평가원)</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="card">
-            <h3>연노련 기관 증가율 순위 (2020-2024)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>순위</th>
-                        <th>기관명</th>
-                        <th>증가율</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>한국기상산업기술원</td>
-                        <td class="text-success">+14.40%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>해양수산과학기술진흥원</td>
-                        <td class="text-success">+12.31%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>한국콘텐츠진흥원</td>
-                        <td class="text-success">+10.27%</td>
-                    </tr>
-                    <tr style="background-color: #eff6ff; font-weight: 600;">
-                        <td>4</td>
-                        <td>한국산업기술진흥원</td>
-                        <td class="text-success">+9.62%</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>정보통신기획평가원</td>
-                        <td class="text-success">+7.46%</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>한국보건산업진흥원</td>
-                        <td class="text-success">+6.36%</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>중소기업기술정보진흥원</td>
-                        <td class="text-success">+6.30%</td>
-                    </tr>
-                    <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>한국에너지기술평가원</td>
-                        <td class="text-danger">-0.93%</td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>농림식품기술기획평가원</td>
-                        <td class="text-danger">-3.88%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="bg-light">
-            <h3>증가율 비교 분석</h3>
-            <p>한국산업기술진흥원의 5년간 평균보수 증가율은 <span class="text-success">9.62%</span>로 연노련 소속 13개 기관 중 <strong>4위</strong>에 해당합니다. 이는 전체 평균 증가율(5.90%)보다 <strong>3.72%p 높은 수준</strong>이며, 중위값(6.11%)보다도 <strong>3.51%p 높은 수준</strong>입니다.</p>
-            <p>특히 최근 3년간(2022-2024) 증가세가 두드러지며, 2024년에는 <span class="text-success">5.33%</span>의 높은 성장률을 보이며 상위권 기관과의 격차를 좁히고 있습니다.</p>
-        </div>
-        
-        <h2>4. 타 기관과의 비교</h2>
-        
-        <div class="comparison-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>구분</th>
-                        <th>한국산업기술진흥원</th>
-                        <th>전체 평균</th>
-                        <th>상위 3개 기관 평균</th>
-                        <th>하위 3개 기관 평균</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2020년</td>
-                        <td>71,091천원</td>
-                        <td>74,293천원</td>
-                        <td>88,292천원</td>
-                        <td>57,551천원</td>
-                    </tr>
-                    <tr>
-                        <td>2024년</td>
-                        <td>77,931천원</td>
-                        <td>78,697천원</td>
-                        <td>92,993천원</td>
-                        <td>62,406천원</td>
-                    </tr>
-                    <tr>
-                        <td>증가액</td>
-                        <td>+6,840천원</td>
-                        <td>+4,404천원</td>
-                        <td>+4,701천원</td>
-                        <td>+4,855천원</td>
-                    </tr>
-                    <tr>
-                        <td>증가율</td>
-                        <td class="text-success">+9.62%</td>
-                        <td>+5.93%</td>
-                        <td>+5.32%</td>
-                        <td>+8.44%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <p>한국산업기술진흥원의 평균보수 증가액(<strong>+6,840천원</strong>)은 전체 평균 증가액(<strong>+4,404천원</strong>)보다 <strong>2,436천원 더 높습니다</strong>. 또한 상위 3개 기관의 평균 증가율(5.32%)보다 높은 증가율(9.62%)을 보여, 상위권 기관과의 격차를 점진적으로 좁혀가고 있습니다.</p>
-        
-        <h2>5. 결론 및 시사점</h2>
-        
-        <div class="card">
-            <h3>주요 결론</h3>
-            <ol>
-                <li><strong>지속적인 성장세:</strong> 한국산업기술진흥원은 5년 연속 증가세를 보이며, 특히 2024년에는 큰 폭의 증가율(5.33%)을 기록했습니다.</li>
-                <li><strong>높은 증가율:</strong> 5년간 증가율(9.62%)은 연노련 소속 13개 기관 중 4위로, 평균(5.90%)을 크게 상회합니다.</li>
-                <li><strong>순위 상승:</strong> 평균보수 순위가 8위에서 7위로 상승하며, 전체 평균과의 격차도 지속적으로 감소하고 있습니다.</li>
-                <li><strong>격차 축소:</strong> 2020년 대비 2024년 기준으로 전체 평균과의 격차가 4.31%에서 0.97%로 크게 감소했습니다.</li>
-            </ol>
-        </div>
-        
-        <div class="bg-light">
-            <h3>시사점</h3>
-            <ul>
-                <li>한국산업기술진흥원은 지난 5년간 <strong>일관되고 안정적인 보수 증가</strong> 추세를 보여왔으며, 특히 최근 들어 증가 속도가 빨라지고 있습니다.</li>
-                <li>이는 기관의 <strong>재정 상태와 운영 효율성</strong>이 지속적으로 개선되고 있음을 시사합니다.</li>
-                <li>현 추세가 지속된다면, 향후 1-2년 내에 <strong>전체 평균을 상회하는 수준</strong>에 도달할 것으로 예상됩니다.</li>
-                <li>다만, 연노련 소속 기관 중 <strong>상위권 기관(정보통신기획평가원, 한국연구재단, 한국산업기술기획평가원)과의 격차</strong>는 여전히 큰 편으로, 이를 좁히기 위한 중장기적인 노력이 필요합니다.</li>
-            </ul>
-        </div>
-        
-        <div class="footer">
-            <p>※ 자료 출처: 연노련 직원 평균 보수 (2020~2024년) 데이터</p>
-            <p>※ 단위: 천원</p>
-            <p>※ 2025년 자료는 정확성이 떨어져 분석에서 제외</p>
-            <p>※ 작성일: 2025년 5월 17일</p>
-        </div>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo-mark"><span>K<br>ETEP</span></div>
+    <div>
+      <div class="org-name">한국에너지기술평가원</div>
+      <div class="org-sub">Korea Institute of Energy Technology Evaluation and Planning</div>
     </div>
+  </div>
+  <div class="header-info">
+    <span>📍 서울특별시 강남구 테헤란로 114길 14 (우)06175</span>
+    <span>☎ 대표번호: <strong>02-3469-8400</strong></span>
+    <span>📅 기준일: 2026. 04. 08.</span>
+  </div>
+</div>
+
+<div class="search-bar">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="이름, 내선번호, 부서명, 업무로 검색..." autofocus>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">층별:</span>
+  <button class="filter-btn active" onclick="setFilter('')">전체</button>
+  <button class="filter-btn" onclick="setFilter('2F')">2F</button>
+  <button class="filter-btn" onclick="setFilter('3F')">3F</button>
+  <button class="filter-btn" onclick="setFilter('4F')">4F</button>
+  <button class="filter-btn" onclick="setFilter('5F')">5F</button>
+  <button class="filter-btn" onclick="setFilter('6F')">6F</button>
+  <button class="filter-btn" onclick="setFilter('7F')">7F</button>
+  <button class="filter-btn" onclick="setFilter('파견')">파견</button>
+  <button class="filter-btn" onclick="setFilter('휴직')">휴직</button>
+  <div class="dept-row">
+    <span class="filter-label">부서:</span>
+    <select id="deptSelect" class="dept-select" onchange="setDept(this.value)">
+      <option value="">전체 부서</option>
+    </select>
+  </div>
+</div>
+
+<div class="main">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:170px">부서</th>
+          <th style="width:80px">성명</th>
+          <th style="width:90px">직위</th>
+          <th style="width:90px">내선번호</th>
+          <th>담당업무</th>
+        </tr>
+      </thead>
+      <tbody id="empTableBody"></tbody>
+    </table>
+    <div class="empty" id="emptyState" style="display:none">
+      <div class="empty-icon">🔍</div>
+      <div>검색 결과가 없습니다.</div>
+    </div>
+  </div>
+  
+  <div class="special-section" id="specialSection">
+    <div class="section-title">안내 번호</div>
+    <div class="special-grid" id="specialGrid"></div>
+  </div>
+</div>
+
+<script>
+const EMPLOYEES = [{"dept": "원 장", "name": "이승재", "pos": "", "ext": "8300", "role": ""}, {"dept": "경영기획본부", "name": "정승영", "pos": "본부장", "ext": "8301", "role": ""}, {"dept": "사업전략본부", "name": "김현경", "pos": "본부장", "ext": "8302", "role": ""}, {"dept": "에너지전환본부", "name": "김봉균", "pos": "본부장", "ext": "8303", "role": ""}, {"dept": "성장동력본부", "name": "이창구", "pos": "본부장", "ext": "8304", "role": ""}, {"dept": "[5F] 감사실", "name": "제갈형옥", "pos": "실장", "ext": "8305", "role": ""}, {"dept": "[6F] 기획조정실", "name": "이상호", "pos": "실장", "ext": "8860", "role": ""}, {"dept": "[4F] 사업총괄실", "name": "이윤백", "pos": "실장", "ext": "8310", "role": ""}, {"dept": "[4F] 재생에너지실", "name": "정성일", "pos": "실장", "ext": "8320", "role": ""}, {"dept": "[5F] 기후테크육성실", "name": "유영일", "pos": "실장", "ext": "8420", "role": ""}, {"dept": "[5F] 감사실", "name": "신주환", "pos": "수석", "ext": "8306", "role": "감사업무 총괄, 부패신고 총괄"}, {"dept": "[6F] 기획조정실", "name": "은예원", "pos": "책임", "ext": "8862", "role": "경영공시, 인권∙윤리경영"}, {"dept": "[4F] 사업총괄실", "name": "장성욱", "pos": "책임", "ext": "8318", "role": "수요조사, 연구기획사업"}, {"dept": "[4F] 재생에너지실", "name": "이상훈", "pos": "수석전문위원", "ext": "8325", "role": "융합사업 예산/기획, 차세대 바이오사업"}, {"dept": "[5F] 기후테크육성실", "name": "이성주", "pos": "연구위원", "ext": "8475", "role": ""}, {"dept": "[5F] 감사실", "name": "한소라", "pos": "선임", "ext": "8308", "role": "반부패/청렴, 종합청렴도평가대응"}, {"dept": "[6F] 기획조정실", "name": "강숙현", "pos": "선임", "ext": "8865", "role": "이사회, 임추위, 기재부/기후부 업무연락방"}, {"dept": "[4F] 사업총괄실", "name": "최태환", "pos": "책임", "ext": "8311", "role": "예·결산(총괄)"}, {"dept": "[4F] 재생에너지실", "name": "강선희", "pos": "책임", "ext": "8321", "role": "신규평가 총괄, 풍력 결산, 해상풍력수산업공존"}, {"dept": "[5F] 기후테크육성실", "name": "서우식", "pos": "수석", "ext": "8427", "role": ""}, {"dept": "[5F] 감사실", "name": "고유미", "pos": "선임", "ext": "8409", "role": "국민신문고 민원대응, 부서 행정업무"}, {"dept": "[6F] 기획조정실", "name": "황민비", "pos": "전임", "ext": "8866", "role": "운영예산 관리, 사업비 교부, 법률자문"}, {"dept": "[4F] 사업총괄실", "name": "이진영", "pos": "책임", "ext": "8314", "role": "평가(총괄), 통계, 콜센터 등"}, {"dept": "[4F] 재생에너지실", "name": "서재영", "pos": "책임", "ext": "8328", "role": "태양광 기획/예산"}, {"dept": "[5F] 기후테크육성실", "name": "손찬웅", "pos": "책임", "ext": "8421", "role": "투자연계형R&D, 규제샌드박스"}, {"dept": "[4F] 사업총괄실", "name": "박병섭", "pos": "책임", "ext": "8312", "role": "기획(총괄), 연구관리혁신협의회"}, {"dept": "[4F] 재생에너지실", "name": "강민지", "pos": "책임", "ext": "8323", "role": "최종평가 총괄, 태양광 평가 및 기타 태양광 종료사업"}, {"dept": "[5F] 기후테크육성실", "name": "백조현", "pos": "책임", "ext": "8422", "role": "기술금융, 투자IR"}, {"dept": "[2F] PD단", "name": "장근무", "pos": "단장", "ext": "8487", "role": ""}, {"dept": "대외협력팀", "name": "김기환", "pos": "책임", "ext": "8861", "role": "대외협력 총괄, 예산/정원/조직관리 총괄"}, {"dept": "[4F] 사업총괄실", "name": "이고은", "pos": "책임", "ext": "8315", "role": "R&D 규정, PD제도, 안전, 실태조사"}, {"dept": "[4F] 재생에너지실", "name": "문신원", "pos": "책임", "ext": "8326", "role": "결산 총괄, 태양광 평가, 차세대태양광, 고체연료 사업"}, {"dept": "[5F] 기후테크육성실", "name": "나혜린", "pos": "전임", "ext": "8423", "role": "초격차 스타트업 프로젝트, 실태조사"}, {"dept": "[2F] PD단", "name": "명승엽", "pos": "PD", "ext": "8486", "role": "태양광"}, {"dept": "대외협력팀", "name": "서다영", "pos": "책임", "ext": "8863", "role": "대외협력 및 국정감사, 사업계획, 제규정"}, {"dept": "[4F] 사업총괄실", "name": "나정욱", "pos": "선임", "ext": "8316", "role": "평가(부), 통계(부), 콜센터 등"}, {"dept": "[4F] 재생에너지실", "name": "이재현", "pos": "선임", "ext": "8329", "role": "진도점검, 사업비 총괄, 태양광 평가, 포항지열사업 결산/평가"}, {"dept": "[5F] 기후테크육성실", "name": "신운택", "pos": "선임", "ext": "8428", "role": "기술평가, 초격차 스타트업 프로젝트"}, {"dept": "[2F] PD단", "name": "정성욱", "pos": "PD", "ext": "8485", "role": "수소·연료전지"}, {"dept": "대외협력팀", "name": "최인영", "pos": "선임", "ext": "8864", "role": "국정감사 총괄, 인력증원"}, {"dept": "[4F] 사업총괄실", "name": "윤민영", "pos": "선임", "ext": "8319", "role": "부서예산/행정업무"}, {"dept": "[4F] 재생에너지실", "name": "변연실", "pos": "선임", "ext": "8889", "role": "지출 및 행정업무"}, {"dept": "[5F] 기후테크육성실", "name": "강윤지", "pos": "전임", "ext": "8426", "role": ""}, {"dept": "[2F] PD단", "name": "김지효", "pos": "PD", "ext": "8874", "role": "스마트 수요관리"}, {"dept": "[4F] 사업총괄실", "name": "강인성", "pos": "선임", "ext": "8313", "role": "예산(부), 결산(부)"}, {"dept": "[4F] 재생에너지실", "name": "김동우", "pos": "선임", "ext": "8327", "role": "풍력 예산/기획, RE100사업 예산, 풍력 종료사업 대응"}, {"dept": "[5F] 기후테크육성실", "name": "장선우", "pos": "전임", "ext": "8425", "role": "초격차 스타트업 프로젝트"}, {"dept": "[2F] PD단", "name": "조기선", "pos": "PD", "ext": "8484", "role": "전력계통"}, {"dept": "[6F] 인재경영실", "name": "기노용", "pos": "실장", "ext": "8850", "role": ""}, {"dept": "[4F] 사업총괄실", "name": "김가금", "pos": "선임", "ext": "8477", "role": "에너지R&D상담센터"}, {"dept": "[4F] 재생에너지실", "name": "권순선", "pos": "선임", "ext": "8322", "role": "단계평가 총괄, 풍력 평가, RE100사업 평가, 기술수준 조사"}, {"dept": "[5F] 기후테크육성실", "name": "김소희", "pos": "전임", "ext": "8424", "role": "초격차 스타트업 프로젝트"}, {"dept": "[2F] PD단", "name": "김종성", "pos": "PD", "ext": "8876", "role": "미래원자력"}, {"dept": "[6F] 인재경영실", "name": "고영환", "pos": "수석", "ext": "8851", "role": "보수 및 복리후생 총괄"}, {"dept": "[4F] 사업총괄실", "name": "배경아", "pos": "전임", "ext": "8878", "role": "에너지R&D상담센터"}, {"dept": "[4F] 재생에너지실", "name": "김영진", "pos": "전임", "ext": "8888", "role": "장비심의위원회 총괄, 풍력 평가, 섹터커플링사업, 태양열사업"}, {"dept": "[2F] PD단", "name": "강금석", "pos": "PD", "ext": "8883", "role": "풍력"}, {"dept": "[6F] 인재경영실", "name": "박소라", "pos": "책임", "ext": "8852", "role": "복무 및 교육 총괄, PD 채용"}, {"dept": "[4F] 사업총괄실", "name": "신민규", "pos": "전임", "ext": "8877", "role": "에너지R&D상담센터"}, {"dept": "[5F] 인력양성실", "name": "박재형", "pos": "실장", "ext": "8450", "role": ""}, {"dept": "[2F] PD단", "name": "이길봉", "pos": "PD", "ext": "8480", "role": "효율향상"}, {"dept": "[6F] 인재경영실", "name": "신안나", "pos": "책임", "ext": "8853", "role": "인사 채용, 배치, 승진, 평가 총괄"}, {"dept": "[2F] 전력산업실", "name": "양진용", "pos": "실장", "ext": "8470", "role": ""}, {"dept": "[5F] 인력양성실", "name": "신봉주", "pos": "수석", "ext": "8457", "role": "평가총괄,내평 및 행사 총괄"}, {"dept": "[2F] PD단", "name": "남명진", "pos": "PD", "ext": "8483", "role": "자원ㆍCCUS"}, {"dept": "[6F] 인재경영실", "name": "박지나", "pos": "선임", "ext": "", "role": ""}, {"dept": "[4F] 성과총괄실", "name": "송은석", "pos": "실장", "ext": "8330", "role": ""}, {"dept": "[2F] 전력산업실", "name": "곽정은", "pos": "책임", "ext": "8378", "role": "청정화력 기획"}, {"dept": "[5F] 인력양성실", "name": "김정관", "pos": "책임", "ext": "", "role": ""}, {"dept": "[2F] PD단", "name": "김태윤", "pos": "PD", "ext": "8491", "role": "청정수소"}, {"dept": "[6F] 인재경영실", "name": "공휘민", "pos": "선임", "ext": "8854", "role": "노무관리, 직원 근무평정"}, {"dept": "[4F] 성과총괄실", "name": "김미화", "pos": "수석", "ext": "8331", "role": "기술료 징수∙관리"}, {"dept": "[2F] 전력산업실", "name": "이주영", "pos": "책임", "ext": "8374", "role": "ESS/전력기기 기획"}, {"dept": "[5F] 인력양성실", "name": "김재훈", "pos": "책임", "ext": "8458", "role": "성과 총괄, 경영평가(계량)"}, {"dept": "[2F] PD단", "name": "김창선", "pos": "PD", "ext": "8481", "role": "스마트그리드·ESS"}, {"dept": "[6F] 인재경영실", "name": "임정화", "pos": "전임", "ext": "8855", "role": "임직원 교육, 파견, 겸직"}, {"dept": "[4F] 성과총괄실", "name": "강영선", "pos": "책임", "ext": "8332", "role": "제재처분, 문제과제 관리"}, {"dept": "[2F] 전력산업실", "name": "이기은", "pos": "선임", "ext": "8307", "role": "전력계통 연구기획사업 관리"}, {"dept": "[5F] 인력양성실", "name": "이수미", "pos": "책임", "ext": "8454", "role": "대외대응, 예산, 내평"}, {"dept": "[2F] PD단", "name": "송길목", "pos": "PD", "ext": "8875", "role": "에너지안전"}, {"dept": "[6F] 인재경영실", "name": "편세진", "pos": "전임", "ext": "8856", "role": "직무급 제도, 비정규직 관리"}, {"dept": "[4F] 성과총괄실", "name": "김현준", "pos": "책임", "ext": "", "role": "연구비 정산 및 기술료 징수관리"}, {"dept": "[2F] 전력산업실", "name": "박정원", "pos": "선임", "ext": "8375", "role": "청정화력/전력기기 평가관리"}, {"dept": "[5F] 인력양성실", "name": "이찬우", "pos": "전임", "ext": "8455", "role": "결산총괄, 대외대응(부), 행사(부)"}, {"dept": "[2F] PD단", "name": "손욱", "pos": "PD", "ext": "8488", "role": "원전환경"}, {"dept": "[6F] 인재경영실", "name": "한상연", "pos": "전임", "ext": "8857", "role": "급여, 총인건비"}, {"dept": "[4F] 성과총괄실", "name": "서영상", "pos": "책임", "ext": "8333", "role": "소송, 법무, 성과조사(부)"}, {"dept": "[2F] 전력산업실", "name": "유재형", "pos": "수석", "ext": "8418", "role": "ESS 및 전력기기 분야 R&D 기획"}, {"dept": "[5F] 인력양성실", "name": "양미라", "pos": "선임", "ext": "8453", "role": "부서 예산 관리 및 집행"}, {"dept": "[2F] PD단", "name": "지영민", "pos": "PD", "ext": "8482", "role": "에너지AI"}, {"dept": "[4F] 성과총괄실", "name": "이기옥", "pos": "책임", "ext": "8334", "role": "소송, 법무"}, {"dept": "[2F] 전력산업실", "name": "김기영", "pos": "수석", "ext": "8472", "role": "전력망 정책자료 작성 지원"}, {"dept": "[6F] 경영지원실", "name": "김정용", "pos": "실장", "ext": "8840", "role": ""}, {"dept": "[4F] 성과총괄실", "name": "김병민", "pos": "책임", "ext": "8335", "role": "정산관리"}, {"dept": "[2F] 전력산업실", "name": "이나경", "pos": "전임", "ext": "8377", "role": "ESS/스마트그리드 평가관리"}, {"dept": "융복합단지실", "name": "손문의", "pos": "실장", "ext": "8820", "role": ""}, {"dept": "혁신추진단", "name": "김경국", "pos": "단장", "ext": "8402", "role": ""}, {"dept": "[6F] 경영지원실", "name": "구본혁", "pos": "책임", "ext": "8841", "role": "계약업무"}, {"dept": "[4F] 성과총괄실", "name": "김주한", "pos": "선임", "ext": "8336", "role": "성과조사, 사업평가"}, {"dept": "[2F] 전력산업실", "name": "안성현", "pos": "전임", "ext": "8379", "role": "스마트그리드/전력정보화 및 정책지원 기획"}, {"dept": "융복합단지실", "name": "고규용", "pos": "수석전문위원", "ext": "-", "role": "에너지융복합단지 대내외 협력지원"}, {"dept": "[6F] 경영지원실", "name": "김다정", "pos": "책임", "ext": "8842", "role": "동반성장, 사회공헌 총괄"}, {"dept": "[2F] 전력산업실", "name": "김한솔", "pos": "선임", "ext": "8886", "role": "부서예산/행정업무"}, {"dept": "융복합단지실", "name": "유지은", "pos": "선임", "ext": "8829", "role": "융복합단지활성화지원 PM"}, {"dept": "[6F] 경영지원실", "name": "김상욱", "pos": "선임", "ext": "8843", "role": "회계, 구매 총괄"}, {"dept": "[5F] 기술정책실", "name": "정훈직", "pos": "실장", "ext": "8440", "role": ""}, {"dept": "융복합단지실", "name": "곽혜림", "pos": "선임", "ext": "8821", "role": "새만금 실증연구단지 사업 PM"}, {"dept": "[7F] ESG경영실", "name": "조정래", "pos": "실장", "ext": "8830", "role": ""}, {"dept": "[6F] 경영지원실", "name": "구본준", "pos": "전임", "ext": "8499", "role": "청사로비운영, 지출관리"}, {"dept": "[5F] 기술정책실", "name": "오정환", "pos": "책임", "ext": "8442", "role": "에너지R&D 투자방향 및 사업평가"}, {"dept": "MVDC사업팀", "name": "이소라", "pos": "책임", "ext": "8454", "role": "전력계통 기획"}, {"dept": "융복합단지실", "name": "서지현", "pos": "선임", "ext": "8823", "role": "부서예산/행정업무"}, {"dept": "[7F] ESG경영실", "name": "박수영", "pos": "책임", "ext": "8832", "role": "경영평가, 경영혁신"}, {"dept": "[6F] 경영지원실", "name": "이예지", "pos": "전임", "ext": "8848", "role": "지출업무"}, {"dept": "[5F] 기술정책실", "name": "황주연", "pos": "책임", "ext": "8444", "role": "에너지R&D 중장기 전략"}, {"dept": "MVDC사업팀", "name": "전현주", "pos": "전임", "ext": "8376", "role": "전력계통 평가관리"}, {"dept": "[7F] ESG경영실", "name": "김재인", "pos": "책임", "ext": "8833", "role": "경영평가, 조직평가"}, {"dept": "[6F] 경영지원실", "name": "조용", "pos": "전임", "ext": "8847", "role": "세무 및 지출업무"}, {"dept": "[5F] 기술정책실", "name": "장영호", "pos": "책임", "ext": "8441", "role": "에너지기술산업 생태계 분석"}, {"dept": "MVDC사업팀", "name": "김형진", "pos": "전임", "ext": "8372", "role": "전력계통/ 전력정보화 및 정책지원/SG 평가관리"}, {"dept": "종합실증센터", "name": "전창호", "pos": "수석", "ext": "8824", "role": "실증연구단지 컨소시엄 관리총괄"}, {"dept": "[7F] ESG경영실", "name": "오준호", "pos": "책임", "ext": "8835", "role": "경영평가, 경영혁신"}, {"dept": "[5F] 기술정책실", "name": "김호중", "pos": "선임", "ext": "8443", "role": "정책수립사업, 에너지기술기업실태조사"}, {"dept": "종합실증센터", "name": "최석호", "pos": "수석", "ext": "8822", "role": "실증연구단지 건설공사관리"}, {"dept": "[7F] ESG경영실", "name": "임예진", "pos": "전임", "ext": "8834", "role": "경영평가, ESG경영"}, {"dept": "안전환경‧동반성장팀", "name": "김지혜", "pos": "책임", "ext": "8846", "role": "안전·재난대응,일반보안,정보공개"}, {"dept": "[5F] 기술정책실", "name": "이선영", "pos": "선임", "ext": "8448", "role": "에너지R&D 사업효과 분석"}, {"dept": "[4F] 수소산업실", "name": "안종득", "pos": "실장", "ext": "8340", "role": ""}, {"dept": "종합실증센터", "name": "박진규", "pos": "수석", "ext": "8826", "role": "실증연구단지 전기안전관리"}, {"dept": "안전환경‧동반성장팀", "name": "채윤영", "pos": "선임", "ext": "8845", "role": "사옥·자산관리"}, {"dept": "[5F] 기술정책실", "name": "반은서", "pos": "선임", "ext": "8449", "role": "에너지 기술동향 조사분석"}, {"dept": "[4F] 수소산업실", "name": "하정우", "pos": "수석", "ext": "8493", "role": "-"}, {"dept": "종합실증센터", "name": "김태형", "pos": "책임", "ext": "8838", "role": "실증연구단지 과제 운영"}, {"dept": "[5F] 국제협력실", "name": "백상주", "pos": "실장", "ext": "8430", "role": ""}, {"dept": "[5F] 기술정책실", "name": "신보름", "pos": "전임", "ext": "8447", "role": "부서예산/행정업무"}, {"dept": "[4F] 수소산업실", "name": "서민혜", "pos": "수석", "ext": "", "role": ""}, {"dept": "종합실증센터", "name": "김성준", "pos": "책임", "ext": "8825", "role": "실증연구단지 및 수탁과제 운영"}, {"dept": "[5F] 국제협력실", "name": "조인애", "pos": "책임", "ext": "8433", "role": "국제협력 총괄, 체코, 중, 노, 스, 신규 협력국"}, {"dept": "[7F] 소통전략실", "name": "강승현", "pos": "실장", "ext": "8880", "role": ""}, {"dept": "[4F] 수소산업실", "name": "곽승규", "pos": "책임", "ext": "8349", "role": "평가총괄, 사업계획수립, 수소안전위원회"}, {"dept": "종합실증센터", "name": "김현진", "pos": "선임", "ext": "8827", "role": "실증연구단지 수소안전관리"}, {"dept": "[5F] 국제협력실", "name": "성태홍", "pos": "책임", "ext": "8434", "role": "공동연구총괄, 사업예산총괄"}, {"dept": "[7F] 소통전략실", "name": "강도규", "pos": "수석", "ext": "8837", "role": "홈페이지 홍보관 관리"}, {"dept": "공공R&D센터", "name": "강근영", "pos": "센터장", "ext": "8210", "role": "에너지공기업협력 신규사업 총괄"}, {"dept": "[4F] 수소산업실", "name": "박 진", "pos": "책임", "ext": "8344", "role": "진흥사업총괄, 수소특화단지총괄"}, {"dept": "[5F] 국제협력실", "name": "김두혁", "pos": "선임", "ext": "8445", "role": "ODA사업 실무"}, {"dept": "[7F] 소통전략실", "name": "이관엽", "pos": "수석", "ext": "8881", "role": "홍보 전략 및 계획 수립, 언론 홍보"}, {"dept": "공공R&D센터", "name": "허정훈", "pos": "수석", "ext": "8221", "role": "에너지공기업 발전R&D분야 협력"}, {"dept": "[4F] 수소산업실", "name": "이현주", "pos": "선임", "ext": "8345", "role": "기획관리 총괄, 사업예산(신재생핵심)"}, {"dept": "[5F] 국제협력실", "name": "이다혜", "pos": "선임", "ext": "8437", "role": "ODA사업 실무, 다자협력(IEA·TCP, MI)"}, {"dept": "[7F] 소통전략실", "name": "최연오", "pos": "선임", "ext": "8836", "role": "공용차량 관리"}, {"dept": "공공R&D센터", "name": "김영완", "pos": "수석", "ext": "8216", "role": "에너지공기업 자원R&D 협력, 기획 동기화"}, {"dept": "[4F] 수소산업실", "name": "김수현", "pos": "선임", "ext": "8347", "role": "과제사업비 지급(안전), 안전R&D 성과관리"}, {"dept": "[5F] 국제협력실", "name": "박재영", "pos": "선임", "ext": "8446", "role": "부서예산·지출관리"}, {"dept": "[7F] 소통전략실", "name": "정동화", "pos": "선임", "ext": "8882", "role": "뉴미디어 홍보, 홍보물, 소통 채널 운영"}, {"dept": "공공R&D센터", "name": "서동한", "pos": "수석", "ext": "8215", "role": "에너지공기업 협력 업무연락"}, {"dept": "[4F] 수소산업실", "name": "이보은", "pos": "선임", "ext": "8348", "role": "사업비지급(수소연료전지), 사업결산(신재생핵심), 통계관리"}, {"dept": "[5F] 국제협력실", "name": "이정은", "pos": "선임", "ext": "8431", "role": "폴란드, 사우디, 아시아, 플랫폼과제 실무"}, {"dept": "[7F] 소통전략실", "name": "신다현", "pos": "전임", "ext": "8884", "role": "뉴미디어 홍보, 고객만족도 조사"}, {"dept": "공공R&D센터", "name": "류호훈", "pos": "수석", "ext": "8222", "role": "에너지공기업 원자력R&D분야 협력"}, {"dept": "[4F] 수소산업실", "name": "안준성", "pos": "선임", "ext": "8342", "role": "기획관리, 사업예산(신재생핵심)"}, {"dept": "[5F] 국제협력실", "name": "한예진", "pos": "전임", "ext": "8432", "role": "CCUS 사업총괄, 신규•연차 총괄, 성과관리"}, {"dept": "[7F] 소통전략실", "name": "정연제", "pos": "전임", "ext": "8300", "role": "비서"}, {"dept": "공공R&D센터", "name": "이재용", "pos": "책임", "ext": "8206", "role": "융복합전담기관 지원/공기업협력 실무협의회"}, {"dept": "[4F] 수소산업실", "name": "박지현", "pos": "전임", "ext": "8343", "role": "사업결산(그린수소, 액체수소충전소)"}, {"dept": "[5F] 국제협력실", "name": "백종현", "pos": "선임", "ext": "8438", "role": "로드맵 총괄, 통계•최종 총괄, 결산대응"}, {"dept": "[4F] 수소산업실", "name": "김예솔", "pos": "전임", "ext": "8895", "role": "신재생(연료전지) 평가, 통계관리"}, {"dept": "[5F] 국제협력실", "name": "김하예", "pos": "전임", "ext": "8436", "role": "미국, 독일, 호주, 협력센터과제 실무, 에너지시장"}, {"dept": "[3F] AI 디지털전환실", "name": "권여선", "pos": "실장", "ext": "8460", "role": ""}, {"dept": "[4F] 수소산업실", "name": "박지현", "pos": "전임", "ext": "8893", "role": "수소진흥사업(비R&D) 및 수소특화단지 관리 지원"}, {"dept": "[3F] AI 디지털전환실", "name": "김영효", "pos": "책임", "ext": "8463", "role": "정보화사업기획,R&D사업관리"}, {"dept": "[4F] 수소산업실", "name": "이은정", "pos": "선임", "ext": "8892", "role": ""}, {"dept": "ODA팀", "name": "표경호", "pos": "책임", "ext": "8435", "role": "ODA사업 총괄"}, {"dept": "[3F] AI 디지털전환실", "name": "여성율", "pos": "선임", "ext": "8464", "role": "정보보안 총괄"}, {"dept": "[3F] AI 디지털전환실", "name": "김득천", "pos": "선임", "ext": "8461", "role": "개인정보보호 총괄"}, {"dept": "[3F] 에너지효율실", "name": "임승빈", "pos": "실장", "ext": "8360", "role": ""}, {"dept": "[3F] AI 디지털전환실", "name": "전수경", "pos": "전임", "ext": "8466", "role": "공공데이터 및 데이터기반행정"}, {"dept": "[3F] 에너지효율실", "name": "김덕근", "pos": "수석", "ext": "8361", "role": "수요관리기반 예산/기획"}, {"dept": "[3F] 에너지효율실", "name": "박문성", "pos": "책임", "ext": "8366", "role": "최종평가, 장비심의"}, {"dept": "[3F] 에너지효율실", "name": "문현주", "pos": "책임", "ext": "8362", "role": "예산/사업+과제기획총괄, 효율혁신 기획"}, {"dept": "[3F] 에너지효율실", "name": "신다영", "pos": "책임", "ext": "8365", "role": "결산/사업+과제평가성과총괄"}, {"dept": "[3F] 에너지효율실", "name": "전한욱", "pos": "책임", "ext": "8363", "role": "효율혁신 예산/기획"}, {"dept": "[3F] 에너지효율실", "name": "권태성", "pos": "선임", "ext": "8368", "role": "단계평가, 사업비 교부/집행"}, {"dept": "[3F] 에너지효율실", "name": "정연주", "pos": "전임", "ext": "8367", "role": "신규평가, 진도점검"}, {"dept": "[3F] 원전산업실", "name": "권지현", "pos": "실장", "ext": "8380", "role": ""}, {"dept": "[3F] 원전산업실", "name": "신동민", "pos": "책임", "ext": "8414", "role": "원전환경 기획, 팀장"}, {"dept": "[3F] 원전산업실", "name": "최현주", "pos": "책임", "ext": "8381", "role": "원자력 평가 총괄"}, {"dept": "[3F] 원전산업실", "name": "유상욱", "pos": "책임", "ext": "8383", "role": "원자력 기획 총괄, 팀장"}, {"dept": "[3F] 원전산업실", "name": "연건흠", "pos": "선임", "ext": "8411", "role": "원자력 비R&D 기획/평가"}, {"dept": "[3F] 원전산업실", "name": "김근태", "pos": "전임", "ext": "8387", "role": "원자력 기획"}, {"dept": "[3F] 원전산업실", "name": "최종서", "pos": "수석", "ext": "8413", "role": "원전해체 기획, 정책 대응"}, {"dept": "[3F] 원전산업실", "name": "권종혁", "pos": "선임", "ext": "8389", "role": "원자력 평가"}, {"dept": "[3F] 원전산업실", "name": "조정홍", "pos": "전임", "ext": "8388", "role": "원자력 평가"}, {"dept": "[3F] 원전산업실", "name": "김보현", "pos": "전임", "ext": "8386", "role": "부서 예산, 회계"}, {"dept": "[5F] 노동조합", "name": "송수원", "pos": "위원장", "ext": "8459", "role": ""}, {"dept": "[5F] 노동조합", "name": "이기은", "pos": "사무국장", "ext": "8455", "role": ""}, {"dept": "원전해체사업팀", "name": "김상호", "pos": "수석전문위원", "ext": "8412", "role": "해체,방폐 R&D 총괄"}, {"dept": "파견 (중소기업기술정보진흥원)", "name": "양훈철", "pos": "연구위원", "ext": "", "role": "파견"}, {"dept": "원전해체사업팀", "name": "조정혜", "pos": "전임", "ext": "8384", "role": "원자력 R&D 평가"}, {"dept": "파견 (한국화학융합시험연구원)", "name": "이재설", "pos": "연구위원", "ext": "", "role": "파견"}, {"dept": "원전해체사업팀", "name": "김민식", "pos": "선임", "ext": "8382", "role": "원자력 R&D 평가"}, {"dept": "파견 (고등기술연구원)", "name": "기성섭", "pos": "연구위원", "ext": "", "role": "파견"}, {"dept": "파견 (한국환경산업기술원)", "name": "진환준", "pos": "수석", "ext": "", "role": "파견"}, {"dept": "[3F] CCUS·신산업실", "name": "이준성", "pos": "실장", "ext": "8390", "role": ""}, {"dept": "파견 (한-미 에너지협력센터)", "name": "서성록", "pos": "책임", "ext": "", "role": "파견"}, {"dept": "[3F] CCUS·신산업실", "name": "안준형", "pos": "책임", "ext": "8391", "role": "신산업 기획"}, {"dept": "파견 (한-EU 에너지협력센터)", "name": "이지희", "pos": "책임", "ext": "", "role": "파견"}, {"dept": "[3F] CCUS·신산업실", "name": "김남훈", "pos": "책임", "ext": "8395", "role": "CCUS 평가·결산총괄"}, {"dept": "파견 (기후에너지기술과)", "name": "연인모", "pos": "책임", "ext": "", "role": "파견"}, {"dept": "[3F] CCUS·신산업실", "name": "이현선", "pos": "선임", "ext": "8398", "role": "CCUS 기획·예산총괄"}, {"dept": "휴직", "name": "이지미", "pos": "수석", "ext": "", "role": "휴직"}, {"dept": "휴직", "name": "김상경", "pos": "책임", "ext": "", "role": "휴직"}, {"dept": "[3F] CCUS·신산업실", "name": "김진성", "pos": "선임", "ext": "8399", "role": "CCUS 기획"}, {"dept": "휴직", "name": "김희정", "pos": "책임", "ext": "", "role": "휴직"}, {"dept": "[3F] CCUS·신산업실", "name": "윤재영", "pos": "전임", "ext": "8397", "role": "자원순환·신산업 평가"}, {"dept": "휴직", "name": "이준영", "pos": "책임", "ext": "", "role": "휴직"}, {"dept": "휴직", "name": "김희선", "pos": "선임", "ext": "", "role": "휴직"}, {"dept": "[3F] CCUS·신산업실", "name": "지경선", "pos": "전임", "ext": "8396", "role": "자원개발·CCUS(비R&D) 평가"}, {"dept": "휴직", "name": "김우정", "pos": "선임", "ext": "", "role": "휴직"}, {"dept": "휴직", "name": "이유민", "pos": "선임", "ext": "", "role": "휴직"}, {"dept": "[3F] CCUS·신산업실", "name": "류진선", "pos": "선임", "ext": "8392", "role": "운영예산·행정"}];
+const SPECIAL = [{"label": "R&D콜센터", "num": "1899-0784"}, {"label": "안내데스크", "num": "8400"}, {"label": "경비실", "num": "8871"}, {"label": "HELP DESK", "num": ""}, {"label": "건물관리실", "num": "8872"}, {"label": "정보시스템 유지보수 총괄", "num": "8801"}, {"label": "FAX 2층", "num": "02-3469-8817"}, {"label": "서버/네트웍장비 보안", "num": "8802, 8819"}, {"label": "포탈/전자결재/메일/홈페이지", "num": "8803"}, {"label": "FAX (4층)", "num": "02-556-1033"}, {"label": "개인PC관리", "num": "8804"}, {"label": "FAX (5층)", "num": "02-556-1337"}, {"label": "웹디자인", "num": "8805"}, {"label": "FAX (6층)", "num": "02-562-0770"}, {"label": "MIS 운영", "num": "8806"}, {"label": "FAX (7층)", "num": "02-555-2430"}, {"label": "GENIE 운영", "num": "8813, 8814"}];
+
+let currentFilter = '';
+let currentDept = '';
+let currentSearch = '';
+
+function populateDeptSelect() {
+  const sel = document.getElementById('deptSelect');
+  const depts = [...new Set(
+    EMPLOYEES
+      .filter(e => {
+        if (!currentFilter) return true;
+        if (currentFilter === '파견') return e.dept.startsWith('파견');
+        if (currentFilter === '휴직') return e.dept === '휴직';
+        return e.dept.includes('['+currentFilter+']');
+      })
+      .map(e => e.dept)
+  )];
+  sel.innerHTML = '<option value="">전체 부서</option>' +
+    depts.map(d => `<option value="${d.replace(/"/g,'&quot;')}">${d}</option>`).join('');
+  sel.value = currentDept && depts.includes(currentDept) ? currentDept : '';
+  if (sel.value !== currentDept) { currentDept = ''; }
+  sel.classList.toggle('filtered', !!currentDept);
+}
+
+function floorClass(dept) {
+  if (dept.includes('[2F]')) return 'floor-2f';
+  if (dept.includes('[3F]')) return 'floor-3f';
+  if (dept.includes('[4F]')) return 'floor-4f';
+  if (dept.includes('[5F]')) return 'floor-5f';
+  if (dept.includes('[6F]')) return 'floor-6f';
+  if (dept.includes('[7F]')) return 'floor-7f';
+  return '';
+}
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function highlight(s, q) {
+  if (!q) return esc(s);
+  const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return esc(s).replace(new RegExp(safe, 'gi'), m => `<mark>${m}</mark>`);
+}
+
+function matchesFilter(emp) {
+  if (currentDept) return emp.dept === currentDept;
+  if (!currentFilter) return true;
+  if (currentFilter === '파견') return emp.dept.startsWith('파견');
+  if (currentFilter === '휴직') return emp.dept === '휴직';
+  return emp.dept.includes('['+currentFilter+']');
+}
+
+function matchesSearch(emp, q) {
+  if (!q) return true;
+  const lq = q.toLowerCase();
+  return emp.name.includes(q) || emp.ext.includes(q) ||
+         emp.dept.toLowerCase().includes(lq) ||
+         emp.pos.includes(q) || emp.role.toLowerCase().includes(lq);
+}
+
+function formatExt(ext) {
+  if (!ext || ext === '-') return '<span class="ext-dash">-</span>';
+  if (ext.startsWith('0') || ext.includes('-')) {
+    return `<a class="ext-link" href="tel:${ext}">${esc(ext)}</a>`;
+  }
+  return `<a class="ext-link" href="tel:02-3469-${ext}">${esc(ext)}</a>`;
+}
+
+function render() {
+  const q = currentSearch.trim();
+  const filtered = EMPLOYEES.filter(e => matchesFilter(e) && matchesSearch(e, q));
+  
+  const tbody = document.getElementById('empTableBody');
+  const empty = document.getElementById('emptyState');
+  const count = document.getElementById('resultCount');
+  
+  count.textContent = `${filtered.length}명`;
+  
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+  
+  let html = '';
+  for (const e of filtered) {
+    const fc = floorClass(e.dept);
+    const deptLabel = e.dept.replace(/\[.F\]\s*/,'');
+    const roleTag = e.role === '파견' ? '<span class="tag-pageon">파견</span>' :
+                    e.role === '휴직' ? '<span class="tag-leave">휴직</span>' : '';
+    const roleText = e.role && e.role !== '파견' && e.role !== '휴직' ? highlight(e.role, q) : '';
+    html += `<tr>
+      <td class="dept-cell"><span class="dept-badge ${fc}">${highlight(deptLabel, q)}</span></td>
+      <td class="name-cell">${highlight(e.name, q)}</td>
+      <td class="pos-cell">${highlight(e.pos, q)}</td>
+      <td class="ext-cell">${formatExt(e.ext)}</td>
+      <td class="role-cell">${roleTag} ${roleText}</td>
+    </tr>`;
+  }
+  tbody.innerHTML = html;
+}
+
+function renderSpecial() {
+  const grid = document.getElementById('specialGrid');
+  let html = '';
+  for (const s of SPECIAL) {
+    if (!s.num) continue;
+    const isInternal = /^\d{4}$/.test(s.num.replace(/\s/g,''));
+    const href = isInternal ? `tel:02-3469-${s.num}` : `tel:${s.num.replace(/\s/g,'')}`;
+    html += `<div class="special-card">
+      <span class="special-label">${esc(s.label)}</span>
+      <span class="special-num"><a href="${href}">${esc(s.num)}</a></span>
+    </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  currentDept = '';
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === (f||'전체'));
+  });
+  populateDeptSelect();
+  render();
+}
+
+function setDept(d) {
+  currentDept = d;
+  document.getElementById('deptSelect').classList.toggle('filtered', !!d);
+  render();
+}
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  currentSearch = this.value;
+  render();
+});
+
+renderSpecial();
+populateDeptSelect();
+render();
+</script>
 </body>
 </html>
